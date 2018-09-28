@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'navbar.html' %}
+    <title>Устройства сброса</title>
+</head>
+<body>
+
+<div class="container">
+    <table class="table">
+    <thead class="thead-dark">
+<tr>
+  <th scope="col">Системное Имя</th>
+  <th scope="col">Пользовательское Имя</th>
+  <th scope="col">Путь InstallShield</th>
+    <th scope="col">Описание</th>
+</tr>
+    </thead>
+{% for b in object_list %}
+<tr>
+  <td>{{ b.SysName }}</td>
+  <td>{{ b.UserName }}</td>
+  <td>{{ b.ISPath }}</td>
+  <td>{{ b.Description }}</td>
+</tr>
+{% endfor %}
+</table>
+
+</div>
+</body>
+</html>

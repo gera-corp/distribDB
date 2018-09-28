@@ -1,4 +1,6 @@
 from django.shortcuts import render
+import json
+from .models import drop_device
 
 # Create your views here.
 def home(request):
@@ -9,3 +11,11 @@ def tables(request):
 
 def programms(request):
     return render(request, 'programms.html')
+
+def drop_device_view(request):
+    obj = drop_device.objects.all()
+    context = {
+        'object_list': obj
+    }
+    return render(request, 'drop_devices.html', context)
+
