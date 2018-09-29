@@ -1,5 +1,4 @@
 from django.shortcuts import render
-import json
 from .models import drop_device
 
 # Create your views here.
