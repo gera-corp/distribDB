@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
+
     {% include 'navbar.html' %}
     <title>Устройства сброса</title>
 </head>
 <body>
 <div class="container-fluid">
-    <table class="table table-sm">
+    <table class="table table-sm table-bordered">
         <thead class="thead-light">
         <tr>
             <th scope="col">Системное Имя</th>
@@ -26,8 +27,7 @@
                 <td><a href="#" class="list-group-item list-group-item-action">{{ b.Description }}</a></td>
                 <td>
                     <form action="{% url 'delete' b.id %}" method="POST">{%csrf_token%}
-                            <button type="submit" class="btn btn-secondary">Удалить</button>
-                        </a>
+                            <a href="." class="list-group-item list-group-item-action"><button type="submit" class="btn btn-secondary btn-sm">Удалить</button></a>
                     </form>
                 </td>
             </div>
