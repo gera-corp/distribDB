@@ -6,4 +6,5 @@ urlpatterns = [
     path('tables/', views.tables),
     path('programms/', views.programms),
     path('drop_devices/', views.drop_device_view),
+    path('drop_devices/<int:id>/delete/', views.delete, name='delete'),
 ]
