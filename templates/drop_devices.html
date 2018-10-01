@@ -7,33 +7,43 @@
     <title>Устройства сброса</title>
 </head>
 <body>
-<div class="container-fluid">
-    <table class="table table-sm table-bordered">
+
+<div class="container-fluid table-responsive">
+    <a href="new_post/"><button type="submit" class="btn btn-secondary btn-sm">Добавить</button></a>
+    <br><br>
+    <table class="table table-sm table-borderless">
         <thead class="thead-light">
-        <tr>
-            <th scope="col">Системное Имя</th>
-            <th scope="col">Пользовательское Имя</th>
-            <th scope="col">Путь InstallShield</th>
-            <th scope="col">Описание</th>
-            <th scope="col"></th>
+        <tr >
+            <th>Системное Имя</th>
+            <th>Пользовательское Имя</th>
+            <th>Путь InstallShield</th>
+            <th>Описание</th>
+            <th></th>
+            <th></th>
+
         </tr>
         </thead>
-        {% for b in object_list %}
+        {% for item in object_list %}
             <tr>
-            <div class="list-group">
-                <td><a href="#" class="list-group-item list-group-item-action">{{ b.SysName }}</a></td>
-                <td><a href="#" class="list-group-item list-group-item-action">{{ b.UserName }}</a></td>
-                <td><a href="#" class="list-group-item list-group-item-action">{{ b.ISPath }}</a></td>
-                <td><a href="#" class="list-group-item list-group-item-action">{{ b.Description }}</a></td>
-                <td>
-                    <form action="{% url 'delete' b.id %}" method="POST">{%csrf_token%}
-                            <a href="." class="list-group-item list-group-item-action"><button type="submit" class="btn btn-secondary btn-sm">Удалить</button></a>
+                <th><a href="#" class="list-group-item list-group-item-action">{{ item.SysName }}</a></th>
+                <th><a href="#" class="list-group-item list-group-item-action">{{ item.UserName }}</a></th>
+                <th><a href="#" class="list-group-item list-group-item-action">{{ item.ISPath }}</a></th>
+                <th><a href="#" class="list-group-item list-group-item-action">{{ item.Description }}</a></th>
+                <th>
+                    <form action="." method="POST">{%csrf_token%}
+                        <a href="."><button type="submit" class="btn btn-secondary btn-sm">Изменить</button></a>
                     </form>
-                </td>
-            </div>
+                </th>
+                <th>
+                    <form action="{% url 'delete' item.id %}" method="POST">{%csrf_token%}
+                        <a href="."><button type="submit" class="btn btn-secondary btn-sm">Удалить</button></a>
+                    </form>
+
+                </th>
             </tr>
         {% endfor %}
     </table>
 </div>
+
 </body>
 </html>

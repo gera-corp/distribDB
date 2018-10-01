@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% include 'navbar.html' %}
+    <meta charset="UTF-8">
+    <title>Редактирование</title>
+</head>
+<body>
+<div class="offset-3 col-md-6">
+    {% if messages %}
+        {% for message in messages %}
+            <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть"><span aria-hidden="true">X</span></button>
+            <strong>{{ message }}</strong>
+            </div>
+        {% endfor %}
+    {% else %}
+<form method="post">{% csrf_token %}
+    <div class="form-group">
+        {{ form.as_p }}
+    </div>
+    <button type="submit" class="btn btn-secondary btn-sm">Сохранить</button>
+    <a href="../"><button type="button" class="btn btn-secondary btn-sm">Отмена</button></a>
+</form>
+    {% endif %}
+</div>
+</body>
+</html>
