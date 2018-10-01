@@ -10,6 +10,9 @@
     {% if messages %}
         {% for message in messages %}
             <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
+                <script type="text/javascript">
+                    setTimeout(function() {window.location.href="/drop_devices/";}, 3000);
+                </script>
             <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть"><span aria-hidden="true">X</span></button>
             <strong>{{ message }}</strong>
             </div>
