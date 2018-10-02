@@ -30,9 +30,7 @@
                 <th><a href="#" class="list-group-item list-group-item-action">{{ item.ISPath }}</a></th>
                 <th><a href="#" class="list-group-item list-group-item-action">{{ item.Description }}</a></th>
                 <th>
-                    <form action="." method="POST">{%csrf_token%}
-                        <a href="."><button type="submit" class="btn btn-secondary btn-sm">Изменить</button></a>
-                    </form>
+                        <a href="{% url 'edit_post' pk=item.pk %}"><button type="submit" class="btn btn-secondary btn-sm">Изменить</button></a>
                 </th>
                 <th>
                     <form action="{% url 'delete' item.id %}" method="POST">{%csrf_token%}

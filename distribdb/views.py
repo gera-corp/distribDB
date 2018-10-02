@@ -37,13 +37,35 @@ def new_post(requst):
         if form.is_valid():
             form.save()
             messages.success(requst, 'Запись нового устройства добавлена!')
-
-            #return redirect('/drop_devices/')
     except Exception as e:
-        form = PostForm()
         messages.warning(requst, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
     context = {
         'form': form,
     }
     return render(requst, template, context)
+
+
+def edit_post(request, pk):
+    template = 'new_post.html'
+    post = get_object_or_404(drop_device, pk=pk)
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+
+        try:
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Изменения внесены')
+        except Exception as e:
+            messages.warning(request, 'Изменения не внесены! Шоибка: {}'.format(e))
+
+    else:
+        form = PostForm(instance=post)
+
+    context = {
+        'form': form,
+        'post': post,
+    }
+
+    return render(request, template, context)
