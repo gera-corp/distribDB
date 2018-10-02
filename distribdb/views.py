@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
-from .models import drop_device
-from .forms import PostForm
+from .models import drop_device, hasp_keys
+from .forms import PostForm, PostHaspForm
 
 
 def home(request):
@@ -25,7 +25,7 @@ def drop_device_delete(request, id):
     odj = get_object_or_404(drop_device, id=id)
     if request.method == 'POST':
         odj.delete()
-        return redirect('/drop_devices/')
+        return redirect('/drop_devices')
     return render(request, 'drop_devices.html', {'device': odj})
 
 
@@ -62,6 +62,61 @@ def edit_post(request, pk):
 
     else:
         form = PostForm(instance=post)
+
+    context = {
+        'form': form,
+        'post': post,
+    }
+
+    return render(request, template, context)
+
+
+def hasp_keys_view(request):
+    obj = hasp_keys.objects.all()
+    return render(request, 'hasp_keys.html', {'object_list': obj})
+
+
+def hasp_keys_delete(request, id):
+    odj = get_object_or_404(hasp_keys, id=id)
+    if request.method == 'POST':
+        odj.delete()
+        return redirect('/hasp_keys')
+    return render(request, 'hasp_keys.html', {'device': odj})
+
+
+def hasp_keys_new_post(requst):
+    template = 'hasp_keys_new_post.html'
+    form = PostHaspForm(requst.POST or None)
+
+    try:
+        if form.is_valid():
+            form.save()
+            messages.success(requst, 'Запись нового устройства добавлена!')
+    except Exception as e:
+        messages.warning(requst, 'Запись не была добавлена! Ошибка: {}'.format(e))
+
+    context = {
+        'form': form,
+    }
+    return render(requst, template, context)
+
+
+def hasp_keys_edit_post(request, pk):
+    template = 'hasp_keys_new_post.html'
+    post = get_object_or_404(hasp_keys, pk=pk)
+
+    if request.method == 'POST':
+        form = PostHaspForm(request.POST, instance=post)
+
+        try:
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Изменения внесены')
+        except Exception as e:
+            messages.warning(request, 'Изменения не внесены! Шоибка: {}'.format(e))
+
+    else:
+        form = PostHaspForm(instance=post)
 
     context = {
         'form': form,

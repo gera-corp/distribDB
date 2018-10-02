@@ -9,4 +9,9 @@ urlpatterns = [
     path('drop_devices/<int:id>/delete/', views.drop_device_delete, name='delete'),
     path('drop_devices/new_post/', views.new_post, name='new_post'),
     path('drop_devices/edit_post/<int:pk>/', views.edit_post, name='edit_post'),
+    path('hasp_keys/', views.hasp_keys_view),
+    path('hasp_keys/<int:id>/delete/', views.hasp_keys_delete, name='hasp_keys_delete'),
+    path('hasp_keys/new_post/', views.hasp_keys_new_post, name='hasp_keys_new_post'),
+    path('hasp_keys/edit_post/<int:pk>/', views.hasp_keys_edit_post, name='hasp_keys_edit_post'),
+
 ]

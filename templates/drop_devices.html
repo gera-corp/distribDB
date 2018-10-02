@@ -8,12 +8,12 @@
 </head>
 <body>
 
-<div class="container-fluid table-responsive">
+<div class="container-fluid table-responsive-sm">
     <a href="new_post/"><button type="submit" class="btn btn-secondary btn-sm">Добавить</button></a>
     <br><br>
     <table class="table table-sm table-borderless">
         <thead class="thead-light">
-        <tr >
+        <tr align="center">
             <th>Системное Имя</th>
             <th>Пользовательское Имя</th>
             <th>Путь InstallShield</th>
@@ -24,21 +24,21 @@
         </tr>
         </thead>
         {% for item in object_list %}
-            <tr>
-                <th><a href="#" class="list-group-item list-group-item-action">{{ item.SysName }}</a></th>
-                <th><a href="#" class="list-group-item list-group-item-action">{{ item.UserName }}</a></th>
-                <th><a href="#" class="list-group-item list-group-item-action">{{ item.ISPath }}</a></th>
-                <th><a href="#" class="list-group-item list-group-item-action">{{ item.Description }}</a></th>
-                <th>
-                        <a href="{% url 'edit_post' pk=item.pk %}"><button type="submit" class="btn btn-secondary btn-sm">Изменить</button></a>
-                </th>
-                <th>
+            <tr><ul class="list-group">
+                <td><li class="list-group-item list-group-item-action">{{ item.SysName }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.UserName }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.ISPath }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.Description }}</li></td>
+                <td>
+                        <a href="{% url 'edit_post' pk=item.pk %}"><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-31-pencil.png"></button></a>
+                </td>
+                <td>
                     <form action="{% url 'delete' item.id %}" method="POST">{%csrf_token%}
-                        <a href="."><button type="submit" class="btn btn-secondary btn-sm">Удалить</button></a>
+                        <a href="."><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-17-bin.png"></button></a>
                     </form>
 
-                </th>
-            </tr>
+                </td>
+            </ul></tr>
         {% endfor %}
     </table>
 </div>
