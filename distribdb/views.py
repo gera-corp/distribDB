@@ -36,7 +36,7 @@ def new_post(requst):
     try:
         if form.is_valid():
             form.save()
-            messages.success(requst, 'Запись нового устройства добавлено!')
+            messages.success(requst, 'Запись нового устройства добавлена!')
 
             #return redirect('/drop_devices/')
     except Exception as e:
