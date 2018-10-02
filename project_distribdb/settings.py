@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'distribdb.apps.DistribdbConfig',
-    'bootstrap4',
 ]
 
 MIDDLEWARE = [

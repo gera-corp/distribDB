@@ -113,7 +113,7 @@ def hasp_keys_edit_post(request, pk):
                 form.save()
                 messages.success(request, 'Изменения внесены')
         except Exception as e:
-            messages.warning(request, 'Изменения не внесены! Шоибка: {}'.format(e))
+            messages.warning(request, 'Изменения не внесены! Ошибка: {}'.format(e))
 
     else:
         form = PostHaspForm(instance=post)

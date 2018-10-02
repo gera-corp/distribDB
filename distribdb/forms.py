@@ -36,11 +36,11 @@ class PostHaspForm(forms.ModelForm):
             'Notes': 'Примечания:'
         }
         widgets = {
-            'ChipNo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': "Attrib"}),
+            'ChipNo': forms.TextInput(attrs={'class': 'form-control'}),
             'Free': forms.CheckboxInput(attrs={'class': 'form-control'}),
             'Port': forms.TextInput(attrs={'class': 'form-control'}),
             'Type': forms.TextInput(attrs={'class': 'form-control'}),
-            'TimeLimit': forms.DateTimeInput(format="%Y-%m-%d %H:%M:%S", attrs={'class': 'form-control', 'placeholder': "%Y-%m-%d %H:%M:%S"}),
+            'TimeLimit': forms.DateInput(format="%Y-%m-%d", attrs={'class': 'form-control', 'placeholder': "%Y-%m-%d"}),
             'Licenses': forms.TextInput(attrs={'class': 'form-control'}),
             'Notes': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
         }
