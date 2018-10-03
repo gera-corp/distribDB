@@ -91,7 +91,7 @@ def hasp_keys_new_post(requst):
     try:
         if form.is_valid():
             form.save()
-            messages.success(requst, 'Запись нового устройства добавлена!')
+            messages.success(requst, 'Запись нового ключа добавлена!')
     except Exception as e:
         messages.warning(requst, 'Запись не была добавлена! Ошибка: {}'.format(e))
 

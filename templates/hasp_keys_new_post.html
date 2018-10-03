@@ -20,7 +20,21 @@
     {% else %}
 <form method="post">{% csrf_token %}
     <div class="form-group">
-        {{ form.as_p }}
+
+        <label for="id_subject">Номер чипа:</label>{{ form.ChipNo }}
+<br>
+        <label for="id_subject">Ключ свободен?</label>{{ form.Free }}
+<br>
+        <label for="id_subject">Порт:</label>{{ form.Port }}
+<br>
+        <label for="id_subject">Тип:</label>{{ form.Type }}
+<br>
+        <label for="id_subject">Ограничение по времени:</label>{{ form.TimeLimit }}
+<br>
+        <label for="id_subject">Количество лицензий:</label>{{ form.Licenses }}
+<br>
+        <label for="id_subject">Примечания:</label>{{ form.Notes }}
+
     </div>
     <button type="submit" class="btn btn-secondary btn-sm">Сохранить</button>
     <a href="/hasp_keys"><button type="button" class="btn btn-secondary btn-sm">Отмена</button></a>

@@ -11,7 +11,7 @@
     <a href="new_post/"><button type="submit" class="btn btn-secondary btn-sm">Добавить</button></a>
     <br><br>
 
-    <table class="table table-sm table-borderless">
+    <table class="table table-sm table-borderless form-control-sm">
         <thead class="thead-light">
         <tr align="center">
             <th>Номер чипа</th>
@@ -29,19 +29,18 @@
             <tr><ul class="list-group">
                 <td><li class="list-group-item list-group-item-action">{{ item.ChipNo }}</li></td>
                 <td align="center"><li class="list-group-item list-group-item-action"><input disabled type="checkbox"{% if item.Free == True %}checked="checked"{% endif %}></li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.Port }}</li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.Type }}</li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.TimeLimit }}</li></td>
-                <td align="center"><li class="list-group-item list-group-item-action">{{ item.Licenses }}</li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.Notes }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.Port }}<br></li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.Type }}<br></li></td>
+                <td><li class="list-group-item list-group-item-action">{% if item.TimeLimit == None %}<br>{% else %}{{ item.TimeLimit|date:'d.m.Y' }}{% endif %}</li></td>
+                <td align="center"><li class="list-group-item list-group-item-action">{{ item.Licenses }}<br></li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.Notes }}<br></li></td>
                 <td>
-                        <a href="{% url 'hasp_keys_edit_post' pk=item.pk %}"><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-31-pencil.png"></button></a>
+                    <a href="{% url 'hasp_keys_edit_post' pk=item.pk %}"><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-31-pencil.png"></button></a>
                 </td>
                 <td>
                     <form action="{% url 'hasp_keys_delete' item.id %}" method="POST">{%csrf_token%}
                         <a href="."><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-17-bin.png"></button></a>
                     </form>
-
                 </td>
             </ul></tr>
         {% endfor %}
