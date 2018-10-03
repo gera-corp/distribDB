@@ -34,7 +34,7 @@ def drop_device_delete(request, id):
 
 
 def new_post(requst):
-    template = 'new_post.html'
+    template = 'drop_device_new_post.html'
     form = PostForm(requst.POST or None)
 
     try:
@@ -51,7 +51,7 @@ def new_post(requst):
 
 
 def edit_post(request, pk):
-    template = 'new_post.html'
+    template = 'drop_device_new_post.html'
     post = get_object_or_404(drop_device, pk=pk)
 
     if request.method == 'POST':
