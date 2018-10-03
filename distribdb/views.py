@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
+from django.db.models import Q
 from .models import drop_device, hasp_keys
 from .forms import PostForm, PostHaspForm
 
@@ -78,7 +79,11 @@ def hasp_keys_view(request):
     obj = hasp_keys.objects.all()
     query = request.GET.get('q')
     if query:
-        obj = obj.filter(ChipNo__icontains=query)
+        obj = obj.filter(
+            Q(ChipNo__icontains=query) |
+            Q(Notes__icontains=query)
+        ).distinct()
+
     return render(request, 'hasp_keys.html', {'object_list': obj})
 
 
