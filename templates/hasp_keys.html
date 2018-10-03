@@ -26,7 +26,7 @@
         </tr>
         </thead>
         {% for item in object_list %}
-            <tr><ul class="list-group">
+            <tr align="center"><ul class="list-group">
                 <td><li class="list-group-item list-group-item-action">{{ item.ChipNo }}</li></td>
                 <td align="center"><li class="list-group-item list-group-item-action"><input disabled type="checkbox"{% if item.Free == True %}checked="checked"{% endif %}></li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.Port }}<br></li></td>

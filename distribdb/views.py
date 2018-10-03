@@ -18,15 +18,18 @@ def programms(request):
 
 def drop_device_view(request):
     obj = drop_device.objects.all()
+    query = request.GET.get('q')
+    if query:
+        obj = obj.filter(SysName__icontains=query)
     return render(request, 'drop_devices.html', {'object_list': obj})
 
 
 def drop_device_delete(request, id):
-    odj = get_object_or_404(drop_device, id=id)
+    obj = get_object_or_404(drop_device, id=id)
     if request.method == 'POST':
-        odj.delete()
+        obj.delete()
         return redirect('/drop_devices')
-    return render(request, 'drop_devices.html', {'device': odj})
+    return render(request, 'drop_devices.html', {'device': obj})
 
 
 def new_post(requst):
@@ -73,15 +76,18 @@ def edit_post(request, pk):
 
 def hasp_keys_view(request):
     obj = hasp_keys.objects.all()
+    query = request.GET.get('q')
+    if query:
+        obj = obj.filter(ChipNo__icontains=query)
     return render(request, 'hasp_keys.html', {'object_list': obj})
 
 
 def hasp_keys_delete(request, id):
-    odj = get_object_or_404(hasp_keys, id=id)
+    obj = get_object_or_404(hasp_keys, id=id)
     if request.method == 'POST':
-        odj.delete()
+        obj.delete()
         return redirect('/hasp_keys')
-    return render(request, 'hasp_keys.html', {'device': odj})
+    return render(request, 'hasp_keys.html', {'device': obj})
 
 
 def hasp_keys_new_post(requst):

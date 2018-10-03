@@ -6,6 +6,9 @@
     <title>Устройства сброса</title>
 </head>
 <body>
+
+
+
 <div class="container-fluid table-responsive-sm">
     <a href="new_post/"><button type="submit" class="btn btn-secondary btn-sm">Добавить</button></a>
     <br><br>
@@ -21,7 +24,7 @@
         </tr>
         </thead>
         {% for item in object_list %}
-            <tr><ul class="list-group">
+            <tr align="center"><ul class="list-group">
                 <td><li class="list-group-item list-group-item-action">{{ item.SysName }}</li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.UserName }}<br></li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.ISPath }}<br></li></td>
