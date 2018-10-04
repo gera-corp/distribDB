@@ -33,21 +33,21 @@ def drop_device_delete(request, id):
     return render(request, 'drop_devices.html', {'device': obj})
 
 
-def drop_device_new_post(requst):
+def drop_device_new_post(request):
     template = 'drop_device_new_post.html'
-    form = PostForm(requst.POST or None)
+    form = PostForm(request.POST or None)
 
     try:
         if form.is_valid():
             form.save()
-            messages.success(requst, 'Запись нового устройства добавлена!')
+            messages.success(request, 'Запись нового устройства добавлена!')
     except Exception as e:
-        messages.warning(requst, 'Запись не была добавлена! Ошибка: {}'.format(e))
+        messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
     context = {
         'form': form,
     }
-    return render(requst, template, context)
+    return render(request, template, context)
 
 
 def drop_device_edit_post(request, pk):
@@ -95,21 +95,21 @@ def hasp_keys_delete(request, id):
     return render(request, 'hasp_keys.html', {'device': obj})
 
 
-def hasp_keys_new_post(requst):
+def hasp_keys_new_post(request):
     template = 'hasp_keys_new_post.html'
-    form = PostHaspForm(requst.POST or None)
+    form = PostHaspForm(request.POST or None)
 
     try:
         if form.is_valid():
             form.save()
-            messages.success(requst, 'Запись нового ключа добавлена!')
+            messages.success(request, 'Запись нового ключа добавлена!')
     except Exception as e:
-        messages.warning(requst, 'Запись не была добавлена! Ошибка: {}'.format(e))
+        messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
     context = {
         'form': form,
     }
-    return render(requst, template, context)
+    return render(request, template, context)
 
 
 def hasp_keys_edit_post(request, pk):
@@ -157,21 +157,21 @@ def hardlock_keys_delete(request, id):
     return render(request, 'hardlock_keys.html', {'device': obj})
 
 
-def hardlock_keys_new_post(requst):
+def hardlock_keys_new_post(request):
     template = 'hardlock_keys_new_post.html'
-    form = PostHardlockForm(requst.POST or None)
+    form = PostHardlockForm(request.POST or None)
 
     try:
         if form.is_valid():
             form.save()
-            messages.success(requst, 'Запись нового ключа добавлена!')
+            messages.success(request, 'Запись нового ключа добавлена!')
     except Exception as e:
-        messages.warning(requst, 'Запись не была добавлена! Ошибка: {}'.format(e))
+        messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
     context = {
         'form': form,
     }
-    return render(requst, template, context)
+    return render(request, template, context)
 
 
 def hardlock_keys_edit_post(request, pk):
@@ -220,21 +220,21 @@ def plane_types_delete(request, id):
     return render(request, 'plane_types.html', {'device': obj})
 
 
-def plane_types_new_post(requst):
+def plane_types_new_post(request):
     template = 'plane_types_new_post.html'
-    form = PostPlaneTypeForm(requst.POST or None)
+    form = PostPlaneTypeForm(request.POST or None)
 
     try:
         if form.is_valid():
             form.save()
-            messages.success(requst, 'Запись нового типа добавлена!')
+            messages.success(request, 'Запись нового типа добавлена!')
     except Exception as e:
-        messages.warning(requst, 'Запись не была добавлена! Ошибка: {}'.format(e))
+        messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
     context = {
         'form': form,
     }
-    return render(requst, template, context)
+    return render(request, template, context)
 
 
 def plane_types_edit_post(request, pk):
@@ -283,21 +283,21 @@ def lang_types_delete(request, id):
     return render(request, 'lang_types.html', {'device': obj})
 
 
-def lang_types_new_post(requst):
+def lang_types_new_post(request):
     template = 'lang_types_new_post.html'
-    form = PostLangForm(requst.POST or None)
+    form = PostLangForm(request.POST or None)
 
     try:
         if form.is_valid():
             form.save()
-            messages.success(requst, 'Запись нового языка добавлена!')
+            messages.success(request, 'Запись нового языка добавлена!')
     except Exception as e:
-        messages.warning(requst, 'Запись не была добавлена! Ошибка: {}'.format(e))
+        messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
     context = {
         'form': form,
     }
-    return render(requst, template, context)
+    return render(request, template, context)
 
 
 def lang_types_edit_post(request, pk):
@@ -345,21 +345,21 @@ def os_types_delete(request, id):
     return render(request, 'os_types.html', {'device': obj})
 
 
-def os_types_new_post(requst):
+def os_types_new_post(request):
     template = 'os_types_new_post.html'
-    form = PostOsForm(requst.POST or None)
+    form = PostOsForm(request.POST or None)
 
     try:
         if form.is_valid():
             form.save()
-            messages.success(requst, 'Запись новой OS добавлена!')
+            messages.success(request, 'Запись новой OS добавлена!')
     except Exception as e:
-        messages.warning(requst, 'Запись не была добавлена! Ошибка: {}'.format(e))
+        messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
     context = {
         'form': form,
     }
-    return render(requst, template, context)
+    return render(request, template, context)
 
 
 def os_types_edit_post(request, pk):
