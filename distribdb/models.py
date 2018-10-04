@@ -41,13 +41,13 @@ class hardlock_keys(models.Model):
         ('LPT', 'LPT')
     )
 
-    Mark                    = models.CharField(max_length=50, blank=False)
+    Mark                    = models.CharField(max_length=50, blank=True)
     ChipNo                  = models.CharField(max_length=50, blank=False)
-    Subcode                 = models.IntegerField()
+    Subcode                 = models.IntegerField(blank=True)
     ModAddr                 = models.IntegerField()
     Port                    = models.CharField(max_length=50, blank=False, default=None, choices=port_name)
     Free                    = models.BooleanField(default=False)
-    Notes                   = models.CharField(max_length=255, blank=True)
+    Notes                   = models.TextField(max_length=8000, blank=True)
 
 
 class plane_types(models.Model):

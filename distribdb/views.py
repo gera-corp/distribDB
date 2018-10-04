@@ -9,10 +9,6 @@ def home(request):
     return render(request, 'index.html')
 
 
-def tables(request):
-    return render(request, 'tables.html')
-
-
 def programms(request):
     return render(request, 'programms.html')
 
@@ -176,7 +172,7 @@ def hardlock_keys_new_post(request):
 
 def hardlock_keys_edit_post(request, pk):
     template = 'hardlock_keys_new_post.html'
-    post = get_object_or_404(hasp_keys, pk=pk)
+    post = get_object_or_404(hardlock_keys, pk=pk)
 
     if request.method == 'POST':
         form = PostHardlockForm(request.POST, instance=post)
