@@ -3,9 +3,9 @@ from django.db import models
 
 class drop_device(models.Model):
 
-    SysName                 = models.CharField(max_length=50)
-    UserName                = models.CharField(max_length=50, blank=True)
-    ISPath                  = models.CharField(max_length=250, blank=True)
+    SysName                 = models.CharField(max_length=50, blank=False)
+    UserName                = models.CharField(max_length=50, blank=False)
+    ISPath                  = models.CharField(max_length=250, blank=False)
     Description             = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
@@ -32,3 +32,40 @@ class hasp_keys(models.Model):
     TimeLimit               = models.DateField(null=True, blank=True)
     Licenses                = models.CharField(max_length=255, blank=True)
     Notes                   = models.TextField(max_length=8000, blank=True)
+
+
+class hardlock_keys(models.Model):
+
+    port_name = (
+        ('USB', 'USB'),
+        ('LPT', 'LPT')
+    )
+
+    Mark                    = models.CharField(max_length=50, blank=False)
+    ChipNo                  = models.CharField(max_length=50, blank=False)
+    Subcode                 = models.IntegerField()
+    ModAddr                 = models.IntegerField()
+    Port                    = models.CharField(max_length=50, blank=False, default=None, choices=port_name)
+    Free                    = models.BooleanField(default=False)
+    Notes                   = models.CharField(max_length=255, blank=True)
+
+
+class plane_types(models.Model):
+
+    SysName                 = models.CharField(max_length=50, blank=False)
+    UserName                = models.CharField(max_length=50, blank=False)
+    ISPath                  = models.CharField(max_length=250, blank=False)
+    Description             = models.TextField(max_length=8000, blank=True)
+
+
+class Lang_types(models.Model):
+
+    Lang                    = models.CharField(max_length=50, blank=False)
+    LCode                   = models.IntegerField()
+    ISDefine                = models.CharField(max_length=50, blank=False)
+
+
+class OS_type(models.Model):
+
+    OS                      = models.CharField(max_length=50, blank=False)
+    OSCode                  = models.IntegerField(blank=False)

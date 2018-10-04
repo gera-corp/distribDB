@@ -11,39 +11,23 @@
         {% for message in messages %}
             <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
                 <script type="text/javascript">
-                    setTimeout(function() {window.location.href="/hasp_keys";}, 2000);
+                    setTimeout(function() {window.location.href="/hardlock_keys";}, 2000);
                 </script>
             <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
             <strong>{{ message }}</strong>
             </div>
         {% endfor %}
     {% else %}
-                <p class="text-monospace small">Данная страница позволяет добавлять/редактировать базу данных ключей аппаратной защиты HASP.
+<p class="text-monospace small">Данная страница позволяет добавлять/редактировать базу данных ключей аппаратной защиты Hardlock.
                     Не допускается повторение номера чипа. Если ключ в настоящее время не включен в состав дистрибутива, необходимо для него установить поле "Свободен".
                     Действительно ли ключ является свободным, определяется прежде всего по его включению в состав дистрибутива. Если ключ входит в состав одного или нескольких дистрибутивов и помечен, как свободный,
                     то это значит, что ключ вернули назад разработчикам.
-            <br>Поле "Ограничение по времени" Заполняется только для ключа HASP Time.
-                <br>Поле "Количество лицензий" заполняется только для ключа NET HASP.</p>
 <form method="post">{% csrf_token %}
     <div class="form-group">
-
-        <label for="id_subject">Номер чипа:</label>{{ form.ChipNo }}
-<br>
-        <label for="id_subject">Ключ свободен?</label>{{ form.Free }}
-<br>
-        <label for="id_subject">Порт:</label>{{ form.Port }}
-<br>
-        <label for="id_subject">Тип:</label>{{ form.Type }}
-<br>
-        <label for="id_subject">Ограничение по времени:</label>{{ form.TimeLimit }}
-<br>
-        <label for="id_subject">Количество лицензий:</label>{{ form.Licenses }}
-<br>
-        <label for="id_subject">Примечания:</label>{{ form.Notes }}
-
+        {{ form.as_p }}
     </div>
     <button type="submit" class="btn btn-secondary btn-sm">Сохранить</button>
-    <a href="/hasp_keys"><button type="button" class="btn btn-secondary btn-sm">Отмена</button></a>
+    <a href="/hardlock_keys"><button type="button" class="btn btn-secondary btn-sm">Отмена</button></a>
 </form>
     {% endif %}
 </div>

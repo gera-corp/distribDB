@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
         {% include 'navbar.html' %}
-    <title>Ключи аппаратной защиты (HASP)</title>
+    <title>Ключи аппаратной защиты (Hardlock)</title>
 </head>
 <body>
 <div class="container-fluid table-responsive-sm">
@@ -12,12 +12,12 @@
     <table class="table table-sm table-borderless form-control-sm">
         <thead class="thead-light">
         <tr align="center">
+            <th>Маркировка</th>
             <th>Номер чипа</th>
-            <th>Свободен</th>
+            <th>Субкод</th>
+            <th>Адрес модуля</th>
             <th>Порт</th>
-            <th>Тип</th>
-            <th>Ограничение по времени</th>
-            <th>Количество лицензий</th>
+            <th>Свободен</th>
             <th>Примечания</th>
             <th></th>
             <th></th>
@@ -25,18 +25,18 @@
         </thead>
         {% for item in object_list %}
             <tr align="center"><ul class="list-group">
-                <td><li class="list-group-item list-group-item-action">{{ item.ChipNo }}</li></td>
-                <td align="center"><li class="list-group-item list-group-item-action"><input disabled type="checkbox"{% if item.Free == True %}checked="checked"{% endif %}></li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.Mark }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.ChipNo }}<br></li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.Subcode }}<br></li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.ModAddr }}<br></li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.Port }}<br></li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.Type }}<br></li></td>
-                <td><li class="list-group-item list-group-item-action">{% if item.TimeLimit == None %}<br>{% else %}{{ item.TimeLimit|date:'d.m.Y' }}{% endif %}</li></td>
-                <td align="center"><li class="list-group-item list-group-item-action">{{ item.Licenses }}<br></li></td>
+                <td align="center"><li class="list-group-item list-group-item-action"><input disabled type="checkbox"{% if item.Free == True %}checked="checked"{% endif %}></li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.Notes }}<br></li></td>
                 <td>
-                    <a href="{% url 'hasp_keys_edit_post' pk=item.pk %}"><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-31-pencil.png"></button></a>
+                    <a href="{% url 'hardlock_keys_edit_post' pk=item.pk %}"><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-31-pencil.png"></button></a>
                 </td>
                 <td>
-                    <form action="{% url 'hasp_keys_delete' item.id %}" method="POST">{%csrf_token%}
+                    <form action="{% url 'hardlock_keys_delete' item.id %}" method="POST">{%csrf_token%}
                         <a href="."><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-17-bin.png"></button></a>
                     </form>
                 </td>
