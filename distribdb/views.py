@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.db.models import Q
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from .models import drop_device, hasp_keys, hardlock_keys, plane_types, Lang_types, OS_type, executables, FASModules, ExecutablePaths
 from .forms import PostForm, PostHaspForm, PostHardlockForm, PostPlaneTypeForm, PostLangForm, PostOsForm, PostExecutablesForm, PostFASModulesForm, PostExecutablePathsForm
 
@@ -18,11 +19,24 @@ def programms(request):
 
 
 def drop_device_view(request):
-    obj = drop_device.objects.all().order_by('-id')
+    obj_list = drop_device.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
-        obj = obj.filter(SysName__icontains=query)
-    return render(request, 'drop_devices.html', {'object_list': obj})
+        obj_list = obj_list.filter(
+            Q(SysName__icontains=query)
+        ).distinct()
+    page = request.GET.get('page')
+    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        'object_list': queryset,
+    }
+    return render(request, 'drop_devices.html', context)
 
 
 def drop_device_delete(request, id):
@@ -76,15 +90,25 @@ def drop_device_edit_post(request, pk):
 
 
 def hasp_keys_view(request):
-    obj = hasp_keys.objects.all().order_by('-id')
+    obj_list = hasp_keys.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
-        obj = obj.filter(
-            Q(ChipNo__icontains=query) |
-            Q(Notes__icontains=query)
-        ).distinct()
-
-    return render(request, 'hasp_keys.html', {'object_list': obj})
+        obj_list = obj_list.filter(
+             Q(ChipNo__icontains=query) |
+             Q(Notes__icontains=query)
+         ).distinct()
+    page = request.GET.get('page')
+    paginator = Paginator(obj_list, 20) #Сколько записей на стрицу отображатся
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        'object_list': queryset,
+    }
+    return render(request, 'hasp_keys.html', context)
 
 
 def hasp_keys_delete(request, id):

@@ -42,7 +42,26 @@
                 </td>
             </ul></tr>
         {% endfor %}
+
     </table>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+      {% if object_list.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page=1">&laquo;</a></li>
+    <li class="page-item"><a class="page-link " href="?page={{ object_list.previous_page_number }}">Назад</a></li>
+      {% endif %}
+    <li class="page-item">
+        <span class="current">
+            <a class="page-link text-muted" href="#">Страница {{ object_list.number }} из {{ object_list.paginator.num_pages }}</a>
+        </span>
+    </li>
+      {% if object_list.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ object_list.next_page_number }}">Далее</a></li>
+      <li class="page-item"><a class="page-link" href="?page={{ object_list.paginator.num_pages }}">&raquo;</a></li>
+  {% endif %}
+  </ul>
+</nav>
+
 </div>
 </body>
 </html>
