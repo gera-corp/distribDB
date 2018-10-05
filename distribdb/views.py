@@ -1,12 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.db.models import Q
-from .models import drop_device, hasp_keys, hardlock_keys, plane_types, Lang_types, OS_type
-from .forms import PostForm, PostHaspForm, PostHardlockForm, PostPlaneTypeForm, PostLangForm, PostOsForm
+from .models import drop_device, hasp_keys, hardlock_keys, plane_types, Lang_types, OS_type, executables, FASModules, ExecutablePaths
+from .forms import PostForm, PostHaspForm, PostHardlockForm, PostPlaneTypeForm, PostLangForm, PostOsForm, PostExecutablesForm, PostFASModulesForm, PostExecutablePathsForm
 
 
 def home(request):
     return render(request, 'index.html')
+
+
+def tables(request):
+    return render(request, 'tables.html')
 
 
 def programms(request):
@@ -14,7 +18,7 @@ def programms(request):
 
 
 def drop_device_view(request):
-    obj = drop_device.objects.all()
+    obj = drop_device.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
         obj = obj.filter(SysName__icontains=query)
@@ -72,7 +76,7 @@ def drop_device_edit_post(request, pk):
 
 
 def hasp_keys_view(request):
-    obj = hasp_keys.objects.all()
+    obj = hasp_keys.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
         obj = obj.filter(
@@ -134,7 +138,7 @@ def hasp_keys_edit_post(request, pk):
 
 
 def hardlock_keys_view(request):
-    obj = hardlock_keys.objects.all()
+    obj = hardlock_keys.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
         obj = obj.filter(
@@ -196,7 +200,7 @@ def hardlock_keys_edit_post(request, pk):
 
 
 def plane_types_view(request):
-    obj = plane_types.objects.all()
+    obj = plane_types.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
         obj = obj.filter(
@@ -259,7 +263,7 @@ def plane_types_edit_post(request, pk):
 
 
 def lang_types_view(request):
-    obj = Lang_types.objects.all()
+    obj = Lang_types.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
         obj = obj.filter(
@@ -322,7 +326,7 @@ def lang_types_edit_post(request, pk):
 
 
 def os_types_view(request):
-    obj = OS_type.objects.all()
+    obj = OS_type.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
         obj = obj.filter(
@@ -374,6 +378,189 @@ def os_types_edit_post(request, pk):
 
     else:
         form = PostOsForm(instance=post)
+
+    context = {
+        'form': form,
+        'post': post,
+    }
+
+    return render(request, template, context)
+
+
+def executables_view(request):
+    obj = executables.objects.all().order_by('-id')
+    query = request.GET.get('q')
+    if query:
+        obj = obj.filter(
+            Q(FileName__icontains=query)
+        ).distinct()
+
+    return render(request, 'executables.html', {'object_list': obj})
+
+
+def executables_delete(request, id):
+    obj = get_object_or_404(executables, id=id)
+    if request.method == 'POST':
+        obj.delete()
+        return redirect('/executables')
+    return render(request, 'executables.html', {'device': obj})
+
+
+def executables_new_post(request):
+    template = 'executables_new_post.html'
+    form = PostExecutablesForm(request.POST or None)
+
+    try:
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Запись нового модуля добавлена!')
+    except Exception as e:
+        messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
+
+    context = {
+        'form': form,
+    }
+    return render(request, template, context)
+
+
+def executables_edit_post(request, pk):
+    template = 'executables_new_post.html'
+    post = get_object_or_404(executables, pk=pk)
+
+    if request.method == 'POST':
+        form = PostExecutablesForm(request.POST, instance=post)
+
+        try:
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Изменения внесены')
+        except Exception as e:
+            messages.warning(request, 'Изменения не внесены! Ошибка: {}'.format(e))
+
+    else:
+        form = PostExecutablesForm(instance=post)
+
+    context = {
+        'form': form,
+        'post': post,
+    }
+
+    return render(request, template, context)
+
+
+def fas_modules_view(request):
+    obj = FASModules.objects.all()
+    query = request.GET.get('q')
+    if query:
+        obj = obj.filter(
+            Q(ExecutableID__icontains=query)
+        ).distinct()
+
+    return render(request, 'fas_modules.html', {'object_list': obj})
+
+
+def fas_modules_delete(request, id):
+    obj = get_object_or_404(FASModules, id=id)
+    if request.method == 'POST':
+        obj.delete()
+        return redirect('/fas_modules')
+    return render(request, 'fas_modules.html', {'device': obj})
+
+
+def fas_modules_new_post(request):
+    template = 'fas_modules_new_post.html'
+    form = PostFASModulesForm(request.POST or None)
+
+    try:
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Запись нового номера FAS добавлена!')
+    except Exception as e:
+        messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
+
+    context = {
+        'form': form,
+    }
+    return render(request, template, context)
+
+
+def fas_modules_edit_post(request, pk):
+    template = 'fas_modules_new_post.html'
+    post = get_object_or_404(FASModules, pk=pk)
+
+    if request.method == 'POST':
+        form = PostFASModulesForm(request.POST, instance=post)
+
+        try:
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Изменения внесены')
+        except Exception as e:
+            messages.warning(request, 'Изменения не внесены! Ошибка: {}'.format(e))
+
+    else:
+        form = PostFASModulesForm(instance=post)
+
+    context = {
+        'form': form,
+        'post': post,
+    }
+
+    return render(request, template, context)
+
+
+def executable_paths_view(request):
+    obj = ExecutablePaths.objects.all()
+    query = request.GET.get('q')
+    if query:
+        obj = obj.filter(
+            Q(ExecutableID__icontains=query)
+        ).distinct()
+
+    return render(request, 'executable_paths.html', {'object_list': obj})
+
+
+def executable_paths_delete(request, id):
+    obj = get_object_or_404(ExecutablePaths, id=id)
+    if request.method == 'POST':
+        obj.delete()
+        return redirect('/executable_paths')
+    return render(request, 'executable_paths.html', {'device': obj})
+
+
+def executable_paths_new_post(request):
+    template = 'executable_paths_new_post.html'
+    form = PostExecutablePathsForm(request.POST or None)
+
+    try:
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Запись нового пути InstallShield добавлена!')
+    except Exception as e:
+        messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
+
+    context = {
+        'form': form,
+    }
+    return render(request, template, context)
+
+
+def executable_paths_edit_post(request, pk):
+    template = 'executable_paths_new_post.html'
+    post = get_object_or_404(ExecutablePaths, pk=pk)
+
+    if request.method == 'POST':
+        form = PostExecutablePathsForm(request.POST, instance=post)
+
+        try:
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Изменения внесены')
+        except Exception as e:
+            messages.warning(request, 'Изменения не внесены! Ошибка: {}'.format(e))
+
+    else:
+        form = PostExecutablePathsForm(instance=post)
 
     context = {
         'form': form,

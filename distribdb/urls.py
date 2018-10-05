@@ -4,6 +4,8 @@ from . import views
 urlpatterns = [
     path('', views.home),
     path('programms/', views.programms),
+    path('tables/', views.tables),
+
     path('drop_devices/', views.drop_device_view),
     path('drop_devices/<int:id>/delete/', views.drop_device_delete, name='drop_device_delete'),
     path('drop_devices/new_post/', views.drop_device_new_post, name='drop_device_new_post'),
@@ -33,5 +35,20 @@ urlpatterns = [
     path('os_types/<int:id>/delete/', views.os_types_delete, name='os_types_delete'),
     path('os_types/new_post/', views.os_types_new_post, name='os_types_new_post'),
     path('os_types/edit_post/<int:pk>/', views.os_types_edit_post, name='os_types_edit_post'),
+
+    path('executables/', views.executables_view),
+    path('executables/<int:id>/delete/', views.executables_delete, name='executables_delete'),
+    path('executables/new_post/', views.executables_new_post, name='executables_new_post'),
+    path('executables/edit_post/<int:pk>/', views.executables_edit_post, name='executables_edit_post'),
+
+    path('fas_modules/', views.fas_modules_view),
+    path('fas_modules/<int:id>/delete/', views.fas_modules_delete, name='fas_modules_delete'),
+    path('fas_modules/new_post/', views.fas_modules_new_post, name='fas_modules_new_post'),
+    path('fas_modules/edit_post/<int:pk>/', views.fas_modules_edit_post, name='fas_modules_edit_post'),
+
+    path('executable_paths/', views.executable_paths_view),
+    path('executable_paths/<int:id>/delete/', views.executable_paths_delete, name='executable_paths_delete'),
+    path('executable_paths/new_post/', views.executable_paths_new_post, name='executable_paths_new_post'),
+    path('executable_paths/edit_post/<int:pk>/', views.executable_paths_edit_post, name='executable_paths_edit_post'),
 
 ]

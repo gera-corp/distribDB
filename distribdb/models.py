@@ -69,3 +69,25 @@ class OS_type(models.Model):
 
     OS                      = models.CharField(max_length=50, blank=False)
     OSCode                  = models.IntegerField(blank=False)
+
+
+class executables(models.Model):
+
+    FileName                = models.CharField(max_length=50, blank=False)
+
+    def __str__(self):
+        return self.FileName
+
+
+class FASModules(models.Model):
+
+    ExecutableID            = models.ForeignKey(executables, on_delete=models.CASCADE, blank=False, default=id(1))
+    FASNo                   = models.IntegerField(blank=False)
+
+
+class ExecutablePaths(models.Model):
+
+    ExecutableID            = models.ForeignKey(executables, on_delete=models.CASCADE, blank=False, default=id(1))
+    ISPath                  = models.CharField(max_length=250, blank=False)
+    Source                  = models.CharField(max_length=800, blank=False)
+    Dest                    = models.CharField(max_length=800, blank=False)

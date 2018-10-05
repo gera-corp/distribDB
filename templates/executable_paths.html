@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+        {% include 'navbar.html' %}
+    <title>Пути InstallShield для исполняемых модулей</title>
+</head>
+<body>
+<div class="container table-responsive-sm">
+    <a href="new_post/"><button type="submit" class="btn btn-secondary btn-sm">Добавить</button></a>
+    <br><br>
+    <table class="table table-sm table-borderless form-control-sm">
+        <thead class="thead-light">
+        <tr align="center">
+            <th>Имя файла</th>
+            <th>Путь InstallShield</th>
+            <th>Источник файлов для шифрования</th>
+            <th>Путь для шифрованых файлов</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        {% for item in object_list %}
+            <tr align="center"><ul class="list-group">
+                <td><li class="list-group-item list-group-item-action">{{ item.ExecutableID }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.ISPath }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.Source }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.Dest }}</li></td>
+                <td>
+                    <a href="{% url 'executable_paths_edit_post' pk=item.pk %}"><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-31-pencil.png"></button></a>
+                </td>
+                <td>
+                    <form action="{% url 'executable_paths_delete' item.id %}" method="POST">{%csrf_token%}
+                        <a href="."><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-17-bin.png"></button></a>
+                    </form>
+                </td>
+            </ul></tr>
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>

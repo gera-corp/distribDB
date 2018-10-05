@@ -1,5 +1,5 @@
 from django import forms
-from .models import drop_device, hasp_keys, hardlock_keys, plane_types, Lang_types, OS_type
+from .models import drop_device, hasp_keys, hardlock_keys, plane_types, Lang_types, OS_type, executables, FASModules, ExecutablePaths
 
 
 class PostForm(forms.ModelForm):
@@ -103,7 +103,7 @@ class PostLangForm(forms.ModelForm):
         widgets = {
             'Lang': forms.TextInput(attrs={'class': 'form-control'}),
             'LCode': forms.NumberInput(attrs={'class': 'form-control', 'required': True, 'type': 'number'}),
-            'ISDefine': forms.TextInput(attrs={'class': 'form-control'}),
+            'ISDefine': forms.TextInput(attrs={'class': 'form-control'})
         }
 
 
@@ -118,5 +118,53 @@ class PostOsForm(forms.ModelForm):
         }
         widgets = {
             'OS': forms.TextInput(attrs={'class': 'form-control'}),
-            'OSCode': forms.NumberInput(attrs={'class': 'form-control', 'required': True, 'type': 'number'}),
+            'OSCode': forms.NumberInput(attrs={'class': 'form-control', 'required': True, 'type': 'number'})
+        }
+
+
+class PostExecutablesForm(forms.ModelForm):
+
+    class Meta:
+        model = executables
+        fields = ['FileName']
+        labels = {
+            'FileName': 'Имя файла'
+        }
+        widgets = {
+            'FileName': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+
+class PostFASModulesForm(forms.ModelForm):
+
+    class Meta:
+        model = FASModules
+        fields = ['ExecutableID', 'FASNo']
+        labels = {
+            'ExecutableID': 'Имя файла',
+            'FASNo': 'FAS-номер'
+        }
+        widgets = {
+            'ExecutableID': forms.Select(attrs={'class': 'form-control'}),
+            'FASNo': forms.NumberInput(attrs={'class': 'form-control', 'required': True, 'type': 'number'})
+        }
+
+
+class PostExecutablePathsForm(forms.ModelForm):
+
+    class Meta:
+        model = ExecutablePaths
+        fields = ['ExecutableID', 'ISPath', 'Source', 'Dest']
+        labels = {
+            'ExecutableID': 'Имя файла',
+            'ISPath': 'Путь InstallShield',
+            'Source': 'Источник файлов для шифрования',
+            'Dest': 'Путь для шифрования файлов'
+
+        }
+        widgets = {
+            'ExecutableID': forms.Select(attrs={'class': 'form-control'}),
+            'ISPath': forms.TextInput(attrs={'class': 'form-control'}),
+            'Source': forms.TextInput(attrs={'class': 'form-control'}),
+            'Dest': forms.TextInput(attrs={'class': 'form-control'})
         }
