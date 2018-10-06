@@ -162,15 +162,25 @@ def hasp_keys_edit_post(request, pk):
 
 
 def hardlock_keys_view(request):
-    obj = hardlock_keys.objects.all().order_by('-id')
+    obj_list = hardlock_keys.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
-        obj = obj.filter(
+        obj_list = obj_list.filter(
             Q(ChipNo__icontains=query) |
             Q(Notes__icontains=query)
         ).distinct()
-
-    return render(request, 'hardlock_keys.html', {'object_list': obj})
+    page = request.GET.get('page')
+    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        'object_list': queryset,
+    }
+    return render(request, 'hardlock_keys.html', context)
 
 
 def hardlock_keys_delete(request, id):
@@ -224,16 +234,26 @@ def hardlock_keys_edit_post(request, pk):
 
 
 def plane_types_view(request):
-    obj = plane_types.objects.all().order_by('-id')
+    obj_list = plane_types.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
-        obj = obj.filter(
+        obj_list = obj_list.filter(
             Q(SysName__icontains=query) |
             Q(UserName__icontains=query) |
             Q(Description__icontains=query)
         ).distinct()
-
-    return render(request, 'plane_types.html', {'object_list': obj})
+    page = request.GET.get('page')
+    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        'object_list': queryset,
+    }
+    return render(request, 'plane_types.html', context)
 
 
 def plane_types_delete(request, id):
@@ -287,16 +307,26 @@ def plane_types_edit_post(request, pk):
 
 
 def lang_types_view(request):
-    obj = Lang_types.objects.all().order_by('-id')
+    obj_list = Lang_types.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
-        obj = obj.filter(
+        obj_list = obj_list.filter(
             Q(Lang__icontains=query) |
             Q(Lcode__icontains=query) |
             Q(ISDefine__icontains=query)
         ).distinct()
-
-    return render(request, 'lang_types.html', {'object_list': obj})
+    page = request.GET.get('page')
+    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        'object_list': queryset,
+    }
+    return render(request, 'lang_types.html', context)
 
 
 def lang_types_delete(request, id):
@@ -350,15 +380,25 @@ def lang_types_edit_post(request, pk):
 
 
 def os_types_view(request):
-    obj = OS_type.objects.all().order_by('-id')
+    obj_list = OS_type.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
-        obj = obj.filter(
+        obj_list = obj_list.filter(
             Q(OS__icontains=query) |
             Q(OSCode__icontains=query)
         ).distinct()
-
-    return render(request, 'os_types.html', {'object_list': obj})
+    page = request.GET.get('page')
+    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        'object_list': queryset,
+    }
+    return render(request, 'os_types.html', context)
 
 
 def os_types_delete(request, id):
@@ -412,14 +452,24 @@ def os_types_edit_post(request, pk):
 
 
 def executables_view(request):
-    obj = executables.objects.all().order_by('-id')
+    obj_list = executables.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
-        obj = obj.filter(
+        obj_list = obj_list.filter(
             Q(FileName__icontains=query)
         ).distinct()
-
-    return render(request, 'executables.html', {'object_list': obj})
+    page = request.GET.get('page')
+    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        'object_list': queryset,
+    }
+    return render(request, 'executables.html', context)
 
 
 def executables_delete(request, id):
@@ -473,14 +523,24 @@ def executables_edit_post(request, pk):
 
 
 def fas_modules_view(request):
-    obj = FASModules.objects.all()
+    obj_list = FASModules.objects.all()
     query = request.GET.get('q')
     if query:
-        obj = obj.filter(
+        obj_list = obj_list.filter(
             Q(ExecutableID__icontains=query)
         ).distinct()
-
-    return render(request, 'fas_modules.html', {'object_list': obj})
+    page = request.GET.get('page')
+    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        'object_list': queryset,
+    }
+    return render(request, 'fas_modules.html', context)
 
 
 def fas_modules_delete(request, id):
@@ -534,14 +594,24 @@ def fas_modules_edit_post(request, pk):
 
 
 def executable_paths_view(request):
-    obj = ExecutablePaths.objects.all()
+    obj_list = ExecutablePaths.objects.all()
     query = request.GET.get('q')
     if query:
-        obj = obj.filter(
+        obj_list = obj_list.filter(
             Q(ExecutableID__icontains=query)
         ).distinct()
-
-    return render(request, 'executable_paths.html', {'object_list': obj})
+    page = request.GET.get('page')
+    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        'object_list': queryset,
+    }
+    return render(request, 'executable_paths.html', context)
 
 
 def executable_paths_delete(request, id):
