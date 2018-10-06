@@ -7,18 +7,26 @@ from .forms import PostForm, PostHaspForm, PostHardlockForm, PostPlaneTypeForm, 
 
 
 def home(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     return render(request, 'index.html')
 
 
 def tables(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     return render(request, 'tables.html')
 
 
 def programms(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     return render(request, 'programms.html')
 
 
 def drop_device_view(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     obj_list = drop_device.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
@@ -40,6 +48,8 @@ def drop_device_view(request):
 
 
 def drop_device_delete(request, id):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     obj = get_object_or_404(drop_device, id=id)
     if request.method == 'POST':
         obj.delete()
@@ -48,6 +58,8 @@ def drop_device_delete(request, id):
 
 
 def drop_device_new_post(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     template = 'drop_device_new_post.html'
     form = PostForm(request.POST or None)
 
@@ -65,6 +77,8 @@ def drop_device_new_post(request):
 
 
 def drop_device_edit_post(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     template = 'drop_device_new_post.html'
     post = get_object_or_404(drop_device, pk=pk)
 
@@ -90,6 +104,8 @@ def drop_device_edit_post(request, pk):
 
 
 def hasp_keys_view(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     obj_list = hasp_keys.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
@@ -112,6 +128,8 @@ def hasp_keys_view(request):
 
 
 def hasp_keys_delete(request, id):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     obj = get_object_or_404(hasp_keys, id=id)
     if request.method == 'POST':
         obj.delete()
@@ -120,6 +138,8 @@ def hasp_keys_delete(request, id):
 
 
 def hasp_keys_new_post(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     template = 'hasp_keys_new_post.html'
     form = PostHaspForm(request.POST or None)
 
@@ -137,6 +157,8 @@ def hasp_keys_new_post(request):
 
 
 def hasp_keys_edit_post(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     template = 'hasp_keys_new_post.html'
     post = get_object_or_404(hasp_keys, pk=pk)
 
@@ -162,6 +184,8 @@ def hasp_keys_edit_post(request, pk):
 
 
 def hardlock_keys_view(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     obj_list = hardlock_keys.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
@@ -184,6 +208,8 @@ def hardlock_keys_view(request):
 
 
 def hardlock_keys_delete(request, id):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     obj = get_object_or_404(hardlock_keys, id=id)
     if request.method == 'POST':
         obj.delete()
@@ -192,6 +218,8 @@ def hardlock_keys_delete(request, id):
 
 
 def hardlock_keys_new_post(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     template = 'hardlock_keys_new_post.html'
     form = PostHardlockForm(request.POST or None)
 
@@ -209,6 +237,8 @@ def hardlock_keys_new_post(request):
 
 
 def hardlock_keys_edit_post(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     template = 'hardlock_keys_new_post.html'
     post = get_object_or_404(hardlock_keys, pk=pk)
 
@@ -234,6 +264,8 @@ def hardlock_keys_edit_post(request, pk):
 
 
 def plane_types_view(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     obj_list = plane_types.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
@@ -257,6 +289,8 @@ def plane_types_view(request):
 
 
 def plane_types_delete(request, id):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     obj = get_object_or_404(plane_types, id=id)
     if request.method == 'POST':
         obj.delete()
@@ -265,6 +299,8 @@ def plane_types_delete(request, id):
 
 
 def plane_types_new_post(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     template = 'plane_types_new_post.html'
     form = PostPlaneTypeForm(request.POST or None)
 
@@ -282,6 +318,8 @@ def plane_types_new_post(request):
 
 
 def plane_types_edit_post(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     template = 'plane_types_new_post.html'
     post = get_object_or_404(plane_types, pk=pk)
 
@@ -307,6 +345,8 @@ def plane_types_edit_post(request, pk):
 
 
 def lang_types_view(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     obj_list = Lang_types.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
@@ -330,6 +370,8 @@ def lang_types_view(request):
 
 
 def lang_types_delete(request, id):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     obj = get_object_or_404(Lang_types, id=id)
     if request.method == 'POST':
         obj.delete()
@@ -338,6 +380,8 @@ def lang_types_delete(request, id):
 
 
 def lang_types_new_post(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     template = 'lang_types_new_post.html'
     form = PostLangForm(request.POST or None)
 
@@ -355,6 +399,8 @@ def lang_types_new_post(request):
 
 
 def lang_types_edit_post(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     template = 'lang_types_new_post.html'
     post = get_object_or_404(Lang_types, pk=pk)
 
@@ -380,6 +426,8 @@ def lang_types_edit_post(request, pk):
 
 
 def os_types_view(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     obj_list = OS_type.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
@@ -402,6 +450,8 @@ def os_types_view(request):
 
 
 def os_types_delete(request, id):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     obj = get_object_or_404(OS_type, id=id)
     if request.method == 'POST':
         obj.delete()
@@ -410,6 +460,8 @@ def os_types_delete(request, id):
 
 
 def os_types_new_post(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     template = 'os_types_new_post.html'
     form = PostOsForm(request.POST or None)
 
@@ -427,6 +479,8 @@ def os_types_new_post(request):
 
 
 def os_types_edit_post(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     template = 'os_types_new_post.html'
     post = get_object_or_404(OS_type, pk=pk)
 
@@ -452,6 +506,8 @@ def os_types_edit_post(request, pk):
 
 
 def executables_view(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     obj_list = executables.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
@@ -473,6 +529,8 @@ def executables_view(request):
 
 
 def executables_delete(request, id):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     obj = get_object_or_404(executables, id=id)
     if request.method == 'POST':
         obj.delete()
@@ -481,6 +539,8 @@ def executables_delete(request, id):
 
 
 def executables_new_post(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     template = 'executables_new_post.html'
     form = PostExecutablesForm(request.POST or None)
 
@@ -498,6 +558,8 @@ def executables_new_post(request):
 
 
 def executables_edit_post(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     template = 'executables_new_post.html'
     post = get_object_or_404(executables, pk=pk)
 
@@ -523,6 +585,8 @@ def executables_edit_post(request, pk):
 
 
 def fas_modules_view(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     obj_list = FASModules.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
@@ -544,6 +608,8 @@ def fas_modules_view(request):
 
 
 def fas_modules_delete(request, id):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     obj = get_object_or_404(FASModules, id=id)
     if request.method == 'POST':
         obj.delete()
@@ -552,6 +618,8 @@ def fas_modules_delete(request, id):
 
 
 def fas_modules_new_post(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     template = 'fas_modules_new_post.html'
     form = PostFASModulesForm(request.POST or None)
 
@@ -569,6 +637,8 @@ def fas_modules_new_post(request):
 
 
 def fas_modules_edit_post(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     template = 'fas_modules_new_post.html'
     post = get_object_or_404(FASModules, pk=pk)
 
@@ -594,6 +664,8 @@ def fas_modules_edit_post(request, pk):
 
 
 def executable_paths_view(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     obj_list = ExecutablePaths.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
@@ -615,6 +687,8 @@ def executable_paths_view(request):
 
 
 def executable_paths_delete(request, id):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     obj = get_object_or_404(ExecutablePaths, id=id)
     if request.method == 'POST':
         obj.delete()
@@ -623,6 +697,8 @@ def executable_paths_delete(request, id):
 
 
 def executable_paths_new_post(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     template = 'executable_paths_new_post.html'
     form = PostExecutablePathsForm(request.POST or None)
 
@@ -640,6 +716,8 @@ def executable_paths_new_post(request):
 
 
 def executable_paths_edit_post(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     template = 'executable_paths_new_post.html'
     post = get_object_or_404(ExecutablePaths, pk=pk)
 

@@ -1,4 +1,6 @@
-from django.urls import path
+from django.urls import path, include
+from django.contrib.auth.views import LogoutView
+from django.conf import settings
 from . import views
 
 urlpatterns = [
@@ -51,4 +53,6 @@ urlpatterns = [
     path('executable_paths/new_post/', views.executable_paths_new_post, name='executable_paths_new_post'),
     path('executable_paths/edit_post/<int:pk>/', views.executable_paths_edit_post, name='executable_paths_edit_post'),
 
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('logout/', LogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
 ]
