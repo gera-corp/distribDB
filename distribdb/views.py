@@ -523,7 +523,7 @@ def executables_edit_post(request, pk):
 
 
 def fas_modules_view(request):
-    obj_list = FASModules.objects.all()
+    obj_list = FASModules.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -594,7 +594,7 @@ def fas_modules_edit_post(request, pk):
 
 
 def executable_paths_view(request):
-    obj_list = ExecutablePaths.objects.all()
+    obj_list = ExecutablePaths.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
