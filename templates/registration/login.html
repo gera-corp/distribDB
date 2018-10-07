@@ -8,10 +8,10 @@
 <body>
 <div class="container alert alert-dark" role="alert" align="center">
 {% if form.errors %}
-    <p class="text-danger">Имя пользователя или пароль не верные!</p>
+    <div class="alert alert-danger" role="alert"><h6>Ошибка авторизации</h6>Внимание! Вход на сайт не был произведён. Возможно, Вы ввели неверное имя пользователя или пароль.</div>
 {% endif %}
 {% if next %}
-    <p class="text-danger">Сюда доступ запрещён!</p>
+    <div class="alert alert-danger" role="alert"><h6>Сюда доступ запрещён!</h6></div>
 {% endif %}
 
 <p class="text-monospace small">
