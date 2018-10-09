@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% include 'navbar.html' %}
+    <meta charset="UTF-8">
+    <title>Редактирование</title>
+</head>
+<body>
+<div class="offset-3 col-md-6">
+    {% if messages %}
+        {% for message in messages %}
+            <div align="center" {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
+                <script type="text/javascript">
+                    setTimeout(function() {window.location.href="/plane_types";}, 2000);
+                </script>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
+            <strong>{{ message }}</strong>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-monospace small">Данная страница позволяет добавлять/редактировать список летательных аппаратов.
+            <br>Комбинация "Системное имя - Пользовательское имя" должна быть уникальной. Поле "Путь InstallShield" не может быть пустым.</p>
+<form method="post">{% csrf_token %}
+    <div class="form-group">
+        {{ form.as_p }}
+    </div>
+    <button type="submit" class="btn btn-secondary">Сохранить</button>
+    <a class="btn btn-secondary" href="/plane_types" role="button">Отмена</a>
+</form>
+    {% endif %}
+</div>
+</body>
+</html>

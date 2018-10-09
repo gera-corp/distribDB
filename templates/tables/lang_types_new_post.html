@@ -9,7 +9,7 @@
 <div class="offset-3 col-md-6">
     {% if messages %}
         {% for message in messages %}
-            <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
+            <div align="center" {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
                 <script type="text/javascript">
                     setTimeout(function() {window.location.href="/lang_types";}, 2000);
                 </script>

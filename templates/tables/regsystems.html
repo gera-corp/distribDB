@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+        {% include 'navbar.html' %}
+    <title>Системы регистрации</title>
+</head>
+<body>
+<div class="container table-responsive-sm">
+    <a class="btn btn-secondary" href="new_post/" role="button">Добавить</a>
+    <br><br>
+    <table class="table table-sm table-borderless form-control-sm">
+        <thead class="thead-light">
+        <tr align="center">
+            <th>Системное имя</th>
+            <th>Пользовательское имя</th>
+            <th>Путь InstallShield</th>
+            <th>Спрятан?</th>
+            <th>Описание</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        {% for item in object_list %}
+            <tr align="center"><ul class="list-group">
+                <td><li class="list-group-item list-group-item-action">{{ item.SysName }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.UserName }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.ISPath }}</li></td>
+                <td align="center"><li class="list-group-item list-group-item-action"><input disabled type="checkbox"{% if item.Hide == True %}checked="checked"{% endif %}></li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.Description }}</li></td>
+                <td>
+                    <a href="{% url 'regsystems_edit_post' pk=item.pk %}"><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-31-pencil.png"></button></a>
+                </td>
+                <td>
+                    <form action="{% url 'regsystems_delete' item.id %}" method="POST">{%csrf_token%}
+                        <a href=".."><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-17-bin.png"></button></a>
+                    </form>
+                </td>
+            </ul></tr>
+        {% endfor %}
+    </table>
+{% include 'paginator_template.html' %}
+</div>
+</body>
+</html>

@@ -9,7 +9,10 @@ class drop_device(models.Model):
     Description             = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return 'Системное имя - {0}, Пользовательское имя - {1}, Путь InstallShield - {2}, Описание - {3}'.format(self.SysName, self.UserName, self.ISPath, self.Description)
+        return self.UserName
+
+    class Meta:
+        ordering = ('UserName',)
 
 
 class hasp_keys(models.Model):
@@ -57,6 +60,12 @@ class plane_types(models.Model):
     ISPath                  = models.CharField(max_length=250, blank=False)
     Description             = models.TextField(max_length=8000, blank=True)
 
+    def __str__(self):
+        return self.UserName
+
+    class Meta:
+        ordering = ('UserName',)
+
 
 class Lang_types(models.Model):
 
@@ -78,6 +87,9 @@ class executables(models.Model):
     def __str__(self):
         return self.FileName
 
+    class Meta:
+        ordering = ('FileName',)
+
 
 class FASModules(models.Model):
 
@@ -91,3 +103,98 @@ class ExecutablePaths(models.Model):
     ISPath                  = models.CharField(max_length=250, blank=False)
     Source                  = models.CharField(max_length=800, blank=False)
     Dest                    = models.CharField(max_length=800, blank=False)
+
+
+class RegSystems(models.Model):
+
+    SysName                 = models.CharField(max_length=50, blank=True)
+    UserName                = models.CharField(max_length=50, blank=False)
+    ISPath                  = models.CharField(max_length=50, blank=True)
+    Hide                    = models.BooleanField(default=False)
+    Description             = models.TextField(max_length=8000, blank=True)
+
+    def __str__(self):
+        return self.UserName
+
+    class Meta:
+        ordering = ('UserName',)
+
+
+class TypeRegsys(models.Model):
+
+    TypeID                  = models.ForeignKey(plane_types, on_delete=models.CASCADE, blank=False, default=id(1))
+    RegsysID                = models.ForeignKey(RegSystems, on_delete=models.CASCADE, blank=False, default=id(1))
+    ISPath                  = models.CharField(max_length=255, blank=False)
+    Description             = models.TextField(max_length=8000, blank=True)
+    UserNameRegsys          = models.CharField(max_length=36, blank=False)
+    SysNameRegsys           = models.CharField(max_length=16, blank=False)
+
+
+class Tasks(models.Model):
+
+    SysName                 = models.CharField(max_length=50, blank=False)
+    UserName                = models.CharField(max_length=50, blank=True)
+
+    def __str__(self):
+        return self.SysName
+
+    class Meta:
+        ordering = ('SysName',)
+
+
+class TypeTasks(models.Model):
+
+    TypeID                  = models.ForeignKey(plane_types, on_delete=models.CASCADE, blank=False, default=id(1))
+    TaskID                  = models.ForeignKey(Tasks, on_delete=models.CASCADE, blank=False, default=id(1))
+    ISPath                  = models.CharField(max_length=255, blank=False)
+    Description             = models.TextField(max_length=8000, blank=True)
+
+
+class Misc(models.Model):
+
+    Name                    = models.CharField(max_length=255, blank=False)
+    SysName                 = models.CharField(max_length=50, blank=True)
+    UserName                = models.CharField(max_length=50, blank=True)
+    Description             = models.TextField(max_length=8000, blank=True)
+
+    def __str__(self):
+        return self.Name
+
+    class Meta:
+        ordering = ('Name',)
+
+
+class TypeMisc(models.Model):
+
+    TypeID                  = models.ForeignKey(plane_types, on_delete=models.CASCADE, blank=False, default=id(1))
+    MiscID                  = models.ForeignKey(Misc, on_delete=models.CASCADE, blank=False, default=id(1))
+    ISPath                  = models.CharField(max_length=255, blank=False)
+    Description             = models.TextField(max_length=8000, blank=True)
+
+
+class Organisations(models.Model):
+
+    Name                    = models.CharField(max_length=50, blank=True)
+    City                    = models.CharField(max_length=50, blank=True)
+    Notes                   = models.CharField(max_length=255, blank=True)
+
+
+class RegSysDevices(models.Model):
+
+    RegsysID                = models.ForeignKey(RegSystems, on_delete=models.CASCADE, blank=False, default=id(1))
+    DeviceID                = models.ForeignKey(drop_device, on_delete=models.CASCADE, blank=False, default=id(1))
+
+
+class Modules(models.Model):
+
+    Name                    = models.CharField(max_length=255, blank=False)
+    Description             = models.TextField(max_length=8000, blank=True)
+    ISPath                  = models.CharField(max_length=255, blank=False)
+
+
+class Drivers(models.Model):
+
+    Name                    = models.CharField(max_length=50, blank=False)
+    Xno                     = models.IntegerField(blank=False)
+    ISPath                  = models.CharField(max_length=255, blank=False)
+    Description             = models.TextField(max_length=8000, blank=True)

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% include 'navbar.html' %}
+    <meta charset="UTF-8">
+    <title>Редактирование</title>
+</head>
+<body>
+<div class="offset-3 col-md-6">
+    {% if messages %}
+        {% for message in messages %}
+            <div align="center" {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
+                <script type="text/javascript">
+                    setTimeout(function() {window.location.href="/drivers";}, 2000);
+                </script>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
+            <strong>{{ message }}</strong>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-monospace small">Данная страница позволяет добавлять/редактировать список драйверов плат сопряжения и прочих устройств.
+            <br>Поле <code>"Путь InstallShield"</code> не может быть пустым.
+            <br>Параметр <code>"Группа эксклюзивности"</code> показывает, какие драйверы не могут быть установлены одновременно.
+        Например, если несколько драйверов имеют одну и ту-же группу эксклюзивности, то в дистрибутив может быть включен только один из них.
+<form method="post">{% csrf_token %}
+    <div class="form-group">
+        {{ form.as_p }}
+    </div>
+    <button type="submit" class="btn btn-secondary">Сохранить</button>
+    <a class="btn btn-secondary" href="/drivers" role="button">Отмена</a>
+</form>
+    {% endif %}
+</div>
+</body>
+</html>

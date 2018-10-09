@@ -2,18 +2,18 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-     {% include 'navbar.html' %}
-    <title>Устройства сброса</title>
+        {% include 'navbar.html' %}
+    <title>Типы ЛА</title>
 </head>
 <body>
-<div class="container-fluid table-responsive-sm">
+<div class="container table-responsive-sm">
     <a class="btn btn-secondary" href="new_post/" role="button">Добавить</a>
     <br><br>
     <table class="table table-sm table-borderless form-control-sm">
         <thead class="thead-light">
         <tr align="center">
-            <th>Системное Имя</th>
-            <th>Пользовательское Имя</th>
+            <th>Системное имя</th>
+            <th>Пользовательское имя</th>
             <th>Путь InstallShield</th>
             <th>Описание</th>
             <th></th>
@@ -28,11 +28,11 @@
                 <td><li class="list-group-item list-group-item-action">{{ item.Description }}<br></li></td>
 
                 <td>
-                    <a href="{% url 'drop_device_edit_post' pk=item.pk %}"><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-31-pencil.png"></button></a>
+                    <a href="{% url 'plane_types_edit_post' pk=item.pk %}"><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-31-pencil.png"></button></a>
                 </td>
                 <td>
-                    <form action="{% url 'drop_device_delete' item.id %}" method="POST">{%csrf_token%}
-                        <a href="."><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-17-bin.png"></button></a>
+                    <form action="{% url 'plane_types_delete' item.id %}" method="POST">{%csrf_token%}
+                        <a href=".."><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-17-bin.png"></button></a>
                     </form>
                 </td>
             </ul></tr>

@@ -1,5 +1,5 @@
 from django import forms
-from .models import drop_device, hasp_keys, hardlock_keys, plane_types, Lang_types, OS_type, executables, FASModules, ExecutablePaths
+from .models import drop_device, hasp_keys, hardlock_keys, plane_types, Lang_types, OS_type, executables, FASModules, ExecutablePaths, RegSystems, TypeRegsys, Tasks, TypeTasks, Misc, TypeMisc, Organisations, RegSysDevices, Modules, Drivers
 
 
 class PostForm(forms.ModelForm):
@@ -167,4 +167,192 @@ class PostExecutablePathsForm(forms.ModelForm):
             'ISPath': forms.TextInput(attrs={'class': 'form-control'}),
             'Source': forms.TextInput(attrs={'class': 'form-control'}),
             'Dest': forms.TextInput(attrs={'class': 'form-control'})
+        }
+
+
+class PostRegSystemsForm(forms.ModelForm):
+
+    class Meta:
+        model = RegSystems
+        fields = ['SysName', 'UserName', 'ISPath', 'Hide', 'Description']
+        labels = {
+            'SysName': 'Системное имя',
+            'UserName': 'Пользовательское имя',
+            'ISPath': 'Путь InstallShield',
+            'Hide': 'Спрятан?',
+            'Description': 'Описание'
+
+        }
+        widgets = {
+            'SysName': forms.TextInput(attrs={'class': 'form-control'}),
+            'UserName': forms.TextInput(attrs={'class': 'form-control'}),
+            'ISPath': forms.TextInput(attrs={'class': 'form-control'}),
+            'Hide': forms.CheckboxInput(attrs={'class': 'form-control'}),
+            'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
+        }
+
+
+class PostTypeRegsysForm(forms.ModelForm):
+
+    class Meta:
+        model = TypeRegsys
+        fields = ['TypeID', 'RegsysID', 'ISPath', 'SysNameRegsys', 'UserNameRegsys', 'Description']
+        labels = {
+            'TypeID': 'Тип ЛА',
+            'RegsysID': 'Система регистрации',
+            'ISPath': 'Пользовательское имя ПБ',
+            'SysNameRegsys': 'Системное имя ПБ',
+            'UserNameRegsys': 'Путь InstallShield',
+            'Description': 'Описание'
+
+        }
+        widgets = {
+            'TypeID': forms.Select(attrs={'class': 'form-control'}),
+            'RegsysID': forms.Select(attrs={'class': 'form-control'}),
+            'ISPath': forms.TextInput(attrs={'class': 'form-control'}),
+            'SysNameRegsys': forms.TextInput(attrs={'class': 'form-control'}),
+            'UserNameRegsys': forms.TextInput(attrs={'class': 'form-control'}),
+            'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
+        }
+
+
+class PostTasksForm(forms.ModelForm):
+
+    class Meta:
+        model = Tasks
+        fields = ['SysName', 'UserName']
+        labels = {
+            'SysName': 'Системное имя',
+            'UserName': 'Пользовательское имя'
+        }
+        widgets = {
+            'SysName': forms.TextInput(attrs={'class': 'form-control'}),
+            'UserName': forms.TextInput(attrs={'class': 'form-control'})
+        }
+
+
+class PostTypeTasksForm(forms.ModelForm):
+
+    class Meta:
+        model = TypeTasks
+        fields = ['TypeID', 'TaskID', 'ISPath', 'Description']
+        labels = {
+            'TypeID': 'Тип ЛА',
+            'TaskID': 'База экспресса',
+            'ISPath': 'Путь InstallShield',
+            'Description': 'Описание'
+        }
+        widgets = {
+            'TypeID': forms.Select(attrs={'class': 'form-control'}),
+            'TaskID': forms.Select(attrs={'class': 'form-control'}),
+            'ISPath': forms.TextInput(attrs={'class': 'form-control'}),
+            'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
+        }
+
+
+class PostMiscForm(forms.ModelForm):
+
+    class Meta:
+        model = Misc
+        fields = ['Name', 'SysName', 'UserName', 'Description']
+        labels = {
+            'Name': 'Название',
+            'SysName': 'Системное имя',
+            'UserName': 'Пользовательское имя',
+            'Description': 'Описание'
+        }
+        widgets = {
+            'Name': forms.TextInput(attrs={'class': 'form-control'}),
+            'SysName': forms.TextInput(attrs={'class': 'form-control'}),
+            'UserName': forms.TextInput(attrs={'class': 'form-control'}),
+            'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
+        }
+
+
+class PostTypeMiscForm(forms.ModelForm):
+
+    class Meta:
+        model = TypeMisc
+        fields = ['TypeID', 'MiscID', 'ISPath', 'Description']
+        labels = {
+            'TypeID': 'Тип ЛА',
+            'MiscID': 'Элемент',
+            'ISPath': 'Путь InstallShield',
+            'Description': 'Описание'
+        }
+        widgets = {
+            'TypeID': forms.Select(attrs={'class': 'form-control'}),
+            'MiscID': forms.Select(attrs={'class': 'form-control'}),
+            'ISPath': forms.TextInput(attrs={'class': 'form-control'}),
+            'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
+        }
+
+
+class PostOrganisationsForm(forms.ModelForm):
+
+    class Meta:
+        model = Organisations
+        fields = ['Name', 'City', 'Notes']
+        labels = {
+            'Name': 'Название',
+            'City': 'Город',
+            'Notes': 'Примечания'
+        }
+        widgets = {
+            'Name': forms.TextInput(attrs={'class': 'form-control'}),
+            'City': forms.TextInput(attrs={'class': 'form-control'}),
+            'Notes': forms.TextInput(attrs={'class': 'form-control'})
+        }
+
+
+class PostRegSysDevicesForm(forms.ModelForm):
+
+    class Meta:
+        model = RegSysDevices
+        fields = ['RegsysID', 'DeviceID']
+        labels = {
+            'RegsysID': 'Система регистрации',
+            'DeviceID': 'Устройство сброса'
+        }
+        widgets = {
+            'RegsysID': forms.Select(attrs={'class': 'form-control'}),
+            'DeviceID': forms.Select(attrs={'class': 'form-control'}),
+        }
+
+
+class PostModulesForm(forms.ModelForm):
+
+    class Meta:
+        model = Modules
+        fields = ['Name', 'Description', 'ISPath']
+        labels = {
+            'Name': 'Название',
+            'Description': 'Описание',
+            'ISPath': 'Путь InstallShield'
+        }
+        widgets = {
+            'Name': forms.TextInput(attrs={'class': 'form-control'}),
+            'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'}),
+            'ISPath': forms.TextInput(attrs={'class': 'form-control'})
+        }
+
+
+class PostDriversForm(forms.ModelForm):
+
+    class Meta:
+        model = Drivers
+        fields = ['Name', 'Xno', 'ISPath', 'Description']
+        labels = {
+            'Name': 'Название',
+            'Xno': 'Группа эксклюзивности(*)',
+            'ISPath': 'Путь InstallShield',
+            'Description': 'Описание',
+
+        }
+        widgets = {
+            'Name': forms.TextInput(attrs={'class': 'form-control'}),
+            'Xno': forms.NumberInput(attrs={'class': 'form-control', 'required': True, 'type': 'number'}),
+            'ISPath': forms.TextInput(attrs={'class': 'form-control'}),
+            'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
+
         }
