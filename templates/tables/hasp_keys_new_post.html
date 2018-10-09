@@ -26,21 +26,7 @@
                     <br>Поле <code>"Количество лицензий"</code> заполняется только для ключа NET HASP.</p>
 <form method="post">{% csrf_token %}
     <div class="form-group">
-
-        <label for="id_subject">Номер чипа:</label>{{ form.ChipNo }}
-<br>
-        <label for="id_subject">Свободен:</label>{{ form.Free }}
-<br>
-        <label for="id_subject">Порт:</label>{{ form.Port }}
-<br>
-        <label for="id_subject">Тип:</label>{{ form.Type }}
-<br>
-        <label for="id_subject">Ограничение по времени:</label>{{ form.TimeLimit }}
-<br>
-        <label for="id_subject">Количество лицензий:</label>{{ form.Licenses }}
-<br>
-        <label for="id_subject">Примечания:</label>{{ form.Notes }}
-
+    {{ form.as_p }}
     </div>
     <button type="submit" class="btn btn-secondary">Сохранить</button>
     <a class="btn btn-secondary" href="/hasp_keys" role="button">Отмена</a>

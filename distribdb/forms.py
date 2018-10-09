@@ -28,7 +28,7 @@ class PostHaspForm(forms.ModelForm):
         fields = ['ChipNo', 'Free', 'Port', 'Type', 'TimeLimit', 'Licenses', 'Notes']
         labels = {
             'ChipNo': 'Номер чипа:',
-            'Free': 'Свободен?',
+            'Free': 'Свободен:',
             'Port': 'Порт:',
             'Type': 'Тип:',
             'TimeLimit': 'Ограничение по времени:',
@@ -37,7 +37,7 @@ class PostHaspForm(forms.ModelForm):
         }
         widgets = {
             'ChipNo': forms.TextInput(attrs={'class': 'form-control'}),
-            'Free': forms.CheckboxInput(attrs={'class': 'form-control'}),
+            'Free': forms.CheckboxInput(),
             'Port': forms.Select(attrs={'class': 'form-control'}),
             'Type': forms.Select(attrs={'class': 'form-control'}),
             'TimeLimit': forms.DateInput(format="%d.%m.%Y", attrs={'class': 'form-control', 'placeholder': "дд-мм-гггг"}),
@@ -57,7 +57,7 @@ class PostHardlockForm(forms.ModelForm):
             'Subcode': 'Субкод:',
             'ModAddr': 'Адрес модуля:',
             'Port': 'Порт:',
-            'Free': 'Свободен?',
+            'Free': 'Свободен:',
             'Notes': 'Примечания:'
         }
         widgets = {
@@ -66,7 +66,7 @@ class PostHardlockForm(forms.ModelForm):
             'Subcode': forms.NumberInput(attrs={'class': 'form-control', 'required': True, 'type': 'number'}),
             'ModAddr': forms.NumberInput(attrs={'class': 'form-control', 'required': True, 'type': 'number'}),
             'Port': forms.Select(attrs={'class': 'form-control'}),
-            'Free': forms.CheckboxInput(attrs={'class': 'form-control'}),
+            'Free': forms.CheckboxInput(),
             'Notes': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
         }
 
@@ -187,7 +187,7 @@ class PostRegSystemsForm(forms.ModelForm):
             'SysName': forms.TextInput(attrs={'class': 'form-control'}),
             'UserName': forms.TextInput(attrs={'class': 'form-control'}),
             'ISPath': forms.TextInput(attrs={'class': 'form-control'}),
-            'Hide': forms.CheckboxInput(attrs={'class': 'form-control'}),
+            'Hide': forms.CheckboxInput(),
             'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
         }
 
