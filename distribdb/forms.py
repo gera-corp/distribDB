@@ -179,7 +179,7 @@ class PostRegSystemsForm(forms.ModelForm):
             'SysName': 'Системное имя',
             'UserName': 'Пользовательское имя',
             'ISPath': 'Путь InstallShield',
-            'Hide': 'Спрятан?',
+            'Hide': 'Спрятать',
             'Description': 'Описание'
 
         }

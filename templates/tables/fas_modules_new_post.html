@@ -18,7 +18,7 @@
             </div>
         {% endfor %}
     {% else %}
-        <p class="text-monospace small">На этой странице регестрируются FAS-номера для каждого исполняемого модуля. FAS-номер должен быть уникальным. Один модуль может иметь только один FAS-номер.</p>
+        <p class="text-monospace small">На этой странице регестрируются <code>FAS-номера</code> для каждого исполняемого модуля. <code>FAS-номер</code> должен быть уникальным. Один модуль может иметь только один <code>FAS-номер</code>.</p>
 <form method="post">{% csrf_token %}
     <div class="form-group">
         {{ form.as_p }}

@@ -19,8 +19,8 @@
         {% endfor %}
     {% else %}
         <p class="text-monospace small">Данная страница позволяет добавлять/редактировать набор языков интерфейса с которым работает ПО СКАТ.
-            Каждому языку должен соответствовать код, принятый в InstallShield для этого языка. Пара "Язык - код" должна быть уникальной.
-            <br>В колонке "Языковая константа" указывается языковая константа препроцессора InstallShield определяемая в GUI InstallShield Build|Settings|Compile/Link|Preprocessor.</p>
+            Каждому языку должен соответствовать код, принятый в InstallShield для этого языка. Пара <code>"Язык - код"</code> должна быть уникальной.
+            <br>В колонке <code>"Языковая константа"</code> указывается языковая константа препроцессора InstallShield определяемая в GUI InstallShield <code>Build|Settings|Compile/Link|Preprocessor</code>.</p>
 <form method="post">{% csrf_token %}
     <div class="form-group">
         {{ form.as_p }}

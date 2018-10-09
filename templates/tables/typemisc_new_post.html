@@ -6,7 +6,7 @@
     <title>Редактирование</title>
 </head>
 <body>
-<div class="offset-3 col-md-6" align="center">
+<div class="offset-3 col-md-6">
     {% if messages %}
         {% for message in messages %}
             <div align="center" {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
@@ -19,7 +19,7 @@
         {% endfor %}
     {% else %}
         <p class="text-monospace small">Данная страница позволяет добавлять/редактировать дополнительный элемент типу ЛА.
-            Например, установить, что у типа Су-25 присутствует дополнительный элемент "Импорт".<br>Комбинация <code>"Тип ЛА - Элемент"</code> должна быть уникальной.
+            <br>Например, установить, что у типа <code>Су-25</code> присутствует дополнительный элемент <code>"Импорт"</code>.<br>Комбинация <code>"Тип ЛА - Элемент"</code> должна быть уникальной.
             Поле <code>"Путь InstallShield"</code> не может быть пустым.
 <form method="post">{% csrf_token %}
     <div class="form-group">
