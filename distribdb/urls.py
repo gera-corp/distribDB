@@ -103,6 +103,11 @@ urlpatterns = [
     path('drivers/new_post/', views.drivers_new_post, name='drivers_new_post'),
     path('drivers/edit_post/<int:pk>/', views.drivers_edit_post, name='drivers_edit_post'),
 
+    path('edit_set/', views.edit_set_view),
+    path('edit_set/<int:pk>/delete/', views.edit_set_delete, name='edit_set_delete'),
+    path('edit_set/new_post/', views.edit_set_new_post, name='edit_set_new_post'),
+    path('edit_set/edit_post/<int:pk>/', views.edit_set_edit_post, name='edit_set_edit_post'),
+
     path('accounts/', include('django.contrib.auth.urls')),
     path('logout/', LogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
 ]

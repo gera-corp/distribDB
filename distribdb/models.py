@@ -125,9 +125,12 @@ class TypeRegsys(models.Model):
     TypeID                  = models.ForeignKey(plane_types, on_delete=models.CASCADE, blank=False, default=id(1))
     RegsysID                = models.ForeignKey(RegSystems, on_delete=models.CASCADE, blank=False, default=id(1))
     ISPath                  = models.CharField(max_length=255, blank=False)
-    Description             = models.TextField(max_length=8000, blank=True)
     UserNameRegsys          = models.CharField(max_length=36, blank=False)
     SysNameRegsys           = models.CharField(max_length=16, blank=False)
+    Description             = models.TextField(max_length=8000, blank=True)
+
+    def __str__(self):
+        return self.UserNameRegsys
 
 
 class Tasks(models.Model):
@@ -178,6 +181,12 @@ class Organisations(models.Model):
     City                    = models.CharField(max_length=50, blank=True)
     Notes                   = models.CharField(max_length=255, blank=True)
 
+    def __str__(self):
+        return self.Name
+
+    class Meta:
+        ordering = ('Name',)
+
 
 class RegSysDevices(models.Model):
 
@@ -198,3 +207,26 @@ class Drivers(models.Model):
     Xno                     = models.IntegerField(blank=False)
     ISPath                  = models.CharField(max_length=255, blank=False)
     Description             = models.TextField(max_length=8000, blank=True)
+
+
+class Sets(models.Model):
+
+    UserFriendlyID          = models.BigAutoField(primary_key=True)
+    Date                    = models.DateField(null=False, blank=False)
+    RegsysID                = models.ForeignKey(TypeRegsys, on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        return self.UserFriendlyID
+
+
+# class SetRegsystems(models.Model):
+#
+#     SetID                   = models.ForeignKey(Sets, on_delete=models.CASCADE)
+#     RegsysID                = models.ForeignKey(TypeRegsys, on_delete=models.CASCADE)
+#
+#
+# class SetDevices(models.Model):
+#
+#      SetID                   = models.ForeignKey(Sets, on_delete=models.CASCADE)
+#      DeviceID                = models.ForeignKey(drop_device, on_delete=models.CASCADE, blank=False, default=id(1))

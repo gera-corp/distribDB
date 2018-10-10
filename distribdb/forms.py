@@ -1,5 +1,5 @@
 from django import forms
-from .models import drop_device, hasp_keys, hardlock_keys, plane_types, Lang_types, OS_type, executables, FASModules, ExecutablePaths, RegSystems, TypeRegsys, Tasks, TypeTasks, Misc, TypeMisc, Organisations, RegSysDevices, Modules, Drivers
+from .models import drop_device, hasp_keys, hardlock_keys, plane_types, Lang_types, OS_type, executables, FASModules, ExecutablePaths, RegSystems, TypeRegsys, Tasks, TypeTasks, Misc, TypeMisc, Organisations, RegSysDevices, Modules, Drivers, Sets
 
 
 class PostForm(forms.ModelForm):
@@ -196,13 +196,13 @@ class PostTypeRegsysForm(forms.ModelForm):
 
     class Meta:
         model = TypeRegsys
-        fields = ['TypeID', 'RegsysID', 'ISPath', 'SysNameRegsys', 'UserNameRegsys', 'Description']
+        fields = ['TypeID', 'RegsysID', 'ISPath', 'UserNameRegsys', 'SysNameRegsys', 'Description']
         labels = {
             'TypeID': 'Тип ЛА',
             'RegsysID': 'Система регистрации',
-            'ISPath': 'Пользовательское имя ПБ',
+            'ISPath': 'Путь InstallShield',
+            'UserNameRegsys': 'Пользовательское имя ПБ',
             'SysNameRegsys': 'Системное имя ПБ',
-            'UserNameRegsys': 'Путь InstallShield',
             'Description': 'Описание'
 
         }
@@ -210,8 +210,8 @@ class PostTypeRegsysForm(forms.ModelForm):
             'TypeID': forms.Select(attrs={'class': 'form-control'}),
             'RegsysID': forms.Select(attrs={'class': 'form-control'}),
             'ISPath': forms.TextInput(attrs={'class': 'form-control'}),
-            'SysNameRegsys': forms.TextInput(attrs={'class': 'form-control'}),
             'UserNameRegsys': forms.TextInput(attrs={'class': 'form-control'}),
+            'SysNameRegsys': forms.TextInput(attrs={'class': 'form-control'}),
             'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
         }
 
@@ -351,8 +351,38 @@ class PostDriversForm(forms.ModelForm):
         }
         widgets = {
             'Name': forms.TextInput(attrs={'class': 'form-control'}),
-            'Xno': forms.NumberInput(attrs={'class': 'form-control', 'required': True, 'type': 'number'}),
+            'Xno': forms.NumberInput(attrs={'class': 'form-control', 'type': 'number'}),
             'ISPath': forms.TextInput(attrs={'class': 'form-control'}),
             'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
 
         }
+
+
+class PostEditSetForm(forms.ModelForm):
+
+    class Meta:
+        model = Sets
+        fields = ['Date', 'UserFriendlyID', 'RegsysID']
+        labels = {
+            'UserFriendlyID': 'ID',
+            'Date': 'Дата',
+            'RegsysID': ''
+        }
+        widgets = {
+            'UserFriendlyID': forms.NumberInput(attrs={'class': 'form-control'}),
+            'Date': forms.DateInput(format="%d.%m.%Y", attrs={'class': 'form-control', 'placeholder': "дд-мм-гггг"}),
+            'RegsysID': forms.Select(attrs={'class': 'form-control'}),
+        }
+
+
+# class Append_TypeRegsysForm(forms.ModelForm):
+#
+#     class Meta:
+#         model = SetRegsystems
+#         fields = ['RegsysID']
+#         labels = {
+#             'RegsysID': 'Типы ЛА'
+#         }
+#         widgets = {
+#             'RegsysID': forms.Select(attrs={'class': 'form-control'}),
+#         }

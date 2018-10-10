@@ -26,10 +26,10 @@
             <tr align="center"><ul class="list-group">
                 <td><li class="list-group-item list-group-item-action">{{ item.TypeID }}</li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.RegsysID }}</li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.ISPath }}</li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.Description }}</li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.UserNameRegsys }}</li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.SysNameRegsys }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.ISPath }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.Description }}</li></td>
                 <td>
                     <a href="{% url 'typeregsys_edit_post' pk=item.pk %}"><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-31-pencil.png"></button></a>
                 </td>

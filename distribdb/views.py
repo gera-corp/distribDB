@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.db.models import Q
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from .models import drop_device, hasp_keys, hardlock_keys, plane_types, Lang_types, OS_type, executables, FASModules, ExecutablePaths, RegSystems, TypeRegsys, Tasks, TypeTasks, Misc, TypeMisc, Organisations, RegSysDevices, Modules, Drivers
-from .forms import PostForm, PostHaspForm, PostHardlockForm, PostPlaneTypeForm, PostLangForm, PostOsForm, PostExecutablesForm, PostFASModulesForm, PostExecutablePathsForm, PostRegSystemsForm, PostTypeRegsysForm, PostTasksForm, PostTypeTasksForm, PostMiscForm, PostTypeMiscForm, PostOrganisationsForm, PostRegSysDevicesForm, PostModulesForm, PostDriversForm
+from .models import drop_device, hasp_keys, hardlock_keys, plane_types, Lang_types, OS_type, executables, FASModules, ExecutablePaths, RegSystems, TypeRegsys, Tasks, TypeTasks, Misc, TypeMisc, Organisations, RegSysDevices, Modules, Drivers, Sets
+from .forms import PostForm, PostHaspForm, PostHardlockForm, PostPlaneTypeForm, PostLangForm, PostOsForm, PostExecutablesForm, PostFASModulesForm, PostExecutablePathsForm, PostRegSystemsForm, PostTypeRegsysForm, PostTasksForm, PostTypeTasksForm, PostMiscForm, PostTypeMiscForm, PostOrganisationsForm, PostRegSysDevicesForm, PostModulesForm, PostDriversForm, PostEditSetForm
 
 
 def home(request):
@@ -1573,6 +1573,83 @@ def drivers_edit_post(request, pk):
 
     else:
         form = PostDriversForm(instance=post)
+
+    context = {
+        'form': form,
+        'post': post,
+    }
+
+    return render(request, template, context)
+
+
+def edit_set_view(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    obj_list = Sets.objects.all().order_by('-pk')
+    query = request.GET.get('q')
+    if query:
+        obj_list = obj_list.filter(
+            Q(Date__icontains=query)
+        ).distinct()
+    page = request.GET.get('page')
+    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        'object_list': queryset,
+    }
+    return render(request, 'sets/edit_set.html', context)
+
+
+def edit_set_delete(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    obj = get_object_or_404(Sets, pk=pk)
+    if request.method == 'POST':
+        obj.delete()
+        return redirect('/edit_set')
+    return render(request, 'sets/edit_set.html', {'device': obj})
+
+
+def edit_set_new_post(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    template = 'sets/edit_set_new_post.html'
+    form = PostEditSetForm(request.POST or None)
+    try:
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Запись нового списка драйверов плат сопряжения и прочих устройств, добавлена!')
+    except Exception as e:
+        messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
+    context = {
+        'form': form,
+    }
+    return render(request, template, context)
+
+
+def edit_set_edit_post(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    template = 'sets/edit_set_new_post.html'
+    post = get_object_or_404(Sets, pk=pk)
+
+    if request.method == 'POST':
+        form = PostEditSetForm(request.POST, instance=post)
+
+        try:
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Изменения внесены')
+        except Exception as e:
+            messages.warning(request, 'Изменения не внесены! Ошибка: {}'.format(e))
+
+    else:
+        form = PostEditSetForm(instance=post)
 
     context = {
         'form': form,
