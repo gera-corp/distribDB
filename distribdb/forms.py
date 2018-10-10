@@ -1,6 +1,6 @@
 from django import forms
 from .models import drop_device, hasp_keys, hardlock_keys, plane_types, Lang_types, OS_type, executables, FASModules, ExecutablePaths, RegSystems, TypeRegsys, Tasks, TypeTasks, Misc, TypeMisc, Organisations, RegSysDevices, Modules, Drivers, Sets
-
+from django.forms import ModelForm, Select
 
 class PostForm(forms.ModelForm):
 
@@ -371,7 +371,7 @@ class PostEditSetForm(forms.ModelForm):
         widgets = {
             'UserFriendlyID': forms.NumberInput(attrs={'class': 'form-control'}),
             'Date': forms.DateInput(format="%d.%m.%Y", attrs={'class': 'form-control', 'placeholder': "дд-мм-гггг"}),
-            'RegsysID': forms.Select(attrs={'class': 'form-control'}),
+            'RegsysID': forms.SelectMultiple(attrs={'class': 'form-control'}),
         }
 
 

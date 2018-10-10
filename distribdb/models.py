@@ -129,13 +129,11 @@ class TypeRegsys(models.Model):
     SysNameRegsys           = models.CharField(max_length=16, blank=False)
     Description             = models.TextField(max_length=8000, blank=True)
 
-    def __str__(self):
-        return self.UserNameRegsys
 
 
 class Tasks(models.Model):
 
-    SysName                 = models.CharField(max_length=50, blank=False)
+    SysName                 = models.CharField(max_length=50, blank=False, unique=True)
     UserName                = models.CharField(max_length=50, blank=True)
 
     def __str__(self):
@@ -147,8 +145,8 @@ class Tasks(models.Model):
 
 class TypeTasks(models.Model):
 
-    TypeID                  = models.ForeignKey(plane_types, on_delete=models.CASCADE, blank=False, default=id(1))
-    TaskID                  = models.ForeignKey(Tasks, on_delete=models.CASCADE, blank=False, default=id(1))
+    TypeID                  = models.ManyToManyField(plane_types)
+    TaskID                  = models.ManyToManyField(Tasks)
     ISPath                  = models.CharField(max_length=255, blank=False)
     Description             = models.TextField(max_length=8000, blank=True)
 
@@ -213,8 +211,7 @@ class Sets(models.Model):
 
     UserFriendlyID          = models.BigAutoField(primary_key=True)
     Date                    = models.DateField(null=False, blank=False)
-    RegsysID                = models.ForeignKey(TypeRegsys, on_delete=models.CASCADE)
-
+    RegsysID                = models.ManyToManyField(TypeRegsys, blank=True)
 
     def __str__(self):
         return self.UserFriendlyID
