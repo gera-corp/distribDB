@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.db.models import Q
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from .models import drop_device, hasp_keys, hardlock_keys, plane_types, Lang_types, OS_type, executables, FASModules, ExecutablePaths, RegSystems, TypeRegsys, Tasks, TypeTasks, Misc, TypeMisc, Organisations, RegSysDevices, Modules, Drivers, Sets
+from .models import drop_device, hasp_keys, hardlock_keys, Plane_types, Lang_types, OS_type, executables, FASModules, ExecutablePaths, RegSystems, TypeRegsys, Tasks, TypeTasks, Misc, TypeMisc, Organisations, RegSysDevices, Modules, Drivers, Sets
 from .forms import PostForm, PostHaspForm, PostHardlockForm, PostPlaneTypeForm, PostLangForm, PostOsForm, PostExecutablesForm, PostFASModulesForm, PostExecutablePathsForm, PostRegSystemsForm, PostTypeRegsysForm, PostTasksForm, PostTypeTasksForm, PostMiscForm, PostTypeMiscForm, PostOrganisationsForm, PostRegSysDevicesForm, PostModulesForm, PostDriversForm, PostEditSetForm
 
 
@@ -266,7 +266,7 @@ def hardlock_keys_edit_post(request, pk):
 def plane_types_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = plane_types.objects.all().order_by('-id')
+    obj_list = Plane_types.objects.all().order_by('-id')
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -291,7 +291,7 @@ def plane_types_view(request):
 def plane_types_delete(request, id):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj = get_object_or_404(plane_types, id=id)
+    obj = get_object_or_404(Plane_types, id=id)
     if request.method == 'POST':
         obj.delete()
         return redirect('/plane_types')
@@ -321,7 +321,7 @@ def plane_types_edit_post(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
     template = 'tables/plane_types_new_post.html'
-    post = get_object_or_404(plane_types, pk=pk)
+    post = get_object_or_404(Plane_types, pk=pk)
 
     if request.method == 'POST':
         form = PostPlaneTypeForm(request.POST, instance=post)
@@ -866,7 +866,6 @@ def typeregsys_new_post(request):
         return redirect('/accounts/login/')
     template = 'tables/typeregsys_new_post.html'
     form = PostTypeRegsysForm(request.POST or None)
-
     try:
         if form.is_valid():
             form.save()

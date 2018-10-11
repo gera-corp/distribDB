@@ -1,6 +1,6 @@
 from django import forms
-from .models import drop_device, hasp_keys, hardlock_keys, plane_types, Lang_types, OS_type, executables, FASModules, ExecutablePaths, RegSystems, TypeRegsys, Tasks, TypeTasks, Misc, TypeMisc, Organisations, RegSysDevices, Modules, Drivers, Sets
-from django.forms import ModelForm, Select
+from .models import drop_device, hasp_keys, hardlock_keys, Plane_types, Lang_types, OS_type, executables, FASModules, ExecutablePaths, RegSystems, TypeRegsys, Tasks, TypeTasks, Misc, TypeMisc, Organisations, RegSysDevices, Modules, Drivers, Sets
+
 
 class PostForm(forms.ModelForm):
 
@@ -74,7 +74,7 @@ class PostHardlockForm(forms.ModelForm):
 class PostPlaneTypeForm(forms.ModelForm):
 
     class Meta:
-        model = plane_types
+        model = Plane_types
         fields = ['SysName', 'UserName', 'ISPath', 'Description']
         labels = {
             'SysName': 'Системное имя:',

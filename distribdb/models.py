@@ -53,7 +53,7 @@ class hardlock_keys(models.Model):
     Notes                   = models.TextField(max_length=8000, blank=True)
 
 
-class plane_types(models.Model):
+class Plane_types(models.Model):
 
     SysName                 = models.CharField(max_length=50, blank=False)
     UserName                = models.CharField(max_length=50, blank=False)
@@ -65,6 +65,7 @@ class plane_types(models.Model):
 
     class Meta:
         ordering = ('UserName',)
+        #app_label = 'plane_types'
 
 
 class Lang_types(models.Model):
@@ -122,13 +123,12 @@ class RegSystems(models.Model):
 
 class TypeRegsys(models.Model):
 
-    TypeID                  = models.ForeignKey(plane_types, on_delete=models.CASCADE, blank=False, default=id(1))
+    TypeID                  = models.ForeignKey(Plane_types, on_delete=models.CASCADE, blank=False, default=id(1))
     RegsysID                = models.ForeignKey(RegSystems, on_delete=models.CASCADE, blank=False, default=id(1))
     ISPath                  = models.CharField(max_length=255, blank=False)
     UserNameRegsys          = models.CharField(max_length=36, blank=False)
     SysNameRegsys           = models.CharField(max_length=16, blank=False)
     Description             = models.TextField(max_length=8000, blank=True)
-
 
 
 class Tasks(models.Model):
@@ -145,10 +145,11 @@ class Tasks(models.Model):
 
 class TypeTasks(models.Model):
 
-    TypeID                  = models.ManyToManyField(plane_types)
-    TaskID                  = models.ManyToManyField(Tasks)
+    TypeID                  = models.ForeignKey(Plane_types, on_delete=models.CASCADE, blank=False, default=id(1))
+    TaskID                  = models.ForeignKey(Tasks, on_delete=models.CASCADE, blank=False, default=id(1))
     ISPath                  = models.CharField(max_length=255, blank=False)
     Description             = models.TextField(max_length=8000, blank=True)
+
 
 
 class Misc(models.Model):
@@ -167,7 +168,7 @@ class Misc(models.Model):
 
 class TypeMisc(models.Model):
 
-    TypeID                  = models.ForeignKey(plane_types, on_delete=models.CASCADE, blank=False, default=id(1))
+    TypeID                  = models.ForeignKey(Plane_types, on_delete=models.CASCADE, blank=False, default=id(1))
     MiscID                  = models.ForeignKey(Misc, on_delete=models.CASCADE, blank=False, default=id(1))
     ISPath                  = models.CharField(max_length=255, blank=False)
     Description             = models.TextField(max_length=8000, blank=True)
@@ -211,7 +212,7 @@ class Sets(models.Model):
 
     UserFriendlyID          = models.BigAutoField(primary_key=True)
     Date                    = models.DateField(null=False, blank=False)
-    RegsysID                = models.ManyToManyField(TypeRegsys, blank=True)
+    RegsysID                = models.ManyToManyField(TypeRegsys)
 
     def __str__(self):
         return self.UserFriendlyID
