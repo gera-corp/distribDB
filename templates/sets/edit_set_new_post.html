@@ -12,7 +12,7 @@
         {% for message in messages %}
             <div align="center" {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
                 <script type="text/javascript">
-                    setTimeout(function() {window.location.href="/";}, 2000);
+                    setTimeout(function() {window.location.href="/edit_set";}, 2000);
                 </script>
             <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
             <strong>{{ message }}</strong>
@@ -26,12 +26,13 @@
 
         <h5><span class="badge badge-info">ID: {{ post.pk }}</span></h5>
 
-        <h5>Дата набора:</h5>
+        Дата набора:
         {{ form.Date }}
-        <br>{{ form.RegsysID }}
+        <br>Типы ЛА:
+        {{ form.RegsysID }}
     </div>
     <button type="submit" class="btn btn-secondary">Сохранить</button>
-    <a class="btn btn-secondary" href="/" role="button">Отмена</a>
+    <a class="btn btn-secondary" href="/edit_set" role="button">Отмена</a>
 </form>
     {% endif %}
 </div>

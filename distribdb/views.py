@@ -1585,6 +1585,7 @@ def edit_set_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
     obj_list = Sets.objects.all().order_by('-pk')
+
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1600,6 +1601,7 @@ def edit_set_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
+
     }
     return render(request, 'sets/edit_set.html', context)
 

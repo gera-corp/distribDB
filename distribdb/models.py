@@ -1,5 +1,5 @@
 from django.db import models
-
+from datetime import datetime
 
 class drop_device(models.Model):
 
@@ -65,7 +65,6 @@ class Plane_types(models.Model):
 
     class Meta:
         ordering = ('UserName',)
-        #app_label = 'plane_types'
 
 
 class Lang_types(models.Model):
@@ -129,6 +128,9 @@ class TypeRegsys(models.Model):
     UserNameRegsys          = models.CharField(max_length=36, blank=False)
     SysNameRegsys           = models.CharField(max_length=16, blank=False)
     Description             = models.TextField(max_length=8000, blank=True)
+
+    def __str__(self):
+        return "{}".format(self.TypeID)
 
 
 class Tasks(models.Model):
@@ -211,7 +213,7 @@ class Drivers(models.Model):
 class Sets(models.Model):
 
     UserFriendlyID          = models.BigAutoField(primary_key=True)
-    Date                    = models.DateField(null=False, blank=False)
+    Date                    = models.DateField(null=False, blank=False, default=datetime.now)
     RegsysID                = models.ManyToManyField(TypeRegsys)
 
     def __str__(self):
