@@ -130,7 +130,7 @@ class TypeRegsys(models.Model):
     Description             = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return "{}".format(self.TypeID)
+        return '%s %s' % (self.TypeID, self.RegsysID)
 
 
 class Tasks(models.Model):
@@ -219,14 +219,3 @@ class Sets(models.Model):
     def __str__(self):
         return self.UserFriendlyID
 
-
-# class SetRegsystems(models.Model):
-#
-#     SetID                   = models.ForeignKey(Sets, on_delete=models.CASCADE)
-#     RegsysID                = models.ForeignKey(TypeRegsys, on_delete=models.CASCADE)
-#
-#
-# class SetDevices(models.Model):
-#
-#      SetID                   = models.ForeignKey(Sets, on_delete=models.CASCADE)
-#      DeviceID                = models.ForeignKey(drop_device, on_delete=models.CASCADE, blank=False, default=id(1))

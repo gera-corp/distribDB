@@ -6,7 +6,7 @@
     <title>Дополнительные модули ПО</title>
 </head>
 <body>
-<div class="container-fluid table-responsive-sm">
+<div class="container-fluid table-responsive-sm shadow p-3 mb-5 bg-white rounded">
     <a class="btn btn-secondary" href="new_post/" role="button">Добавить</a>
     <br><br>
     <table class="table table-sm table-borderless form-control-sm">
@@ -29,7 +29,8 @@
                 </td>
                 <td>
                     <form action="{% url 'modules_delete' item.id %}" method="POST">{%csrf_token%}
-                        <a href=".."><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-17-bin.png"></button></a>
+                                                 <button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-17-bin.png"></button>
+                        {% include 'modal.html' %}
                     </form>
                 </td>
             </ul></tr>

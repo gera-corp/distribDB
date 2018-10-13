@@ -7,7 +7,7 @@
 
 </head>
 <body>
-<div class="offset-3 col-md-6">
+<div class="offset-3 col-md-6 shadow p-3 mb-5 bg-white rounded">
     {% if messages %}
         {% for message in messages %}
             <div align="center" {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
@@ -24,7 +24,7 @@
 <form method="post">{% csrf_token %}
     <div class="form-group">
 
-        <h5><span class="badge badge-info">ID: {{ post.pk }}</span></h5>
+        <h5><span class="badge badge-info">ID: {{ post.UserFriendlyID }}</span></h5>
 
         Дата набора:
         {{ form.Date }}

@@ -131,7 +131,7 @@ class PostExecutablesForm(forms.ModelForm):
             'FileName': 'Имя файла'
         }
         widgets = {
-            'FileName': forms.TextInput(attrs={'class': 'form-control'}),
+            'FileName': forms.TextInput(attrs={'class': 'form-control'})
         }
 
 
@@ -316,7 +316,7 @@ class PostRegSysDevicesForm(forms.ModelForm):
         }
         widgets = {
             'RegsysID': forms.Select(attrs={'class': 'form-control'}),
-            'DeviceID': forms.Select(attrs={'class': 'form-control'}),
+            'DeviceID': forms.Select(attrs={'class': 'form-control'})
         }
 
 
@@ -371,18 +371,6 @@ class PostEditSetForm(forms.ModelForm):
         widgets = {
             'UserFriendlyID': forms.NumberInput(attrs={'class': 'form-control'}),
             'Date': forms.DateInput(format="%d.%m.%Y", attrs={'class': 'form-control', 'placeholder': "дд-мм-гггг"}),
-            'RegsysID': forms.CheckboxSelectMultiple(),
+            'RegsysID': forms.CheckboxSelectMultiple(attrs={'class': 'checkbox'})
         }
 
-
-# class Append_TypeRegsysForm(forms.ModelForm):
-#
-#     class Meta:
-#         model = SetRegsystems
-#         fields = ['RegsysID']
-#         labels = {
-#             'RegsysID': 'Типы ЛА'
-#         }
-#         widgets = {
-#             'RegsysID': forms.Select(attrs={'class': 'form-control'}),
-#         }
