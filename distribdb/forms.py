@@ -371,6 +371,6 @@ class PostEditSetForm(forms.ModelForm):
         widgets = {
             'UserFriendlyID': forms.NumberInput(attrs={'class': 'form-control'}),
             'Date': forms.DateInput(format="%d.%m.%Y", attrs={'class': 'form-control', 'placeholder': "дд-мм-гггг"}),
-            'RegsysID': forms.CheckboxSelectMultiple(attrs={'class': 'checkbox'})
+            'RegsysID': forms.SelectMultiple(attrs={'class': 'form-control'})
         }
 
