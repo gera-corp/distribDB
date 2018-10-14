@@ -152,6 +152,8 @@ class TypeTasks(models.Model):
     ISPath                  = models.CharField(max_length=255, blank=False)
     Description             = models.TextField(max_length=8000, blank=True)
 
+    def __str__(self):
+        return '%s %s' % (self.TypeID, self.TaskID)
 
 
 class Misc(models.Model):
@@ -175,6 +177,9 @@ class TypeMisc(models.Model):
     ISPath                  = models.CharField(max_length=255, blank=False)
     Description             = models.TextField(max_length=8000, blank=True)
 
+    def __str__(self):
+        return '%s %s' % (self.TypeID, self.MiscID)
+
 
 class Organisations(models.Model):
 
@@ -194,6 +199,8 @@ class RegSysDevices(models.Model):
     RegsysID                = models.ForeignKey(RegSystems, on_delete=models.CASCADE, blank=False, default=id(1))
     DeviceID                = models.ForeignKey(drop_device, on_delete=models.CASCADE, blank=False, default=id(1))
 
+    def __str__(self):
+        return '%s %s' % (self.RegsysID, self.DeviceID)
 
 class Modules(models.Model):
 
@@ -215,6 +222,9 @@ class Sets(models.Model):
     UserFriendlyID          = models.BigAutoField(primary_key=True)
     Date                    = models.DateField(null=False, blank=False, default=datetime.now)
     RegsysID                = models.ManyToManyField(TypeRegsys)
+    TypeTasksID             = models.ManyToManyField(TypeTasks)
+    TypeMiscID              = models.ManyToManyField(TypeMisc)
+    RegSysDevicesID         = models.ManyToManyField(RegSysDevices)
 
     def __str__(self):
         return self.UserFriendlyID

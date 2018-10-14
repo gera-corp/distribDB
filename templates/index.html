@@ -8,13 +8,14 @@
 <body>
 <div class="container shadow p-3 mb-5 bg-white rounded">
 <p class="text-monospace">Домашняя страница
-<br>Версия Alpha 0.8.2.0
+<br>Версия Beta 0.0.2.0
 <br>Учётная запись: {{ user.username }}
 <br>Уровень доступа:
 <br><br>Для работы с базой данных выберите пункт
 </p>
 <div class="alert alert-info" role="alert" align="center">
-<h7>Операции по базе данных</h7>
+
+    {% load static %}<img src="{% static '/img/icon-recycle-blue1.png' %}" />
 </div>
 <div class="btn-group" role="group" align="center">
 <div class="btn-group" role="group">

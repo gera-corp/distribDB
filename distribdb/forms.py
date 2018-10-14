@@ -362,15 +362,21 @@ class PostEditSetForm(forms.ModelForm):
 
     class Meta:
         model = Sets
-        fields = ['Date', 'UserFriendlyID', 'RegsysID']
+        fields = ['Date', 'UserFriendlyID', 'RegsysID', 'TypeTasksID', 'TypeMiscID', 'RegSysDevicesID']
         labels = {
             'UserFriendlyID': 'ID',
             'Date': 'Дата',
-            'RegsysID': ''
+            'RegsysID': '',
+            'TypeTasksID': '',
+            'TypeMiscID': '',
+            'RegSysDevicesID': ''
         }
         widgets = {
             'UserFriendlyID': forms.NumberInput(attrs={'class': 'form-control'}),
             'Date': forms.DateInput(format="%d.%m.%Y", attrs={'class': 'form-control', 'placeholder': "дд-мм-гггг"}),
-            'RegsysID': forms.SelectMultiple(attrs={'class': 'form-control'})
+            'RegsysID': forms.SelectMultiple(attrs={'class': 'form-control', 'size': 5}),
+            'TypeTasksID': forms.SelectMultiple(attrs={'class': 'form-control', 'size': 5}),
+            'TypeMiscID': forms.SelectMultiple(attrs={'class': 'form-control', 'size': 5}),
+            'RegSysDevicesID': forms.SelectMultiple(attrs={'class': 'form-control', 'size': 5}),
         }
 
