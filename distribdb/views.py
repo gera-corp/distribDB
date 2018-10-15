@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.db.models import Q
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from .models import drop_device, hasp_keys, hardlock_keys, Plane_types, Lang_types, OS_type, executables, FASModules, ExecutablePaths, RegSystems, TypeRegsys, Tasks, TypeTasks, Misc, TypeMisc, Organisations, RegSysDevices, Modules, Drivers, Sets
-from .forms import PostForm, PostHaspForm, PostHardlockForm, PostPlaneTypeForm, PostLangForm, PostOsForm, PostExecutablesForm, PostFASModulesForm, PostExecutablePathsForm, PostRegSystemsForm, PostTypeRegsysForm, PostTasksForm, PostTypeTasksForm, PostMiscForm, PostTypeMiscForm, PostOrganisationsForm, PostRegSysDevicesForm, PostModulesForm, PostDriversForm, PostEditSetForm
+from .models import *
+from .forms import *
 
 
 def home(request):
