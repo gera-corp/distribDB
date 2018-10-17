@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 
+
 class drop_device(models.Model):
 
     SysName                 = models.CharField(max_length=50, blank=False)
@@ -60,8 +61,8 @@ class Plane_types(models.Model):
     ISPath                  = models.CharField(max_length=250, blank=False)
     Description             = models.TextField(max_length=8000, blank=True)
 
-    def __str__(self):
-        return self.UserName
+    # def __str__(self):
+    #     return self.UserName
 
     class Meta:
         ordering = ('UserName',)
@@ -93,13 +94,13 @@ class executables(models.Model):
 
 class FASModules(models.Model):
 
-    ExecutableID            = models.ForeignKey(executables, on_delete=models.CASCADE, blank=False, default=id(1))
+    ExecutableID            = models.ForeignKey('executables', on_delete=models.CASCADE, blank=False, default=id(1))
     FASNo                   = models.IntegerField(blank=False)
 
 
 class ExecutablePaths(models.Model):
 
-    ExecutableID            = models.ForeignKey(executables, on_delete=models.CASCADE, blank=False, default=id(1))
+    ExecutableID            = models.ForeignKey('executables', on_delete=models.CASCADE, blank=False, default=id(1))
     ISPath                  = models.CharField(max_length=250, blank=False)
     Source                  = models.CharField(max_length=800, blank=False)
     Dest                    = models.CharField(max_length=800, blank=False)
@@ -113,8 +114,8 @@ class RegSystems(models.Model):
     Hide                    = models.BooleanField(default=False)
     Description             = models.TextField(max_length=8000, blank=True)
 
-    def __str__(self):
-        return self.UserName
+    # def __str__(self):
+    #     return self.UserName
 
     class Meta:
         ordering = ('UserName',)
@@ -122,15 +123,18 @@ class RegSystems(models.Model):
 
 class TypeRegsys(models.Model):
 
-    TypeID                  = models.ForeignKey(Plane_types, on_delete=models.CASCADE, blank=False, default=id(1))
-    RegsysID                = models.ForeignKey(RegSystems, on_delete=models.CASCADE, blank=False, default=id(1))
+    TypeID                  = models.ForeignKey('Plane_types', on_delete=models.CASCADE, blank=False, default=id(1))
+    RegsysID                = models.ForeignKey('RegSystems', on_delete=models.CASCADE, blank=False, default=id(1))
     ISPath                  = models.CharField(max_length=255, blank=False)
     UserNameRegsys          = models.CharField(max_length=36, blank=False)
     SysNameRegsys           = models.CharField(max_length=16, blank=False)
     Description             = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return '%s %s' % (self.TypeID, self.RegsysID)
+        return '%s (%s)' % (self.TypeID.UserName, self.RegsysID.UserName)
+
+    class Meta:
+        ordering = ('TypeID', 'RegsysID',)
 
 
 class Tasks(models.Model):
@@ -147,13 +151,13 @@ class Tasks(models.Model):
 
 class TypeTasks(models.Model):
 
-    TypeID                  = models.ForeignKey(Plane_types, on_delete=models.CASCADE, blank=False, default=id(1))
-    TaskID                  = models.ForeignKey(Tasks, on_delete=models.CASCADE, blank=False, default=id(1))
+    TypeID                  = models.ForeignKey('Plane_types', on_delete=models.CASCADE, blank=False, default=id(1))
+    TaskID                  = models.ForeignKey('Tasks', on_delete=models.CASCADE, blank=False, default=id(1))
     ISPath                  = models.CharField(max_length=255, blank=False)
     Description             = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return '%s %s' % (self.TypeID, self.TaskID)
+        return '%s (%s)' % (self.TypeID.UserName, self.TaskID.UserName)
 
 
 class Misc(models.Model):
@@ -172,8 +176,8 @@ class Misc(models.Model):
 
 class TypeMisc(models.Model):
 
-    TypeID                  = models.ForeignKey(Plane_types, on_delete=models.CASCADE, blank=False, default=id(1))
-    MiscID                  = models.ForeignKey(Misc, on_delete=models.CASCADE, blank=False, default=id(1))
+    TypeID                  = models.ForeignKey('Plane_types', on_delete=models.CASCADE, blank=False, default=id(1))
+    MiscID                  = models.ForeignKey('Misc', on_delete=models.CASCADE, blank=False, default=id(1))
     ISPath                  = models.CharField(max_length=255, blank=False)
     Description             = models.TextField(max_length=8000, blank=True)
 
@@ -196,11 +200,12 @@ class Organisations(models.Model):
 
 class RegSysDevices(models.Model):
 
-    RegsysID                = models.ForeignKey(RegSystems, on_delete=models.CASCADE, blank=False, default=id(1))
-    DeviceID                = models.ForeignKey(drop_device, on_delete=models.CASCADE, blank=False, default=id(1))
+    RegsysID                = models.ForeignKey('RegSystems', on_delete=models.CASCADE, blank=False, default=id(1))
+    DeviceID                = models.ForeignKey('drop_device', on_delete=models.CASCADE, blank=False, default=id(1))
 
     def __str__(self):
         return '%s %s' % (self.RegsysID, self.DeviceID)
+
 
 class Modules(models.Model):
 
@@ -221,10 +226,10 @@ class Sets(models.Model):
 
     UserFriendlyID          = models.BigAutoField(primary_key=True)
     Date                    = models.DateField(null=False, blank=False, default=datetime.now)
-    RegsysID                = models.ManyToManyField(TypeRegsys)
-    TypeTasksID             = models.ManyToManyField(TypeTasks)
-    TypeMiscID              = models.ManyToManyField(TypeMisc)
-    RegSysDevicesID         = models.ManyToManyField(RegSysDevices)
+    RegsysID                = models.ManyToManyField('TypeRegsys')
+    TypeTasksID             = models.ManyToManyField('TypeTasks')
+    TypeMiscID              = models.ManyToManyField('TypeMisc')
+    RegSysDevicesID         = models.ManyToManyField('RegSysDevices')
 
     def __str__(self):
         return self.UserFriendlyID
