@@ -358,25 +358,43 @@ class PostDriversForm(forms.ModelForm):
         }
 
 
-class PostEditSetForm(forms.ModelForm):
+# class PostEditSetForm(forms.ModelForm):
+#
+#     class Meta:
+#         model = Sets
+#         fields = ['Date', 'UserFriendlyID', 'RegsysID', 'TypeTasksID', 'TypeMiscID', 'RegSysDevicesID']
+#         labels = {
+#             'UserFriendlyID': 'ID',
+#             'Date': 'Дата',
+#             'RegsysID': '',
+#             'TypeTasksID': '',
+#             'TypeMiscID': '',
+#             'RegSysDevicesID': ''
+#         }
+#         widgets = {
+#             'UserFriendlyID': forms.NumberInput(attrs={'class': 'form-control'}),
+#             'Date': forms.DateInput(format="%d.%m.%Y", attrs={'class': 'form-control', 'placeholder': "дд-мм-гггг"}),
+#             'RegsysID': forms.SelectMultiple(attrs={'class': 'form-control', 'size': 5}),
+#             'TypeTasksID': forms.SelectMultiple(attrs={'class': 'form-control', 'size': 5}),
+#             'TypeMiscID': forms.SelectMultiple(attrs={'class': 'form-control', 'size': 5}),
+#             'RegSysDevicesID': forms.SelectMultiple(attrs={'class': 'form-control', 'size': 5}),
+#         }
 
+
+class PersonForm(forms.ModelForm):
     class Meta:
         model = Sets
-        fields = ['Date', 'UserFriendlyID', 'RegsysID', 'TypeTasksID', 'TypeMiscID', 'RegSysDevicesID']
-        labels = {
-            'UserFriendlyID': 'ID',
-            'Date': 'Дата',
-            'RegsysID': '',
-            'TypeTasksID': '',
-            'TypeMiscID': '',
-            'RegSysDevicesID': ''
-        }
-        widgets = {
-            'UserFriendlyID': forms.NumberInput(attrs={'class': 'form-control'}),
-            'Date': forms.DateInput(format="%d.%m.%Y", attrs={'class': 'form-control', 'placeholder': "дд-мм-гггг"}),
-            'RegsysID': forms.SelectMultiple(attrs={'class': 'form-control', 'size': 5}),
-            'TypeTasksID': forms.SelectMultiple(attrs={'class': 'form-control', 'size': 5}),
-            'TypeMiscID': forms.SelectMultiple(attrs={'class': 'form-control', 'size': 5}),
-            'RegSysDevicesID': forms.SelectMultiple(attrs={'class': 'form-control', 'size': 5}),
-        }
+        fields = ('Date', 'UserFriendlyID', 'country', 'city')
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['city'].queryset = TypeRegsys.objects.none()
+
+        if 'country' in self.data:
+            try:
+                country_id = int(self.data.get('country'))
+                self.fields['city'].queryset = TypeRegsys.objects.filter(RegsysID_id=country_id).order_by('id')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            self.fields['city'].queryset = self.instance.country.city_set.order_by('TypeID')
