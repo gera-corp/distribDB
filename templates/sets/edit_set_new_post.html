@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    {% include 'navbar.html' %}
-    <meta charset="UTF-8">
-    <title>Редактирование</title>
-
-</head>
-<body>
+<title>Редактирование</title>
+{% extends 'navbar.html' %}
+{% block content %}
 <div class="offset-3 col-md-6 shadow p-3 mb-5 bg-white rounded">
     {% if messages %}
         {% for message in messages %}
@@ -38,9 +32,8 @@
         {{ form.RegSysDevicesID }}
     </div>
     <button type="submit" class="btn btn-secondary">Сохранить</button>
-    <a class="btn btn-secondary" href="/edit_set" role="button">Отмена</a>
+    <a class="btn btn-secondary" href=".." role="button">Отмена</a>
 </form>
     {% endif %}
 </div>
-</body>
-</html>
+{% endblock %}

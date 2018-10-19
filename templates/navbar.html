@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
 <script src="{{ STATIC_URL }} /static/js/jquery-3.3.1.slim.min.js"></script>
 <script src="{{ STATIC_URL }} /static/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="{{ STATIC_URL }} /static/css/bootstrap.min.css">
@@ -12,7 +16,7 @@
       {% if request.path == '/' %}<li class="nav-item active">{% endif %}
         <a class="nav-link" href="/">Главная <span class="sr-only">(current)</span></a>
       </li>
-    {% if request.path == '/tables/' %}<li class="nav-item active">{% endif %}
+    {% if '/tables/' in request.path %}<li class="nav-item active">{% endif %}
         <a class="nav-link" href="/tables">Таблицы</a></li>
     {% if request.path == '/programms/' %}<li class="nav-item active">{% endif %}
         <a class="nav-link" href="/programms">Программы</a></li>
@@ -43,4 +47,9 @@
       </div>
     </div>
 </nav>
-
+</head>
+<body>
+{%block content %}
+{% endblock %}
+</body>
+</html>

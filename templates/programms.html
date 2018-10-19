@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    {% include 'navbar.html' %}
-    <title>Программы</title>
-</head>
-<body>
+<title>Программы</title>
+{% extends 'navbar.html' %}
+{% block content %}
 <div class="container shadow p-3 mb-5 bg-white rounded">
     <p class="text-monospace">Программы для Васи!</p>
 </div>
-
-</body>
-</html>
+{% endblock %}

@@ -1,52 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% include 'navbar.html' %}
-    <title>Таблицы</title>
-</head>
-<body>
+<title>Таблицы</title>
+{% extends 'navbar.html' %}
+{% block content %}
 <div class="container shadow p-3 mb-5 bg-white rounded">
 <div class="row">
   <div class="col">
     <div class="btn-group-vertical" role="group">
-    <a class="btn btn-outline-dark" href="/hardlock_keys" role="button">Ключи аппаратной защиты (Hardlock)</a>
-    <a class="btn btn-outline-dark" href="/hasp_keys" role="button">Ключи аппаратной защиты (HASP)</a>
+    <a class="btn btn-outline-dark" href="/tables/hardlock_keys" role="button">Ключи аппаратной защиты (Hardlock)</a>
+    <a class="btn btn-outline-dark" href="/tables/hasp_keys" role="button">Ключи аппаратной защиты (HASP)</a>
     </div>
-    <br><br><a class="btn btn-outline-dark" href="/plane_types" role="button">Типы ЛА</a>
+    <br><br><a class="btn btn-outline-dark" href="/tables/plane_types" role="button">Типы ЛА</a>
     <br><br>
     <div class="btn-group-vertical" role="group">
-    <a class="btn btn-outline-dark" href="/lang_types" role="button">Язык интерфейса</a>
-    <a class="btn btn-outline-dark" href="/os_types" role="button">Операционная система</a><br>
+    <a class="btn btn-outline-dark" href="/tables/lang_types" role="button">Язык интерфейса</a>
+    <a class="btn btn-outline-dark" href="/tables/os_types" role="button">Операционная система</a><br>
     </div>
   </div>
   <div class="col">
       <div class="btn-group-vertical" role="group">
-    <a class="btn btn-outline-dark" href="/executables" role="button">Исполняемые модули</a>
-    <a class="btn btn-outline-dark" href="/fas_modules" role="button">FAS-номера исполняемых модулей</a>
-    <a class="btn btn-outline-dark" href="/executable_paths" role="button">Пути InstallShield для исполняемых модулей</a>
+    <a class="btn btn-outline-dark" href="/tables/executables" role="button">Исполняемые модули</a>
+    <a class="btn btn-outline-dark" href="/tables/fas_modules" role="button">FAS-номера исполняемых модулей</a>
+    <a class="btn btn-outline-dark" href="/tables/executable_paths" role="button">Пути InstallShield для исполняемых модулей</a>
     </div>
         <br><br><div class="btn-group-vertical" role="group">
-    <a class="btn btn-outline-dark" href="/regsystems" role="button">Системы регистрации</a>
-    <a class="btn btn-outline-dark" href="/typeregsys" role="button">Системы регистрации для типа ЛА</a>
+    <a class="btn btn-outline-dark" href="/tables/regsystems" role="button">Системы регистрации</a>
+    <a class="btn btn-outline-dark" href="/tables/typeregsys" role="button">Системы регистрации для типа ЛА</a>
     </div>
         <br><br><div class="btn-group-vertical" role="group">
-    <a class="btn btn-outline-dark" href="/tasks" role="button">Базы экспрессов</a>
-    <a class="btn btn-outline-dark" href="/typetasks" role="button">Экспрессы для типа ЛА</a>
+    <a class="btn btn-outline-dark" href="/tables/tasks" role="button">Базы экспрессов</a>
+    <a class="btn btn-outline-dark" href="/tables/typetasks" role="button">Экспрессы для типа ЛА</a>
     </div>
         <br><br><div class="btn-group-vertical" role="group">
-    <a class="btn btn-outline-dark" href="/misc" role="button">Дополнительные элементы ЛА</a>
-    <a class="btn btn-outline-dark" href="/typemisc" role="button">Дополнительные элементы по типам ЛА</a><br>
+    <a class="btn btn-outline-dark" href="/tables/misc" role="button">Дополнительные элементы ЛА</a>
+    <a class="btn btn-outline-dark" href="/tables/typemisc" role="button">Дополнительные элементы по типам ЛА</a><br>
     </div>
   </div>
   <div class="col">
-      <a class="btn btn-outline-dark" href="/organisations" role="button">Организации-заказчики</a>
-      <br><br><a class="btn btn-outline-dark" href="/drop_devices" role="button">Устройства сброса</a>
-      <br><br><a class="btn btn-outline-dark" href="/regsysdevices" role="button">Устройства сброса по Регистраторам</a>
-      <br><br><a class="btn btn-outline-dark" href="/modules" role="button">Дополнительные модули ПО</a>
-      <br><br><br><a class="btn btn-outline-dark" href="/drivers" role="button">Драйверы плат сопряжения и прочих устройств</a>
+      <a class="btn btn-outline-dark" href="/tables/organisations" role="button">Организации-заказчики</a>
+      <br><br><a class="btn btn-outline-dark" href="/tables/drop_devices" role="button">Устройства сброса</a>
+      <br><br><a class="btn btn-outline-dark" href="/tables/regsysdevices" role="button">Устройства сброса по Регистраторам</a>
+      <br><br><a class="btn btn-outline-dark" href="/tables/modules" role="button">Дополнительные модули ПО</a>
+      <br><br><br><a class="btn btn-outline-dark" href="/tables/drivers" role="button">Драйверы плат сопряжения и прочих устройств</a>
   </div>
 </div>
 </div>
-</body>
-</html>
+{% endblock %}

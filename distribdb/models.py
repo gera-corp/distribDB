@@ -9,9 +9,6 @@ class drop_device(models.Model):
     ISPath                  = models.CharField(max_length=250, blank=False)
     Description             = models.TextField(max_length=8000, blank=True)
 
-    def __str__(self):
-        return self.UserName
-
     class Meta:
         ordering = ('UserName',)
 
@@ -114,8 +111,8 @@ class RegSystems(models.Model):
     Hide                    = models.BooleanField(default=False)
     Description             = models.TextField(max_length=8000, blank=True)
 
-    # def __str__(self):
-    #     return self.UserName
+    def __str__(self):
+        return self.UserName
 
     class Meta:
         ordering = ('UserName',)
@@ -133,6 +130,8 @@ class TypeRegsys(models.Model):
     def __str__(self):
         return self.RegsysID.UserName
 
+    class Meta:
+        ordering = ('RegsysID',)
 
 
 class Tasks(models.Model):
@@ -202,7 +201,7 @@ class RegSysDevices(models.Model):
     DeviceID                = models.ForeignKey('drop_device', on_delete=models.CASCADE, blank=False, default=id(1))
 
     def __str__(self):
-        return '%s %s' % (self.RegsysID, self.DeviceID)
+        return '%s %s' % (self.RegsysID.UserName, self.DeviceID.UserName)
 
 
 class Modules(models.Model):
@@ -224,16 +223,12 @@ class Sets(models.Model):
 
     UserFriendlyID          = models.BigAutoField(primary_key=True)
     Date                    = models.DateField(null=False, blank=False, default=datetime.now)
-    country                 = models.ForeignKey('Plane_types', on_delete=models.SET_NULL, null=True)
-    city                    = models.ManyToManyField('RegSystems')
-
-
-    #
-    #
-    # RegsysID                = models.ManyToManyField('TypeRegsys')
-    # TypeTasksID             = models.ManyToManyField('TypeTasks')
-    # TypeMiscID              = models.ManyToManyField('TypeMisc')
-    # RegSysDevicesID         = models.ManyToManyField('RegSysDevices')
+    # country                 = models.ForeignKey('Plane_types', on_delete=models.SET_NULL, null=True)
+    # city                    = models.ManyToManyField('RegSystems')
+    RegsysID                = models.ManyToManyField('TypeRegsys')
+    TypeTasksID             = models.ManyToManyField('TypeTasks')
+    TypeMiscID              = models.ManyToManyField('TypeMisc')
+    RegSysDevicesID         = models.ManyToManyField('RegSysDevices')
 
     def __str__(self):
         return self.UserFriendlyID

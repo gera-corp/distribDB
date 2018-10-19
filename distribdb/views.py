@@ -1580,130 +1580,108 @@ def drivers_edit_post(request, pk):
     return render(request, template, context)
 
 
+def edit_set_view(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    obj_list = Sets.objects.all().order_by('-pk')
+
+    query = request.GET.get('q')
+    if query:
+        obj_list = obj_list.filter(
+            Q(Date__icontains=query)
+        ).distinct()
+    page = request.GET.get('page')
+    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        'object_list': queryset,
+
+    }
+    return render(request, 'sets/edit_set.html', context)
+
+
+def edit_set_delete(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    obj = get_object_or_404(Sets, pk=pk)
+    if request.method == 'POST':
+        obj.delete()
+        return redirect('/edit_set')
+    return render(request, 'sets/edit_set.html', {'device': obj})
+
+
+def edit_set_new_post(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    template = 'sets/edit_set_new_post.html'
+    form = PostEditSetForm(request.POST or None)
+    try:
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Запись нового списка драйверов плат сопряжения и прочих устройств, добавлена!')
+    except Exception as e:
+        messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
+    context = {
+        'form': form,
+    }
+    return render(request, template, context)
+
+
+def edit_set_edit_post(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    template = 'sets/edit_set_new_post.html'
+    post = get_object_or_404(Sets, pk=pk)
+
+    if request.method == 'POST':
+        form = PostEditSetForm(request.POST, instance=post)
+
+        try:
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Изменения внесены')
+        except Exception as e:
+            messages.warning(request, 'Изменения не внесены! Ошибка: {}'.format(e))
+
+    else:
+        form = PostEditSetForm(instance=post)
+
+    context = {
+        'form': form,
+        'post': post,
+    }
+
+    return render(request, template, context)
 
 
 
-
-
-
-
-
-
-
-from django.views.generic import ListView, CreateView, UpdateView
-from django.urls import reverse_lazy
-
-
-class PersonListView(ListView):
-    model = Sets
-    context_object_name = 'people'
-
-
-class PersonCreateView(CreateView):
-    model = Sets
-    form_class = PersonForm
-    success_url = reverse_lazy('person_changelist')
-
-
-class PersonUpdateView(UpdateView):
-    model = Sets
-    form_class = PersonForm
-    success_url = reverse_lazy('person_changelist')
-
-
-def load_cities(request):
-    country_id = request.GET.get('country')
-    cities = TypeRegsys.objects.filter(RegsysID_id=country_id).order_by('id')
-    return render(request, 'hr/city_dropdown_list_options.html', {'cities': cities})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# def edit_set_view(request):
-#     if not request.user.is_authenticated:
-#         return redirect('/accounts/login/')
-#     obj_list = Sets.objects.all().order_by('-pk')
-#
-#     query = request.GET.get('q')
-#     if query:
-#         obj_list = obj_list.filter(
-#             Q(Date__icontains=query)
-#         ).distinct()
-#     page = request.GET.get('page')
-#     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
-#     try:
-#         queryset = paginator.page(page)
-#     except PageNotAnInteger:
-#         queryset = paginator.page(1)
-#     except EmptyPage:
-#         queryset = paginator.page(paginator.num_pages)
-#     context = {
-#         'object_list': queryset,
-#
-#     }
-#     return render(request, 'sets/edit_set.html', context)
-#
-#
-# def edit_set_delete(request, pk):
-#     if not request.user.is_authenticated:
-#         return redirect('/accounts/login/')
-#     obj = get_object_or_404(Sets, pk=pk)
-#     if request.method == 'POST':
-#         obj.delete()
-#         return redirect('/edit_set')
-#     return render(request, 'sets/edit_set.html', {'device': obj})
-#
-#
-# def edit_set_new_post(request):
-#     if not request.user.is_authenticated:
-#         return redirect('/accounts/login/')
-#     template = 'sets/edit_set_new_post.html'
-#     form = PostEditSetForm(request.POST or None)
-#     try:
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, 'Запись нового списка драйверов плат сопряжения и прочих устройств, добавлена!')
-#     except Exception as e:
-#         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
-#     context = {
-#         'form': form,
-#     }
-#     return render(request, template, context)
+# from django.views.generic import ListView, CreateView, UpdateView
+# from django.urls import reverse_lazy
 #
 #
-# def edit_set_edit_post(request, pk):
-#     if not request.user.is_authenticated:
-#         return redirect('/accounts/login/')
-#     template = 'sets/edit_set_new_post.html'
-#     post = get_object_or_404(Sets, pk=pk)
+# class PersonListView(ListView):
+#     model = Sets
+#     context_object_name = 'people'
 #
-#     if request.method == 'POST':
-#         form = PostEditSetForm(request.POST, instance=post)
 #
-#         try:
-#             if form.is_valid():
-#                 form.save()
-#                 messages.success(request, 'Изменения внесены')
-#         except Exception as e:
-#             messages.warning(request, 'Изменения не внесены! Ошибка: {}'.format(e))
+# class PersonCreateView(CreateView):
+#     model = Sets
+#     form_class = PersonForm
+#     success_url = reverse_lazy('person_changelist')
 #
-#     else:
-#         form = PostEditSetForm(instance=post)
 #
-#     context = {
-#         'form': form,
-#         'post': post,
-#     }
+# class PersonUpdateView(UpdateView):
+#     model = Sets
+#     form_class = PersonForm
+#     success_url = reverse_lazy('person_changelist')
 #
-#     return render(request, template, context)
+#
+# def load_cities(request):
+#     country_id = request.GET.get('country')
+#     cities = TypeRegsys.objects.filter(RegsysID_id=country_id).order_by('id')
+#     return render(request, 'hr/city_dropdown_list_options.html', {'cities': cities})

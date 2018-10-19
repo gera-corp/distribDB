@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-        {% include 'navbar.html' %}
-    <title>Дополнительные элементы типа ЛА</title>
-</head>
-<body>
+<title>Дополнительные элементы типа ЛА</title>
+{% extends 'navbar.html' %}
+{% block content %}
 <div class="container table-responsive-sm shadow p-3 mb-5 bg-white rounded">
     <a class="btn btn-secondary" href="new_post/" role="button">Добавить</a>
     <br><br>
@@ -40,5 +35,4 @@
     </table>
 {% include 'paginator_template.html' %}
 </div>
-</body>
-</html>
+{% endblock %}

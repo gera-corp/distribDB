@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-{% include 'navbar.html' %}
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
+<title>Авторизация</title>
+{% extends 'navbar.html' %}
+{% block content %}
 <div class="container shadow p-3 mb-5 bg-white rounded">
 <div class="alert alert-dark" role="alert" align="center">
 {% if form.errors %}
@@ -25,5 +20,4 @@
 
 </div>
 </div>
-</body>
-</html>
+{% endblock %}
