@@ -1,5 +1,5 @@
 <title>Дополнительные модули ПО</title>
-{% extends 'navbar.html' %}
+{% extends 'base.html' %}
 {% block content %}
 <div class="container-fluid table-responsive-sm shadow p-3 mb-5 bg-white rounded">
     <a class="btn btn-secondary" href="new_post/" role="button">Добавить</a>
@@ -31,6 +31,6 @@
             </ul></tr>
         {% endfor %}
     </table>
-{% include 'paginator_template.html' %}
+{% include 'paginator.html' %}
 </div>
 {% endblock %}
