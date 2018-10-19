@@ -52,7 +52,7 @@ def drop_device_delete(request, id):
     obj = get_object_or_404(drop_device, id=id)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/drop_devices')
+        return redirect('/tables/drop_devices')
     return render(request, 'tables/drop_devices.html', {'device': obj})
 
 
@@ -132,7 +132,7 @@ def hasp_keys_delete(request, id):
     obj = get_object_or_404(hasp_keys, id=id)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/hasp_keys')
+        return redirect('/tables/hasp_keys')
     return render(request, 'tables/hasp_keys.html', {'device': obj})
 
 
@@ -212,7 +212,7 @@ def hardlock_keys_delete(request, id):
     obj = get_object_or_404(hardlock_keys, id=id)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/hardlock_keys')
+        return redirect('/tables/hardlock_keys')
     return render(request, 'tables/hardlock_keys.html', {'device': obj})
 
 
@@ -293,7 +293,7 @@ def plane_types_delete(request, id):
     obj = get_object_or_404(Plane_types, id=id)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/plane_types')
+        return redirect('/tables/plane_types')
     return render(request, 'tables/plane_types.html', {'device': obj})
 
 
@@ -374,7 +374,7 @@ def lang_types_delete(request, id):
     obj = get_object_or_404(Lang_types, id=id)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/lang_types')
+        return redirect('/tables/lang_types')
     return render(request, 'tables/lang_types.html', {'device': obj})
 
 
@@ -454,7 +454,7 @@ def os_types_delete(request, id):
     obj = get_object_or_404(OS_type, id=id)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/os_types')
+        return redirect('/tables/os_types')
     return render(request, 'tables/os_types.html', {'device': obj})
 
 
@@ -533,7 +533,7 @@ def executables_delete(request, id):
     obj = get_object_or_404(executables, id=id)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/executables')
+        return redirect('/tables/executables')
     return render(request, 'tables/executables.html', {'device': obj})
 
 
@@ -612,7 +612,7 @@ def fas_modules_delete(request, id):
     obj = get_object_or_404(FASModules, id=id)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/fas_modules')
+        return redirect('/tables/fas_modules')
     return render(request, 'tables/fas_modules.html', {'device': obj})
 
 
@@ -691,7 +691,7 @@ def executable_paths_delete(request, id):
     obj = get_object_or_404(ExecutablePaths, id=id)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/executable_paths')
+        return redirect('/tables/executable_paths')
     return render(request, 'tables/executable_paths.html', {'device': obj})
 
 
@@ -772,7 +772,7 @@ def regsystems_delete(request, id):
     obj = get_object_or_404(RegSystems, id=id)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/regsystems')
+        return redirect('/tables/regsystems')
     return render(request, 'tables/regsystems.html', {'device': obj})
 
 
@@ -856,7 +856,7 @@ def typeregsys_delete(request, id):
     obj = get_object_or_404(TypeRegsys, id=id)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/typeregsys')
+        return redirect('/tables/typeregsys')
     return render(request, 'tables/typeregsys.html', {'device': obj})
 
 
@@ -935,7 +935,7 @@ def tasks_delete(request, id):
     obj = get_object_or_404(Tasks, id=id)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/tasks')
+        return redirect('/tables/tasks')
     return render(request, 'tables/tasks.html', {'device': obj})
 
 
@@ -1016,7 +1016,7 @@ def typetasks_delete(request, id):
     obj = get_object_or_404(TypeTasks, id=id)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/typetasks')
+        return redirect('/tables/typetasks')
     return render(request, 'tables/typetasks.html', {'device': obj})
 
 
@@ -1098,7 +1098,7 @@ def misc_delete(request, id):
     obj = get_object_or_404(Misc, id=id)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/misc')
+        return redirect('/tables/misc')
     return render(request, 'tables/misc.html', {'device': obj})
 
 
@@ -1179,7 +1179,7 @@ def typemisc_delete(request, id):
     obj = get_object_or_404(TypeMisc, id=id)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/typemisc')
+        return redirect('/tables/typemisc')
     return render(request, 'tables/typemisc.html', {'device': obj})
 
 
@@ -1260,7 +1260,7 @@ def organisations_delete(request, id):
     obj = get_object_or_404(Organisations, id=id)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/organisations')
+        return redirect('/tables/organisations')
     return render(request, 'tables/organisations.html', {'device': obj})
 
 
@@ -1368,7 +1368,7 @@ def regsysdevices_delete(request, id):
     obj = get_object_or_404(RegSysDevices, id=id)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/regsysdevices')
+        return redirect('/tables/regsysdevices')
     return render(request, 'tables/regsysdevices.html', {'device': obj})
 
 
@@ -1449,7 +1449,7 @@ def modules_delete(request, id):
     obj = get_object_or_404(Modules, id=id)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/modules')
+        return redirect('/tables/modules')
     return render(request, 'tables/modules.html', {'device': obj})
 
 
@@ -1530,7 +1530,7 @@ def drivers_delete(request, id):
     obj = get_object_or_404(Drivers, id=id)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/drivers')
+        return redirect('/tables/drivers')
     return render(request, 'tables/drivers.html', {'device': obj})
 
 
@@ -1611,7 +1611,7 @@ def edit_set_delete(request, pk):
     obj = get_object_or_404(Sets, pk=pk)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/edit_set')
+        return redirect('/tables/edit_set')
     return render(request, 'sets/edit_set.html', {'device': obj})
 
 
