@@ -128,7 +128,7 @@ class TypeRegsys(models.Model):
     Description             = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return self.RegsysID.UserName
+        return '%s %s' % (self.TypeID.UserName, self.RegsysID.UserName)
 
     class Meta:
         ordering = ('RegsysID',)

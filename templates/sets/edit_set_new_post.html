@@ -23,7 +23,11 @@
         Дата набора:
         {{ form.Date }}
         <br>Первичные базы:
-        {{ form.RegsysID }}
+        {% for checkbox in form.RegsysID %}<br>
+            <label class="btn btn-light">
+            {{ checkbox.tag }} {{ checkbox.choice_label }}
+            </label>
+        {% endfor %}
         <br>
         {{ form.TypeTasksID }}
         <br>
