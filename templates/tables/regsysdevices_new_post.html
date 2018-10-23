@@ -5,14 +5,11 @@
     {% if messages %}
         {% for message in messages %}
             <div align="center" {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
-                <script type="text/javascript">
-                    setTimeout(function() {window.location.href="/tables/regsysdevices";}, 2000);
-                </script>
             <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
             <strong>{{ message }}</strong>
             </div>
         {% endfor %}
-    {% else %}
+    {% endif %}
         <p class="text-monospace small">Данная страница позволяет добавлять/редактировать соответствие системам регистрации устройств сброса.
             <br>У одного регистратора не может быть одинаковых <code>"Устройств сброса"</code>.
 <form method="post">{% csrf_token %}
@@ -22,6 +19,5 @@
     <button type="submit" class="btn btn-secondary">Сохранить</button>
     <a class="btn btn-secondary" href="/tables/regsysdevices" role="button">Отмена</a>
 </form>
-    {% endif %}
 </div>
 {% endblock %}

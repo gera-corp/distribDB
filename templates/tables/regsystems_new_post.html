@@ -5,14 +5,11 @@
     {% if messages %}
         {% for message in messages %}
             <div align="center" {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
-                <script type="text/javascript">
-                    setTimeout(function() {window.location.href="/tables/regsystems";}, 2000);
-                </script>
             <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
             <strong>{{ message }}</strong>
             </div>
         {% endfor %}
-    {% else %}
+    {% endif %}
         <p class="text-monospace small">Данная страница позволяет добавлять/редактировать базу данных систем регистрации. Не допускается повторение комбинации <code>"Системное имя - пользовательское имя"</code>.
             Если система регистрации используется только для конкретного типа ЛА и не является общей (т.е. не размещается в каталоге <code>RESOURCE\REGSYS</code>), то для нее необходимо установить флажок <code>"Спрятать"</code>.
             <code>"Путь InstallShield"</code> для такой системы не имеет значения. Однако, в любом случае это поле не должно быть пустым.
@@ -23,6 +20,5 @@
     <button type="submit" class="btn btn-secondary">Сохранить</button>
     <a class="btn btn-secondary" href="/tables/regsystems" role="button">Отмена</a>
 </form>
-    {% endif %}
 </div>
 {% endblock %}

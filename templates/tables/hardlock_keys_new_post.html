@@ -5,14 +5,11 @@
     {% if messages %}
         {% for message in messages %}
             <div align="center" {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
-                <script type="text/javascript">
-                    setTimeout(function() {window.location.href="/tables/hardlock_keys";}, 2000);
-                </script>
             <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
             <strong>{{ message }}</strong>
             </div>
         {% endfor %}
-    {% else %}
+    {% endif %}
 <p class="text-monospace small">Данная страница позволяет добавлять/редактировать базу данных ключей аппаратной защиты Hardlock.
     Не допускается повторение номера чипа. Если ключ в настоящее время не включен в состав дистрибутива, необходимо для него установить поле <code>"Свободен"</code>.
                     Действительно ли ключ является свободным, определяется прежде всего по его включению в состав дистрибутива. Если ключ входит в состав одного или нескольких дистрибутивов и помечен, как свободный,
@@ -24,6 +21,6 @@
     <button type="submit" class="btn btn-secondary">Сохранить</button>
     <a class="btn btn-secondary" href="/tables/hardlock_keys" role="button">Отмена</a>
 </form>
-    {% endif %}
+
 </div>
 {% endblock %}

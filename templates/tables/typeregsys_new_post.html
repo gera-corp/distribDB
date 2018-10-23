@@ -5,14 +5,11 @@
     {% if messages %}
         {% for message in messages %}
             <div align="center" {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
-                <script type="text/javascript">
-                    setTimeout(function() {window.location.href="/tables/typeregsys";}, 2000);
-                </script>
             <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
             <strong>{{ message }}</strong>
             </div>
         {% endfor %}
-    {% else %}
+    {% endif %}
         <p class="text-monospace small">Данная страница позволяет назначить типу ЛА - систему регистрации. Например, установить, что у типа <code>Су-27</code> присутствует система регистрации <code>"Тестер У3. сер.3".</code>
             Комбинация <code>"Тип ЛА - Система регистрации - Пользовательское имя ПБ"</code> должна быть уникальной. Поле <code>"Путь InstallShield"</code> не может быть пустым.
 <form method="post">{% csrf_token %}
@@ -22,6 +19,6 @@
     <button type="submit" class="btn btn-secondary">Сохранить</button>
     <a class="btn btn-secondary" href="/tables/typeregsys" role="button">Отмена</a>
 </form>
-    {% endif %}
+
 </div>
 {% endblock %}

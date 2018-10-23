@@ -5,14 +5,11 @@
     {% if messages %}
         {% for message in messages %}
             <div align="center" {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
-                <script type="text/javascript">
-                    setTimeout(function() {window.location.href="/tables/executable_paths";}, 2000);
-                </script>
             <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
             <strong>{{ message }}</strong>
             </div>
         {% endfor %}
-    {% else %}
+    {% endif %}
 <p class="text-monospace small">На этой странице следует указать исполняемые модули дистрибутива и их соответствие путям компонентов <code>InstallShield</code>,
         источник откуда брать файлы для шифрования. Допускается наличие для одного исполняемого модуля нескольких путей <code>InstallShield</code>.
 <form method="post">{% csrf_token %}
@@ -22,6 +19,5 @@
     <button type="submit" class="btn btn-secondary">Сохранить</button>
     <a class="btn btn-secondary" href="/tables/executable_paths" role="button">Отмена</a>
 </form>
-    {% endif %}
 </div>
 {% endblock %}
