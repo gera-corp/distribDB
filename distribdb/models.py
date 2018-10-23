@@ -126,6 +126,10 @@ class TypeTasks(models.Model):
     def __str__(self):
         return '%s (%s)' % (self.TypeID.UserName, self.TaskID.UserName)
 
+    class Meta:
+        verbose_name = 'Экспресс для типов ЛА'
+        unique_together = ('TypeID', 'TaskID')
+
 
 class Misc(models.Model):
 
