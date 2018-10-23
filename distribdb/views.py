@@ -825,7 +825,7 @@ def regsystems_edit_post(request, pk):
 def typeregsys_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = TypeRegsys.objects.all().order_by('-id')
+    obj_list = TypeRegsys.objects.all().order_by('TypeID')
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(

@@ -15,7 +15,8 @@
     {% else %}
         <h5>Добавление нового набора.</h5><p class="text-monospace small">
         Данная страница позволяет добавить набор в базу данных. В дальнейшем этот набор может быть использован для создания одного или нескольких новых дистрибутивов.
-<form method="post">{% csrf_token %}
+<form method="post">
+    {% csrf_token %}
     <div class="form-group">
 
         <h5><span class="badge badge-info">ID: {{ post.UserFriendlyID }}</span></h5>
@@ -23,17 +24,30 @@
         Дата набора:
         {{ form.Date }}
         <br>Первичные базы:
-        {% for checkbox in form.RegsysID %}<br>
-            <label class="btn btn-light">
-            {{ checkbox.tag }} {{ checkbox.choice_label }}
+        {% for RegsysID in form.RegsysID %}<br>
+            <label class="btn btn-outline-secondary">
+            {{ RegsysID.tag }} {{ RegsysID.choice_label }}
             </label>
         {% endfor %}
-        <br>
-        {{ form.TypeTasksID }}
-        <br>
-        {{ form.TypeMiscID }}
-        <br>
-        {{ form.RegSysDevicesID }}
+        <br>Расчётные базы:
+    {% for TypeTasksID in form.TypeTasksID %}<br>
+            <label class="btn btn-outline-secondary">
+            {{ TypeTasksID.tag }} {{ TypeTasksID.choice_label }}
+            </label>
+        {% endfor %}
+        <br>Дополнительные элементы:
+        {% for TypeMiscID in form.TypeMiscID %}<br>
+            <label class="btn btn-outline-secondary">
+            {{ TypeMiscID.tag }} {{ TypeMiscID.choice_label }}
+            </label>
+        {% endfor %}
+        <br>Устройства сброса:
+            {% for RegSysDevicesID in form.RegSysDevicesID %}<br>
+            <label class="btn btn-outline-secondary">
+            {{ RegSysDevicesID.tag }} {{ RegSysDevicesID.choice_label }}
+            </label>
+        {% endfor %}
+
     </div>
     <button type="submit" class="btn btn-secondary">Сохранить</button>
     <a class="btn btn-secondary" href="/edit_set" role="button">Отмена</a>

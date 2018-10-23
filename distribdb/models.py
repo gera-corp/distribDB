@@ -51,20 +51,6 @@ class hardlock_keys(models.Model):
     Notes                   = models.TextField(max_length=8000, blank=True)
 
 
-class Plane_types(models.Model):
-
-    SysName                 = models.CharField(max_length=50, blank=False)
-    UserName                = models.CharField(max_length=50, blank=False)
-    ISPath                  = models.CharField(max_length=250, blank=False)
-    Description             = models.TextField(max_length=8000, blank=True)
-
-    def __str__(self):
-        return self.UserName
-
-    class Meta:
-        ordering = ('UserName',)
-
-
 class Lang_types(models.Model):
 
     Lang                    = models.CharField(max_length=50, blank=False)
@@ -116,22 +102,6 @@ class RegSystems(models.Model):
 
     class Meta:
         ordering = ('UserName',)
-
-
-class TypeRegsys(models.Model):
-
-    TypeID                  = models.ForeignKey('Plane_types', on_delete=models.CASCADE, blank=False, default=id(1))
-    RegsysID                = models.ForeignKey('RegSystems', on_delete=models.CASCADE, blank=False, default=id(1))
-    ISPath                  = models.CharField(max_length=255, blank=False)
-    UserNameRegsys          = models.CharField(max_length=36, blank=False)
-    SysNameRegsys           = models.CharField(max_length=16, blank=False)
-    Description             = models.TextField(max_length=8000, blank=True)
-
-    def __str__(self):
-        return '%s %s' % (self.TypeID.UserName, self.RegsysID.UserName)
-
-    class Meta:
-        ordering = ('RegsysID',)
 
 
 class Tasks(models.Model):
@@ -219,12 +189,43 @@ class Drivers(models.Model):
     Description             = models.TextField(max_length=8000, blank=True)
 
 
+class Plane_types(models.Model):
+
+    SysName                 = models.CharField(max_length=50, blank=False)
+    UserName                = models.CharField(max_length=50, blank=False)
+    ISPath                  = models.CharField(max_length=250, blank=False)
+    Description             = models.TextField(max_length=8000, blank=True)
+
+    def __str__(self):
+        return self.UserName
+
+    class Meta:
+        ordering = ('UserName',)
+        verbose_name = 'Типы ЛА'
+
+
+class TypeRegsys(models.Model):
+
+    TypeID                  = models.ForeignKey('Plane_types', on_delete=models.CASCADE, blank=False, default=id(1))
+    RegsysID                = models.ForeignKey('RegSystems', on_delete=models.CASCADE, blank=False, default=id(1))
+    ISPath                  = models.CharField(max_length=255, blank=False)
+    UserNameRegsys          = models.CharField(max_length=36, blank=False)
+    SysNameRegsys           = models.CharField(max_length=16, blank=False)
+    Description             = models.TextField(max_length=8000, blank=True)
+
+    def __str__(self):
+        return '%s %s' % (self.TypeID.UserName, self.RegsysID.UserName)
+
+    class Meta:
+        ordering = ('TypeID',)
+        unique_together = ('TypeID', 'RegsysID')
+        verbose_name = 'Система регистрации по типам ЛА'
+
+
 class Sets(models.Model):
 
     UserFriendlyID          = models.BigAutoField(primary_key=True)
     Date                    = models.DateField(null=False, blank=False, default=datetime.now)
-    # country                 = models.ForeignKey('Plane_types', on_delete=models.SET_NULL, null=True)
-    # city                    = models.ManyToManyField('RegSystems')
     RegsysID                = models.ManyToManyField('TypeRegsys')
     TypeTasksID             = models.ManyToManyField('TypeTasks')
     TypeMiscID              = models.ManyToManyField('TypeMisc')
