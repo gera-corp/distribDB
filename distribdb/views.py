@@ -1623,7 +1623,7 @@ def edit_set_new_post(request):
     try:
         if form.is_valid():
             form.save()
-            messages.success(request, 'Запись нового списка драйверов плат сопряжения и прочих устройств, добавлена!')
+            messages.success(request, 'Запись нового набора, добавлена!')
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
     context = {

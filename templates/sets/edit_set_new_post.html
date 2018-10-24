@@ -16,19 +16,14 @@
     {% csrf_token %}
     <div class="form-group">
         <h5><span class="badge badge-info">ID: {{ post.UserFriendlyID }}</span></h5>
-
         Дата набора:
         {{ form.Date }}
-        <br>
-
 {% regroup form.RegsysID by data.group as feature_list %}
-{% for group in feature_list %}
+{% for group in feature_list %}<br>
     <h5><span class="badge badge-secondary" data-toggle="collapse" href="#collapseExample1">{{ group.grouper|default:"Other Features" }}</span></h5>
-
 {% for choice in group.list %}
     <label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label><br>
   {% endfor %}
-
 {% endfor %}
 
 
