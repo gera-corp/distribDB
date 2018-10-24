@@ -1619,7 +1619,7 @@ def edit_set_new_post(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
     template = 'sets/edit_set_new_post.html'
-    form = PostEditSetForm(request.POST or None)
+    form = WidgetForm(request.POST or None)
     try:
         if form.is_valid():
             form.save()
@@ -1639,7 +1639,7 @@ def edit_set_edit_post(request, pk):
     post = get_object_or_404(Sets, pk=pk)
 
     if request.method == 'POST':
-        form = PostEditSetForm(request.POST, instance=post)
+        form = WidgetForm(request.POST, instance=post)
 
         try:
             if form.is_valid():
@@ -1649,7 +1649,7 @@ def edit_set_edit_post(request, pk):
             messages.warning(request, 'Изменения не внесены! Ошибка: {}'.format(e))
 
     else:
-        form = PostEditSetForm(instance=post)
+        form = WidgetForm(instance=post)
 
     context = {
         'form': form,
@@ -1657,31 +1657,3 @@ def edit_set_edit_post(request, pk):
     }
 
     return render(request, template, context)
-
-
-
-# from django.views.generic import ListView, CreateView, UpdateView
-# from django.urls import reverse_lazy
-#
-#
-# class PersonListView(ListView):
-#     model = Sets
-#     context_object_name = 'people'
-#
-#
-# class PersonCreateView(CreateView):
-#     model = Sets
-#     form_class = PersonForm
-#     success_url = reverse_lazy('person_changelist')
-#
-#
-# class PersonUpdateView(UpdateView):
-#     model = Sets
-#     form_class = PersonForm
-#     success_url = reverse_lazy('person_changelist')
-#
-#
-# def load_cities(request):
-#     country_id = request.GET.get('country')
-#     cities = TypeRegsys.objects.filter(RegsysID_id=country_id).order_by('id')
-#     return render(request, 'hr/city_dropdown_list_options.html', {'cities': cities})

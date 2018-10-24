@@ -5,83 +5,96 @@
     {% if messages %}
         {% for message in messages %}
             <div align="center" {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
-                <script type="text/javascript">
-                    setTimeout(function() {window.location.href="/edit_set";}, 2000);
-                </script>
             <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
             <strong>{{ message }}</strong>
             </div>
         {% endfor %}
-    {% else %}
+{% endif %}
         <h5>Добавление нового набора.</h5><p class="text-monospace small">
         Данная страница позволяет добавить набор в базу данных. В дальнейшем этот набор может быть использован для создания одного или нескольких новых дистрибутивов.
 <form method="post">
     {% csrf_token %}
     <div class="form-group">
-
         <h5><span class="badge badge-info">ID: {{ post.UserFriendlyID }}</span></h5>
 
         Дата набора:
         {{ form.Date }}
         <br>
-<p>
-  <a class="btn btn-secondary btn-sm" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Первичные базы
-  </a></p>
+
+{% regroup form.RegsysID by data.group as feature_list %}
+{% for group in feature_list %}
+    <h5><span class="badge badge-secondary" data-toggle="collapse" href="#collapseExample1">{{ group.grouper|default:"Other Features" }}</span></h5>
+
+{% for choice in group.list %}
+    <label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label><br>
+  {% endfor %}
+
+{% endfor %}
 
 
-<div class="collapse" id="collapseExample1">
-  <div class="card card-body">
-        {% for RegsysID in form.RegsysID %}<div class="form-group-sm">
-            <label class="btn btn-outline-secondary btn-sm">
-            {{ RegsysID.tag }} {{ RegsysID.choice_label }}
-            </label></div>
-        {% endfor %}
-  </div><br>
-</div>
+<br>
+{#<p><a class="btn btn-secondary btn-sm" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">#}
+{#    Первичные базы#}
+{#  </a></p>#}
+{# <div class="collapse" id="collapseExample1">#}
+{#  <div class="card card-body">#}
+{#    {{ form.RegsysID }}#}
+{#  </div><br>#}
+{#</div>#}
+{##}
+{##}
+{#<p><a class="btn btn-secondary btn-sm" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">#}
+{#    Расчётные базы#}
+{#  </a></p>#}
+{#<div class="collapse" id="collapseExample2">#}
+{#  <div class="card card-body">#}
+{#{{ form.TypeTasksID }}#}
+{#    </div><br>#}
+{#</div>#}
 
 
-<p>  <a class="btn btn-secondary btn-sm" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Расчётные базы
-  </a></p>
 
-<div class="collapse" id="collapseExample2">
-  <div class="card card-body">
-    {% for TypeTasksID in form.TypeTasksID %}<div class="form-group-sm">
-            <label class="btn btn-outline-secondary btn-sm">
-            {{ TypeTasksID.tag }} {{ TypeTasksID.choice_label }}
-            </label></div>
-        {% endfor %}
-    </div><br>
-</div>
-<p><a class="btn btn-secondary btn-sm" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">
-        Дополнительные элементы
- </a></p>
-    <div class="collapse" id="collapseExample3">
-  <div class="card card-body">
-        {% for TypeMiscID in form.TypeMiscID %}<div class="form-group-sm">
-            <label class="btn btn-outline-secondary btn-sm">
-            {{ TypeMiscID.tag }} {{ TypeMiscID.choice_label }}
-            </label></div>
-        {% endfor %}
-      </div><br>
-</div>
-
-<p><a class="btn btn-secondary btn-sm" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample">
-        Устройства сброса
-</a></p>
-        <div class="collapse" id="collapseExample4">
-  <div class="card card-body">
-            {% for RegSysDevicesID in form.RegSysDevicesID %}<div class="form-group-sm">
-            <label class="btn btn-outline-secondary btn-sm">
-            {{ RegSysDevicesID.tag }} {{ RegSysDevicesID.choice_label }}
-            </label></div>
-        {% endfor %}
-     </div><br>
-</div>
+{#<p>  <a class="btn btn-secondary btn-sm" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">#}
+{#    Расчётные базы#}
+{#  </a></p>#}
+{##}
+{#<div class="collapse" id="collapseExample2">#}
+{#  <div class="card card-body">#}
+{#    {% for TypeTasksID in form.TypeTasksID %}<div class="form-group-sm">#}
+{#            <label class="btn btn-outline-secondary btn-sm">#}
+{#            {{ TypeTasksID.tag }} {{ TypeTasksID.choice_label }}#}
+{#            </label></div>#}
+{#        {% endfor %}#}
+{#    </div><br>#}
+{#</div>#}
+{#<p><a class="btn btn-secondary btn-sm" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">#}
+{#        Дополнительные элементы#}
+{# </a></p>#}
+{#    <div class="collapse" id="collapseExample3">#}
+{#  <div class="card card-body">#}
+{#        {% for TypeMiscID in form.TypeMiscID %}<div class="form-group-sm">#}
+{#            <label class="btn btn-outline-secondary btn-sm">#}
+{#            {{ TypeMiscID.tag }} {{ TypeMiscID.choice_label }}#}
+{#            </label></div>#}
+{#        {% endfor %}#}
+{#      </div><br>#}
+{#</div>#}
+{##}
+{#<p><a class="btn btn-secondary btn-sm" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample">#}
+{#        Устройства сброса#}
+{#</a></p>#}
+{#        <div class="collapse" id="collapseExample4">#}
+{#  <div class="card card-body">#}
+{#            {% for RegSysDevicesID in form.RegSysDevicesID %}<div class="form-group-sm">#}
+{#            <label class="btn btn-outline-secondary btn-sm">#}
+{#            {{ RegSysDevicesID.tag }} {{ RegSysDevicesID.choice_label }}#}
+{#            </label></div>#}
+{#        {% endfor %}#}
+{#     </div><br>#}
+{#</div>#}
     <button type="submit" class="btn btn-secondary btn-sm">Сохранить</button>
     <a class="btn btn-secondary btn-sm" href="/edit_set" role="button">Отмена</a>
 </form>
-    {% endif %}
+
 </div>
 {% endblock %}

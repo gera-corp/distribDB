@@ -12,6 +12,9 @@ class drop_device(models.Model):
     class Meta:
         ordering = ('UserName',)
 
+    def __str__(self):
+        return self.UserName
+
 
 class hasp_keys(models.Model):
 
@@ -124,7 +127,7 @@ class TypeTasks(models.Model):
     Description             = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return '%s (%s)' % (self.TypeID.UserName, self.TaskID.UserName)
+        return self.TaskID.UserName
 
     class Meta:
         verbose_name = 'Экспресс для типов ЛА'
@@ -210,20 +213,20 @@ class Plane_types(models.Model):
 
 class TypeRegsys(models.Model):
 
-    TypeID                  = models.ForeignKey('Plane_types', on_delete=models.CASCADE, blank=False, default=id(1))
-    RegsysID                = models.ForeignKey('RegSystems', on_delete=models.CASCADE, blank=False, default=id(1))
+    TypeID                  = models.ForeignKey('Plane_types', on_delete=models.CASCADE, blank=False, default=id(1), verbose_name='"Тип ЛА"')
+    RegsysID                = models.ForeignKey('RegSystems', on_delete=models.CASCADE, blank=False, default=id(1), verbose_name='"Система регистрации"')
     ISPath                  = models.CharField(max_length=255, blank=False)
     UserNameRegsys          = models.CharField(max_length=36, blank=False)
     SysNameRegsys           = models.CharField(max_length=16, blank=False)
     Description             = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return '%s %s' % (self.TypeID.UserName, self.RegsysID.UserName)
+        return self.RegsysID.UserName
 
     class Meta:
         ordering = ('TypeID',)
         unique_together = ('TypeID', 'RegsysID')
-        verbose_name = 'Система регистрации по типам ЛА'
+        verbose_name = '"Система регистрации по типам ЛА"'
 
 
 class Sets(models.Model):
@@ -236,5 +239,4 @@ class Sets(models.Model):
     RegSysDevicesID         = models.ManyToManyField('RegSysDevices')
 
     def __str__(self):
-        return self.UserFriendlyID
-
+        return '%s %s' % (self.RegsysID, self.TypeTasksID)
