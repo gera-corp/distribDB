@@ -23,23 +23,7 @@
 <br>Первичные базы:
 {% regroup form.RegsysID by data.group as feature_list %}
 {% for group in feature_list %}<h5><button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapseExample{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
-    <span class="badge badge-light">{% for i in group.list %}{% if i.data.selected == True %}.{% endif %}{% endfor %}</span></button></h5>
-
-
-{% regroup employees by skill_level as employees_by_level %}
-{% for level in employees_by_level %}
-    <tr>
-        <td class="level">{{ level.grouper.skill }}</td>
-        <td class="count">{{ level.list|length }}</td>
-        {% for e in level.list %}
-            <td class="race">{{ forloop.counter0 }}</td>
-        {% endfor %}
-    </tr>
-{% endfor %}
-
-
-
-
+    <span class="badge badge-light">{% for i in group.list %}{% if i.data.selected == True %}+{% endif %}{% endfor %}</span></button></h5>
 
 {% for choice in group.list %}
     <div class="collapse" id="collapseExample{{ group.grouper.id }}"><label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.data.label }} </label></div>
