@@ -18,76 +18,44 @@
         <h5><span class="badge badge-info">ID: {{ post.UserFriendlyID }}</span></h5>
         Дата набора:
         {{ form.Date }}
+
+
+<br>Первичные базы:
 {% regroup form.RegsysID by data.group as feature_list %}
-{% for group in feature_list %}<br>
-    <h5><span class="badge badge-secondary" data-toggle="collapse" href="#collapseExample1">{{ group.grouper|default:"Other Features" }}</span></h5>
-{% for choice in group.list %}
-    <label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label><br>
-  {% endfor %}
+{% for group in feature_list %}<h5><button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapseExample{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
+    <span class="badge badge-light">{% for i in group.list %}{% if i.data.selected == True %}.{% endif %}{% endfor %}</span></button></h5>
+
+
+{% regroup employees by skill_level as employees_by_level %}
+{% for level in employees_by_level %}
+    <tr>
+        <td class="level">{{ level.grouper.skill }}</td>
+        <td class="count">{{ level.list|length }}</td>
+        {% for e in level.list %}
+            <td class="race">{{ forloop.counter0 }}</td>
+        {% endfor %}
+    </tr>
 {% endfor %}
 
 
-<br>
-{#<p><a class="btn btn-secondary btn-sm" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">#}
-{#    Первичные базы#}
-{#  </a></p>#}
-{# <div class="collapse" id="collapseExample1">#}
-{#  <div class="card card-body">#}
-{#    {{ form.RegsysID }}#}
-{#  </div><br>#}
-{#</div>#}
-{##}
-{##}
-{#<p><a class="btn btn-secondary btn-sm" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">#}
-{#    Расчётные базы#}
-{#  </a></p>#}
-{#<div class="collapse" id="collapseExample2">#}
-{#  <div class="card card-body">#}
-{#{{ form.TypeTasksID }}#}
-{#    </div><br>#}
-{#</div>#}
 
 
 
-{#<p>  <a class="btn btn-secondary btn-sm" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">#}
-{#    Расчётные базы#}
-{#  </a></p>#}
-{##}
-{#<div class="collapse" id="collapseExample2">#}
-{#  <div class="card card-body">#}
-{#    {% for TypeTasksID in form.TypeTasksID %}<div class="form-group-sm">#}
-{#            <label class="btn btn-outline-secondary btn-sm">#}
-{#            {{ TypeTasksID.tag }} {{ TypeTasksID.choice_label }}#}
-{#            </label></div>#}
-{#        {% endfor %}#}
-{#    </div><br>#}
-{#</div>#}
-{#<p><a class="btn btn-secondary btn-sm" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">#}
-{#        Дополнительные элементы#}
-{# </a></p>#}
-{#    <div class="collapse" id="collapseExample3">#}
-{#  <div class="card card-body">#}
-{#        {% for TypeMiscID in form.TypeMiscID %}<div class="form-group-sm">#}
-{#            <label class="btn btn-outline-secondary btn-sm">#}
-{#            {{ TypeMiscID.tag }} {{ TypeMiscID.choice_label }}#}
-{#            </label></div>#}
-{#        {% endfor %}#}
-{#      </div><br>#}
-{#</div>#}
-{##}
-{#<p><a class="btn btn-secondary btn-sm" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample">#}
-{#        Устройства сброса#}
-{#</a></p>#}
-{#        <div class="collapse" id="collapseExample4">#}
-{#  <div class="card card-body">#}
-{#            {% for RegSysDevicesID in form.RegSysDevicesID %}<div class="form-group-sm">#}
-{#            <label class="btn btn-outline-secondary btn-sm">#}
-{#            {{ RegSysDevicesID.tag }} {{ RegSysDevicesID.choice_label }}#}
-{#            </label></div>#}
-{#        {% endfor %}#}
-{#     </div><br>#}
-{#</div>#}
-    <button type="submit" class="btn btn-secondary btn-sm">Сохранить</button>
+{% for choice in group.list %}
+    <div class="collapse" id="collapseExample{{ group.grouper.id }}"><label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.data.label }} </label></div>
+  {% endfor %}
+{% endfor %}
+
+Расчётные базы:
+{% regroup form.TypeTasksID by data.group as feature_list %}
+{% for group in feature_list %}
+    <h5><button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapseExample{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }} <span class="badge badge-light">{% for choice in group.list %}{% if choice.data.selected == True %}+{% endif %}{% endfor %}</span></button></h5>
+{% for choice in group.list %}
+    <div class="collapse" id="collapseExample{{ group.grouper.id }}"><label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label></div>
+  {% endfor %}
+{% endfor %}
+
+    <br><br><button type="submit" class="btn btn-secondary btn-sm">Сохранить</button>
     <a class="btn btn-secondary btn-sm" href="/edit_set" role="button">Отмена</a>
 </form>
 
