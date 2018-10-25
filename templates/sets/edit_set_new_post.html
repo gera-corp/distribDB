@@ -33,7 +33,8 @@
 Расчётные базы:
 {% regroup form.TypeTasksID by data.group as feature_list %}
 {% for group in feature_list %}
-    <h5><button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapseExample{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }} <span class="badge badge-light">{% for choice in group.list %}{% if choice.data.selected == True %}+{% endif %}{% endfor %}</span></button></h5>
+    <h5><button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapseExample{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
+        <span class="badge badge-light">{% for choice in group.list %}{% if choice.data.selected == True %}+{% endif %}{% endfor %}</span></button></h5>
 {% for choice in group.list %}
     <div class="collapse" id="collapseExample{{ group.grouper.id }}"><label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label></div>
   {% endfor %}
