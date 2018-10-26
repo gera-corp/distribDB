@@ -23,8 +23,7 @@
 <br>Первичные базы:
 {% regroup form.RegsysID by data.group as feature_list %}
 {% for group in feature_list %}<h5><button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapseExample{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
-    <span class="badge badge-light">{% for i in group.list %}{% if i.data.selected == True %}+{% endif %}{% endfor %}</span></button></h5>
-
+    <span class="badge badge-light"><script>var test = 0; {% for i in group.list %}{% if i.data.selected == True %}; test = test + 1; {% endif %}{% endfor %}; if (test == 0){test = ''};document.write(test)</script></span></button></h5>
 {% for choice in group.list %}
     <div class="collapse" id="collapseExample{{ group.grouper.id }}"><label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.data.label }} </label></div>
   {% endfor %}
@@ -34,7 +33,7 @@
 {% regroup form.TypeTasksID by data.group as feature_list %}
 {% for group in feature_list %}
     <h5><button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapseExample{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
-        <span class="badge badge-light">{% for choice in group.list %}{% if choice.data.selected == True %}+{% endif %}{% endfor %}</span></button></h5>
+        {% with test1=0 %}<span class="badge badge-light">{% for choice in group.list %}{% if choice.data.selected == True %}{{ test1|add:1 }}{% endif %}{% endfor %}{% endwith %}</span></button></h5>
 {% for choice in group.list %}
     <div class="collapse" id="collapseExample{{ group.grouper.id }}"><label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label></div>
   {% endfor %}
