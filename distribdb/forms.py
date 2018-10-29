@@ -481,7 +481,7 @@ class WidgetForm(forms.ModelForm):
                                                                     queryset=TypeMisc.objects.all(),
                                                                     widget=GroupedCheckboxSelectMultiple(),
                                                                     required=False)
-        # self.fields['RegSysDevicesID'] = GroupedModelMultipleChoiceField(group_by_field='SysName',
-        #                                                             queryset=RegSystems.objects.all(),
-        #                                                             widget=GroupedCheckboxSelectMultiple(),
-        #                                                             required=False)
+        self.fields['RegSysDevicesID'] = GroupedModelMultipleChoiceField(group_by_field='SysName',
+                                                                    queryset=RegSystems.objects.all(),
+                                                                    widget=GroupedCheckboxSelectMultiple(),
+                                                                    required=False)

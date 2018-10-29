@@ -243,7 +243,7 @@ class Sets(models.Model):
     TypeTasksID             = models.ManyToManyField('TypeTasks')
     TypeMiscID              = models.ManyToManyField('TypeMisc')
     RegSysDevicesID         = models.ManyToManyField('RegSystems')
-    SetModulesID            = models.ManyToManyField('Modules')
+    SetModulesID            = models.ManyToManyField('Modules', blank=True)
 
     def __str__(self):
         return '%s %s' % (self.RegsysID, self.TypeTasksID)
