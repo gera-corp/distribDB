@@ -29,7 +29,7 @@ class hasp_keys(models.Model):
         ('NetHASP', 'NetHasp')
     )
 
-    ChipNo                  = models.CharField(max_length=50, blank=False)
+    ChipNo                  = models.CharField(max_length=50, blank=False, unique=True)
     Free                    = models.BooleanField(default=False)
     Port                    = models.CharField(max_length=50, blank=False, default=None, choices=port_name)
     Type                    = models.CharField(max_length=50, blank=False, default=None, choices=type_key)
@@ -156,7 +156,7 @@ class TypeMisc(models.Model):
     Description             = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return '%s %s' % (self.TypeID, self.MiscID)
+        return self.MiscID.Name
 
 
 class Organisations(models.Model):
@@ -186,6 +186,12 @@ class Modules(models.Model):
     Name                    = models.CharField(max_length=255, blank=False)
     Description             = models.TextField(max_length=8000, blank=True)
     ISPath                  = models.CharField(max_length=255, blank=False)
+
+    def __str__(self):
+        return self.Name
+
+    class Meta:
+        ordering = ('Name',)
 
 
 class Drivers(models.Model):
@@ -236,7 +242,8 @@ class Sets(models.Model):
     RegsysID                = models.ManyToManyField('TypeRegsys')
     TypeTasksID             = models.ManyToManyField('TypeTasks')
     TypeMiscID              = models.ManyToManyField('TypeMisc')
-    RegSysDevicesID         = models.ManyToManyField('RegSysDevices')
+    RegSysDevicesID         = models.ManyToManyField('RegSystems')
+    SetModulesID            = models.ManyToManyField('Modules')
 
     def __str__(self):
         return '%s %s' % (self.RegsysID, self.TypeTasksID)

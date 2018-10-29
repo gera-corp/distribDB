@@ -1,9 +1,10 @@
 from django import forms
 from .models import *
+from django.forms.models import ModelChoiceIterator, ModelMultipleChoiceField
+from itertools import groupby
 
 
 class PostForm(forms.ModelForm):
-
     class Meta:
         model = drop_device
         fields = ['SysName', 'UserName', 'ISPath', 'Description']
@@ -22,7 +23,6 @@ class PostForm(forms.ModelForm):
 
 
 class PostHaspForm(forms.ModelForm):
-
     class Meta:
         model = hasp_keys
         fields = ['ChipNo', 'Free', 'Port', 'Type', 'TimeLimit', 'Licenses', 'Notes']
@@ -40,14 +40,14 @@ class PostHaspForm(forms.ModelForm):
             'Free': forms.CheckboxInput(),
             'Port': forms.Select(attrs={'class': 'form-control'}),
             'Type': forms.Select(attrs={'class': 'form-control'}),
-            'TimeLimit': forms.DateInput(format="%d.%m.%Y", attrs={'class': 'form-control', 'placeholder': "дд-мм-гггг"}),
+            'TimeLimit': forms.DateInput(format="%d.%m.%Y",
+                                         attrs={'class': 'form-control', 'placeholder': "дд-мм-гггг"}),
             'Licenses': forms.TextInput(attrs={'class': 'form-control'}),
             'Notes': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
         }
 
 
 class PostHardlockForm(forms.ModelForm):
-
     class Meta:
         model = hardlock_keys
         fields = ['Mark', 'ChipNo', 'Subcode', 'ModAddr', 'Port', 'Free', 'Notes']
@@ -72,7 +72,6 @@ class PostHardlockForm(forms.ModelForm):
 
 
 class PostPlaneTypeForm(forms.ModelForm):
-
     class Meta:
         model = Plane_types
         fields = ['SysName', 'UserName', 'ISPath', 'Description']
@@ -91,7 +90,6 @@ class PostPlaneTypeForm(forms.ModelForm):
 
 
 class PostLangForm(forms.ModelForm):
-
     class Meta:
         model = Lang_types
         fields = ['Lang', 'LCode', 'ISDefine']
@@ -108,7 +106,6 @@ class PostLangForm(forms.ModelForm):
 
 
 class PostOsForm(forms.ModelForm):
-
     class Meta:
         model = OS_type
         fields = ['OS', 'OSCode']
@@ -123,7 +120,6 @@ class PostOsForm(forms.ModelForm):
 
 
 class PostExecutablesForm(forms.ModelForm):
-
     class Meta:
         model = executables
         fields = ['FileName']
@@ -136,7 +132,6 @@ class PostExecutablesForm(forms.ModelForm):
 
 
 class PostFASModulesForm(forms.ModelForm):
-
     class Meta:
         model = FASModules
         fields = ['ExecutableID', 'FASNo']
@@ -151,7 +146,6 @@ class PostFASModulesForm(forms.ModelForm):
 
 
 class PostExecutablePathsForm(forms.ModelForm):
-
     class Meta:
         model = ExecutablePaths
         fields = ['ExecutableID', 'ISPath', 'Source', 'Dest']
@@ -171,7 +165,6 @@ class PostExecutablePathsForm(forms.ModelForm):
 
 
 class PostRegSystemsForm(forms.ModelForm):
-
     class Meta:
         model = RegSystems
         fields = ['SysName', 'UserName', 'ISPath', 'Hide', 'Description']
@@ -193,7 +186,6 @@ class PostRegSystemsForm(forms.ModelForm):
 
 
 class PostTypeRegsysForm(forms.ModelForm):
-
     class Meta:
         model = TypeRegsys
         fields = ['TypeID', 'RegsysID', 'ISPath', 'UserNameRegsys', 'SysNameRegsys', 'Description']
@@ -217,7 +209,6 @@ class PostTypeRegsysForm(forms.ModelForm):
 
 
 class PostTasksForm(forms.ModelForm):
-
     class Meta:
         model = Tasks
         fields = ['SysName', 'UserName']
@@ -232,7 +223,6 @@ class PostTasksForm(forms.ModelForm):
 
 
 class PostTypeTasksForm(forms.ModelForm):
-
     class Meta:
         model = TypeTasks
         fields = ['TypeID', 'TaskID', 'ISPath', 'Description']
@@ -251,7 +241,6 @@ class PostTypeTasksForm(forms.ModelForm):
 
 
 class PostMiscForm(forms.ModelForm):
-
     class Meta:
         model = Misc
         fields = ['Name', 'SysName', 'UserName', 'Description']
@@ -270,7 +259,6 @@ class PostMiscForm(forms.ModelForm):
 
 
 class PostTypeMiscForm(forms.ModelForm):
-
     class Meta:
         model = TypeMisc
         fields = ['TypeID', 'MiscID', 'ISPath', 'Description']
@@ -289,7 +277,6 @@ class PostTypeMiscForm(forms.ModelForm):
 
 
 class PostOrganisationsForm(forms.ModelForm):
-
     class Meta:
         model = Organisations
         fields = ['Name', 'City', 'Notes']
@@ -306,7 +293,6 @@ class PostOrganisationsForm(forms.ModelForm):
 
 
 class PostRegSysDevicesForm(forms.ModelForm):
-
     class Meta:
         model = RegSysDevices
         fields = ['RegsysID', 'DeviceID']
@@ -321,7 +307,6 @@ class PostRegSysDevicesForm(forms.ModelForm):
 
 
 class PostModulesForm(forms.ModelForm):
-
     class Meta:
         model = Modules
         fields = ['Name', 'Description', 'ISPath']
@@ -338,7 +323,6 @@ class PostModulesForm(forms.ModelForm):
 
 
 class PostDriversForm(forms.ModelForm):
-
     class Meta:
         model = Drivers
         fields = ['Name', 'Xno', 'ISPath', 'Description']
@@ -356,44 +340,6 @@ class PostDriversForm(forms.ModelForm):
             'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
 
         }
-
-
-# class PostEditSetForm(forms.ModelForm):
-#
-#     RegsysID = forms.ModelMultipleChoiceField(queryset=TypeRegsys.objects.all().order_by('TypeID'), widget=forms.CheckboxSelectMultiple())
-#
-#     class Meta:
-#         model = Sets
-#         fields = [
-#             'Date',
-#             'UserFriendlyID',
-#             'RegsysID',
-#             'TypeTasksID',
-#             'TypeMiscID',
-#             'RegSysDevicesID'
-#         ]
-#
-#         labels = {
-#             'UserFriendlyID': 'ID',
-#             'Date': 'Дата',
-#             'RegsysID': 'Тип ЛА',
-#             'TypeTasksID': '',
-#             'TypeMiscID': '',
-#             'RegSysDevicesID': ''
-#         }
-#
-#         widgets = {
-#             'UserFriendlyID': forms.NumberInput(attrs={'class': 'form-control'}),
-#             'Date': forms.DateInput(format="%d.%m.%Y", attrs={'class': 'form-control', 'placeholder': "дд-мм-гггг"}),
-#             # 'RegsysID': forms.CheckboxSelectMultiple(),
-#             'TypeTasksID': forms.CheckboxSelectMultiple(),
-#             'TypeMiscID': forms.CheckboxSelectMultiple(),
-#             'RegSysDevicesID': forms.CheckboxSelectMultiple(),
-#           }
-
-
-from django.forms.models import ModelChoiceIterator, ModelMultipleChoiceField
-from itertools import groupby
 
 
 class GroupedModelMultipleChoiceField(ModelMultipleChoiceField):
@@ -415,6 +361,7 @@ class GroupedModelMultipleChoiceField(ModelMultipleChoiceField):
         if hasattr(self, '_choices'):
             return self._choices
         return GroupedModelChoiceIterator(self)
+
     choices = property(_get_choices, ModelMultipleChoiceField._set_choices)
 
 
@@ -463,8 +410,8 @@ class GroupedCheckboxSelectMultiple(forms.CheckboxSelectMultiple):
 
             for subvalue, sublabel in choices:
                 selected = (
-                    str(subvalue) in value and
-                    (not has_selected or self.allow_multiple_selected)
+                        str(subvalue) in value and
+                        (not has_selected or self.allow_multiple_selected)
                 )
                 has_selected |= selected
                 subgroup.append(self.create_option(
@@ -505,17 +452,36 @@ class GroupedCheckboxSelectMultiple(forms.CheckboxSelectMultiple):
 class WidgetForm(forms.ModelForm):
     class Meta:
         model = Sets
-        fields = ['RegsysID', 'TypeTasksID', 'Date']
+        fields = ['Date', 'RegsysID', 'TypeTasksID', 'TypeMiscID', 'SetModulesID', 'RegSysDevicesID']
         labels = {
             'RegsysID': 'Первичные базы',
             'TypeTasksID': 'Расчётные базы',
+            'TypeMiscID': 'Дополнительные элементы',
+            'SetModulesID': 'Дополнительные модули ПО',
+            'RegSysDevicesID': 'Системы решистрации'
         }
 
         widgets = {
             'Date': forms.DateInput(format="%d.%m.%Y", attrs={'class': 'form-control', 'placeholder': "дд-мм-гггг"}),
+            'SetModulesID': forms.CheckboxSelectMultiple(),
+            'RegSysDevicesID': forms.CheckboxSelectMultiple(),
         }
 
     def __init__(self, *args, **kwargs):
         super(WidgetForm, self).__init__(*args, **kwargs)
-        self.fields['RegsysID'] = GroupedModelMultipleChoiceField(group_by_field='TypeID', queryset=TypeRegsys.objects.all(), widget=GroupedCheckboxSelectMultiple(), required=False)
-        self.fields['TypeTasksID'] = GroupedModelMultipleChoiceField(group_by_field='TypeID', queryset=TypeTasks.objects.all(), widget=GroupedCheckboxSelectMultiple(), required=False)
+        self.fields['RegsysID'] = GroupedModelMultipleChoiceField(group_by_field='TypeID',
+                                                                  queryset=TypeRegsys.objects.all(),
+                                                                  widget=GroupedCheckboxSelectMultiple(),
+                                                                  required=False)
+        self.fields['TypeTasksID'] = GroupedModelMultipleChoiceField(group_by_field='TypeID',
+                                                                     queryset=TypeTasks.objects.all(),
+                                                                     widget=GroupedCheckboxSelectMultiple(),
+                                                                     required=False)
+        self.fields['TypeMiscID'] = GroupedModelMultipleChoiceField(group_by_field='TypeID',
+                                                                    queryset=TypeMisc.objects.all(),
+                                                                    widget=GroupedCheckboxSelectMultiple(),
+                                                                    required=False)
+        # self.fields['RegSysDevicesID'] = GroupedModelMultipleChoiceField(group_by_field='SysName',
+        #                                                             queryset=RegSystems.objects.all(),
+        #                                                             widget=GroupedCheckboxSelectMultiple(),
+        #                                                             required=False)
