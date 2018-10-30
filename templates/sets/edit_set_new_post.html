@@ -1,7 +1,7 @@
 <title>Редактирование</title>
 {% extends 'base.html' %}
 {% block content %}
-<div class="offset-3 col-md-6 shadow p-3 mb-5 bg-white rounded">
+<div class="container table-responsive-sm shadow p-3 mb-5 bg-white rounded">
     {% if messages %}
         {% for message in messages %}
             <div align="center" {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
@@ -11,7 +11,7 @@
         {% endfor %}
 {% endif %}
         <h5>Добавление нового набора.</h5><p class="text-monospace small">
-        Данная страница позволяет добавить набор в базу данных. В дальнейшем этот набор может быть использован для создания одного или нескольких новых дистрибутивов.
+        Данная страница позволяет добавить/редактировать набор в базе данных. В дальнейшем этот набор может быть использован для создания одного или нескольких новых дистрибутивов.
 <form method="post">
     {% csrf_token %}
 
@@ -20,69 +20,90 @@
         {{ form.Date }}
 <br>
 <table class="table table-sm table-borderless form-control-sm">
-    <tr>
-        <th>Первичные базы:</th>
-        <th>Расчётные базы:</th>
-        <th>Дополнительные элементы:</th>
+    <tr align="center">
+        <th><h6><li class="list-group-item list-group-item-info">Первичные базы</li></h6></th>
+        <th><h6><li class="list-group-item list-group-item-info">Расчётные базы</li></h6></th>
+        <th><h6><li class="list-group-item list-group-item-info">Доп. элементы</li></h6></th>
     </tr>
         <td width="33%">
-{% regroup form.RegsysID by data.group as feature_list %}
-{% for group in feature_list %}<h5><button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
-    <script>var numchkbox=0;{% for i in group.list %}{% if i.data.selected == True %}numchkbox++;{% endif %}{% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}</script></button></h5>
-{% for choice in group.list %}
-    <div class="collapse" id="collapse{{ group.grouper.id }}"><label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.data.label }}</label></div>
-  {% endfor %}
+{% regroup form.Regsys by data.group as feature_list %}
+{% for group in feature_list %}<button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
+    <script>var numchkbox=0;{% for i in group.list %}{% if i.data.selected == True %}numchkbox++;{% endif %}{% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}</script></button>
+<div class="collapse" id="collapse{{ group.grouper.id }}"><br>{% for choice in group.list %}
+    <label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label>
+  {% endfor %}<br><br></div>
 {% endfor %}
 </td>
 
 <td width="33%">
-{% regroup form.TypeTasksID by data.group as feature_list %}
+{% regroup form.TypeTasks by data.group as feature_list %}
 {% for group in feature_list %}
-    <h5><button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
-        <script>var numchkbox=0;{% for choice in group.list %}{% if choice.data.selected == True %}numchkbox++;{% endif %}{% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}</script></button></h5>
-{% for choice in group.list %}
-    <div class="collapse" id="collapse{{ group.grouper.id }}"><label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label></div>
-  {% endfor %}
+    <button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
+        <script>var numchkbox=0;{% for choice in group.list %}{% if choice.data.selected == True %}numchkbox++;{% endif %}{% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}</script></button>
+<div class="collapse" id="collapse{{ group.grouper.id }}"><br>{% for choice in group.list %}
+   <label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label>
+  {% endfor %}<br><br></div>
 {% endfor %}
 </td>
 
 <td width="33%">
-{% regroup form.TypeMiscID by data.group as feature_list %}
+{% regroup form.TypeMisc by data.group as feature_list %}
 {% for group in feature_list %}
-    <h5><button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
-        <script>var numchkbox=0;{% for choice in group.list %}{% if choice.data.selected == True %}numchkbox++;{% endif %}{% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}</script></button></h5>
-{% for choice in group.list %}
-    <div class="collapse" id="collapse{{ group.grouper.id }}"><label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label></div>
-  {% endfor %}
+    <button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
+        <script>var numchkbox=0;{% for choice in group.list %}{% if choice.data.selected == True %}numchkbox++;{% endif %}{% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}</script></button>
+<div class="collapse" id="collapse{{ group.grouper.id }}"><br>{% for choice in group.list %}
+    <label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label>
+  {% endfor %}<br><br></div>
 {% endfor %}
 </tr>
 </td>
 </table>
 
-<table class="table table-sm form-control-sm">
-
-<td width="100%">
+<table>
+<td>
 <button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#dopmodpo">Подолнительные модули ПО
-    <script>var numchkbox=0;{% for checkbox in form.SetModulesID %}{% if checkbox.data.selected == True %}numchkbox++;{% endif %}
+    <script>var numchkbox=0;{% for checkbox in form.Modules %}{% if checkbox.data.selected == True %}numchkbox++;{% endif %}
     {% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}
     </script>
 </button><br><br>
-{% for checkbox in form.SetModulesID %}
-<div class="collapse" id="dopmodpo"><label class="btn btn-outline-secondary btn-sm">
+<div class="collapse" id="dopmodpo">{% for checkbox in form.Modules %}
+<label class="btn btn-outline-secondary btn-sm">
  {{ checkbox.tag }} {{ checkbox.choice_label }}
-</label></div>
-{% endfor %}
+</label><br>
+{% endfor %}</div>
 
 <button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#resys">Системы регистриции
-    <script>var numchkbox=0;{% for checkbox in form.RegSysDevicesID %}{% if checkbox.data.selected == True %}numchkbox++;{% endif %}
+    <script>var numchkbox=0;{% for checkbox in form.RegSysDevices %}{% if checkbox.data.selected == True %}numchkbox++;{% endif %}
     {% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}
     </script>
 </button><br><br>
-{% for checkbox in form.RegSysDevicesID %}
-<div class="collapse" id="resys"><label class="btn btn-outline-secondary btn-sm">
+<div class="collapse" id="resys">{% for checkbox in form.RegSysDevices %}
+<label class="btn btn-outline-secondary btn-sm">
     {{ checkbox.tag }} {{ checkbox.choice_label }}
-</label></div>
-{% endfor %}
+</label>
+{% endfor %}</div>
+
+<button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#dropdev">Устройства сброса
+    <script>var numchkbox=0;{% for checkbox in form.Devices %}{% if checkbox.data.selected == True %}numchkbox++;{% endif %}
+    {% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}
+    </script>
+</button><br><br>
+<div class="collapse" id="dropdev">{% for checkbox in form.Devices %}
+<label class="btn btn-outline-secondary btn-sm">
+    {{ checkbox.tag }} {{ checkbox.choice_label }}
+</label>
+{% endfor %}</div>
+
+<button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#driver">Драйверы устройств
+    <script>var numchkbox=0;{% for checkbox in form.Drivers %}{% if checkbox.data.selected == True %}numchkbox++;{% endif %}
+    {% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}
+    </script>
+</button><br><br>
+<div class="collapse" id="driver">{% for checkbox in form.Drivers %}
+<label class="btn btn-outline-secondary btn-sm">
+    {{ checkbox.tag }} {{ checkbox.choice_label }}
+</label>
+{% endfor %}</div>
 </td>
 
 

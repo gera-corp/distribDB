@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect
 from django.contrib import messages
 from django.db.models import Q
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
@@ -60,12 +60,13 @@ def drop_device_new_post(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
     template = 'tables/drop_device_new_post.html'
-    form = PostForm(request.POST or None)
+    form = PostDropDeviceForm(request.POST or None)
 
     try:
         if form.is_valid():
             form.save()
             messages.success(request, 'Запись нового устройства добавлена!')
+            form = PostDropDeviceForm()
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
@@ -82,7 +83,7 @@ def drop_device_edit_post(request, pk):
     post = get_object_or_404(drop_device, pk=pk)
 
     if request.method == 'POST':
-        form = PostForm(request.POST, instance=post)
+        form = PostDropDeviceForm(request.POST, instance=post)
 
         try:
             if form.is_valid():
@@ -92,7 +93,7 @@ def drop_device_edit_post(request, pk):
             messages.warning(request, 'Изменения не внесены! Шоибка: {}'.format(e))
 
     else:
-        form = PostForm(instance=post)
+        form = PostDropDeviceForm(instance=post)
 
     context = {
         'form': form,
@@ -146,6 +147,7 @@ def hasp_keys_new_post(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Запись нового ключа добавлена!')
+            form = PostHaspForm()
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
@@ -226,6 +228,7 @@ def hardlock_keys_new_post(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Запись нового ключа добавлена!')
+            form = PostHardlockForm()
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
@@ -307,6 +310,7 @@ def plane_types_new_post(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Запись нового типа добавлена!')
+            form = PostPlaneTypeForm()
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
@@ -388,6 +392,7 @@ def lang_types_new_post(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Запись нового языка добавлена!')
+            form = PostLangForm()
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
@@ -468,6 +473,7 @@ def os_types_new_post(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Запись новой OS добавлена!')
+            form = PostOsForm()
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
@@ -547,6 +553,7 @@ def executables_new_post(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Запись нового модуля добавлена!')
+            form = PostExecutablesForm
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
@@ -626,6 +633,7 @@ def fas_modules_new_post(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Запись нового номера FAS добавлена!')
+            form = PostFASModulesForm()
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
@@ -705,6 +713,7 @@ def executable_paths_new_post(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Запись нового пути InstallShield добавлена!')
+            form = PostExecutablePathsForm()
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
@@ -786,6 +795,7 @@ def regsystems_new_post(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Запись новой системы регистрации добавлена!')
+            form = PostRegSystemsForm()
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
@@ -869,6 +879,7 @@ def typeregsys_new_post(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Запись новой системы регистрации по типам ЛА добавлена!')
+            form = PostTypeRegsysForm()
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
@@ -949,6 +960,7 @@ def tasks_new_post(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Запись новой базы экспрессов добавлена!')
+            form = PostTasksForm()
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
@@ -1030,6 +1042,7 @@ def typetasks_new_post(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Запись новой базы экспресса для типа ЛА назначена!')
+            form = PostTypeTasksForm()
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
@@ -1112,6 +1125,7 @@ def misc_new_post(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Запись нового дополнительного элемента типа ЛА, добавлена!!')
+            form = PostMiscForm()
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
@@ -1193,6 +1207,7 @@ def typemisc_new_post(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Запись нового элемента типу ЛА добавлена!')
+            form = PostTypeMiscForm()
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
@@ -1274,6 +1289,7 @@ def organisations_new_post(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Запись новой организации-закачкика добавлена!')
+            form = PostOrganisationsForm()
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
@@ -1301,33 +1317,6 @@ def organisations_edit_post(request, pk):
 
     else:
         form = PostOrganisationsForm(instance=post)
-
-    context = {
-        'form': form,
-        'post': post,
-    }
-
-    return render(request, template, context)
-
-
-def typemisc_edit_post(request, pk):
-    if not request.user.is_authenticated:
-        return redirect('/accounts/login/')
-    template = 'tables/typemisc_new_post.html'
-    post = get_object_or_404(TypeMisc, pk=pk)
-
-    if request.method == 'POST':
-        form = PostTypeMiscForm(request.POST, instance=post)
-
-        try:
-            if form.is_valid():
-                form.save()
-                messages.success(request, 'Изменения внесены')
-        except Exception as e:
-            messages.warning(request, 'Изменения не внесены! Ошибка: {}'.format(e))
-
-    else:
-        form = PostTypeMiscForm(instance=post)
 
     context = {
         'form': form,
@@ -1382,6 +1371,7 @@ def regsysdevices_new_post(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Запись нового соответствия системы регистрации устройств сброса добавлена!')
+            form = PostRegSysDevicesForm()
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
@@ -1463,6 +1453,7 @@ def modules_new_post(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Запись нового дополнительного модуля входящий в состав ПО СКАТ, добавлена!')
+            form = PostModulesForm()
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
@@ -1544,6 +1535,7 @@ def drivers_new_post(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Запись нового списка драйверов плат сопряжения и прочих устройств, добавлена!')
+            form = PostDriversForm()
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
 
@@ -1611,7 +1603,7 @@ def edit_set_delete(request, pk):
     obj = get_object_or_404(Sets, pk=pk)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/tables/edit_set')
+        return redirect('/edit_set')
     return render(request, 'sets/edit_set.html', {'device': obj})
 
 
@@ -1624,6 +1616,7 @@ def edit_set_new_post(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Запись нового набора, добавлена!')
+            form = WidgetForm()
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
     context = {

@@ -4,19 +4,19 @@ from django.forms.models import ModelChoiceIterator, ModelMultipleChoiceField
 from itertools import groupby
 
 
-class PostForm(forms.ModelForm):
+class PostDropDeviceForm(forms.ModelForm):
     class Meta:
         model = drop_device
         fields = ['SysName', 'UserName', 'ISPath', 'Description']
         labels = {
-            'SysName': 'Пользовательское имя:',
-            'UserName': 'Системное имя:',
+            'SysName': 'Системное имя:',
+            'UserName': 'Пользовательское имя:',
             'ISPath': 'Путь InstallShield:',
             'Description': 'Описание'
         }
         widgets = {
-            'SysName': forms.TextInput(attrs={'class': 'form-control', 'placeholder': "Attrib"}),
-            'UserName': forms.TextInput(attrs={'class': 'form-control', 'placeholder': "имя каталога"}),
+            'SysName': forms.TextInput(attrs={'class': 'form-control'}),
+            'UserName': forms.TextInput(attrs={'class': 'form-control'}),
             'ISPath': forms.TextInput(attrs={'class': 'form-control'}),
             'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
         }
@@ -452,36 +452,40 @@ class GroupedCheckboxSelectMultiple(forms.CheckboxSelectMultiple):
 class WidgetForm(forms.ModelForm):
     class Meta:
         model = Sets
-        fields = ['Date', 'RegsysID', 'TypeTasksID', 'TypeMiscID', 'SetModulesID', 'RegSysDevicesID']
+        fields = ['Date', 'Regsys', 'TypeTasks', 'TypeMisc', 'Modules', 'RegSysDevices', 'Devices', 'Drivers']
         labels = {
-            'RegsysID': 'Первичные базы',
-            'TypeTasksID': 'Расчётные базы',
-            'TypeMiscID': 'Дополнительные элементы',
-            'SetModulesID': 'Дополнительные модули ПО',
-            'RegSysDevicesID': 'Системы решистрации'
+            'Regsys': 'Первичные базы',
+            'TypeTasks': 'Расчётные базы',
+            'TypeMisc': 'Дополнительные элементы',
+            'Modules': 'Дополнительные модули ПО',
+            'RegSysDevices': 'Системы решистрации',
+            'Devices': 'Устройства сброса',
+            'Drivers': 'Драйверы устройств'
         }
 
         widgets = {
             'Date': forms.DateInput(format="%d.%m.%Y", attrs={'class': 'form-control', 'placeholder': "дд-мм-гггг"}),
-            'SetModulesID': forms.CheckboxSelectMultiple(),
-            'RegSysDevicesID': forms.CheckboxSelectMultiple(),
+            'Modules': forms.CheckboxSelectMultiple(),
+            'RegSysDevices': forms.CheckboxSelectMultiple(),
+            'Devices': forms.CheckboxSelectMultiple(),
+            'Drivers': forms.CheckboxSelectMultiple()
         }
 
     def __init__(self, *args, **kwargs):
         super(WidgetForm, self).__init__(*args, **kwargs)
-        self.fields['RegsysID'] = GroupedModelMultipleChoiceField(group_by_field='TypeID',
+        self.fields['Regsys'] = GroupedModelMultipleChoiceField(group_by_field='TypeID',
                                                                   queryset=TypeRegsys.objects.all(),
                                                                   widget=GroupedCheckboxSelectMultiple(),
                                                                   required=False)
-        self.fields['TypeTasksID'] = GroupedModelMultipleChoiceField(group_by_field='TypeID',
+        self.fields['TypeTasks'] = GroupedModelMultipleChoiceField(group_by_field='TypeID',
                                                                      queryset=TypeTasks.objects.all(),
                                                                      widget=GroupedCheckboxSelectMultiple(),
                                                                      required=False)
-        self.fields['TypeMiscID'] = GroupedModelMultipleChoiceField(group_by_field='TypeID',
+        self.fields['TypeMisc'] = GroupedModelMultipleChoiceField(group_by_field='TypeID',
                                                                     queryset=TypeMisc.objects.all(),
                                                                     widget=GroupedCheckboxSelectMultiple(),
                                                                     required=False)
-        self.fields['RegSysDevicesID'] = GroupedModelMultipleChoiceField(group_by_field='SysName',
+        self.fields['RegSysDevices'] = GroupedModelMultipleChoiceField(group_by_field='SysName',
                                                                     queryset=RegSystems.objects.all(),
                                                                     widget=GroupedCheckboxSelectMultiple(),
                                                                     required=False)
