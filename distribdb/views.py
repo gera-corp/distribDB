@@ -26,7 +26,7 @@ def programms(request):
 def drop_device_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = drop_device.objects.all().order_by('-id')
+    obj_list = drop_device.objects.all()
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -105,7 +105,7 @@ def drop_device_edit_post(request, pk):
 def hasp_keys_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = hasp_keys.objects.all().order_by('-id')
+    obj_list = hasp_keys.objects.all()
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -185,7 +185,7 @@ def hasp_keys_edit_post(request, pk):
 def hardlock_keys_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = hardlock_keys.objects.all().order_by('-id')
+    obj_list = hardlock_keys.objects.all()
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -265,7 +265,7 @@ def hardlock_keys_edit_post(request, pk):
 def plane_types_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = Plane_types.objects.all().order_by('-id')
+    obj_list = Plane_types.objects.all()
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -346,7 +346,7 @@ def plane_types_edit_post(request, pk):
 def lang_types_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = Lang_types.objects.all().order_by('-id')
+    obj_list = Lang_types.objects.all()
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -427,7 +427,7 @@ def lang_types_edit_post(request, pk):
 def os_types_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = OS_type.objects.all().order_by('-id')
+    obj_list = OS_type.objects.all()
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -507,7 +507,7 @@ def os_types_edit_post(request, pk):
 def executables_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = executables.objects.all().order_by('-id')
+    obj_list = executables.objects.all()
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -586,7 +586,7 @@ def executables_edit_post(request, pk):
 def fas_modules_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = FASModules.objects.all().order_by('-id')
+    obj_list = FASModules.objects.all()
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -665,7 +665,7 @@ def fas_modules_edit_post(request, pk):
 def executable_paths_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = ExecutablePaths.objects.all().order_by('-id')
+    obj_list = ExecutablePaths.objects.all()
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -744,7 +744,7 @@ def executable_paths_edit_post(request, pk):
 def regsystems_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = RegSystems.objects.all().order_by('-id')
+    obj_list = RegSystems.objects.all().order_by('SysName')
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -825,7 +825,7 @@ def regsystems_edit_post(request, pk):
 def typeregsys_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = TypeRegsys.objects.all().order_by('TypeID')
+    obj_list = TypeRegsys.objects.all()
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -908,7 +908,7 @@ def typeregsys_edit_post(request, pk):
 def tasks_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = Tasks.objects.all().order_by('-id')
+    obj_list = Tasks.objects.all()
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -988,7 +988,7 @@ def tasks_edit_post(request, pk):
 def typetasks_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = TypeTasks.objects.all().order_by('-id')
+    obj_list = TypeTasks.objects.all()
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1069,7 +1069,7 @@ def typetasks_edit_post(request, pk):
 def misc_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = Misc.objects.all().order_by('-id')
+    obj_list = Misc.objects.all()
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1151,7 +1151,7 @@ def misc_edit_post(request, pk):
 def typemisc_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = TypeMisc.objects.all().order_by('-id')
+    obj_list = TypeMisc.objects.all()
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1232,7 +1232,7 @@ def typemisc_edit_post(request, pk):
 def organisations_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = Organisations.objects.all().order_by('-id')
+    obj_list = Organisations.objects.all()
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1340,7 +1340,7 @@ def typemisc_edit_post(request, pk):
 def regsysdevices_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = RegSysDevices.objects.all().order_by('-id')
+    obj_list = RegSysDevices.objects.all()
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1421,7 +1421,7 @@ def regsysdevices_edit_post(request, pk):
 def modules_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = Modules.objects.all().order_by('-id')
+    obj_list = Modules.objects.all()
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1502,7 +1502,7 @@ def modules_edit_post(request, pk):
 def drivers_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = Drivers.objects.all().order_by('-id')
+    obj_list = Drivers.objects.all()
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1583,7 +1583,7 @@ def drivers_edit_post(request, pk):
 def edit_set_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = Sets.objects.all().order_by('-pk')
+    obj_list = Sets.objects.all()
 
     query = request.GET.get('q')
     if query:

@@ -2,18 +2,23 @@ from django.db import models
 from datetime import datetime
 
 
-class drop_device(models.Model):
+class hardlock_keys(models.Model):
 
-    SysName                 = models.CharField(max_length=50, blank=False)
-    UserName                = models.CharField(max_length=50, blank=False)
-    ISPath                  = models.CharField(max_length=250, blank=False)
-    Description             = models.TextField(max_length=8000, blank=True)
+    port_name = (
+        ('USB', 'USB'),
+        ('LPT', 'LPT')
+    )
+
+    Mark                    = models.CharField(max_length=50, blank=True)
+    ChipNo                  = models.CharField(max_length=50, blank=False)
+    Subcode                 = models.IntegerField(blank=True)
+    ModAddr                 = models.IntegerField()
+    Port                    = models.CharField(max_length=50, blank=False, default=None, choices=port_name)
+    Free                    = models.BooleanField(default=False)
+    Notes                   = models.TextField(max_length=8000, blank=True)
 
     class Meta:
-        ordering = ('UserName',)
-
-    def __str__(self):
-        return self.UserName
+        ordering = ('ChipNo',)
 
 
 class hasp_keys(models.Model):
@@ -37,21 +42,23 @@ class hasp_keys(models.Model):
     Licenses                = models.CharField(max_length=255, blank=True)
     Notes                   = models.TextField(max_length=8000, blank=True)
 
+    class Meta:
+        ordering = ('ChipNo',)
 
-class hardlock_keys(models.Model):
 
-    port_name = (
-        ('USB', 'USB'),
-        ('LPT', 'LPT')
-    )
+class Plane_types(models.Model):
 
-    Mark                    = models.CharField(max_length=50, blank=True)
-    ChipNo                  = models.CharField(max_length=50, blank=False)
-    Subcode                 = models.IntegerField(blank=True)
-    ModAddr                 = models.IntegerField()
-    Port                    = models.CharField(max_length=50, blank=False, default=None, choices=port_name)
-    Free                    = models.BooleanField(default=False)
-    Notes                   = models.TextField(max_length=8000, blank=True)
+    SysName                 = models.CharField(max_length=50, blank=False)
+    UserName                = models.CharField(max_length=50, blank=False)
+    ISPath                  = models.CharField(max_length=250, blank=False)
+    Description             = models.TextField(max_length=8000, blank=True)
+
+    def __str__(self):
+        return self.UserName
+
+    class Meta:
+        ordering = ('UserName',)
+        verbose_name = 'Типы ЛА'
 
 
 class Lang_types(models.Model):
@@ -69,42 +76,68 @@ class OS_type(models.Model):
 
 class executables(models.Model):
 
-    FileName                = models.CharField(max_length=50, blank=False)
+    FileName                = models.CharField(max_length=50, blank=False, unique=True)
 
     def __str__(self):
         return self.FileName
 
     class Meta:
+        verbose_name = 'Исполняемый модуль'
         ordering = ('FileName',)
 
 
 class FASModules(models.Model):
 
     ExecutableID            = models.ForeignKey('executables', on_delete=models.CASCADE, blank=False, default=id(1))
-    FASNo                   = models.IntegerField(blank=False)
+    FASNo                   = models.IntegerField(blank=False, unique=True)
+
+    class Meta:
+        verbose_name = 'FAS модуль'
+        ordering = ('ExecutableID',)
 
 
 class ExecutablePaths(models.Model):
 
     ExecutableID            = models.ForeignKey('executables', on_delete=models.CASCADE, blank=False, default=id(1))
     ISPath                  = models.CharField(max_length=250, blank=False)
-    Source                  = models.CharField(max_length=800, blank=False)
-    Dest                    = models.CharField(max_length=800, blank=False)
+    Source                  = models.CharField(max_length=800, blank=True)
+    Dest                    = models.CharField(max_length=800, blank=True)
+
+    class Meta:
+        ordering = ('ExecutableID',)
 
 
 class RegSystems(models.Model):
 
-    SysName                 = models.CharField(max_length=50, blank=True)
+    SysName                 = models.CharField(max_length=50, blank=False)
     UserName                = models.CharField(max_length=50, blank=False)
-    ISPath                  = models.CharField(max_length=50, blank=True)
+    ISPath                  = models.CharField(max_length=50, blank=False)
     Hide                    = models.BooleanField(default=False)
     Description             = models.TextField(max_length=8000, blank=True)
+
+    class Meta:
+        ordering = ('UserName',)
 
     def __str__(self):
         return self.UserName
 
+
+class TypeRegsys(models.Model):
+
+    TypeID                  = models.ForeignKey('Plane_types', on_delete=models.CASCADE, blank=False, default=id(1), verbose_name='"Тип ЛА"')
+    RegsysID                = models.ForeignKey('RegSystems', on_delete=models.CASCADE, blank=False, default=id(1), verbose_name='"Система регистрации"')
+    ISPath                  = models.CharField(max_length=255, blank=False)
+    UserNameRegsys          = models.CharField(max_length=36, blank=False)
+    SysNameRegsys           = models.CharField(max_length=16, blank=False)
+    Description             = models.TextField(max_length=8000, blank=True)
+
+    def __str__(self):
+        return self.RegsysID.UserName
+
     class Meta:
-        ordering = ('UserName',)
+        ordering = ('TypeID',)
+        unique_together = ('TypeID', 'RegsysID')
+        verbose_name = '"Система регистрации по типам ЛА"'
 
 
 class Tasks(models.Model):
@@ -136,7 +169,7 @@ class TypeTasks(models.Model):
 
 class Misc(models.Model):
 
-    Name                    = models.CharField(max_length=255, blank=False)
+    Name                    = models.CharField(max_length=255, blank=False, unique=True)
     SysName                 = models.CharField(max_length=50, blank=True)
     UserName                = models.CharField(max_length=50, blank=True)
     Description             = models.TextField(max_length=8000, blank=True)
@@ -158,10 +191,14 @@ class TypeMisc(models.Model):
     def __str__(self):
         return self.MiscID.Name
 
+    class Meta:
+        unique_together = ('TypeID', 'MiscID')
+        ordering = ('TypeID',)
+
 
 class Organisations(models.Model):
 
-    Name                    = models.CharField(max_length=50, blank=True)
+    Name                    = models.CharField(max_length=50, blank=False, unique=True)
     City                    = models.CharField(max_length=50, blank=True)
     Notes                   = models.CharField(max_length=255, blank=True)
 
@@ -172,6 +209,20 @@ class Organisations(models.Model):
         ordering = ('Name',)
 
 
+class drop_device(models.Model):
+
+    SysName                 = models.CharField(max_length=50, blank=False)
+    UserName                = models.CharField(max_length=50, blank=False, unique=True)
+    ISPath                  = models.CharField(max_length=250, blank=False)
+    Description             = models.TextField(max_length=8000, blank=True)
+
+    class Meta:
+        ordering = ('SysName',)
+
+    def __str__(self):
+        return self.UserName
+
+
 class RegSysDevices(models.Model):
 
     RegsysID                = models.ForeignKey('RegSystems', on_delete=models.CASCADE, blank=False, default=id(1))
@@ -180,12 +231,15 @@ class RegSysDevices(models.Model):
     def __str__(self):
         return '%s %s' % (self.RegsysID.UserName, self.DeviceID.UserName)
 
+    class Meta:
+        ordering = ('RegsysID',)
+
 
 class Modules(models.Model):
 
-    Name                    = models.CharField(max_length=255, blank=False)
-    Description             = models.TextField(max_length=8000, blank=True)
+    Name                    = models.CharField(max_length=255, blank=False, unique=True)
     ISPath                  = models.CharField(max_length=255, blank=False)
+    Description             = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
         return self.Name
@@ -196,43 +250,16 @@ class Modules(models.Model):
 
 class Drivers(models.Model):
 
-    Name                    = models.CharField(max_length=50, blank=False)
+    Name                    = models.CharField(max_length=50, blank=False, unique=True)
     Xno                     = models.IntegerField(blank=False)
     ISPath                  = models.CharField(max_length=255, blank=False)
     Description             = models.TextField(max_length=8000, blank=True)
 
-
-class Plane_types(models.Model):
-
-    SysName                 = models.CharField(max_length=50, blank=False)
-    UserName                = models.CharField(max_length=50, blank=False)
-    ISPath                  = models.CharField(max_length=250, blank=False)
-    Description             = models.TextField(max_length=8000, blank=True)
-
     def __str__(self):
-        return self.UserName
+        return self.Name
 
     class Meta:
-        ordering = ('UserName',)
-        verbose_name = 'Типы ЛА'
-
-
-class TypeRegsys(models.Model):
-
-    TypeID                  = models.ForeignKey('Plane_types', on_delete=models.CASCADE, blank=False, default=id(1), verbose_name='"Тип ЛА"')
-    RegsysID                = models.ForeignKey('RegSystems', on_delete=models.CASCADE, blank=False, default=id(1), verbose_name='"Система регистрации"')
-    ISPath                  = models.CharField(max_length=255, blank=False)
-    UserNameRegsys          = models.CharField(max_length=36, blank=False)
-    SysNameRegsys           = models.CharField(max_length=16, blank=False)
-    Description             = models.TextField(max_length=8000, blank=True)
-
-    def __str__(self):
-        return self.RegsysID.UserName
-
-    class Meta:
-        ordering = ('TypeID',)
-        unique_together = ('TypeID', 'RegsysID')
-        verbose_name = '"Система регистрации по типам ЛА"'
+        ordering = ('Name',)
 
 
 class Sets(models.Model):
@@ -247,3 +274,6 @@ class Sets(models.Model):
 
     def __str__(self):
         return '%s %s' % (self.RegsysID, self.TypeTasksID)
+
+    class Meta:
+        ordering = ('-UserFriendlyID',)

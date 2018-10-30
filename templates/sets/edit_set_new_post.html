@@ -14,7 +14,7 @@
         Данная страница позволяет добавить набор в базу данных. В дальнейшем этот набор может быть использован для создания одного или нескольких новых дистрибутивов.
 <form method="post">
     {% csrf_token %}
-    <div class="form-group">
+
         <h5><span class="badge badge-info">ID: {{ post.UserFriendlyID }}</span></h5>
         Дата набора:
         {{ form.Date }}
@@ -59,7 +59,7 @@
 </td>
 </table>
 
-<table class="table table-sm table-borderless form-control-sm">
+<table class="table table-sm form-control-sm">
 
 <td width="100%">
 <button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#dopmodpo">Подолнительные модули ПО
@@ -80,14 +80,14 @@
 </button><br><br>
 {% for checkbox in form.RegSysDevicesID %}
 <div class="collapse" id="resys"><label class="btn btn-outline-secondary btn-sm">
- {{ checkbox.tag }} {{ checkbox.choice_label }}
+    {{ checkbox.tag }} {{ checkbox.choice_label }}
 </label></div>
 {% endfor %}
 </td>
 
 
 </table>
-</div>
+
     <br><br><button type="submit" class="btn btn-secondary btn-sm">Сохранить</button>
     <a class="btn btn-secondary btn-sm" href="/edit_set" role="button">Отмена</a>
 </form>
