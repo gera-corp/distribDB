@@ -61,38 +61,89 @@
 
 <table>
 <td>
-<button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#dopmodpo">Подолнительные модули ПО
+<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#dopmodpo">Подолнительные модули ПО
     <script>var numchkbox=0;{% for checkbox in form.Modules %}{% if checkbox.data.selected == True %}numchkbox++;{% endif %}
     {% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}
     </script>
 </button><br><br>
-<div class="collapse" id="dopmodpo">{% for checkbox in form.Modules %}
+<div class="modal fade" id="dopmodpo" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLongTitle">Подолнительные модули ПО</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+    {% for checkbox in form.Modules %}
 <label class="btn btn-outline-secondary btn-sm">
  {{ checkbox.tag }} {{ checkbox.choice_label }}
 </label><br>
-{% endfor %}</div>
+{% endfor %}      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
+        <button type="submit" class="btn btn-danger btn-sm">Сохранить</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-<button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#resys">Системы регистриции
+<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#resys">Системы регистриции
     <script>var numchkbox=0;{% for checkbox in form.RegSysDevices %}{% if checkbox.data.selected == True %}numchkbox++;{% endif %}
     {% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}
     </script>
 </button><br><br>
-<div class="collapse" id="resys">{% for checkbox in form.RegSysDevices %}
+<div class="modal" id="resys" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLongTitle">Системы регистриции</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+    {% for checkbox in form.RegSysDevices %}
 <label class="btn btn-outline-secondary btn-sm">
     {{ checkbox.tag }} {{ checkbox.choice_label }}
-</label>
+</label><br>
 {% endfor %}</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
+        <button type="submit" class="btn btn-danger btn-sm">Сохранить</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-<button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#dropdev">Устройства сброса
+<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#dropdev">Устройства сброса
     <script>var numchkbox=0;{% for checkbox in form.Devices %}{% if checkbox.data.selected == True %}numchkbox++;{% endif %}
     {% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}
     </script>
 </button><br><br>
-<div class="collapse" id="dropdev">{% for checkbox in form.Devices %}
+<div class="modal" id="dropdev" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLongTitle">Устройства сброса</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+    {% for checkbox in form.Devices %}
 <label class="btn btn-outline-secondary btn-sm">
     {{ checkbox.tag }} {{ checkbox.choice_label }}
-</label>
+</label><br>
 {% endfor %}</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
+        <button type="submit" class="btn btn-danger btn-sm">Сохранить</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#driver">Драйверы устройств
     <script>var numchkbox=0;{% for checkbox in form.Drivers %}{% if checkbox.data.selected == True %}numchkbox++;{% endif %}
@@ -109,8 +160,8 @@
 
 </table>
 
-    <br><br><button type="submit" class="btn btn-secondary btn-sm">Сохранить</button>
-    <a class="btn btn-secondary btn-sm" href="/edit_set" role="button">Отмена</a>
+    <br><br><button type="submit" class="btn btn-danger btn-sm">Сохранить</button>
+    <a class="btn btn-dark btn-sm" href="/edit_set" role="button">Отмена</a>
 </form>
 
 </div>
