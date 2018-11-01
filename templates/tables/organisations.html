@@ -15,9 +15,9 @@
         </thead>
         {% for item in object_list %}
             <tr align="center"><ul class="list-group">
-                <td><li class="list-group-item list-group-item-action">{{ item.Name }}</li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.City }}</li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.Notes }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.name }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.city }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.notes }}</li></td>
                 <td>
                     <a href="{% url 'organisations_edit_post' pk=item.pk %}"><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-31-pencil.png"></button></a>
                 </td>

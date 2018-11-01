@@ -17,11 +17,11 @@
         </thead>
         {% for item in object_list %}
             <tr align="center"><ul class="list-group">
-                <td><li class="list-group-item list-group-item-action">{{ item.SysName }}</li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.UserName }}</li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.ISPath }}</li></td>
-                <td align="center"><li class="list-group-item list-group-item-action"><input disabled type="checkbox"{% if item.Hide == True %}checked="checked"{% endif %}></li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.Description }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.sysname }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.username }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.ispath }}</li></td>
+                <td align="center"><li class="list-group-item list-group-item-action"><input disabled type="checkbox"{% if item.hide == True %}checked="checked"{% endif %}></li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.description }}</li></td>
                 <td>
                     <a href="{% url 'regsystems_edit_post' pk=item.pk %}"><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-31-pencil.png"></button></a>
                 </td>

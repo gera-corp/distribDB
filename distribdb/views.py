@@ -30,7 +30,7 @@ def drop_device_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(SysName__icontains=query)
+            Q(sysname__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -90,7 +90,7 @@ def drop_device_edit_post(request, pk):
                 form.save()
                 messages.success(request, 'Изменения внесены')
         except Exception as e:
-            messages.warning(request, 'Изменения не внесены! Шоибка: {}'.format(e))
+            messages.warning(request, 'Изменения не внесены! Ошибка: {}'.format(e))
 
     else:
         form = PostDropDeviceForm(instance=post)
@@ -272,9 +272,9 @@ def plane_types_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(SysName__icontains=query) |
-            Q(UserName__icontains=query) |
-            Q(Description__icontains=query)
+            Q(sysname__icontains=query) |
+            Q(username__icontains=query) |
+            Q(description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -354,9 +354,9 @@ def lang_types_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(Lang__icontains=query) |
-            Q(Lcode__icontains=query) |
-            Q(ISDefine__icontains=query)
+            Q(lang__icontains=query) |
+            Q(lcode__icontains=query) |
+            Q(isdefine__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -436,8 +436,8 @@ def os_types_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(OS__icontains=query) |
-            Q(OSCode__icontains=query)
+            Q(os__icontains=query) |
+            Q(oscode__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -517,7 +517,7 @@ def executables_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(FileName__icontains=query)
+            Q(filename__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -597,7 +597,7 @@ def fas_modules_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(ExecutableID__icontains=query)
+            Q(executableid__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -753,13 +753,13 @@ def executable_paths_edit_post(request, pk):
 def regsystems_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = RegSystems.objects.all().order_by('SysName')
+    obj_list = RegSystems.objects.all().order_by('sysname')
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(SysName__icontains=query) |
-            Q(UserName__icontains=query) |
-            Q(ISPath__icontains=query)
+            Q(sysname__icontains=query) |
+            Q(username__icontains=query) |
+            Q(ispath__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -839,12 +839,12 @@ def typeregsys_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(TypeID__icontains=query) |
-            Q(RegsysID__icontains=query) |
-            Q(UserNameRegsys__icontains=query) |
-            Q(SysNameRegsys__icontains=query) |
-            Q(Description__icontains=query) |
-            Q(ISPath__icontains=query)
+            Q(typeid__icontains=query) |
+            Q(regsysid__icontains=query) |
+            Q(usernameregsys__icontains=query) |
+            Q(sysnameregsys__icontains=query) |
+            Q(description__icontains=query) |
+            Q(ispath__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -923,8 +923,8 @@ def tasks_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(UserName__icontains=query) |
-            Q(SysName__icontains=query)
+            Q(username__icontains=query) |
+            Q(sysname__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -1004,9 +1004,9 @@ def typetasks_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(TypeID__icontains=query) |
-            Q(TaskID__icontains=query) |
-            Q(Description__icontains=query)
+            Q(typeid__icontains=query) |
+            Q(taskid__icontains=query) |
+            Q(description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -1086,10 +1086,10 @@ def misc_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(Name__icontains=query) |
-            Q(SysName__icontains=query) |
-            Q(UserName__icontains=query) |
-            Q(Description__icontains=query)
+            Q(name__icontains=query) |
+            Q(sysname__icontains=query) |
+            Q(username__icontains=query) |
+            Q(description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -1169,9 +1169,9 @@ def typemisc_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(TypeID__icontains=query) |
-            Q(MiscID__icontains=query) |
-            Q(Description__icontains=query)
+            Q(typeid__icontains=query) |
+            Q(miscid__icontains=query) |
+            Q(description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -1251,9 +1251,9 @@ def organisations_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(Name__icontains=query) |
-            Q(City__icontains=query) |
-            Q(Notes__icontains=query)
+            Q(name__icontains=query) |
+            Q(city__icontains=query) |
+            Q(notes__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -1333,9 +1333,8 @@ def regsysdevices_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(Name__icontains=query) |
-            Q(City__icontains=query) |
-            Q(Notes__icontains=query)
+            Q(regsysid__icontains=query) |
+            Q(deviceid__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -1415,9 +1414,9 @@ def modules_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(Name__icontains=query) |
-            Q(Description__icontains=query) |
-            Q(ISPath__icontains=query)
+            Q(name__icontains=query) |
+            Q(description__icontains=query) |
+            Q(ispath__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -1497,9 +1496,9 @@ def drivers_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(Name__icontains=query) |
-            Q(ISPath__icontains=query) |
-            Q(Description__icontains=query)
+            Q(name__icontains=query) |
+            Q(ispath__icontains=query) |
+            Q(description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -1580,7 +1579,7 @@ def edit_set_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(Date__icontains=query)
+            Q(date__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся

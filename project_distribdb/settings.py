@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'project_distribdb.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django_db',
+        'NAME': 'distribDB',
         'USER': 'user_django',
         'PASSWORD': 'anigil',
         'HOST': '127.0.0.1',

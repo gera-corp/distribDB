@@ -19,13 +19,13 @@
         </thead>
         {% for item in object_list %}
             <tr align="center"><ul class="list-group">
-                <td><li class="list-group-item list-group-item-action">{{ item.Mark }}</li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.ChipNo }}<br></li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.Subcode }}<br></li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.ModAddr }}<br></li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.Port }}<br></li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.mark }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.chipno }}<br></li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.subcode }}<br></li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.modaddr }}<br></li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.port }}<br></li></td>
                 <td align="center"><li class="list-group-item list-group-item-action"><input disabled type="checkbox"{% if item.Free == True %}checked="checked"{% endif %}></li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.Notes }}<br></li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.notes }}<br></li></td>
                 <td>
                     <a href="{% url 'hardlock_keys_edit_post' pk=item.pk %}"><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-31-pencil.png"></button></a>
                 </td>

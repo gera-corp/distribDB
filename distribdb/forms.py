@@ -7,337 +7,337 @@ from itertools import groupby
 class PostDropDeviceForm(forms.ModelForm):
     class Meta:
         model = drop_device
-        fields = ['SysName', 'UserName', 'ISPath', 'Description']
+        fields = ['sysname', 'username', 'ispath', 'description']
         labels = {
-            'SysName': 'Системное имя:',
-            'UserName': 'Пользовательское имя:',
-            'ISPath': 'Путь InstallShield:',
-            'Description': 'Описание'
+            'sysname': 'Системное имя:',
+            'username': 'Пользовательское имя:',
+            'ispath': 'Путь InstallShield:',
+            'description': 'Описание'
         }
         widgets = {
-            'SysName': forms.TextInput(attrs={'class': 'form-control'}),
-            'UserName': forms.TextInput(attrs={'class': 'form-control'}),
-            'ISPath': forms.TextInput(attrs={'class': 'form-control'}),
-            'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
+            'sysname': forms.TextInput(attrs={'class': 'form-control'}),
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'ispath': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
         }
 
 
 class PostHaspForm(forms.ModelForm):
     class Meta:
         model = hasp_keys
-        fields = ['ChipNo', 'Free', 'Port', 'Type', 'TimeLimit', 'Licenses', 'Notes']
+        fields = ['chipno', 'free', 'port', 'type', 'timelimit', 'licenses', 'notes']
         labels = {
-            'ChipNo': 'Номер чипа:',
-            'Free': 'Свободен:',
-            'Port': 'Порт:',
-            'Type': 'Тип:',
-            'TimeLimit': 'Ограничение по времени:',
+            'chipno': 'Номер чипа:',
+            'free': 'Свободен:',
+            'port': 'Порт:',
+            'type': 'Тип:',
+            'timelimit': 'Ограничение по времени:',
             'Licenses': 'Количество лицензий:',
             'Notes': 'Примечания:'
         }
         widgets = {
-            'ChipNo': forms.TextInput(attrs={'class': 'form-control'}),
-            'Free': forms.CheckboxInput(),
-            'Port': forms.Select(attrs={'class': 'form-control'}),
-            'Type': forms.Select(attrs={'class': 'form-control'}),
-            'TimeLimit': forms.DateInput(format="%d.%m.%Y",
+            'chipno': forms.TextInput(attrs={'class': 'form-control'}),
+            'free': forms.CheckboxInput(),
+            'port': forms.Select(attrs={'class': 'form-control'}),
+            'type': forms.Select(attrs={'class': 'form-control'}),
+            'timelimit': forms.DateInput(format="%d.%m.%Y",
                                          attrs={'class': 'form-control', 'placeholder': "дд-мм-гггг"}),
-            'Licenses': forms.TextInput(attrs={'class': 'form-control'}),
-            'Notes': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
+            'licenses': forms.TextInput(attrs={'class': 'form-control'}),
+            'notes': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
         }
 
 
 class PostHardlockForm(forms.ModelForm):
     class Meta:
         model = hardlock_keys
-        fields = ['Mark', 'ChipNo', 'Subcode', 'ModAddr', 'Port', 'Free', 'Notes']
+        fields = ['mark', 'chipno', 'subcode', 'modaddr', 'port', 'free', 'notes']
         labels = {
-            'Mark': 'Маркировка:',
-            'ChipNo': 'Номер чипа',
-            'Subcode': 'Субкод:',
-            'ModAddr': 'Адрес модуля:',
+            'mark': 'Маркировка:',
+            'chipno': 'Номер чипа',
+            'subcode': 'Субкод:',
+            'modaddr': 'Адрес модуля:',
             'Port': 'Порт:',
             'Free': 'Свободен:',
             'Notes': 'Примечания:'
         }
         widgets = {
-            'Mark': forms.TextInput(attrs={'class': 'form-control'}),
-            'ChipNo': forms.TextInput(attrs={'class': 'form-control'}),
-            'Subcode': forms.NumberInput(attrs={'class': 'form-control', 'required': True, 'type': 'number'}),
-            'ModAddr': forms.NumberInput(attrs={'class': 'form-control', 'required': True, 'type': 'number'}),
-            'Port': forms.Select(attrs={'class': 'form-control'}),
-            'Free': forms.CheckboxInput(),
-            'Notes': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
+            'mark': forms.TextInput(attrs={'class': 'form-control'}),
+            'chipno': forms.TextInput(attrs={'class': 'form-control'}),
+            'subcode': forms.NumberInput(attrs={'class': 'form-control', 'required': True, 'type': 'number'}),
+            'modaddr': forms.NumberInput(attrs={'class': 'form-control', 'required': True, 'type': 'number'}),
+            'port': forms.Select(attrs={'class': 'form-control'}),
+            'free': forms.CheckboxInput(),
+            'notes': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
         }
 
 
 class PostPlaneTypeForm(forms.ModelForm):
     class Meta:
         model = Plane_types
-        fields = ['SysName', 'UserName', 'ISPath', 'Description']
+        fields = ['sysname', 'username', 'ispath', 'description']
         labels = {
-            'SysName': 'Системное имя:',
-            'UserName': 'Пользовательское имя:',
-            'ISPath': 'Путь InstallShield:',
-            'Description': 'Описание'
+            'sysname': 'Системное имя:',
+            'username': 'Пользовательское имя:',
+            'ispath': 'Путь InstallShield:',
+            'description': 'Описание'
         }
         widgets = {
-            'SysName': forms.TextInput(attrs={'class': 'form-control'}),
-            'UserName': forms.TextInput(attrs={'class': 'form-control'}),
-            'ISPath': forms.TextInput(attrs={'class': 'form-control'}),
-            'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
+            'sysname': forms.TextInput(attrs={'class': 'form-control'}),
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'ispath': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
         }
 
 
 class PostLangForm(forms.ModelForm):
     class Meta:
         model = Lang_types
-        fields = ['Lang', 'LCode', 'ISDefine']
+        fields = ['lang', 'lcode', 'isdefine']
         labels = {
-            'Lang': 'Язык',
-            'LCode': 'Код',
-            'ISDefine': 'Языковая константа'
+            'lang': 'Язык',
+            'lcode': 'Код',
+            'isdefine': 'Языковая константа'
         }
         widgets = {
-            'Lang': forms.TextInput(attrs={'class': 'form-control'}),
-            'LCode': forms.NumberInput(attrs={'class': 'form-control', 'required': True, 'type': 'number'}),
-            'ISDefine': forms.TextInput(attrs={'class': 'form-control'})
+            'lang': forms.TextInput(attrs={'class': 'form-control'}),
+            'lcode': forms.NumberInput(attrs={'class': 'form-control', 'required': True, 'type': 'number'}),
+            'isdefine': forms.TextInput(attrs={'class': 'form-control'})
         }
 
 
 class PostOsForm(forms.ModelForm):
     class Meta:
         model = OS_type
-        fields = ['OS', 'OSCode']
+        fields = ['os', 'oscode']
         labels = {
-            'OS': 'Операционная система',
-            'OSCode': 'Код'
+            'os': 'Операционная система',
+            'oscode': 'Код'
         }
         widgets = {
-            'OS': forms.TextInput(attrs={'class': 'form-control'}),
-            'OSCode': forms.NumberInput(attrs={'class': 'form-control', 'required': True, 'type': 'number'})
+            'os': forms.TextInput(attrs={'class': 'form-control'}),
+            'oscode': forms.NumberInput(attrs={'class': 'form-control', 'required': True, 'type': 'number'})
         }
 
 
 class PostExecutablesForm(forms.ModelForm):
     class Meta:
         model = executables
-        fields = ['FileName']
+        fields = ['filename']
         labels = {
-            'FileName': 'Имя файла'
+            'filename': 'Имя файла'
         }
         widgets = {
-            'FileName': forms.TextInput(attrs={'class': 'form-control'})
+            'filename': forms.TextInput(attrs={'class': 'form-control'})
         }
 
 
 class PostFASModulesForm(forms.ModelForm):
     class Meta:
         model = FASModules
-        fields = ['ExecutableID', 'FASNo']
+        fields = ['executableid', 'fasno']
         labels = {
-            'ExecutableID': 'Имя файла',
-            'FASNo': 'FAS-номер'
+            'executableid': 'Имя файла',
+            'fasno': 'FAS-номер'
         }
         widgets = {
-            'ExecutableID': forms.Select(attrs={'class': 'form-control'}),
-            'FASNo': forms.NumberInput(attrs={'class': 'form-control', 'required': True, 'type': 'number'})
+            'executableid': forms.Select(attrs={'class': 'form-control'}),
+            'fasno': forms.NumberInput(attrs={'class': 'form-control', 'required': True, 'type': 'number'})
         }
 
 
 class PostExecutablePathsForm(forms.ModelForm):
     class Meta:
         model = ExecutablePaths
-        fields = ['ExecutableID', 'ISPath', 'Source', 'Dest']
+        fields = ['executableid', 'ispath', 'source', 'dest']
         labels = {
-            'ExecutableID': 'Имя файла',
-            'ISPath': 'Путь InstallShield',
-            'Source': 'Источник файлов для шифрования',
-            'Dest': 'Путь для шифрования файлов'
+            'executableid': 'Имя файла',
+            'ispath': 'Путь InstallShield',
+            'source': 'Источник файлов для шифрования',
+            'dest': 'Путь для шифрования файлов'
 
         }
         widgets = {
-            'ExecutableID': forms.Select(attrs={'class': 'form-control'}),
-            'ISPath': forms.TextInput(attrs={'class': 'form-control'}),
-            'Source': forms.TextInput(attrs={'class': 'form-control'}),
-            'Dest': forms.TextInput(attrs={'class': 'form-control'})
+            'executableid': forms.Select(attrs={'class': 'form-control'}),
+            'ispath': forms.TextInput(attrs={'class': 'form-control'}),
+            'source': forms.TextInput(attrs={'class': 'form-control'}),
+            'dest': forms.TextInput(attrs={'class': 'form-control'})
         }
 
 
 class PostRegSystemsForm(forms.ModelForm):
     class Meta:
         model = RegSystems
-        fields = ['SysName', 'UserName', 'ISPath', 'Hide', 'Description']
+        fields = ['sysname', 'username', 'ispath', 'hide', 'description']
         labels = {
-            'SysName': 'Системное имя',
-            'UserName': 'Пользовательское имя',
-            'ISPath': 'Путь InstallShield',
-            'Hide': 'Спрятать',
-            'Description': 'Описание'
+            'sysname': 'Системное имя',
+            'username': 'Пользовательское имя',
+            'ispath': 'Путь InstallShield',
+            'hide': 'Спрятать',
+            'description': 'Описание'
 
         }
         widgets = {
-            'SysName': forms.TextInput(attrs={'class': 'form-control'}),
-            'UserName': forms.TextInput(attrs={'class': 'form-control'}),
-            'ISPath': forms.TextInput(attrs={'class': 'form-control'}),
-            'Hide': forms.CheckboxInput(),
-            'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
+            'sysname': forms.TextInput(attrs={'class': 'form-control'}),
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'ispath': forms.TextInput(attrs={'class': 'form-control'}),
+            'hide': forms.CheckboxInput(),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
         }
 
 
 class PostTypeRegsysForm(forms.ModelForm):
     class Meta:
         model = TypeRegsys
-        fields = ['TypeID', 'RegsysID', 'ISPath', 'UserNameRegsys', 'SysNameRegsys', 'Description']
+        fields = ['typeid', 'regsysid', 'ispath', 'usernameregsys', 'sysnameregsys', 'description']
         labels = {
-            'TypeID': 'Тип ЛА',
-            'RegsysID': 'Система регистрации',
-            'ISPath': 'Путь InstallShield',
-            'UserNameRegsys': 'Пользовательское имя ПБ',
-            'SysNameRegsys': 'Системное имя ПБ',
-            'Description': 'Описание'
+            'typeid': 'Тип ЛА',
+            'regsysid': 'Система регистрации',
+            'ispath': 'Путь InstallShield',
+            'usernameregsys': 'Пользовательское имя ПБ',
+            'sysnameregsys': 'Системное имя ПБ',
+            'description': 'Описание'
 
         }
         widgets = {
-            'TypeID': forms.Select(attrs={'class': 'form-control'}),
-            'RegsysID': forms.Select(attrs={'class': 'form-control'}),
-            'ISPath': forms.TextInput(attrs={'class': 'form-control'}),
-            'UserNameRegsys': forms.TextInput(attrs={'class': 'form-control'}),
-            'SysNameRegsys': forms.TextInput(attrs={'class': 'form-control'}),
-            'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
+            'typeid': forms.Select(attrs={'class': 'form-control'}),
+            'regsysid': forms.Select(attrs={'class': 'form-control'}),
+            'ispath': forms.TextInput(attrs={'class': 'form-control'}),
+            'usernameregsys': forms.TextInput(attrs={'class': 'form-control'}),
+            'sysnameregsys': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
         }
 
 
 class PostTasksForm(forms.ModelForm):
     class Meta:
         model = Tasks
-        fields = ['SysName', 'UserName']
+        fields = ['sysname', 'username']
         labels = {
-            'SysName': 'Системное имя',
-            'UserName': 'Пользовательское имя'
+            'sysname': 'Системное имя',
+            'username': 'Пользовательское имя'
         }
         widgets = {
-            'SysName': forms.TextInput(attrs={'class': 'form-control'}),
-            'UserName': forms.TextInput(attrs={'class': 'form-control'})
+            'sysname': forms.TextInput(attrs={'class': 'form-control'}),
+            'username': forms.TextInput(attrs={'class': 'form-control'})
         }
 
 
 class PostTypeTasksForm(forms.ModelForm):
     class Meta:
         model = TypeTasks
-        fields = ['TypeID', 'TaskID', 'ISPath', 'Description']
+        fields = ['typeid', 'taskid', 'ispath', 'description']
         labels = {
-            'TypeID': 'Тип ЛА',
-            'TaskID': 'База экспресса',
-            'ISPath': 'Путь InstallShield',
+            'typeid': 'Тип ЛА',
+            'taskid': 'База экспресса',
+            'ispath': 'Путь InstallShield',
             'Description': 'Описание'
         }
         widgets = {
-            'TypeID': forms.Select(attrs={'class': 'form-control'}),
-            'TaskID': forms.Select(attrs={'class': 'form-control'}),
-            'ISPath': forms.TextInput(attrs={'class': 'form-control'}),
-            'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
+            'typeid': forms.Select(attrs={'class': 'form-control'}),
+            'taskid': forms.Select(attrs={'class': 'form-control'}),
+            'ispath': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
         }
 
 
 class PostMiscForm(forms.ModelForm):
     class Meta:
         model = Misc
-        fields = ['Name', 'SysName', 'UserName', 'Description']
+        fields = ['name', 'sysname', 'username', 'description']
         labels = {
-            'Name': 'Название',
-            'SysName': 'Системное имя',
-            'UserName': 'Пользовательское имя',
-            'Description': 'Описание'
+            'name': 'Название',
+            'sysname': 'Системное имя',
+            'username': 'Пользовательское имя',
+            'description': 'Описание'
         }
         widgets = {
-            'Name': forms.TextInput(attrs={'class': 'form-control'}),
-            'SysName': forms.TextInput(attrs={'class': 'form-control'}),
-            'UserName': forms.TextInput(attrs={'class': 'form-control'}),
-            'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'sysname': forms.TextInput(attrs={'class': 'form-control'}),
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
         }
 
 
 class PostTypeMiscForm(forms.ModelForm):
     class Meta:
         model = TypeMisc
-        fields = ['TypeID', 'MiscID', 'ISPath', 'Description']
+        fields = ['typeid', 'miscid', 'ispath', 'description']
         labels = {
-            'TypeID': 'Тип ЛА',
-            'MiscID': 'Элемент',
-            'ISPath': 'Путь InstallShield',
-            'Description': 'Описание'
+            'typeid': 'Тип ЛА',
+            'miscid': 'Элемент',
+            'ispath': 'Путь InstallShield',
+            'description': 'Описание'
         }
         widgets = {
-            'TypeID': forms.Select(attrs={'class': 'form-control'}),
-            'MiscID': forms.Select(attrs={'class': 'form-control'}),
-            'ISPath': forms.TextInput(attrs={'class': 'form-control'}),
-            'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
+            'typeid': forms.Select(attrs={'class': 'form-control'}),
+            'miscid': forms.Select(attrs={'class': 'form-control'}),
+            'ispath': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
         }
 
 
 class PostOrganisationsForm(forms.ModelForm):
     class Meta:
         model = Organisations
-        fields = ['Name', 'City', 'Notes']
+        fields = ['name', 'city', 'notes']
         labels = {
-            'Name': 'Название',
-            'City': 'Город',
-            'Notes': 'Примечания'
+            'name': 'Название',
+            'city': 'Город',
+            'notes': 'Примечания'
         }
         widgets = {
-            'Name': forms.TextInput(attrs={'class': 'form-control'}),
-            'City': forms.TextInput(attrs={'class': 'form-control'}),
-            'Notes': forms.TextInput(attrs={'class': 'form-control'})
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'city': forms.TextInput(attrs={'class': 'form-control'}),
+            'notes': forms.TextInput(attrs={'class': 'form-control'})
         }
 
 
 class PostRegSysDevicesForm(forms.ModelForm):
     class Meta:
         model = RegSysDevices
-        fields = ['RegsysID', 'DeviceID']
+        fields = ['regsysid', 'deviceid']
         labels = {
-            'RegsysID': 'Система регистрации',
-            'DeviceID': 'Устройство сброса'
+            'regsysid': 'Система регистрации',
+            'deviceid': 'Устройство сброса'
         }
         widgets = {
-            'RegsysID': forms.Select(attrs={'class': 'form-control'}),
-            'DeviceID': forms.Select(attrs={'class': 'form-control'})
+            'regsysid': forms.Select(attrs={'class': 'form-control'}),
+            'deviceid': forms.Select(attrs={'class': 'form-control'})
         }
 
 
 class PostModulesForm(forms.ModelForm):
     class Meta:
         model = Modules
-        fields = ['Name', 'Description', 'ISPath']
+        fields = ['name', 'description', 'ispath']
         labels = {
-            'Name': 'Название',
-            'Description': 'Описание',
-            'ISPath': 'Путь InstallShield'
+            'name': 'Название',
+            'description': 'Описание',
+            'ispath': 'Путь InstallShield'
         }
         widgets = {
-            'Name': forms.TextInput(attrs={'class': 'form-control'}),
-            'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'}),
-            'ISPath': forms.TextInput(attrs={'class': 'form-control'})
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'}),
+            'ispath': forms.TextInput(attrs={'class': 'form-control'})
         }
 
 
 class PostDriversForm(forms.ModelForm):
     class Meta:
         model = Drivers
-        fields = ['Name', 'Xno', 'ISPath', 'Description']
+        fields = ['name', 'xno', 'ispath', 'description']
         labels = {
-            'Name': 'Название',
-            'Xno': 'Группа эксклюзивности(*)',
-            'ISPath': 'Путь InstallShield',
-            'Description': 'Описание',
+            'name': 'Название',
+            'xno': 'Группа эксклюзивности(*)',
+            'ispath': 'Путь InstallShield',
+            'description': 'Описание',
 
         }
         widgets = {
-            'Name': forms.TextInput(attrs={'class': 'form-control'}),
-            'Xno': forms.NumberInput(attrs={'class': 'form-control', 'type': 'number'}),
-            'ISPath': forms.TextInput(attrs={'class': 'form-control'}),
-            'Description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'xno': forms.NumberInput(attrs={'class': 'form-control', 'type': 'number'}),
+            'ispath': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'})
 
         }
 
@@ -473,19 +473,19 @@ class WidgetForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(WidgetForm, self).__init__(*args, **kwargs)
-        self.fields['Regsys'] = GroupedModelMultipleChoiceField(group_by_field='TypeID',
+        self.fields['Regsys'] = GroupedModelMultipleChoiceField(group_by_field='typeid',
                                                                   queryset=TypeRegsys.objects.all(),
                                                                   widget=GroupedCheckboxSelectMultiple(),
                                                                   required=False)
-        self.fields['TypeTasks'] = GroupedModelMultipleChoiceField(group_by_field='TypeID',
+        self.fields['TypeTasks'] = GroupedModelMultipleChoiceField(group_by_field='typeid',
                                                                      queryset=TypeTasks.objects.all(),
                                                                      widget=GroupedCheckboxSelectMultiple(),
                                                                      required=False)
-        self.fields['TypeMisc'] = GroupedModelMultipleChoiceField(group_by_field='TypeID',
+        self.fields['TypeMisc'] = GroupedModelMultipleChoiceField(group_by_field='typeid',
                                                                     queryset=TypeMisc.objects.all(),
                                                                     widget=GroupedCheckboxSelectMultiple(),
                                                                     required=False)
-        self.fields['RegSysDevices'] = GroupedModelMultipleChoiceField(group_by_field='SysName',
+        self.fields['RegSysDevices'] = GroupedModelMultipleChoiceField(group_by_field='sysname',
                                                                     queryset=RegSystems.objects.all(),
                                                                     widget=GroupedCheckboxSelectMultiple(),
                                                                     required=False)
