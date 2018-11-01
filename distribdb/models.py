@@ -194,6 +194,7 @@ class TypeTasks(models.Model):
         return self.taskid.username
 
     class Meta:
+        ordering = ('typeid',)
         verbose_name = 'Экспресс для типов ЛА'
         unique_together = ('typeid', 'taskid')
         db_table = 'typetasks'
