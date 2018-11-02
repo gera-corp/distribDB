@@ -139,12 +139,12 @@ class RegSystems(models.Model):
     hide                    = models.BooleanField(default=False)
     description             = models.TextField(max_length=8000, blank=True)
 
+    def __str__(self):
+        return self.username
+
     class Meta:
         ordering = ('username',)
         db_table = 'regsystems'
-
-    def __str__(self):
-        return self.username
 
 
 class TypeRegsys(models.Model):
@@ -158,7 +158,7 @@ class TypeRegsys(models.Model):
     description             = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return self.regsysid.sysname
+        return self.regsysid.username
 
     class Meta:
         ordering = ('typeid',)
@@ -191,7 +191,7 @@ class TypeTasks(models.Model):
     description             = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return self.taskid.username
+        return self.taskid.sysname
 
     class Meta:
         ordering = ('typeid',)
@@ -323,7 +323,7 @@ class Sets(models.Model):
     TypeTasks               = models.ManyToManyField('TypeTasks')
     TypeMisc                = models.ManyToManyField('TypeMisc')
     Modules                 = models.ManyToManyField('Modules', blank=True)
-    RegSysDevices           = models.ManyToManyField('RegSystems')
+    RegSysDevices           = models.ManyToManyField('RegSystems', blank=True)
     Devices                 = models.ManyToManyField('drop_device', blank=True)
     Drivers                 = models.ManyToManyField('Drivers', blank=True)
 
