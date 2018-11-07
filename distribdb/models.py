@@ -140,7 +140,7 @@ class RegSystems(models.Model):
     description             = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return self.username
+        return '%s %s' % (self.username, self.hide)
 
     class Meta:
         ordering = ('username',)

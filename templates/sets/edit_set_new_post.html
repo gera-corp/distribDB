@@ -19,46 +19,46 @@
         Дата набора:
         {{ form.Date }}
 <br>
-{#<table class="table table-sm table-borderless form-control-sm">#}
-{#    <tr align="center">#}
-{#        <th><h6><li class="list-group-item list-group-item-info">Первичные базы</li></h6></th>#}
-{#        <th><h6><li class="list-group-item list-group-item-info">Расчётные базы</li></h6></th>#}
-{#        <th><h6><li class="list-group-item list-group-item-info">Доп. элементы</li></h6></th>#}
-{#    </tr>#}
-{#        <td width="33%">#}
-{#{% regroup form.Regsys by data.group as feature_list %}#}
-{#{% for group in feature_list %}#}
-{#    <label type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}#}
-{#    <script>var numchkbox=0;{% for i in group.list %}{% if i.data.selected == True %}numchkbox++;{% endif %}{% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}</script></label>#}
-{#<div class="collapse" id="collapse{{ group.grouper.id }}">{% for choice in group.list %}#}
-{#    <label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label>#}
-{#  {% endfor %}<br></div>#}
-{#{% endfor %}#}
-{#</td>#}
-{##}
-{#<td width="33%">#}
-{#{% regroup form.TypeTasks by data.group as feature_list %}#}
-{#{% for group in feature_list %}#}
-{#    <label type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}#}
-{#        <script>var numchkbox=0;{% for choice in group.list %}{% if choice.data.selected == True %}numchkbox++;{% endif %}{% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}</script></label>#}
-{#<div class="collapse" id="collapse{{ group.grouper.id }}">{% for choice in group.list %}#}
-{#   <label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label>#}
-{#  {% endfor %}<br></div>#}
-{#{% endfor %}#}
-{#</td>#}
-{##}
-{#<td width="33%">#}
-{#{% regroup form.TypeMisc by data.group as feature_list %}#}
-{#{% for group in feature_list %}#}
-{#    <label type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}#}
-{#        <script>var numchkbox=0;{% for choice in group.list %}{% if choice.data.selected == True %}numchkbox++;{% endif %}{% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}</script></label>#}
-{#<div class="collapse" id="collapse{{ group.grouper.id }}">{% for choice in group.list %}#}
-{#    <label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label>#}
-{#  {% endfor %}<br></div>#}
-{#{% endfor %}#}
-{#</tr>#}
-{#</td>#}
-{#</table>#}
+<table class="table table-sm table-borderless form-control-sm">
+    <tr align="center">
+        <th><h6><li class="list-group-item list-group-item-info">Первичные базы</li></h6></th>
+        <th><h6><li class="list-group-item list-group-item-info">Расчётные базы</li></h6></th>
+        <th><h6><li class="list-group-item list-group-item-info">Доп. элементы</li></h6></th>
+    </tr>
+        <td width="33%">
+{% regroup form.Regsys by data.group as feature_list %}
+{% for group in feature_list %}
+    <label type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
+    <script>var numchkbox=0;{% for i in group.list %}{% if i.data.selected == True %}numchkbox++;{% endif %}{% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}</script></label>
+<div class="collapse" id="collapse{{ group.grouper.id }}">{% for choice in group.list %}
+    <label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label>
+  {% endfor %}<br></div>
+{% endfor %}
+</td>
+
+<td width="33%">
+{% regroup form.TypeTasks by data.group as feature_list %}
+{% for group in feature_list %}
+    <label type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
+        <script>var numchkbox=0;{% for choice in group.list %}{% if choice.data.selected == True %}numchkbox++;{% endif %}{% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}</script></label>
+<div class="collapse" id="collapse{{ group.grouper.id }}">{% for choice in group.list %}
+   <label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label>
+  {% endfor %}<br></div>
+{% endfor %}
+</td>
+
+<td width="33%">
+{% regroup form.TypeMisc by data.group as feature_list %}
+{% for group in feature_list %}
+    <label type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
+        <script>var numchkbox=0;{% for choice in group.list %}{% if choice.data.selected == True %}numchkbox++;{% endif %}{% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}</script></label>
+<div class="collapse" id="collapse{{ group.grouper.id }}">{% for choice in group.list %}
+    <label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label>
+  {% endfor %}<br></div>
+{% endfor %}
+</tr>
+</td>
+</table>
 
 <table>
 <td>
@@ -105,9 +105,7 @@
       </div>
       <div class="modal-body">
     {% for checkbox in form.RegSysDevices %}
-<label class="btn btn-outline-secondary btn-sm">
-    {{ checkbox.tag }} {{ checkbox.data }}
-</label><br>
+    {% if 'False' in checkbox.data.label %}<label class="btn btn-outline-secondary btn-sm">{{ checkbox.tag }} {{ checkbox.data.label|cut:'False' }}</label><br>{% endif %}
 {% endfor %}</div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
