@@ -109,11 +109,10 @@ urlpatterns = [
     path('edit_set/new_post/', views.edit_set_new_post),
     path('edit_set/edit_post/<int:pk>/', views.edit_set_edit_post, name='edit_set_edit_post'),
 
-    # path('edit_set', views.PersonListView.as_view(), name='person_changelist'),
-    # path('edit_set/add/', views.PersonCreateView.as_view(), name='person_add'),
-    # path('edit_set/<uuid:pk>/', views.PersonUpdateView.as_view(), name='person_change'),
-    # path('edit_set/ajax/', views.load_cities, name='ajax_load_cities'),  # <-- this one here
-
+    # path('distrib_list/', views.distrib_list_view),
+    # path('distrib_list/<int:pk>/delete/', views.distrib_list_delete, name='edit_set_delete'),
+    # path('distrib_list/new_post/', views.distrib_list_new_post),
+    # path('distrib_list/edit_post/<int:pk>/', views.distrib_list_edit_post, name='edit_set_edit_post'),
 
     path('accounts/', include('django.contrib.auth.urls')),
     path('logout/', LogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
