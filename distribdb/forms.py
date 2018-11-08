@@ -474,14 +474,14 @@ class WidgetForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(WidgetForm, self).__init__(*args, **kwargs)
         self.fields['Regsys'] = GroupedModelMultipleChoiceField(group_by_field='typeid',
-                                                                  queryset=TypeRegsys.objects.all(),
+                                                                  queryset=TypeRegsys.objects.select_related('regsysid'),
                                                                   widget=GroupedCheckboxSelectMultiple(),
                                                                   required=False)
         self.fields['TypeTasks'] = GroupedModelMultipleChoiceField(group_by_field='typeid',
-                                                                     queryset=TypeTasks.objects.all(),
+                                                                     queryset=TypeTasks.objects.select_related('taskid'),
                                                                      widget=GroupedCheckboxSelectMultiple(),
                                                                      required=False)
         self.fields['TypeMisc'] = GroupedModelMultipleChoiceField(group_by_field='typeid',
-                                                                    queryset=TypeMisc.objects.all(),
+                                                                    queryset=TypeMisc.objects.select_related('miscid'),
                                                                     widget=GroupedCheckboxSelectMultiple(),
                                                                     required=False)

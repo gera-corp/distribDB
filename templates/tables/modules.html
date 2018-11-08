@@ -22,7 +22,7 @@
                     <a href="{% url 'modules_edit_post' pk=item.pk %}"><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-31-pencil.png"></button></a>
                 </td>
                 <td>
-                    <form action="{% url 'modules_delete' item.id %}" method="POST">{%csrf_token%}
+                    <form action="{% url 'modules_delete' item.pk %}" method="POST">{%csrf_token%}
                                                  <button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target=#modal{{ item.id }}><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-17-bin.png"></button>
                         {% include 'modal.html' %}
                     </form>

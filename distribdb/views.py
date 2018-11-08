@@ -46,10 +46,10 @@ def drop_device_view(request):
     return render(request, 'tables/drop_devices.html', context)
 
 
-def drop_device_delete(request, id):
+def drop_device_delete(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj = get_object_or_404(drop_device, id=id)
+    obj = get_object_or_404(drop_device, pk=pk)
     if request.method == 'POST':
         obj.delete()
         return redirect('/tables/drop_devices')
@@ -127,10 +127,10 @@ def hasp_keys_view(request):
     return render(request, 'tables/hasp_keys.html', context)
 
 
-def hasp_keys_delete(request, id):
+def hasp_keys_delete(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj = get_object_or_404(hasp_keys, id=id)
+    obj = get_object_or_404(hasp_keys, pk=pk)
     if request.method == 'POST':
         obj.delete()
         return redirect('/tables/hasp_keys')
@@ -208,10 +208,10 @@ def hardlock_keys_view(request):
     return render(request, 'tables/hardlock_keys.html', context)
 
 
-def hardlock_keys_delete(request, id):
+def hardlock_keys_delete(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj = get_object_or_404(hardlock_keys, id=id)
+    obj = get_object_or_404(hardlock_keys, pk=pk)
     if request.method == 'POST':
         obj.delete()
         return redirect('/tables/hardlock_keys')
@@ -290,10 +290,10 @@ def plane_types_view(request):
     return render(request, 'tables/plane_types.html', context)
 
 
-def plane_types_delete(request, id):
+def plane_types_delete(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj = get_object_or_404(Plane_types, id=id)
+    obj = get_object_or_404(Plane_types, pk=pk)
     if request.method == 'POST':
         obj.delete()
         return redirect('/tables/plane_types')
@@ -372,10 +372,10 @@ def lang_types_view(request):
     return render(request, 'tables/lang_types.html', context)
 
 
-def lang_types_delete(request, id):
+def lang_types_delete(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj = get_object_or_404(Lang_types, id=id)
+    obj = get_object_or_404(Lang_types, pk=pk)
     if request.method == 'POST':
         obj.delete()
         return redirect('/tables/lang_types')
@@ -453,10 +453,10 @@ def os_types_view(request):
     return render(request, 'tables/os_types.html', context)
 
 
-def os_types_delete(request, id):
+def os_types_delete(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj = get_object_or_404(OS_type, id=id)
+    obj = get_object_or_404(OS_type, pk=pk)
     if request.method == 'POST':
         obj.delete()
         return redirect('/tables/os_types')
@@ -533,10 +533,10 @@ def executables_view(request):
     return render(request, 'tables/executables.html', context)
 
 
-def executables_delete(request, id):
+def executables_delete(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj = get_object_or_404(executables, id=id)
+    obj = get_object_or_404(executables, pk=pk)
     if request.method == 'POST':
         obj.delete()
         return redirect('/tables/executables')
@@ -613,10 +613,10 @@ def fas_modules_view(request):
     return render(request, 'tables/fas_modules.html', context)
 
 
-def fas_modules_delete(request, id):
+def fas_modules_delete(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj = get_object_or_404(FASModules, id=id)
+    obj = get_object_or_404(FASModules, pk=pk)
     if request.method == 'POST':
         obj.delete()
         return redirect('/tables/fas_modules')
@@ -693,10 +693,10 @@ def executable_paths_view(request):
     return render(request, 'tables/executable_paths.html', context)
 
 
-def executable_paths_delete(request, id):
+def executable_paths_delete(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj = get_object_or_404(ExecutablePaths, id=id)
+    obj = get_object_or_404(ExecutablePaths, pk=pk)
     if request.method == 'POST':
         obj.delete()
         return redirect('/tables/executable_paths')
@@ -775,10 +775,10 @@ def regsystems_view(request):
     return render(request, 'tables/regsystems.html', context)
 
 
-def regsystems_delete(request, id):
+def regsystems_delete(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj = get_object_or_404(RegSystems, id=id)
+    obj = get_object_or_404(RegSystems, pk=pk)
     if request.method == 'POST':
         obj.delete()
         return redirect('/tables/regsystems')
@@ -860,10 +860,10 @@ def typeregsys_view(request):
     return render(request, 'tables/typeregsys.html', context)
 
 
-def typeregsys_delete(request, id):
+def typeregsys_delete(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj = get_object_or_404(TypeRegsys, id=id)
+    obj = get_object_or_404(TypeRegsys, pk=pk)
     if request.method == 'POST':
         obj.delete()
         return redirect('/tables/typeregsys')
@@ -940,10 +940,10 @@ def tasks_view(request):
     return render(request, 'tables/tasks.html', context)
 
 
-def tasks_delete(request, id):
+def tasks_delete(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj = get_object_or_404(Tasks, id=id)
+    obj = get_object_or_404(Tasks, pk=pk)
     if request.method == 'POST':
         obj.delete()
         return redirect('/tables/tasks')
@@ -1022,10 +1022,10 @@ def typetasks_view(request):
     return render(request, 'tables/typetasks.html', context)
 
 
-def typetasks_delete(request, id):
+def typetasks_delete(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj = get_object_or_404(TypeTasks, id=id)
+    obj = get_object_or_404(TypeTasks, pk=pk)
     if request.method == 'POST':
         obj.delete()
         return redirect('/tables/typetasks')
@@ -1105,10 +1105,10 @@ def misc_view(request):
     return render(request, 'tables/misc.html', context)
 
 
-def misc_delete(request, id):
+def misc_delete(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj = get_object_or_404(Misc, id=id)
+    obj = get_object_or_404(Misc, pk=pk)
     if request.method == 'POST':
         obj.delete()
         return redirect('/tables/misc')
@@ -1187,10 +1187,10 @@ def typemisc_view(request):
     return render(request, 'tables/typemisc.html', context)
 
 
-def typemisc_delete(request, id):
+def typemisc_delete(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj = get_object_or_404(TypeMisc, id=id)
+    obj = get_object_or_404(TypeMisc, pk=pk)
     if request.method == 'POST':
         obj.delete()
         return redirect('/tables/typemisc')
@@ -1269,10 +1269,10 @@ def organisations_view(request):
     return render(request, 'tables/organisations.html', context)
 
 
-def organisations_delete(request, id):
+def organisations_delete(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj = get_object_or_404(Organisations, id=id)
+    obj = get_object_or_404(Organisations, pk=pk)
     if request.method == 'POST':
         obj.delete()
         return redirect('/tables/organisations')
@@ -1350,10 +1350,10 @@ def regsysdevices_view(request):
     return render(request, 'tables/regsysdevices.html', context)
 
 
-def regsysdevices_delete(request, id):
+def regsysdevices_delete(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj = get_object_or_404(RegSysDevices, id=id)
+    obj = get_object_or_404(RegSysDevices, pk=pk)
     if request.method == 'POST':
         obj.delete()
         return redirect('/tables/regsysdevices')
@@ -1432,10 +1432,10 @@ def modules_view(request):
     return render(request, 'tables/modules.html', context)
 
 
-def modules_delete(request, id):
+def modules_delete(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj = get_object_or_404(Modules, id=id)
+    obj = get_object_or_404(Modules, pk=pk)
     if request.method == 'POST':
         obj.delete()
         return redirect('/tables/modules')
@@ -1514,10 +1514,10 @@ def drivers_view(request):
     return render(request, 'tables/drivers.html', context)
 
 
-def drivers_delete(request, id):
+def drivers_delete(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj = get_object_or_404(Drivers, id=id)
+    obj = get_object_or_404(Drivers, pk=pk)
     if request.method == 'POST':
         obj.delete()
         return redirect('/tables/drivers')

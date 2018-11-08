@@ -254,8 +254,8 @@ class Organisations(models.Model):
 class drop_device(models.Model):
 
     id                       = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    sysname                 = models.CharField(max_length=50, blank=False)
-    username                = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Пользовательским именем')
+    sysname                  = models.CharField(max_length=50, blank=False)
+    username                 = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Пользовательским именем')
     ispath                   = models.CharField(max_length=250, blank=False)
     description              = models.TextField(max_length=8000, blank=True)
 
