@@ -36,7 +36,7 @@
                         <td>
                             <form action="{% url 'edit_set_delete' item.pk %}" method="POST">{% csrf_token %}
                                 <button type="button" class="btn btn-link btn-sm" data-toggle="modal"
-                                        data-target=#modal{{ item.pk }}><img
+                                        data-target=#modal-{{ item.pk }}><img
                                         src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-17-bin.png"></button>
                                 {% include 'modal.html' %}
                             </form>
