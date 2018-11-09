@@ -32,8 +32,8 @@ class PostHaspForm(forms.ModelForm):
             'port': 'Порт:',
             'type': 'Тип:',
             'timelimit': 'Ограничение по времени:',
-            'Licenses': 'Количество лицензий:',
-            'Notes': 'Примечания:'
+            'licenses': 'Количество лицензий:',
+            'notes': 'Примечания:'
         }
         widgets = {
             'chipno': forms.TextInput(attrs={'class': 'form-control'}),
@@ -56,9 +56,9 @@ class PostHardlockForm(forms.ModelForm):
             'chipno': 'Номер чипа',
             'subcode': 'Субкод:',
             'modaddr': 'Адрес модуля:',
-            'Port': 'Порт:',
-            'Free': 'Свободен:',
-            'Notes': 'Примечания:'
+            'port': 'Порт:',
+            'free': 'Свободен:',
+            'notes': 'Примечания:'
         }
         widgets = {
             'mark': forms.TextInput(attrs={'class': 'form-control'}),
@@ -230,7 +230,7 @@ class PostTypeTasksForm(forms.ModelForm):
             'typeid': 'Тип ЛА',
             'taskid': 'База экспресса',
             'ispath': 'Путь InstallShield',
-            'Description': 'Описание'
+            'description': 'Описание'
         }
         widgets = {
             'typeid': forms.Select(attrs={'class': 'form-control'}),
