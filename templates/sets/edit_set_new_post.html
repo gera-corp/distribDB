@@ -9,7 +9,7 @@
             <strong>{{ message }}</strong>
             </div>
         {% endfor %}
-{% endif %}
+    {% endif %}
         <h5>Добавление нового набора.</h5><p class="text-monospace small">
         Данная страница позволяет добавить/редактировать набор в базе данных. В дальнейшем этот набор может быть использован для создания одного или нескольких новых дистрибутивов.
 <form method="post">
@@ -28,8 +28,8 @@
         <td width="33%">
 {% regroup form.Regsys by data.group as feature_list %}
 {% for group in feature_list %}
-    <label type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
-    <script>var numchkbox=0;{% for i in group.list %}{% if i.data.selected == True %}numchkbox++;{% endif %}{% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}</script></label>
+    <label type="radio" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
+        <script>var numchkbox=0;{% for i in group.list %}{% if i.data.selected == True %}numchkbox++;{% endif %}{% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}</script></label>
 <div class="collapse" id="collapse{{ group.grouper.id }}">{% for choice in group.list %}
     <label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label>
   {% endfor %}<br></div>
@@ -39,7 +39,7 @@
 <td width="33%">
 {% regroup form.TypeTasks by data.group as feature_list %}
 {% for group in feature_list %}
-    <label type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
+    <label type="radio" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
         <script>var numchkbox=0;{% for choice in group.list %}{% if choice.data.selected == True %}numchkbox++;{% endif %}{% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}</script></label>
 <div class="collapse" id="collapse{{ group.grouper.id }}">{% for choice in group.list %}
    <label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label>
@@ -50,7 +50,7 @@
 <td width="33%">
 {% regroup form.TypeMisc by data.group as feature_list %}
 {% for group in feature_list %}
-    <label type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
+    <label type="radio" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
         <script>var numchkbox=0;{% for choice in group.list %}{% if choice.data.selected == True %}numchkbox++;{% endif %}{% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}</script></label>
 <div class="collapse" id="collapse{{ group.grouper.id }}">{% for choice in group.list %}
     <label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label>
@@ -94,7 +94,7 @@
     {% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}
     </script>
 </button><br><br>
-<div class="modal" id="resys" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
+<div class="modal fade" id="resys" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -119,7 +119,7 @@
     {% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-pill badge-light /">',numchkbox)}
     </script>
 </button><br><br>
-<div class="modal" id="dropdev" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
+<div class="modal fade" id="dropdev" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
       <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

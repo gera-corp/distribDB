@@ -15,7 +15,7 @@
         </tr>
         </thead>
         {% for item in object_list %}
-            <tr align="center"><ul class="list-group">
+            <tr align="center">
                 <td><li class="list-group-item list-group-item-action">{{ item.name }}</li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.xno }}</li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.ispath }}</li></td>
@@ -29,7 +29,7 @@
                         {% include 'modal.html' %}
                     </form>
                 </td>
-            </ul></tr>
+            </tr>
         {% endfor %}
     </table>
 {% include 'paginator.html' %}

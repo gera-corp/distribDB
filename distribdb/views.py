@@ -1609,7 +1609,7 @@ def edit_set_delete(request, pk):
 from django.views.decorators.cache import cache_page
 
 
-# @cache_page(60 * 15)
+#@cache_page(60 * 15)
 def edit_set_new_post(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
@@ -1628,7 +1628,7 @@ def edit_set_new_post(request):
     return render(request, template, context)
 
 
-# @cache_page(60 * 15)
+#@cache_page(60 * 15)
 def edit_set_edit_post(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')

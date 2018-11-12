@@ -1,39 +1,40 @@
 <title>Главная</title>
 {% extends 'base.html' %}
 {% block content %}
-<div class="container shadow p-3 mb-5 bg-white rounded">
-<p class="text-monospace">Домашняя страница
-<br>Версия Beta 2.18.10.29
-<br>Учётная запись: {{ user.username }}
-<br>Уровень доступа:
-<br><br>Для работы с базой данных выберите пункт
-</p>
-<div class="alert alert-info" role="alert" align="center">
-
-    {% load static %}<img src="{% static '/img/icon-recycle-blue1.png' %}" />
-</div>
-<div class="btn-group" role="group" align="center">
-<div class="btn-group" role="group">
-<button id="btnGroupDrop1" type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-Просмотр и изменение
-</button>
-<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-<a class="dropdown-item" href="/edit_set">Наборы</a>
-<a class="dropdown-item" href="/distrib_list">Дистрибутивы</a>
-<a class="dropdown-item" href="#">Обновления дистрибутивов</a>
-</div>
-</div>
-</div>
-<div class="btn-group" role="group" align="center">
-<div class="btn-group" role="group">
-<button id="btnGroupDrop1" type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-Создание
-</button>
-<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-<a class="dropdown-item" href="/edit_set/new_post">Добавление нового набора</a>
-<a class="dropdown-item" href="#">Добавление нового дистрибутива</a>
-</div>
-</div>
-</div>
-</div>
+    <div class="container shadow p-3 mb-5 bg-white rounded">
+        <p class="text-monospace">Домашняя страница
+            <br>Версия Beta 2.18.10.29
+            <br>Учётная запись: {{ user.username }}
+            <br>Уровень доступа:
+            <br><br>Для работы с базой данных выберите пункт
+        </p>
+        <div class="alert alert-info" role="alert" align="center">
+            {% load static %}<img src="{% static '/img/icon-recycle-blue1.png' %}"/>
+        </div>
+        <div class="btn-group" role="group" align="center">
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-outline-dark dropdown-toggle"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Просмотр и изменение
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" href="/edit_set">Наборы</a>
+                    <a class="dropdown-item" href="/distrib_list">Дистрибутивы</a>
+                    <a class="dropdown-item" href="#">Обновления дистрибутивов</a>
+                </div>
+            </div>
+        </div>
+        <div class="btn-group" role="group" align="center">
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-outline-dark dropdown-toggle"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Создание
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" href="/edit_set/new_post">Добавление нового набора</a>
+                    <a class="dropdown-item" href="#">Добавление нового дистрибутива</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
