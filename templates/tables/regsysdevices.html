@@ -9,7 +9,6 @@
             <th>Система регистрации</th>
             <th>Устройство сброса</th>
             <th></th>
-            <th></th>
         </tr>
         </thead>
         {% for item in object_list %}
@@ -17,13 +16,16 @@
                 <td width="50%"><li class="list-group-item list-group-item-action">{{ item.regsysid }}</li></td>
                 <td width="50%"><li class="list-group-item list-group-item-action">{{ item.deviceid }}</li></td>
                 <td>
-                    <a href="{% url 'regsysdevices_edit_post' pk=item.pk %}"><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-31-pencil.png"></button></a>
-                </td>
-                <td>
-                    <form action="{% url 'regsysdevices_delete' item.pk %}" method="POST">{%csrf_token%}
-                                                 <button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target=#modal-{{ item.id }}><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-17-bin.png"></button>
-                        {% include 'modal.html' %}
-                    </form>
+    <div class="btn-group" role="group">
+    <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <img src="{{ STATIC_URL }} /static/glyphicons/png/more.svg" alt="more">
+    </button>
+      <div class="dropdown-menu" aria-labelledby="{{ item.pk }}">
+      <a class="dropdown-item" href="{% url 'regsysdevices_edit_post' pk=item.pk %}">Редактировать</a>
+      <a class="dropdown-item" href="#" data-toggle="modal" data-target=#modal-{{ item.id }}>Удалить</a>
+    </div>
+        <form action="{% url 'regsysdevices_delete' item.pk %}" method="POST">{% csrf_token %}{% include 'modal.html' %}</form>
+    </div>
                 </td>
             </tr>
         {% endfor %}

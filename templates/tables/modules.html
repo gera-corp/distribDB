@@ -1,7 +1,7 @@
 <title>Дополнительные модули ПО</title>
 {% extends 'base.html' %}
 {% block content %}
-<div class="container-fluid table-responsive-sm shadow p-3 mb-5 bg-white rounded">
+<div class="container table-responsive-sm shadow p-3 mb-5 bg-white rounded">
     <a class="btn btn-secondary" href="new_post/" role="button">Добавить</a><br><br>
     <table class="table table-sm table-borderless form-control-sm">
         <thead>
@@ -9,7 +9,6 @@
             <th>Название</th>
             <th>Описание</th>
             <th>Путь InstallShield</th>
-            <th></th>
             <th></th>
         </tr>
         </thead>
@@ -19,13 +18,16 @@
                 <td><li class="list-group-item list-group-item-action">{{ item.description }}</li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.ispath }}</li></td>
                 <td>
-                    <a href="{% url 'modules_edit_post' pk=item.pk %}"><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-31-pencil.png"></button></a>
-                </td>
-                <td>
-                    <form action="{% url 'modules_delete' item.pk %}" method="POST">{%csrf_token%}
-                                                 <button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target=#modal-{{ item.id }}><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-17-bin.png"></button>
-                        {% include 'modal.html' %}
-                    </form>
+    <div class="btn-group" role="group">
+    <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <img src="{{ STATIC_URL }} /static/glyphicons/png/more.svg" alt="more">
+    </button>
+      <div class="dropdown-menu" aria-labelledby="{{ item.pk }}">
+      <a class="dropdown-item" href="{% url 'modules_edit_post' pk=item.pk %}">Редактировать</a>
+      <a class="dropdown-item" href="#" data-toggle="modal" data-target=#modal-{{ item.id }}>Удалить</a>
+    </div>
+        <form action="{% url 'modules_delete' item.pk %}" method="POST">{% csrf_token %}{% include 'modal.html' %}</form>
+    </div>
                 </td>
             </tr>
         {% endfor %}

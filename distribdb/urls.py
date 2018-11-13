@@ -105,9 +105,9 @@ urlpatterns = [
     path('tables/drivers/edit_post/<uuid:pk>/', views.drivers_edit_post, name='drivers_edit_post'),
 
     path('edit_set/', views.edit_set_view),
-    path('edit_set/<int:pk>/delete/', views.edit_set_delete, name='edit_set_delete'),
+    path('edit_set/<uuid:pk>/delete/', views.edit_set_delete, name='edit_set_delete'),
     path('edit_set/new_post/', views.edit_set_new_post),
-    path('edit_set/edit_post/<int:pk>/', views.edit_set_edit_post, name='edit_set_edit_post'),
+    path('edit_set/edit_post/<uuid:pk>/', views.edit_set_edit_post, name='edit_set_edit_post'),
 
     # path('distrib_list/', views.distrib_list_view),
     # path('distrib_list/<int:pk>/delete/', views.distrib_list_delete, name='edit_set_delete'),

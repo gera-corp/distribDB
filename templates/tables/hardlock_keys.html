@@ -27,14 +27,18 @@
                 <td align="center"><li class="list-group-item list-group-item-action"><input disabled type="checkbox"{% if item.Free == True %}checked="checked"{% endif %}></li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.notes }}<br></li></td>
                 <td>
-                    <a href="{% url 'hardlock_keys_edit_post' pk=item.pk %}"><button type="submit" class="btn btn-link btn-sm"><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-31-pencil.png"></button></a>
+    <div class="btn-group" role="group">
+    <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <img src="{{ STATIC_URL }} /static/glyphicons/png/more.svg">
+    </button>
+      <div class="dropdown-menu" aria-labelledby="{{ item.pk }}">
+      <a class="dropdown-item" href="{% url 'hardlock_keys_edit_post' pk=item.pk %}">Редактировать</a>
+      <a class="dropdown-item" href="#" data-toggle="modal" data-target=#modal-{{ item.id }}>Удалить</a>
+    </div>
+        <form action="{% url 'hardlock_keys_delete' item.pk %}" method="POST">{% csrf_token %}{% include 'modal.html' %}</form>
+    </div>
                 </td>
-                <td>
-                    <form action="{% url 'hardlock_keys_delete' item.pk %}" method="POST">{%csrf_token%}
-                                                 <button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target=#modal-{{ item.id }}><img src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-17-bin.png"></button>
-                        {% include 'modal.html' %}
-                    </form>
-                </td>
+
             </tr>
         {% endfor %}
     </table>

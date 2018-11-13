@@ -315,9 +315,18 @@ class Drivers(models.Model):
         db_table = 'drivers'
 
 
+def ids():
+    no = Sets.objects.count()
+    if no is None:
+        return 1
+    else:
+        return no + 1
+
+
 class Sets(models.Model):
 
-    UserFriendlyID          = models.BigAutoField(primary_key=True)
+    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    UserFriendlyID          = models.BigIntegerField(default=ids, unique=True, editable=False)
     Date                    = models.DateField(null=False, blank=False, default=datetime.now)
     Regsys                  = models.ManyToManyField('TypeRegsys')
     TypeTasks               = models.ManyToManyField('TypeTasks')

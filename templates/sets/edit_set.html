@@ -28,18 +28,16 @@
                             <li class="list-group-item list-group-item-action">{{ item.Date|date:'d.m.Y' }}</li>
                         </td>
                         <td>
-                            <a href="{% url 'edit_set_edit_post' pk=item.pk %}">
-                                <button type="submit" class="btn btn-link btn-sm"><img
-                                        src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-31-pencil.png"></button>
-                            </a>
-                        </td>
-                        <td>
-                            <form action="{% url 'edit_set_delete' item.pk %}" method="POST">{% csrf_token %}
-                                <button type="button" class="btn btn-link btn-sm" data-toggle="modal"
-                                        data-target=#modal-{{ item.pk }}><img
-                                        src="{{ STATIC_URL }} /static/glyphicons/png/glyphicons-17-bin.png"></button>
-                                {% include 'modal.html' %}
-                            </form>
+    <div class="btn-group" role="group">
+    <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <img src="{{ STATIC_URL }} /static/glyphicons/png/more.svg" alt="more">
+    </button>
+      <div class="dropdown-menu" aria-labelledby="{{ item.pk }}">
+      <a class="dropdown-item" href="{% url 'edit_set_edit_post' pk=item.pk %}">Редактировать</a>
+      <a class="dropdown-item" href="#" data-toggle="modal" data-target=#modal-{{ item.id }}>Удалить</a>
+    </div>
+        <form action="{% url 'edit_set_delete' item.pk %}" method="POST">{% csrf_token %}{% include 'modal.html' %}</form>
+    </div>
                         </td>
                     </ul>
                 </tr>
