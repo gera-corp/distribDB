@@ -6,10 +6,8 @@
         <table class="table table-sm table-borderless form-control-sm">
             <thead>
             <tr align="center">
-                <th></th>
                 <th>ID</th>
                 <th>Дата создания</th>
-                <th></th>
                 <th></th>
             </tr>
             </thead>
@@ -18,14 +16,10 @@
                 <tr align="center">
                     <ul class="list-group">
                         <td>
-                            <li class="list-group-item list-group-item-action">
-                                {% for test in item.RegsysID.all %}{{ test.TypeID }}{% endfor %}</li>
+                            <li class="list-group-item list-group-item-action">{{ item.userfriendlyid }}</li>
                         </td>
                         <td>
-                            <li class="list-group-item list-group-item-action">{{ item.UserFriendlyID }}</li>
-                        </td>
-                        <td>
-                            <li class="list-group-item list-group-item-action">{{ item.Date|date:'d.m.Y' }}</li>
+                            <li class="list-group-item list-group-item-action">{{ item.date|date:'d.m.Y' }}</li>
                         </td>
                         <td>
     <div class="btn-group" role="group">

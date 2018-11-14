@@ -316,28 +316,29 @@ class Drivers(models.Model):
 
 
 def ids():
-    no = Sets.objects.count()
-    if no is None:
-        return 1
-    else:
+    try:
+        no = Sets.objects.first().userfriendlyid
         return no + 1
+    except:
+        return 1
 
 
 class Sets(models.Model):
 
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    UserFriendlyID          = models.BigIntegerField(default=ids, unique=True, editable=False)
-    Date                    = models.DateField(null=False, blank=False, default=datetime.now)
-    Regsys                  = models.ManyToManyField('TypeRegsys')
-    TypeTasks               = models.ManyToManyField('TypeTasks')
-    TypeMisc                = models.ManyToManyField('TypeMisc')
-    Modules                 = models.ManyToManyField('Modules', blank=True)
-    RegSysDevices           = models.ManyToManyField('RegSystems', blank=True)
-    Devices                 = models.ManyToManyField('drop_device', blank=True)
-    Drivers                 = models.ManyToManyField('Drivers', blank=True)
+    userfriendlyid          = models.BigIntegerField(default=ids, unique=True, editable=False)
+    date                    = models.DateField(null=False, blank=False, default=datetime.now)
+    regsystems              = models.ManyToManyField('TypeRegsys')
+    typetasks               = models.ManyToManyField('TypeTasks')
+    typemisc                = models.ManyToManyField('TypeMisc')
+    modules                 = models.ManyToManyField('Modules', blank=True)
+    typeregsystems           = models.ManyToManyField('RegSystems', blank=True)
+    devices                 = models.ManyToManyField('drop_device', blank=True)
+    drivers                 = models.ManyToManyField('Drivers', blank=True)
 
     def __str__(self):
-        return '%s %s' % (self.Regsys, self.TypeTasks)
+        return '%s %s' % (self.regsystems, self.typetasks)
 
     class Meta:
-        ordering = ('-UserFriendlyID',)
+        ordering = ('-userfriendlyid',)
+        db_table = 'sets'

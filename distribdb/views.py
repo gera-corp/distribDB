@@ -1579,7 +1579,8 @@ def edit_set_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(date__icontains=query)
+            Q(date__icontains=query) |
+            Q(userfriendlyid__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
