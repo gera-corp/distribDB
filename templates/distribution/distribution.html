@@ -18,7 +18,7 @@
             <tr align="center">
                 <td><li class="list-group-item list-group-item-action">{{ item.name }}</li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.setid.userfriendlyid }}</li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.date }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.date|date:'d.m.Y' }}</li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.organisationid }}</li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.login }}</li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.serial }}</li></td>
