@@ -332,13 +332,58 @@ class Sets(models.Model):
     typetasks               = models.ManyToManyField('TypeTasks')
     typemisc                = models.ManyToManyField('TypeMisc')
     modules                 = models.ManyToManyField('Modules', blank=True)
-    typeregsystems           = models.ManyToManyField('RegSystems', blank=True)
+    typeregsystems          = models.ManyToManyField('RegSystems', blank=True)
     devices                 = models.ManyToManyField('drop_device', blank=True)
     drivers                 = models.ManyToManyField('Drivers', blank=True)
 
-    def __str__(self):
-        return '%s %s' % (self.regsystems, self.typetasks)
+    def __int__(self):
+        return self.userfriendlyid
 
     class Meta:
         ordering = ('-userfriendlyid',)
         db_table = 'sets'
+
+
+class Distribution(models.Model):
+
+    med = (
+        ('Нет', 'Нет'),
+        ('MO', 'MO'),
+        ('CD-R', 'CD-R')
+    )
+
+    disk = (
+        ('Release(S:\)', 'Release(S:\)'),
+        ('Repository(R:\)', 'Repository(R:\)')
+    )
+
+    spec = (
+        ('Нет', 'Нет'),
+        ('ФА', 'ФА'),
+        ('Бюллетень', 'Бюллетень')
+    )
+
+    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    setid                   = models.ForeignKey(Sets, on_delete=models.CASCADE, blank=False)
+    organisationid          = models.ForeignKey(Organisations, on_delete=models.CASCADE, blank=False)
+    complectno              = models.CharField(max_length=50, blank=True)
+    name                    = models.CharField(max_length=50, blank=False)
+    date                    = models.DateField(null=False, blank=False, default=datetime.now)
+    contract                = models.CharField(max_length=50, blank=True)
+    login                   = models.CharField(max_length=50, blank=False)
+    serial                  = models.CharField(max_length=50, blank=False)
+    language                = models.CharField(max_length=50, blank=False)
+    media                   = models.CharField(max_length=50, blank=True, choices=med)
+    os                      = models.CharField(max_length=50, blank=True)
+    specialcase             = models.CharField(max_length=50, blank=False, choices=spec)
+    notes                   = models.CharField(max_length=255, blank=True)
+    langid                  = models.ForeignKey(Lang_types, on_delete=models.CASCADE, blank=False)
+    osid                    = models.ForeignKey(OS_type, on_delete=models.CASCADE, blank=False)
+    releasedisk             = models.CharField(max_length=50, blank=True, choices=disk)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ('setid',)
+        db_table = 'distributions'

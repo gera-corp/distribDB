@@ -485,3 +485,22 @@ class WidgetForm(forms.ModelForm):
                                                                     queryset=TypeMisc.objects.select_related('miscid'),
                                                                     widget=GroupedCheckboxSelectMultiple(),
                                                                     required=False)
+
+class Distrib(forms.ModelForm):
+    class Meta:
+        model = Distribution
+        fields = ['organisationid', 'complectno', 'name', 'date', 'contract', 'login', 'serial', 'language', 'media', 'os', 'specialcase', 'notes', 'langid', 'osid', 'releasedisk']
+        labels = {
+            'organisationid': 'Заказчик',
+            'complectno': '№ комплекта',
+            'name': 'Название',
+            'date': 'Дата создания дистрибутива',
+            'contract': 'Договор',
+            'login': 'Логин',
+            'serial': 'Серийный номер',
+            'language': 'Язык',
+            'media': 'Носитель',
+            'os': 'Операционная система',
+            'specialcase': 'Особые условия',
+            'notes': 'Примечания'
+        }

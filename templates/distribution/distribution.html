@@ -1,0 +1,42 @@
+<title>Дистрибутивы</title>
+{% extends 'base.html' %}
+{% block content %}
+<div class="container table-responsive-sm shadow p-3 mb-5 bg-white rounded">
+    <a class="btn btn-secondary" href="new_post/" role="button">Добавить</a><br><br>
+    <table class="table table-sm table-borderless form-control-sm">
+        <thead>
+        <tr align="center">
+            <th>Название</th>
+            <th>Набор ID</th>
+            <th>Дата</th>
+            <th>Заказчик</th>
+            <th>Логин</th>
+            <th>Серийный номер</th>
+        </tr>
+        </thead>
+        {% for item in object_list %}
+            <tr align="center">
+                <td><li class="list-group-item list-group-item-action">{{ item.name }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.setid.userfriendlyid }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.date }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.organisationid }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.login }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.serial }}</li></td>
+                <td>
+    <div class="btn-group" role="group">
+    <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <img src="{{ STATIC_URL }} /static/glyphicons/png/more.svg" alt="more">
+    </button>
+      <div class="dropdown-menu" aria-labelledby="{{ item.pk }}">
+      <a class="dropdown-item" href="{% url 'drivers_edit_post' pk=item.pk %}">Редактировать</a>
+      <a class="dropdown-item" href="#" data-toggle="modal" data-target=#modal-{{ item.pk }}>Удалить</a>
+    </div>
+        <form action="{% url 'drivers_delete' item.pk %}" method="POST">{% csrf_token %}{% include 'modal.html' %}</form>
+    </div>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% include 'paginator.html' %}
+</div>
+{% endblock %}

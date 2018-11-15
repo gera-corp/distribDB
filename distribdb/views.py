@@ -1655,3 +1655,29 @@ def edit_set_edit_post(request, pk):
     }
 
     return render(request, template, context)
+
+
+def distrib_list_view(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    obj_list = Distribution.objects.all()
+
+    query = request.GET.get('q')
+    if query:
+        obj_list = obj_list.filter(
+            Q(setid__icontains=query) |
+            Q(organisationid__icontains=query)
+        ).distinct()
+    page = request.GET.get('page')
+    paginator = Paginator(obj_list, 20)
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        'object_list': queryset,
+
+    }
+    return render(request, 'distribution/distribution.html', context)

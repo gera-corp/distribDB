@@ -109,7 +109,7 @@ urlpatterns = [
     path('edit_set/new_post/', views.edit_set_new_post),
     path('edit_set/edit_post/<uuid:pk>/', views.edit_set_edit_post, name='edit_set_edit_post'),
 
-    # path('distrib_list/', views.distrib_list_view),
+    path('distrib_list/', views.distrib_list_view),
     # path('distrib_list/<int:pk>/delete/', views.distrib_list_delete, name='edit_set_delete'),
     # path('distrib_list/new_post/', views.distrib_list_new_post),
     # path('distrib_list/edit_post/<int:pk>/', views.distrib_list_edit_post, name='edit_set_edit_post'),
