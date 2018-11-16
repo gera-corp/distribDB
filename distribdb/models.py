@@ -77,6 +77,9 @@ class Lang_types(models.Model):
     lcode                   = models.IntegerField()
     isdefine                = models.CharField(max_length=50, blank=False)
 
+    def __str__(self):
+        return self.lang
+
     class Meta:
         db_table = 'lang'
 
@@ -86,6 +89,9 @@ class OS_type(models.Model):
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     os                      = models.CharField(max_length=50, blank=False)
     oscode                  = models.IntegerField(blank=False)
+
+    def __str__(self):
+        return self.os
 
     class Meta:
         db_table = 'os'
@@ -260,7 +266,7 @@ class drop_device(models.Model):
     description              = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return self.sysname
+        return self.username
 
     class Meta:
         verbose_name = 'Устройство сброса'
@@ -336,8 +342,8 @@ class Sets(models.Model):
     devices                 = models.ManyToManyField('drop_device', blank=True)
     drivers                 = models.ManyToManyField('Drivers', blank=True)
 
-    def __int__(self):
-        return self.userfriendlyid
+    def __str__(self):
+        return '%s --- %s' % (self.date.strftime('%d.%m.%Y'), self.userfriendlyid)
 
     class Meta:
         ordering = ('-userfriendlyid',)
@@ -347,18 +353,18 @@ class Sets(models.Model):
 class Distribution(models.Model):
 
     med = (
-        ('Нет', 'Нет'),
+        ('нет', 'нет'),
         ('MO', 'MO'),
         ('CD-R', 'CD-R')
     )
 
     disk = (
-        ('Release(S:\)', 'Release(S:\)'),
-        ('Repository(R:\)', 'Repository(R:\)')
+        ('Release (S:\)', 'Release (S:\)'),
+        ('Repository (R:\)', 'Repository (R:\)')
     )
 
     spec = (
-        ('Нет', 'Нет'),
+        ('нет', 'нет'),
         ('ФА', 'ФА'),
         ('Бюллетень', 'Бюллетень')
     )
@@ -381,8 +387,8 @@ class Distribution(models.Model):
     osid                    = models.ForeignKey(OS_type, on_delete=models.CASCADE, blank=False)
     releasedisk             = models.CharField(max_length=50, blank=True, choices=disk)
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name
 
     class Meta:
         ordering = ('setid',)

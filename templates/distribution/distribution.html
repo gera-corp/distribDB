@@ -17,7 +17,7 @@
         {% for item in object_list %}
             <tr align="center">
                 <td><li class="list-group-item list-group-item-action">{{ item.name }}</li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.setid.userfriendlyid }}</li></td>
+                <td><li class="list-group-item list-group-item-action"><a href="/edit_set/edit_post/{{ item.setid.userfriendlyid }}/" class="badge badge-info">{{ item.setid.userfriendlyid }}</a></li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.date|date:'d.m.Y' }}</li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.organisationid }}</li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.login }}</li></td>
@@ -28,10 +28,10 @@
       <img src="{{ STATIC_URL }} /static/glyphicons/png/more.svg" alt="more">
     </button>
       <div class="dropdown-menu" aria-labelledby="{{ item.pk }}">
-      <a class="dropdown-item" href="{% url 'drivers_edit_post' pk=item.pk %}">Редактировать</a>
+      <a class="dropdown-item" href="{% url 'distrib_list_edit_post' pk=item.pk %}">Редактировать</a>
       <a class="dropdown-item" href="#" data-toggle="modal" data-target=#modal-{{ item.pk }}>Удалить</a>
     </div>
-        <form action="{% url 'drivers_delete' item.pk %}" method="POST">{% csrf_token %}{% include 'modal.html' %}</form>
+        <form action="{% url 'distrib_list_delete' item.pk %}" method="POST">{% csrf_token %}{% include 'modal.html' %}</form>
     </div>
                 </td>
             </tr>

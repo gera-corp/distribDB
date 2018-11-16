@@ -486,21 +486,62 @@ class WidgetForm(forms.ModelForm):
                                                                     widget=GroupedCheckboxSelectMultiple(),
                                                                     required=False)
 
+
 class Distrib(forms.ModelForm):
     class Meta:
         model = Distribution
-        fields = ['organisationid', 'complectno', 'name', 'date', 'contract', 'login', 'serial', 'language', 'media', 'os', 'specialcase', 'notes', 'langid', 'osid', 'releasedisk']
+        fields = [
+            'name',
+            'setid',
+            'date',
+            'organisationid',
+            'complectno',
+            'contract',
+            'login',
+            'serial',
+            #'language',
+            #'os',
+            'langid',
+            'media',
+            'osid',
+            'specialcase',
+            'releasedisk',
+            'notes'
+        ]
         labels = {
+            'setid': 'Набор',
             'organisationid': 'Заказчик',
             'complectno': '№ комплекта',
             'name': 'Название',
             'date': 'Дата создания дистрибутива',
-            'contract': 'Договор',
+            'contract': 'Контракт',
             'login': 'Логин',
             'serial': 'Серийный номер',
             'language': 'Язык',
             'media': 'Носитель',
             'os': 'Операционная система',
+            'langid': 'Язык',
+            'osid': 'Операционная система',
             'specialcase': 'Особые условия',
+            'releasedisk': 'Диск сборки',
             'notes': 'Примечания'
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'setid': forms.Select(attrs={'class': 'form-control'}),
+            'date': forms.DateInput(format="%d.%m.%Y", attrs={'class': 'form-control', 'placeholder': "дд-мм-гггг"}),
+            'organisationid': forms.Select(attrs={'class': 'form-control'}),
+            'complectno': forms.TextInput(attrs={'class': 'form-control'}),
+            'contract': forms.TextInput(attrs={'class': 'form-control'}),
+            'login': forms.TextInput(attrs={'class': 'form-control'}),
+            'serial': forms.TextInput(attrs={'class': 'form-control'}),
+            #'language': forms.TextInput(attrs={'class': 'form-control'}),
+            'media': forms.Select(attrs={'class': 'form-control'}),
+            #'os': forms.TextInput(attrs={'class': 'form-control'}),
+            'langid': forms.Select(attrs={'class': 'form-control'}),
+            'osid': forms.Select(attrs={'class': 'form-control'}),
+            'specialcase': forms.Select(attrs={'class': 'form-control'}),
+            'releasedisk': forms.Select(attrs={'class': 'form-control'}),
+            'notes': forms.Textarea(attrs={'class': 'form-control'}),
+
         }

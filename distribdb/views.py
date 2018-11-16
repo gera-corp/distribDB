@@ -1630,11 +1630,11 @@ def edit_set_new_post(request):
 
 
 #@cache_page(60 * 15)
-def edit_set_edit_post(request, pk):
+def edit_set_edit_post(request, userfriendlyid):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
     template = 'sets/edit_set_new_post.html'
-    post = get_object_or_404(Sets, pk=pk)
+    post = get_object_or_404(Sets, userfriendlyid=userfriendlyid)
 
     if request.method == 'POST':
         form = WidgetForm(request.POST, instance=post)
@@ -1665,8 +1665,7 @@ def distrib_list_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(setid__icontains=query) |
-            Q(organisationid__icontains=query)
+            Q(setid__userfriendlyid=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)
@@ -1681,3 +1680,56 @@ def distrib_list_view(request):
 
     }
     return render(request, 'distribution/distribution.html', context)
+
+
+def distrib_list_new_post(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    template = 'distribution/distribution_new_post.html'
+    form = Distrib(request.POST or None)
+    try:
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Запись нового набора, добавлена!')
+            form = Distrib()
+    except Exception as e:
+        messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
+    context = {
+        'form': form,
+    }
+    return render(request, template, context)
+
+
+def distrib_list_edit_post(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    template = 'distribution/distribution_new_post.html'
+    post = get_object_or_404(Distribution, pk=pk)
+
+    if request.method == 'POST':
+        form = Distrib(request.POST, instance=post)
+        try:
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Изменения внесены')
+        except Exception as e:
+            messages.warning(request, 'Изменения не внесены! Ошибка: {}'.format(e))
+
+    else:
+        form = Distrib(instance=post)
+
+    context = {
+        'form': form,
+        'post': post,
+    }
+    return render(request, template, context)
+
+
+def distrib_list_delete(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    obj = get_object_or_404(Distribution, pk=pk)
+    if request.method == 'POST':
+        obj.delete()
+        return redirect('/distrib_list')
+    return render(request, 'distrib_list/distribution.html', {'device': obj})
