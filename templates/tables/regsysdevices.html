@@ -13,7 +13,7 @@
         </thead>
         {% for item in object_list %}
             <tr align="center">
-                <td width="50%"><li class="list-group-item list-group-item-action">{{ item.regsysid }}</li></td>
+                <td width="50%"><li class="list-group-item list-group-item-action">{{ item.regsysid.username }}</li></td>
                 <td width="50%"><li class="list-group-item list-group-item-action">{{ item.deviceid }}</li></td>
                 <td>
     <div class="btn-group" role="group">
