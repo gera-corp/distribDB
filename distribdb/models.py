@@ -4,7 +4,6 @@ import uuid
 
 
 class hardlock_keys(models.Model):
-
     port_name = (
         ('USB', 'USB'),
         ('LPT', 'LPT')
@@ -25,18 +24,15 @@ class hardlock_keys(models.Model):
 
 
 class hasp_keys(models.Model):
-
     port_name = (
         ('USB', 'USB'),
         ('LPT', 'LPT')
     )
-
     type_key = (
         ('LocalHASP', 'LocalHASP'),
         ('TimeHASP', 'TimeHASP'),
         ('NetHASP', 'NetHasp')
     )
-
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     chipno                  = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Номером чипа')
     free                    = models.BooleanField(default=False)
@@ -46,6 +42,9 @@ class hasp_keys(models.Model):
     licenses                = models.CharField(max_length=255, blank=True)
     notes                   = models.TextField(max_length=8000, blank=True)
 
+    def __str__(self):
+        return self.chipno
+
     class Meta:
         verbose_name = 'Ключ аппаратной защиты (HASP)'
         ordering = ('chipno',)
@@ -53,7 +52,6 @@ class hasp_keys(models.Model):
 
 
 class Plane_types(models.Model):
-
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     sysname                 = models.CharField(max_length=50, blank=False)
     username                = models.CharField(max_length=50, blank=False)
@@ -71,7 +69,6 @@ class Plane_types(models.Model):
 
 
 class Lang_types(models.Model):
-
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     lang                    = models.CharField(max_length=50, blank=False)
     lcode                   = models.IntegerField()
@@ -85,7 +82,6 @@ class Lang_types(models.Model):
 
 
 class OS_type(models.Model):
-
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     os                      = models.CharField(max_length=50, blank=False)
     oscode                  = models.IntegerField(blank=False)
@@ -98,7 +94,6 @@ class OS_type(models.Model):
 
 
 class executables(models.Model):
-
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     filename                = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Именем файла')
 
@@ -112,7 +107,6 @@ class executables(models.Model):
 
 
 class FASModules(models.Model):
-
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     executableid            = models.ForeignKey('executables', on_delete=models.CASCADE, blank=False)
     fasno                   = models.IntegerField(blank=False, unique=True, verbose_name='FAS номером')
@@ -124,7 +118,6 @@ class FASModules(models.Model):
 
 
 class ExecutablePaths(models.Model):
-
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     executableid            = models.ForeignKey('executables', on_delete=models.CASCADE, blank=False)
     ispath                  = models.CharField(max_length=250, blank=False)
@@ -137,7 +130,6 @@ class ExecutablePaths(models.Model):
 
 
 class RegSystems(models.Model):
-
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     sysname                 = models.CharField(max_length=50, blank=False)
     username                = models.CharField(max_length=50, blank=False)
@@ -154,7 +146,6 @@ class RegSystems(models.Model):
 
 
 class TypeRegsys(models.Model):
-
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     typeid                  = models.ForeignKey('Plane_types', on_delete=models.CASCADE, blank=False, verbose_name='Тип ЛА')
     regsysid                = models.ForeignKey('RegSystems', on_delete=models.CASCADE, blank=False, verbose_name='Система регистрации')
@@ -174,7 +165,6 @@ class TypeRegsys(models.Model):
 
 
 class Tasks(models.Model):
-
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     sysname                 = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Системным именем')
     username                = models.CharField(max_length=50, blank=True)
@@ -189,7 +179,6 @@ class Tasks(models.Model):
 
 
 class TypeTasks(models.Model):
-
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     typeid                  = models.ForeignKey('Plane_types', on_delete=models.CASCADE, blank=False, verbose_name='Тип ЛА')
     taskid                  = models.ForeignKey('Tasks', on_delete=models.CASCADE, blank=False, verbose_name='База экспресса')
@@ -207,7 +196,6 @@ class TypeTasks(models.Model):
 
 
 class Misc(models.Model):
-
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name                    = models.CharField(max_length=255, blank=False, unique=True, verbose_name='Названием')
     sysname                 = models.CharField(max_length=50, blank=True)
@@ -224,7 +212,6 @@ class Misc(models.Model):
 
 
 class TypeMisc(models.Model):
-
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     typeid                  = models.ForeignKey('Plane_types', on_delete=models.CASCADE, blank=False, verbose_name='Тип ЛА')
     miscid                  = models.ForeignKey('Misc', on_delete=models.CASCADE, blank=False, verbose_name='Элемент')
@@ -242,7 +229,6 @@ class TypeMisc(models.Model):
 
 
 class Organisations(models.Model):
-
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name                    = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Названием')
     city                    = models.CharField(max_length=50, blank=True)
@@ -258,7 +244,6 @@ class Organisations(models.Model):
 
 
 class drop_device(models.Model):
-
     id                       = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     sysname                  = models.CharField(max_length=50, blank=False)
     username                 = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Пользовательским именем')
@@ -275,7 +260,6 @@ class drop_device(models.Model):
 
 
 class RegSysDevices(models.Model):
-
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     regsysid                = models.ForeignKey('RegSystems', on_delete=models.CASCADE, blank=False)
     deviceid                = models.ForeignKey('drop_device', on_delete=models.CASCADE, blank=False)
@@ -289,7 +273,6 @@ class RegSysDevices(models.Model):
 
 
 class Modules(models.Model):
-
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name                    = models.CharField(max_length=255, blank=False, unique=True, verbose_name='Названием')
     ispath                  = models.CharField(max_length=255, blank=False)
@@ -305,7 +288,6 @@ class Modules(models.Model):
 
 
 class Drivers(models.Model):
-
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name                    = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Названием')
     xno                     = models.IntegerField(blank=False)
@@ -330,7 +312,6 @@ def ids():
 
 
 class Sets(models.Model):
-
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     userfriendlyid          = models.BigIntegerField(default=ids, unique=True, editable=False)
     date                    = models.DateField(null=False, blank=False, default=datetime.now)
@@ -351,24 +332,20 @@ class Sets(models.Model):
 
 
 class Distribution(models.Model):
-
     med = (
         ('нет', 'нет'),
         ('MO', 'MO'),
         ('CD-R', 'CD-R')
     )
-
     disk = (
         ('Release (S:\)', 'Release (S:\)'),
         ('Repository (R:\)', 'Repository (R:\)')
     )
-
     spec = (
         ('нет', 'нет'),
         ('ФА', 'ФА'),
         ('Бюллетень', 'Бюллетень')
     )
-
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     setid                   = models.ForeignKey(Sets, on_delete=models.CASCADE, blank=False)
     organisationid          = models.ForeignKey(Organisations, on_delete=models.CASCADE, blank=False)
@@ -386,10 +363,24 @@ class Distribution(models.Model):
     langid                  = models.ForeignKey(Lang_types, on_delete=models.CASCADE, blank=False)
     osid                    = models.ForeignKey(OS_type, on_delete=models.CASCADE, blank=False)
     releasedisk             = models.CharField(max_length=50, blank=True, choices=disk)
+    distribhaspkeys         = models.ManyToManyField(hasp_keys, blank=True, through='HaspRelationship')
 
-    # def __str__(self):
-    #     return self.name
+    def __str__(self):
+        return self.name
 
     class Meta:
         ordering = ('setid',)
         db_table = 'distributions'
+
+
+class HaspRelationship(models.Model):
+    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    distribution_id         = models.ForeignKey('Distribution', on_delete=models.CASCADE, blank=False)
+    hasp_keys_id            = models.ForeignKey('hasp_keys', on_delete=models.CASCADE, blank=False)
+    date                    = models.DateField(null=False, blank=False, default=datetime.now)
+
+    class Meta:
+        db_table = 'distributions_distribhaspkeys'
+
+    def __str__(self):
+        return self.date.strftime('%d.%m.%Y')

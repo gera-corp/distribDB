@@ -506,7 +506,8 @@ class Distrib(forms.ModelForm):
             'osid',
             'specialcase',
             'releasedisk',
-            'notes'
+            'notes',
+            'distribhaspkeys'
         ]
         labels = {
             'setid': 'Набор',
@@ -517,14 +518,15 @@ class Distrib(forms.ModelForm):
             'contract': 'Контракт',
             'login': 'Логин',
             'serial': 'Серийный номер',
-            'language': 'Язык',
+            # 'language': 'Язык',
             'media': 'Носитель',
-            'os': 'Операционная система',
+            # 'os': 'Операционная система',
             'langid': 'Язык',
             'osid': 'Операционная система',
             'specialcase': 'Особые условия',
             'releasedisk': 'Диск сборки',
-            'notes': 'Примечания'
+            'notes': 'Примечания',
+            'distribhaspkeys': 'Ключи дистрибутива HASP',
         }
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -543,5 +545,7 @@ class Distrib(forms.ModelForm):
             'specialcase': forms.Select(attrs={'class': 'form-control'}),
             'releasedisk': forms.Select(attrs={'class': 'form-control'}),
             'notes': forms.Textarea(attrs={'class': 'form-control'}),
+            'distribhaspkeys': forms.CheckboxSelectMultiple(),
 
         }
+

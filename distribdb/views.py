@@ -1705,7 +1705,7 @@ def distrib_list_edit_post(request, pk):
         return redirect('/accounts/login/')
     template = 'distribution/distribution_new_post.html'
     post = get_object_or_404(Distribution, pk=pk)
-
+    haspdate = HaspRelationship.objects.select_related('distribution_id', 'hasp_keys_id').all().order_by('date')
     if request.method == 'POST':
         form = Distrib(request.POST, instance=post)
         try:
@@ -1721,6 +1721,7 @@ def distrib_list_edit_post(request, pk):
     context = {
         'form': form,
         'post': post,
+        'haspdate': haspdate,
     }
     return render(request, template, context)
 

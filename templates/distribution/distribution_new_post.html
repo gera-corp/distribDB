@@ -13,8 +13,68 @@
         <p class="text-monospace small">Данная страница позволяет добавлять/редактировать
 <form method="post">{% csrf_token %}
     <div class="form-group">
-{{ form.as_p }}
+Название
+{{ form.name }}
+<br>Набор
+{{ form.setid }}
+<br>Дата создания
+{{ form.date }}
+<br>Заказчик
+{{ form.organisationid }}
+<br>№ комплекта
+{{ form.complectno }}
+<br>Контракт
+{{ form.contract }}
+<br>Логин
+{{ form.login }}
+<br>Серийный номер
+{{ form.serial }}
+<br>Язык
+{{ form.langid }}
+<br>Носитель
+{{ form.media }}
+<br>Операционная система
+{{ form.osid }}
+<br>Особые условия
+{{ form.specialcase }}
+<br>Диск сборки
+{{ form.releasedisk }}
+<br>Примечания
+{{ form.notes }}
+<br>{% for checkbox in form.distribhaspkeys %}{% if checkbox.data.selected == True %}
+{{ checkbox.choice_label }}<br>
+{{ checkbox.data }}
+{% endif %}{% endfor %}
 
+    <br><br>
+
+{#        {%for item in haspdate %}{{ item }} {% endfor %}#}
+<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#hasp">Ключи дистрибутива HASP
+    <script>var numchkbox=0;{% for checkbox in form.distribhaspkeys %}{% if checkbox.data.selected == True %}numchkbox++;{% endif %}
+    {% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-light /">',numchkbox)}
+    </script>
+</button><br><br>
+<div class="modal fade" id="hasp" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLongTitle">Ключи дистрибутива HASP</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" align="center">
+    {% for checkbox in form.distribhaspkeys %}
+<label class="btn btn-outline-secondary btn-sm">
+    {{ checkbox.tag }} {{ checkbox.choice_label }}
+</label>&nbsp
+{% endfor %}</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
     <button type="submit" class="btn btn-secondary">Сохранить</button>
     <a class="btn btn-secondary" href="/distrib_list" role="button">Отмена</a>
