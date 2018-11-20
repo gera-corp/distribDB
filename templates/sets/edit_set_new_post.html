@@ -26,7 +26,7 @@
         <th><h6><li class="list-group-item list-group-item-info">Доп. элементы</li></h6></th>
     </tr>
         <td width="33%">
-{% regroup form.regsystems by data.group as feature_list %}
+{% regroup form.typeregsystems by data.group as feature_list %}
 {% for group in feature_list %}
     <label type="radio" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
         <script>var numchkbox=0;{% for choice in group.list %}{% if choice.data.selected == True %}numchkbox++;{% endif %}{% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-light /">',numchkbox)}</script></label>
@@ -90,7 +90,7 @@
 </div>
 
 <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#resys">Системы регистриции
-    <script>var numchkbox=0;{% for checkbox in form.typeregsystems %}{% if checkbox.data.selected == True %}numchkbox++;{% endif %}
+    <script>var numchkbox=0;{% for checkbox in form.regsystems %}{% if checkbox.data.selected == True %}numchkbox++;{% endif %}
     {% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-light /">',numchkbox)}
     </script>
 </button><br><br>
@@ -104,7 +104,7 @@
         </button>
       </div>
       <div class="modal-body">
-    {% for checkbox in form.typeregsystems %}
+    {% for checkbox in form.regsystems %}
     {% if 'False' in checkbox.data.label %}<label class="btn btn-outline-secondary btn-sm">{{ checkbox.tag }} {{ checkbox.data.label|cut:'False' }}</label><br>{% endif %}
 {% endfor %}</div>
       <div class="modal-footer">

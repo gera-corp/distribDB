@@ -41,14 +41,7 @@
 {{ form.releasedisk }}
 <br>Примечания
 {{ form.notes }}
-<br>{% for checkbox in form.distribhaspkeys %}{% if checkbox.data.selected == True %}
-{{ checkbox.choice_label }}<br>
-{{ checkbox.data }}
-{% endif %}{% endfor %}
-
-    <br><br>
-
-{#        {%for item in haspdate %}{{ item }} {% endfor %}#}
+<br>
 <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#hasp">Ключи дистрибутива HASP
     <script>var numchkbox=0;{% for checkbox in form.distribhaspkeys %}{% if checkbox.data.selected == True %}numchkbox++;{% endif %}
     {% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-light /">',numchkbox)}

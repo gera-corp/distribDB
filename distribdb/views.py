@@ -1661,7 +1661,7 @@ def distrib_list_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
     obj_list = Distribution.objects.all()
-
+    obj_list1 = HaspRelationship.objects.all()
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1677,7 +1677,7 @@ def distrib_list_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
-
+        'obj_list1': obj_list1
     }
     return render(request, 'distribution/distribution.html', context)
 
@@ -1705,7 +1705,7 @@ def distrib_list_edit_post(request, pk):
         return redirect('/accounts/login/')
     template = 'distribution/distribution_new_post.html'
     post = get_object_or_404(Distribution, pk=pk)
-    haspdate = HaspRelationship.objects.select_related('distribution_id', 'hasp_keys_id').all().order_by('date')
+
     if request.method == 'POST':
         form = Distrib(request.POST, instance=post)
         try:
@@ -1721,7 +1721,7 @@ def distrib_list_edit_post(request, pk):
     context = {
         'form': form,
         'post': post,
-        'haspdate': haspdate,
+
     }
     return render(request, template, context)
 

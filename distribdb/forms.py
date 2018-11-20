@@ -452,13 +452,13 @@ class GroupedCheckboxSelectMultiple(forms.CheckboxSelectMultiple):
 class WidgetForm(forms.ModelForm):
     class Meta:
         model = Sets
-        fields = ['date', 'regsystems', 'typetasks', 'typemisc', 'modules', 'typeregsystems', 'devices', 'drivers']
+        fields = ['date', 'typeregsystems', 'typetasks', 'typemisc', 'modules', 'regsystems', 'devices', 'drivers']
         labels = {
-            'regsystems': 'Первичные базы',
+            'typeregsystems': 'Первичные базы',
             'typetasks': 'Расчётные базы',
             'typemisc': 'Дополнительные элементы',
             'modules': 'Дополнительные модули ПО',
-            'typeregsystems': 'Системы решистрации',
+            'regsystems': 'Системы решистрации',
             'devices': 'Устройства сброса',
             'drivers': 'Драйверы устройств'
         }
@@ -466,14 +466,14 @@ class WidgetForm(forms.ModelForm):
         widgets = {
             'date': forms.DateInput(format="%d.%m.%Y", attrs={'class': 'form-control', 'placeholder': "дд-мм-гггг"}),
             'modules': forms.CheckboxSelectMultiple(),
-            'typeregsystems': forms.CheckboxSelectMultiple(),
+            'regsystems': forms.CheckboxSelectMultiple(),
             'devices': forms.CheckboxSelectMultiple(),
             'drivers': forms.CheckboxSelectMultiple()
         }
 
     def __init__(self, *args, **kwargs):
         super(WidgetForm, self).__init__(*args, **kwargs)
-        self.fields['regsystems'] = GroupedModelMultipleChoiceField(group_by_field='typeid',
+        self.fields['typeregsystems'] = GroupedModelMultipleChoiceField(group_by_field='typeid',
                                                                   queryset=TypeRegsys.objects.select_related('regsysid'),
                                                                   widget=GroupedCheckboxSelectMultiple(),
                                                                   required=False)

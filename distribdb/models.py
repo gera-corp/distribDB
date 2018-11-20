@@ -315,13 +315,13 @@ class Sets(models.Model):
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     userfriendlyid          = models.BigIntegerField(default=ids, unique=True, editable=False)
     date                    = models.DateField(null=False, blank=False, default=datetime.now)
-    regsystems              = models.ManyToManyField('TypeRegsys')
-    typetasks               = models.ManyToManyField('TypeTasks')
-    typemisc                = models.ManyToManyField('TypeMisc')
-    modules                 = models.ManyToManyField('Modules', blank=True)
-    typeregsystems          = models.ManyToManyField('RegSystems', blank=True)
-    devices                 = models.ManyToManyField('drop_device', blank=True)
-    drivers                 = models.ManyToManyField('Drivers', blank=True)
+    typeregsystems          = models.ManyToManyField('TypeRegsys', through='TypeRegSysRelationship', through_fields=('sets', 'typeregsys'))
+    typetasks               = models.ManyToManyField('TypeTasks', through='TypeTasksRelationship', through_fields=('sets', 'typetasks'))
+    typemisc                = models.ManyToManyField('TypeMisc', through='TypeMiscRelationship', through_fields=('sets', 'typemisc'))
+    modules                 = models.ManyToManyField('Modules', through='ModulesRelationship', through_fields=('sets', 'modules'), blank=True)
+    regsystems              = models.ManyToManyField('RegSystems', through='RegSystemsRelationship', through_fields=('sets', 'regsystems'), blank=True)
+    devices                 = models.ManyToManyField('drop_device', through='drop_deviceRelationship', through_fields=('sets', 'drop_device'), blank=True)
+    drivers                 = models.ManyToManyField('Drivers', through='DriversRelationship', through_fields=('sets','drivers'), blank=True)
 
     def __str__(self):
         return '%s --- %s' % (self.date.strftime('%d.%m.%Y'), self.userfriendlyid)
@@ -329,6 +329,76 @@ class Sets(models.Model):
     class Meta:
         ordering = ('-userfriendlyid',)
         db_table = 'sets'
+
+
+class TypeRegSysRelationship(models.Model):
+    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    sets                    = models.ForeignKey('Sets', on_delete=models.CASCADE)
+    typeregsys              = models.ForeignKey('TypeRegsys', on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'sets_typeregsystems'
+        auto_created = True
+
+
+class TypeTasksRelationship(models.Model):
+    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    sets                    = models.ForeignKey('Sets', on_delete=models.CASCADE)
+    typetasks               = models.ForeignKey('TypeTasks', on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'sets_typetasks'
+        auto_created = True
+
+
+class TypeMiscRelationship(models.Model):
+    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    sets                    = models.ForeignKey('Sets', on_delete=models.CASCADE)
+    typemisc                = models.ForeignKey('TypeMisc', on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'sets_typemisc'
+        auto_created = True
+
+
+class ModulesRelationship(models.Model):
+    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    sets                    = models.ForeignKey('Sets', on_delete=models.CASCADE)
+    modules                 = models.ForeignKey('Modules', on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'sets_modules'
+        auto_created = True
+
+
+class RegSystemsRelationship(models.Model):
+    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    sets                    = models.ForeignKey('Sets', on_delete=models.CASCADE)
+    regsystems              = models.ForeignKey('RegSystems', on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'sets_regsystems'
+        auto_created = True
+
+
+class drop_deviceRelationship(models.Model):
+    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    sets                    = models.ForeignKey('Sets', on_delete=models.CASCADE)
+    drop_device             = models.ForeignKey('drop_device', on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'sets_devices'
+        auto_created = True
+
+
+class DriversRelationship(models.Model):
+    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    sets                    = models.ForeignKey('Sets', on_delete=models.CASCADE)
+    drivers                 = models.ForeignKey('Drivers', on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'sets_drivers'
+        auto_created = True
 
 
 class Distribution(models.Model):
@@ -347,8 +417,8 @@ class Distribution(models.Model):
         ('Бюллетень', 'Бюллетень')
     )
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    setid                   = models.ForeignKey(Sets, on_delete=models.CASCADE, blank=False)
-    organisationid          = models.ForeignKey(Organisations, on_delete=models.CASCADE, blank=False)
+    setid                   = models.ForeignKey('Sets', on_delete=models.CASCADE, blank=False)
+    organisationid          = models.ForeignKey('Organisations', on_delete=models.CASCADE, blank=False)
     complectno              = models.CharField(max_length=50, blank=True)
     name                    = models.CharField(max_length=50, blank=False)
     date                    = models.DateField(null=False, blank=False, default=datetime.now)
@@ -360,10 +430,10 @@ class Distribution(models.Model):
     os                      = models.CharField(max_length=50, blank=True)
     specialcase             = models.CharField(max_length=50, blank=False, choices=spec)
     notes                   = models.CharField(max_length=255, blank=True)
-    langid                  = models.ForeignKey(Lang_types, on_delete=models.CASCADE, blank=False)
-    osid                    = models.ForeignKey(OS_type, on_delete=models.CASCADE, blank=False)
+    langid                  = models.ForeignKey('Lang_types', on_delete=models.CASCADE, blank=False)
+    osid                    = models.ForeignKey('OS_type', on_delete=models.CASCADE, blank=False)
     releasedisk             = models.CharField(max_length=50, blank=True, choices=disk)
-    distribhaspkeys         = models.ManyToManyField(hasp_keys, blank=True, through='HaspRelationship')
+    distribhaspkeys         = models.ManyToManyField('hasp_keys', blank=True, through='HaspRelationship')
 
     def __str__(self):
         return self.name
@@ -375,12 +445,13 @@ class Distribution(models.Model):
 
 class HaspRelationship(models.Model):
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    distribution_id         = models.ForeignKey('Distribution', on_delete=models.CASCADE, blank=False)
-    hasp_keys_id            = models.ForeignKey('hasp_keys', on_delete=models.CASCADE, blank=False)
+    distribid               = models.ForeignKey('Distribution', on_delete=models.CASCADE, blank=False)
+    hasp_keys               = models.ForeignKey('hasp_keys', on_delete=models.CASCADE, blank=False)
     date                    = models.DateField(null=False, blank=False, default=datetime.now)
 
     class Meta:
-        db_table = 'distributions_distribhaspkeys'
+        db_table = 'distribhaspkeys'
+        auto_created = True
 
     def __str__(self):
         return self.date.strftime('%d.%m.%Y')
