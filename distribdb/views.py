@@ -1661,7 +1661,7 @@ def distrib_list_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
     obj_list = Distribution.objects.all()
-    obj_list1 = HaspRelationship.objects.all()
+
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1677,7 +1677,6 @@ def distrib_list_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
-        'obj_list1': obj_list1
     }
     return render(request, 'distribution/distribution.html', context)
 

@@ -433,7 +433,7 @@ class Distribution(models.Model):
     langid                  = models.ForeignKey('Lang_types', on_delete=models.CASCADE, blank=False)
     osid                    = models.ForeignKey('OS_type', on_delete=models.CASCADE, blank=False)
     releasedisk             = models.CharField(max_length=50, blank=True, choices=disk)
-    distribhaspkeys         = models.ManyToManyField('hasp_keys', blank=True, through='HaspRelationship')
+    distribhaspkeys         = models.ManyToManyField('hasp_keys', blank=True, through='HaspRelationship', through_fields=('distribid', 'hasp_keys'))
 
     def __str__(self):
         return self.name
@@ -454,4 +454,4 @@ class HaspRelationship(models.Model):
         auto_created = True
 
     def __str__(self):
-        return self.date.strftime('%d.%m.%Y')
+        return '%s %s' % (self.date.strftime('%d.%m.%Y'), self.hasp_keys)
