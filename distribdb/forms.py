@@ -507,7 +507,8 @@ class Distrib(forms.ModelForm):
             'specialcase',
             'releasedisk',
             'notes',
-            'distribhaspkeys'
+            'distribhaspkeys',
+            'distribhardlockkeys'
         ]
         labels = {
             'setid': 'Набор',
@@ -527,6 +528,7 @@ class Distrib(forms.ModelForm):
             'releasedisk': 'Диск сборки',
             'notes': 'Примечания',
             'distribhaspkeys': 'Ключи дистрибутива HASP',
+            'distribhardlockkeys': 'Ключи дистрибутива Hardlock'
         }
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -546,6 +548,7 @@ class Distrib(forms.ModelForm):
             'releasedisk': forms.Select(attrs={'class': 'form-control'}),
             'notes': forms.Textarea(attrs={'class': 'form-control'}),
             'distribhaspkeys': forms.CheckboxSelectMultiple(),
+            'distribhardlockkeys': forms.CheckboxSelectMultiple()
 
         }
 

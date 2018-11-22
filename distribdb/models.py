@@ -22,6 +22,9 @@ class hardlock_keys(models.Model):
         ordering = ('chipno',)
         db_table = 'hl_keys'
 
+    def __str__(self):
+        return self.chipno
+
 
 class hasp_keys(models.Model):
     port_name = (
@@ -39,7 +42,7 @@ class hasp_keys(models.Model):
     port                    = models.CharField(max_length=50, blank=False, default=None, choices=port_name)
     type                    = models.CharField(max_length=50, blank=False, default=None, choices=type_key)
     timelimit               = models.DateField(null=True, blank=True)
-    licenses                = models.CharField(max_length=255, blank=True)
+    licenses                = models.CharField(max_length=255, blank=True, null=True)
     notes                   = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
@@ -434,6 +437,7 @@ class Distribution(models.Model):
     osid                    = models.ForeignKey('OS_type', on_delete=models.CASCADE, blank=False)
     releasedisk             = models.CharField(max_length=50, blank=True, choices=disk)
     distribhaspkeys         = models.ManyToManyField('hasp_keys', blank=True, through='HaspRelationship', through_fields=('distribid', 'hasp_keys'))
+    distribhardlockkeys     = models.ManyToManyField('hardlock_keys', blank=True, through='HardLockRelationship', through_fields=('distribid', 'hardlock_keys'))
 
     def __str__(self):
         return self.name
@@ -455,3 +459,14 @@ class HaspRelationship(models.Model):
 
     def __str__(self):
         return '%s %s' % (self.date.strftime('%d.%m.%Y'), self.hasp_keys)
+
+
+class HardLockRelationship(models.Model):
+    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    distribid               = models.ForeignKey('Distribution', on_delete=models.CASCADE, blank=False)
+    hardlock_keys           = models.ForeignKey('hardlock_keys', on_delete=models.CASCADE, blank=False)
+    date                    = models.DateField(null=False, blank=False, default=datetime.now)
+
+    class Meta:
+        db_table = 'distribhlkeys'
+        auto_created = True

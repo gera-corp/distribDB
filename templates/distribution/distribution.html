@@ -43,10 +43,77 @@
     <li class="list-group-item">Специальные условия:<p class="font-weight-bold">{{ item.specialcase }}</p></li>
     <li class="list-group-item">Диск сборки:<p class="font-weight-bold">{{ item.releasedisk }}</p></li>
     <li class="list-group-item">Примечания:<p class="font-weight-bold">{{ item.notes }}</p></li>
-    <li class="list-group-item">Ключи HASP:
-        {% for test in item.distribhaspkeys.all %}
-    <p class="font-weight-bold">{{ test.chipno }}</p>
-    {% endfor %}</li>
+    <li class="list-group-item">Ключи (HASP):
+    <div class="container">
+  <div class="row">
+    <div class="col-sm">
+      Дата:<br>
+{% for haspdate in item.hasprelationship_set.all %}
+    <span class="font-weight-bold">{{ haspdate.date|date:'d.m.Y' }}</span><br>
+{% endfor %}
+    </div>
+    <div class="col-sm">
+      № чипа:<br>
+{% for haspkey in item.hasprelationship_set.all %}
+    <span class="font-weight-bold">{{ haspkey.hasp_keys }}</span><br>
+
+{% endfor %}
+    </div>
+    <div class="col-sm">
+      Ограничение:<br>
+     {% for limit in item.distribhaspkeys.all %}
+     {% if not limit.timelimit is Null %}
+         <span class="font-weight-bold">{{ limit.timelimit|date:'d.m.Y' }}</span><br>
+     {% endif %}
+
+         {% endfor %}
+    </div>
+{#    <div class="col-sm">#}
+{#      Лицензий:<br>#}
+{#     {% for lic in item.distribhaspkeys.all %}#}
+{#     {% if not lic.licenses is Null %}#}
+{#         <span class="font-weight-bold">{{ lic.licenses }}</span><br>#}
+{#     {% endif %}#}
+{#         {% endfor %}#}
+{#    </div>#}
+{#    <div class="col-sm">#}
+{#      Свободен:<br>#}
+{#     {% for free in item.distribhaspkeys.all %}#}
+{#     {% if True in free.free %}#}
+{#         <span class="font-weight-bold">{{ free.free }}</span><br>#}
+{#     {% endif %}#}
+{#         {% endfor %}#}
+{#    </div>#}
+{#<div class="col-sm">#}
+{#      Примечания:<br>#}
+{#     {% for notess in item.distribhaspkeys.all %}#}
+{#     {% if not notess.notes is Null %}#}
+{#         <span class="font-weight-bold">{{ notess.notes }}</span><br>#}
+{#     {% endif %}#}
+{#         {% endfor %}#}
+{#</div>#}
+    </div>
+</div>
+    </li>
+
+    <li class="list-group-item">Ключи (Hardlock):
+            <div class="container">
+  <div class="row">
+    <div class="col-sm">
+      Дата:<br>
+{% for hardlockdate in item.hardlockrelationship_set.all %}
+    <span class="font-weight-bold">{{ hardlockdate.date|date:'d.m.Y' }}</span><br>
+{% endfor %}
+    </div>
+    <div class="col-sm">
+      № чипа:<br>
+{% for hardlockkey in item.hardlockrelationship_set.all %}
+    <span class="font-weight-bold">{{ hardlockkey.hardlock_keys }}</span><br>
+{% endfor %}
+    </div>
+  </div>
+</div>
+    </li>
 </ul>
 </div>
       <div class="modal-footer">
@@ -55,7 +122,7 @@
       </div>
     </div>
   </div>
-</div>
+    </div>
                 <td><li class="list-group-item list-group-item-action"><a href="/edit_set/edit_post/{{ item.setid.userfriendlyid }}/" class="badge badge-info">{{ item.setid.userfriendlyid }}</a></li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.date|date:'d.m.Y' }}</li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.organisationid }}</li></td>

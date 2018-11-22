@@ -110,8 +110,8 @@ def hasp_keys_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-             Q(ChipNo__icontains=query) |
-             Q(Notes__icontains=query)
+             Q(chipno__icontains=query) |
+             Q(notes__icontains=query)
          ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20) #Сколько записей на стрицу отображатся
@@ -191,8 +191,8 @@ def hardlock_keys_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(ChipNo__icontains=query) |
-            Q(Notes__icontains=query)
+            Q(chipno__icontains=query) |
+            Q(notes__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -1665,7 +1665,8 @@ def distrib_list_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(setid__userfriendlyid=query)
+            Q(name__icontains=query)
+            # Q(setid__userfriendlyid=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)
