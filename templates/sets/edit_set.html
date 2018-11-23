@@ -2,6 +2,7 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container table-responsive-sm shadow-lg p-3 mb-5 bg-white rounded">
+        <p class="text-monospace small">Данная страница позволяет просмотреть список наборов.</p>
         <a class="btn btn-secondary" href="new_post/" role="button">Добавить</a><br><br>
         <table class="table table-sm table-borderless form-control-sm">
             <thead>
@@ -15,10 +16,10 @@
             {% for item in object_list %}
                 <tr align="center">
                     <ul class="list-group">
-                        <td>
+                        <td width="50%">
                             <li class="list-group-item list-group-item-action">{{ item.userfriendlyid }}</li>
                         </td>
-                        <td>
+                        <td width="50%">
                             <li class="list-group-item list-group-item-action">{{ item.date|date:'d.m.Y' }}</li>
                         </td>
                         <td>

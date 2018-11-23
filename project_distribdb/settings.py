@@ -26,11 +26,7 @@ SECRET_KEY = 'ay_+^dvht@o20avxch72^!lxhj#319qdcg0=b8en&0ble@cpzn'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '127.0.0.1',
-    '10.10.1.119',
-    '10.10.1.12',
-    'geracorp.ru',
-    '77.37.207.26'
+    '*'
 ]
 
 
