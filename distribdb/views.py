@@ -1630,11 +1630,11 @@ def edit_set_new_post(request):
 
 
 #@cache_page(60 * 15)
-def edit_set_edit_post(request, userfriendlyid):
+def edit_set_edit_post(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
     template = 'sets/edit_set_new_post.html'
-    post = get_object_or_404(Sets, userfriendlyid=userfriendlyid)
+    post = get_object_or_404(Sets, pk=pk)
 
     if request.method == 'POST':
         form = WidgetForm(request.POST, instance=post)
@@ -1661,12 +1661,12 @@ def distrib_list_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
     obj_list = Distribution.objects.all()
-
+    obj_update = DistribUpdates.objects.all()
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
+            Q(setid__userfriendlyid__icontains=query) |
             Q(name__icontains=query)
-            # Q(setid__userfriendlyid=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)
@@ -1678,6 +1678,7 @@ def distrib_list_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
+        'obj_update': obj_update
     }
     return render(request, 'distribution/distribution.html', context)
 

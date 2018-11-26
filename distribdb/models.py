@@ -470,3 +470,16 @@ class HardLockRelationship(models.Model):
     class Meta:
         db_table = 'distribhlkeys'
         auto_created = True
+
+
+class DistribUpdates(models.Model):
+    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    distribid               = models.ForeignKey('Distribution', on_delete=models.CASCADE, blank=False)
+    newdistribid            = models.ForeignKey('self', on_delete=models.CASCADE, blank=True)
+    date                    = models.DateField(null=False, blank=False, default=datetime.now)
+    source                  = models.CharField(max_length=80, null=True, blank=True)
+    cause                   = models.CharField(max_length=80, null=True, blank=True)
+    notes                   = models.CharField(max_length=5192, null=True, blank=True)
+
+    class Meta:
+        db_table = 'distribupdates'

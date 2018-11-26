@@ -103,8 +103,23 @@
     <div class="col">
         Дата:
     </div>
+    <div class="col">
+        Маркировка:
+    </div>
      <div class="col">
         № чипа:
+     </div>
+    <div class="col">
+        Субкод:
+    </div>
+    <div class="col">
+        Адрес модуля:
+    </div>
+    <div class="col">
+        Свободен:
+    </div>
+     <div class="col">
+        Примечания:
      </div>
         </div>
 {% for hardlock in item.hardlockrelationship_set.all %}
@@ -115,8 +130,26 @@
         {{ hardlock.date|date:'d.m.Y' }}
     </div>
     <div class="col-sm">
-        {{ hardlock.hardlock_keys }}
-    </div></div></span>
+        {{ hardlock.hardlock_keys.mark }}
+    </div>
+    <div class="col-sm">
+        {{ hardlock.hardlock_keys.chipno }}
+    </div>
+    <div class="col-sm">
+        {{ hardlock.hardlock_keys.subcode }}
+    </div>
+    <div class="col-sm">
+        {{ hardlock.hardlock_keys.modaddr }}
+    </div>
+    <div class="col-sm">
+        {% if not hardlock.hardlock_keys.free is False %}
+        Да
+        {% endif %}
+    </div>
+    <div class="col-sm">
+        {{ hardlock.hardlock_keys.notes }}
+    </div>
+    </div></span>
 {% endfor %}
     </li>
 </ul>
@@ -128,7 +161,7 @@
     </div>
   </div>
     </div>
-                <td><li class="list-group-item list-group-item-action"><a href="/edit_set/edit_post/{{ item.setid.userfriendlyid }}/" class="badge badge-info">{{ item.setid.userfriendlyid }}</a></li></td>
+                <td><li class="list-group-item list-group-item-action"><a href="/edit_set/edit_post/{{ item.setid.id }}/" class="badge badge-info">{{ item.setid.userfriendlyid }}</a></li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.date|date:'d.m.Y' }}</li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.organisationid }}</li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.login }}</li></td>
