@@ -1661,7 +1661,6 @@ def distrib_list_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
     obj_list = Distribution.objects.all()
-    obj_update = DistribUpdates.objects.all()
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1678,7 +1677,6 @@ def distrib_list_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
-        'obj_update': obj_update
     }
     return render(request, 'distribution/distribution.html', context)
 
@@ -1735,3 +1733,26 @@ def distrib_list_delete(request, pk):
         obj.delete()
         return redirect('/distrib_list')
     return render(request, 'distrib_list/distribution.html', {'device': obj})
+
+
+def distrib_update_view(request):
+    if not request.user.is_authenticated:
+        return redirect('/account/login/')
+    obj_list = DistribUpRelationship.objects.all().order_by('date')
+    query = request.GET.get('q')
+    if query:
+        obj_list = obj_list.filter(
+            Q(distribid__name__icontains=query)
+        ).distinct()
+    page = request.GET.get('page')
+    paginator = Paginator(obj_list, 20)
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        'object_list': queryset,
+    }
+    return render(request, 'distribution/distrib_update.html', context)

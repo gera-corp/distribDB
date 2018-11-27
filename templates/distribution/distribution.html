@@ -151,7 +151,29 @@
     </div>
     </div></span>
 {% endfor %}
-    </li>
+     </li>
+<li class="list-group-item">Обвноления дистрибутива:
+<div class="container">
+<div class="row">
+    <div class="col">
+        Дистрибутив
+    </div>
+    <div class="col">
+        Новый дистрибутив:
+    </div>
+</div>
+
+{% for test in item.distribupdate.all %}
+ <li class="list-group-item">
+    <span class="font-weight-bold">
+    <div class="row">
+    <div class="col-sm">
+
+    {{ test.notes }} {{ test.name }} {{ test.date|date:'d.m.Y' }} {{ test.source }}
+</div></div></span>
+{% endfor %}
+</li>
+
 </ul>
 </div>
       <div class="modal-footer">
