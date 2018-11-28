@@ -115,9 +115,9 @@ urlpatterns = [
     path('distrib_list/edit_post/<uuid:pk>/', views.distrib_list_edit_post, name='distrib_list_edit_post'),
 
     path('distrib_update/', views.distrib_update_view),
-    # path('distrib_update/<uuid:pk>/delete/', views.distrib_list_delete, name='distrib_list_delete'),
-    # path('distrib_update/new_post/', views.distrib_list_new_post),
-    # path('distrib_update/edit_post/<uuid:pk>/', views.distrib_list_edit_post, name='distrib_list_edit_post'),
+    path('distrib_update/<uuid:pk>/delete/', views.distrib_update_delete, name='distrib_update_delete'),
+    path('distrib_update/new_post/', views.distrib_update_new_post),
+    path('distrib_update/edit_post/<uuid:pk>/', views.distrib_update_edit_post, name='distrib_update_edit_post'),
 
     path('accounts/', include('django.contrib.auth.urls')),
     path('logout/', LogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),

@@ -1,0 +1,22 @@
+<title>Редактирование</title>
+{% extends 'base.html' %}
+{% block content %}
+<div class="offset-3 col-md-6 shadow p-3 mb-5 bg-white rounded">
+    {% if messages %}
+        {% for message in messages %}
+            <div align="center" {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
+            <strong>{{ message }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
+        <p class="text-monospace small">Данная страница позволяет внести изменения в информацию об обновлении дистритива.
+<form method="post">{% csrf_token %}
+    <div class="form-group">
+        {{ form.as_p }}
+    </div>
+    <button type="submit" class="btn btn-secondary">Сохранить</button>
+    <a class="btn btn-secondary" href="/distrib_update" role="button">Отмена</a>
+</form>
+</div>
+{% endblock %}

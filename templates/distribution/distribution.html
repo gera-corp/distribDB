@@ -17,7 +17,7 @@
         </thead>
         {% for item in object_list %}
             <tr align="center">
-                <td><button type="button" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.id }}">{{ item.name }}</button></td>
+                <td><a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.id }}">{{ item.name }}</a></td>
     <div class="modal fade" id="id{{ item.id }}" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -43,50 +43,51 @@
     <li class="list-group-item">Операционная система:<p class="font-weight-bold">{{ item.osid }}</p></li>
     <li class="list-group-item">Специальные условия:<p class="font-weight-bold">{{ item.specialcase }}</p></li>
     <li class="list-group-item">Диск сборки:<p class="font-weight-bold">{{ item.releasedisk }}</p></li>
-    <li class="list-group-item">Примечания:<p class="font-weight-bold">{{ item.notes }}</p></li>
-    <li class="list-group-item">Ключи (HASP):
+    <li class="list-group-item">Примечания:<p class="font-weight-bold">{{ item.notes }}</p></li><br>
+    <li class="list-group-item"><p class="text-center">Ключи (HASP):</p>
 
     <div class="container">
+<span class="font-weight-normal small">
         <div class="row">
-    <div class="col-sm">
-      Дата:
+    <div class="col-sm" align="center">
+        Дата:
     </div>
-     <div class="col-sm">
+     <div class="col-sm" align="center">
       № чипа:
     </div>
-     <div class="col-sm">
+     <div class="col-sm" align="center">
       Ограничение:
     </div>
-     <div class="col-sm">
+     <div class="col-sm" align="center">
       Лицензий:
     </div>
-     <div class="col-sm">
+     <div class="col-sm" align="center">
       Свободен:
     </div>
-    <div class="col-sm">
+    <div class="col-sm" align="center">
       Примечания:
     </div>
-    </div>
+    </div></span>
 
 {% for haspkey in item.hasprelationship_set.all %}
     <li class="list-group-item">
     <span class="font-weight-bold">
     <div class="row">
-    <div class="col-sm">
+    <div class="col-sm" align="center">
         {{ haspkey.date|date:'d.m.Y' }}
     </div>
-    <div class="col-sm">
+    <div class="col-sm" align="center">
         {{ haspkey.hasp_keys.chipno }}
     </div>
-    <div class="col-sm">
+    <div class="col-sm" align="center">
         {{ haspkey.hasp_keys.timelimit|date:'d.m.Y' }}
         </div>
-    <div class="col-sm">
+    <div class="col-sm" align="center">
         {% if not haspkey.hasp_keys.licenses is None %}
         {{ haspkey.hasp_keys.licenses }}
         {% endif %}
         </div>
-    <div class="col-sm">
+    <div class="col-sm" align="center">
         {% if not haspkey.hasp_keys.free is False %}
         Да
         {% endif %}
@@ -96,52 +97,53 @@
     </div></div>
     </span>
 {% endfor %}
-    </li>
-    <li class="list-group-item">Ключи (Hardlock):
+    </li><br>
+    <li class="list-group-item"><p class="text-center">Ключи (Hardlock):</p>
             <div class="container">
+<span class="font-weight-normal small">
         <div class="row">
-    <div class="col">
+    <div class="col-sm" align="center">
         Дата:
     </div>
-    <div class="col">
-        Маркировка:
+    <div class="col-sm" align="center">
+        Маркер:
     </div>
-     <div class="col">
+     <div class="col-sm" align="center">
         № чипа:
      </div>
-    <div class="col">
+    <div class="col-sm" align="center">
         Субкод:
     </div>
-    <div class="col">
-        Адрес модуля:
+    <div class="col-sm" align="center">
+        Адрес:
     </div>
-    <div class="col">
+    <div class="col-sm" align="center">
         Свободен:
     </div>
-     <div class="col">
+     <div class="col-sm" align="center">
         Примечания:
      </div>
-        </div>
+        </div></span>
 {% for hardlock in item.hardlockrelationship_set.all %}
         <li class="list-group-item">
     <span class="font-weight-bold">
     <div class="row">
-    <div class="col-sm">
+    <div class="col-sm" align="center">
         {{ hardlock.date|date:'d.m.Y' }}
     </div>
-    <div class="col-sm">
+    <div class="col-sm" align="center">
         {{ hardlock.hardlock_keys.mark }}
     </div>
-    <div class="col-sm">
+    <div class="col-sm" align="center">
         {{ hardlock.hardlock_keys.chipno }}
     </div>
-    <div class="col-sm">
+    <div class="col-sm" align="center">
         {{ hardlock.hardlock_keys.subcode }}
     </div>
-    <div class="col-sm">
+    <div class="col-sm" align="center">
         {{ hardlock.hardlock_keys.modaddr }}
     </div>
-    <div class="col-sm">
+    <div class="col-sm" align="center">
         {% if not hardlock.hardlock_keys.free is False %}
         Да
         {% endif %}
@@ -151,26 +153,55 @@
     </div>
     </div></span>
 {% endfor %}
-     </li>
-<li class="list-group-item">Обвноления дистрибутива:
+     </li><br>
+    <li class="list-group-item"><p class="text-center">Обвноления дистрибутива:</p>
 <div class="container">
+<span class="font-weight-normal small">
 <div class="row">
-    <div class="col">
-        Дистрибутив
+    <div class="col-sm" align="center">
+        Дистрибутив:
     </div>
-    <div class="col">
+    <div class="col-sm" align="center">
         Новый дистрибутив:
     </div>
+    <div class="col-sm" align="center">
+        Дата обновления:
+    </div>
+    <div class="col-sm" align="center">
+        Кто запросил:
+    </div>
+    <div class="col-sm" align="center">
+        Причина обновления:
+    </div>
+        <div class="col-sm" align="center">
+        Примечания:
+    </div>
+</div></span>
+
+{% for test in item.distribup_set.all %}
+<li class="list-group-item">
+<span class="font-weight-bold">
+<div class="row">
+<div class="col-sm">
+{{ test }}
 </div>
-
-{% for test in item.distribupdate.all %}
- <li class="list-group-item">
-    <span class="font-weight-bold">
-    <div class="row">
-    <div class="col-sm">
-
-    {{ test.notes }} {{ test.name }} {{ test.date|date:'d.m.Y' }} {{ test.source }}
-</div></div></span>
+<div class="col-sm">
+{{ test.newdistribid.name }}
+</div>
+<div class="col-sm">
+{{ test.date|date:'d.m.Y' }}
+</div>
+<div class="col-sm">
+{{ test.source }}
+</div>
+<div class="col-sm">
+{{ test.cause }}
+</div>
+<div class="col-sm">
+{{ test.notes }}
+</div>
+</div>
+</span>
 {% endfor %}
 </li>
 

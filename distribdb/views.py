@@ -1738,7 +1738,7 @@ def distrib_list_delete(request, pk):
 def distrib_update_view(request):
     if not request.user.is_authenticated:
         return redirect('/account/login/')
-    obj_list = DistribUpRelationship.objects.all().order_by('date')
+    obj_list = DistribUp.objects.all().order_by('date')
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1756,3 +1756,57 @@ def distrib_update_view(request):
         'object_list': queryset,
     }
     return render(request, 'distribution/distrib_update.html', context)
+
+
+def distrib_update_new_post(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    template = 'distribution/distrib_update_new_post.html'
+    form = DistribUpdate(request.POST or None)
+    try:
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Запись нового набора, добавлена!')
+            form = DistribUpdate()
+    except Exception as e:
+        messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
+    context = {
+        'form': form,
+    }
+    return render(request, template, context)
+
+
+def distrib_update_edit_post(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    template = 'distribution/distrib_update_new_post.html'
+    post = get_object_or_404(DistribUp, pk=pk)
+
+    if request.method == 'POST':
+        form = DistribUpdate(request.POST, instance=post)
+        try:
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Изменения внесены')
+        except Exception as e:
+            messages.warning(request, 'Изменения не внесены! Ошибка: {}'.format(e))
+
+    else:
+        form = DistribUpdate(instance=post)
+
+    context = {
+        'form': form,
+        'post': post,
+
+    }
+    return render(request, template, context)
+
+
+def distrib_update_delete(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    obj = get_object_or_404(DistribUp, pk=pk)
+    if request.method == 'POST':
+        obj.delete()
+        return redirect('/distrib_update')
+    return render(request, 'distrib_update/distrib_update.html', {'device': obj})

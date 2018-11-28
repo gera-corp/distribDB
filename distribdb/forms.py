@@ -552,3 +552,31 @@ class Distrib(forms.ModelForm):
 
         }
 
+
+class DistribUpdate(forms.ModelForm):
+    class Meta:
+        model = DistribUp
+        fields = [
+            'distribid',
+            'newdistribid',
+            'date',
+            'source',
+            'cause',
+            'notes'
+        ]
+        labels = {
+            'distribid': 'Обновляемый дистрибутив:',
+            'newdistribid': 'Новое название дистрибутива:',
+            'date': 'Дата обновления:',
+            'source': 'Кто запросил:',
+            'cause': 'Причина обновления:',
+            'notes': 'Примечания:'
+        }
+        widgets = {
+            'distribid': forms.Select(attrs={'class': 'form-control'}),
+            'newdistribid': forms.Select(attrs={'class': 'form-control'}),
+            'date': forms.DateInput(attrs={'class': 'form-control'}),
+            'source': forms.TextInput(attrs={'class': 'form-control'}),
+            'cause': forms.TextInput(attrs={'class': 'form-control'}),
+            'notes': forms.Textarea(attrs={'class': 'form-control'})
+        }

@@ -438,7 +438,7 @@ class Distribution(models.Model):
     releasedisk             = models.CharField(max_length=50, blank=True, choices=disk)
     distribhaspkeys         = models.ManyToManyField('hasp_keys', blank=True, through='HaspRelationship', through_fields=('distribid', 'hasp_keys'))
     distribhardlockkeys     = models.ManyToManyField('hardlock_keys', blank=True, through='HardLockRelationship', through_fields=('distribid', 'hardlock_keys'))
-    distribupdate           = models.ManyToManyField('self', blank=True, through='DistribUpRelationship', symmetrical=False, through_fields=('distribid', 'newdistribid'), related_name='distribupdatetest')
+    distribupdate           = models.ManyToManyField('self', blank=True, through='DistribUp', through_fields=('distribid', 'newdistribid'), symmetrical=False)
 
     def __str__(self):
         return self.name
@@ -473,7 +473,7 @@ class HardLockRelationship(models.Model):
         auto_created = True
 
 
-class DistribUpRelationship(models.Model):
+class DistribUp(models.Model):
     id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     distribid               = models.ForeignKey('Distribution', on_delete=models.CASCADE, blank=False, related_name='distribid_test')
     newdistribid            = models.ForeignKey('Distribution', on_delete=models.CASCADE, blank=True, related_name='newdistribid_test')
