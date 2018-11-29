@@ -21,7 +21,7 @@
         {% for item in object_list %}
             <tr align="center">
                 <td><a href="/distrib_list/edit_post/{{ item.distribid.id }}" class="list-group-item list-group-item-action">{{ item.distribid.name }}</a></td>
-                <td>{% if item.newdistribid %}<a href="/distrib_list/edit_post/{{ item.newdistribid.id }}" class="list-group-item list-group-item-action">{{ item.newdistribid }}</a>
+                <td>{% if item.newdistribid %}<a href="/distrib_list/edit_post/{{ item.newdistribid.id }}" class="list-group-item list-group-item-action">{{ item.newdistribid.name }}</a>
                 {% else %}<li class="list-group-item list-group-item-action"></li>{% endif %}</td>
                 <td><li class="list-group-item list-group-item-action">{{ item.date|date:'d.m.Y' }}</li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.source }}</li></td>

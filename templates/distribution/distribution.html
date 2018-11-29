@@ -19,7 +19,7 @@
             <tr align="center">
                 <td><a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.id }}">{{ item.name }}</a></td>
     <div class="modal fade" id="id{{ item.id }}" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="ModalLongTitle">Информация о дистрибутиве</h5>
@@ -30,23 +30,21 @@
       <div class="modal-body">
           <p class="text-monospace">Данная страница позваляет получить детальную информацию о дистрибутиве.</p>
 <ul class="list-group list-group-flush">
-    <li class="list-group-item">Название:<p class="font-weight-bold">{{ item.name }}</p></li>
-    <li class="list-group-item">Набор:<p class="font-weight-bold">{{ item.setid.userfriendlyid }}</p></li>
-    <li class="list-group-item">Дата создания:<p class="font-weight-bold">{{ item.date|date:'d.m.Y' }}</p></li>
-    <li class="list-group-item">Заказчик:<p class="font-weight-bold">{{ item.organisationid }}</p></li>
-    <li class="list-group-item">№ комплекта:<p class="font-weight-bold">{{ item.complectno }}</p></li>
-    <li class="list-group-item">Контракт:<p class="font-weight-bold">{{ item.contract }}</p></li>
-    <li class="list-group-item">Логин:<p class="font-weight-bold">{{ item.login }}</p></li>
-    <li class="list-group-item">Серийный номер:<p class="font-weight-bold">{{ item.serial }}</p></li>
-    <li class="list-group-item">Язык:<p class="font-weight-bold">{{ item.langid }}</p></li>
-    <li class="list-group-item">Носитель:<p class="font-weight-bold">{{ item.media }}</p></li>
-    <li class="list-group-item">Операционная система:<p class="font-weight-bold">{{ item.osid }}</p></li>
-    <li class="list-group-item">Специальные условия:<p class="font-weight-bold">{{ item.specialcase }}</p></li>
-    <li class="list-group-item">Диск сборки:<p class="font-weight-bold">{{ item.releasedisk }}</p></li>
-    <li class="list-group-item">Примечания:<p class="font-weight-bold">{{ item.notes }}</p></li><br>
+    <li class="list-group-item">Название:<p class="font-weight-bold small">{{ item.name }}</p></li>
+    <li class="list-group-item">Набор:<p class="font-weight-bold small">{{ item.setid.userfriendlyid }}</p></li>
+    <li class="list-group-item">Дата создания:<p class="font-weight-bold small">{{ item.date|date:'d.m.Y' }}</p></li>
+    <li class="list-group-item">Заказчик:<p class="font-weight-bold small">{{ item.organisationid }}</p></li>
+    <li class="list-group-item">№ комплекта:<p class="font-weight-bold small">{{ item.complectno }}</p></li>
+    <li class="list-group-item">Контракт:<p class="font-weight-bold small">{{ item.contract }}</p></li>
+    <li class="list-group-item">Логин:<p class="font-weight-bold small">{{ item.login }}</p></li>
+    <li class="list-group-item">Серийный номер:<p class="font-weight-bold small">{{ item.serial }}</p></li>
+    <li class="list-group-item">Язык:<p class="font-weight-bold small">{{ item.langid }}</p></li>
+    <li class="list-group-item">Носитель:<p class="font-weight-bold small">{{ item.media }}</p></li>
+    <li class="list-group-item">Операционная система:<p class="font-weight-bold small">{{ item.osid }}</p></li>
+    <li class="list-group-item">Специальные условия:<p class="font-weight-bold small">{{ item.specialcase }}</p></li>
+    <li class="list-group-item">Диск сборки:<p class="font-weight-bold small">{{ item.releasedisk }}</p></li>
+    <li class="list-group-item">Примечания:<p class="font-weight-bold small">{{ item.notes }}</p></li><br>
     <li class="list-group-item"><p class="text-center">Ключи (HASP):</p>
-
-    <div class="container">
 <span class="font-weight-normal small">
         <div class="row">
     <div class="col-sm" align="center">
@@ -67,11 +65,11 @@
     <div class="col-sm" align="center">
       Примечания:
     </div>
-    </div></span>
+        </div></span>
 
 {% for haspkey in item.hasprelationship_set.all %}
     <li class="list-group-item">
-    <span class="font-weight-bold">
+    <span class="font-weight-bold small">
     <div class="row">
     <div class="col-sm" align="center">
         {{ haspkey.date|date:'d.m.Y' }}
@@ -99,7 +97,6 @@
 {% endfor %}
     </li><br>
     <li class="list-group-item"><p class="text-center">Ключи (Hardlock):</p>
-            <div class="container">
 <span class="font-weight-normal small">
         <div class="row">
     <div class="col-sm" align="center">
@@ -115,7 +112,7 @@
         Субкод:
     </div>
     <div class="col-sm" align="center">
-        Адрес:
+        Адрес модуля:
     </div>
     <div class="col-sm" align="center">
         Свободен:
@@ -123,10 +120,10 @@
      <div class="col-sm" align="center">
         Примечания:
      </div>
-        </div></span>
+</span>
 {% for hardlock in item.hardlockrelationship_set.all %}
         <li class="list-group-item">
-    <span class="font-weight-bold">
+    <span class="font-weight-bold small">
     <div class="row">
     <div class="col-sm" align="center">
         {{ hardlock.date|date:'d.m.Y' }}
@@ -148,14 +145,14 @@
         Да
         {% endif %}
     </div>
-    <div class="col-sm">
+    <div class="col-sm" align="center">
         {{ hardlock.hardlock_keys.notes }}
     </div>
     </div></span>
 {% endfor %}
      </li><br>
     <li class="list-group-item"><p class="text-center">Обновления дистрибутива:</p>
-<div class="container">
+
 <span class="font-weight-normal small">
 <div class="row">
     <div class="col-sm" align="center">
@@ -176,29 +173,36 @@
         <div class="col-sm" align="center">
         Примечания:
     </div>
-</div></span>
+</span>
 
-{% for test in item.distribup_set.all %}
+{% for update in item.updatedistr_set.all %}
 <li class="list-group-item">
-<span class="font-weight-bold">
+<span class="font-weight-bold small">
 <div class="row">
-<div class="col-sm">
-{{ test }}
+<div class="col-sm" align="center">
+
+{{ update.distribid.name }}
 </div>
-<div class="col-sm">
-{{ test.newdistribid.name }}
+<div class="col-sm" align="center">
+{{ update.newdistribid.name }}
 </div>
-<div class="col-sm">
-{{ test.date|date:'d.m.Y' }}
+<div class="col-sm" align="center">
+{{ update.date|date:'d.m.Y' }}
 </div>
-<div class="col-sm">
-{{ test.source }}
+<div class="col-sm" align="center">
+{% if not update.source is None %}
+{{ update.source }}
+{% endif %}
 </div>
-<div class="col-sm">
-{{ test.cause }}
+<div class="col-sm" align="center">
+{% if not update.cause is None %}
+{{ update.cause }}
+{% endif %}
 </div>
-<div class="col-sm">
-{{ test.notes }}
+<div class="col-sm" align="center">
+{% if not update.notes is None %}
+{{ update.notes }}
+{% endif %}
 </div>
 </div>
 </span>
@@ -208,6 +212,7 @@
 </ul>
 </div>
       <div class="modal-footer">
+          <a href="/distrib_update/new_post/"><button type="button" class="btn btn-secondary btn-sm">Добавить обновление</button></a>
         <a href="{% url 'distrib_list_edit_post' pk=item.pk %}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
       </div>

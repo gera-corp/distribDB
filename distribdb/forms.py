@@ -555,7 +555,7 @@ class Distrib(forms.ModelForm):
 
 class DistribUpdate(forms.ModelForm):
     class Meta:
-        model = DistribUp
+        model = UpdateDistr
         fields = [
             'distribid',
             'newdistribid',

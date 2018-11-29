@@ -1738,7 +1738,7 @@ def distrib_list_delete(request, pk):
 def distrib_update_view(request):
     if not request.user.is_authenticated:
         return redirect('/account/login/')
-    obj_list = DistribUp.objects.all().order_by('date')
+    obj_list = UpdateDistr.objects.all().order_by('date')
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1780,7 +1780,7 @@ def distrib_update_edit_post(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
     template = 'distribution/distrib_update_new_post.html'
-    post = get_object_or_404(DistribUp, pk=pk)
+    post = get_object_or_404(UpdateDistr, pk=pk)
 
     if request.method == 'POST':
         form = DistribUpdate(request.POST, instance=post)
@@ -1805,7 +1805,7 @@ def distrib_update_edit_post(request, pk):
 def distrib_update_delete(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj = get_object_or_404(DistribUp, pk=pk)
+    obj = get_object_or_404(UpdateDistr, pk=pk)
     if request.method == 'POST':
         obj.delete()
         return redirect('/distrib_update')
