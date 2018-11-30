@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Средство для просмотра отчетов</title>
+        <style type="text/css">
+            @font-face {
+            font-family: arial;
+            src: url("/static/fonts/arial.ttf");
+            }
+            body {
+                font-family: arial;
+                font-weight: 200;
+                font-size: 14px;
+            }
+            .header {
+                font-size: 20px;
+                font-weight: 100;
+                text-align: center;
+                color: #007cae;
+            }
+            .title {
+                font-size: 22px;
+                font-weight: 100;
+               /* text-align: right;*/
+               padding: 10px 20px 0px 20px;
+            }
+            .title span {
+                color: #007cae;
+            }
+            .details {
+                padding: 10px 20px 0px 20px;
+                text-align: left !important;
+                /*margin-left: 40%;*/
+            }
+            .hrItem {
+                border: none;
+                height: 1px;
+                /* Set the hr color */
+                color: #333; /* old IE */
+                background-color: #fff; /* Modern Browsers */
+            }
+        </style>
+    </head>
+    <body>
+        <div class='details'>
+Состав ПО "СКАТ"
+<br><br>
+"УТВЕРЖДАЮ"
+<br>
+Главный конструктор &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;{{ date|date:'d E Y' }}
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;по разработке ПО _________________ О.Кузнецов<br>
+<br>Заказчик:
+<br>По договору №:
+<br>Серийный номер дистрибутива:
+<br>Логин:
+<br>Язык:
+
+<br><br>
+{% for item in obj_list %}
+    {{ item.name }}<br>
+{% endfor %}
+
+            <hr class='hrItem' />
+        </div>
+    </div>
+    </body>
+</html>

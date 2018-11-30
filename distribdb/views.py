@@ -1810,3 +1810,71 @@ def distrib_update_delete(request, pk):
         obj.delete()
         return redirect('/distrib_update')
     return render(request, 'distrib_update/distrib_update.html', {'device': obj})
+
+
+from .render_to_pdf import render_to_pdf
+from django.http import HttpResponse
+from django.views.generic import View
+from django.template.loader import get_template
+
+
+class GeneratePDF(View):
+    def get(self, request, *args, **kwargs):
+        obj_list = Distribution.objects.all()[0:10]
+        date = datetime.now()
+        template = get_template('pdf/invoice.html')
+        context = {
+            "obj_list": obj_list,
+            "date": date,
+        }
+        html = template.render(context)
+        pdf = render_to_pdf('pdf/invoice.html', context)
+        if pdf:
+            response = HttpResponse(pdf, content_type='application/pdf')
+            filename = "Invoice_%s.pdf" %("12341231")
+            content = "inline; filename='%s'" %(filename)
+            download = request.GET.get("download")
+            if download:
+                content = "attachment; filename='%s'" %(filename)
+            response['Content-Disposition'] = content
+            return response
+        return HttpResponse("Not found")
+
+# class GeneratePDF(View):
+#     def get(self, request, order_type, order_id):
+#         try:
+#             order = Distribution.objects.get(
+#                 id=order_id, user=request.user.id, status__in=[1, 2]
+#             )
+#         except Distribution.DoesNotExist:
+#             return HttpResponse(status=404)
+#
+#         context = {
+#             'order_id': order.id
+#         }
+#         template = 'pdf/invoice.html'
+#         pdf = render_to_pdf(template, context)
+#
+#         if pdf:
+#             filename = 'order_{}_{}.pdf'.format(order_type, order_id)
+#             content = 'inline; filename="{}"'.format(filename)
+#
+#             if request.GET.get('save_to_file') == 'true':
+#                 content = 'attachment; filename="{}"'.format(filename)
+#
+#             response = HttpResponse(pdf, content_type='application/pdf')
+#             response['Content-Disposition'] = content
+#             return response
+#
+#         return HttpResponse(status=404)
+
+# class GeneratePdf(View):
+#     def get(self, request, *args, **kwargs):
+#         data = {
+#              'today': datetime.now(),
+#              'amount': 39.99,
+#             'customer_name': 'Cooper Mann',
+#             'order_id': 1233434,
+#         }
+#         pdf = render_to_pdf('pdf/invoice.html', data)
+#         return HttpResponse(pdf, content_type='application/pdf')
