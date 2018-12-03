@@ -370,6 +370,7 @@ class ModulesRelationship(models.Model):
     modules                 = models.ForeignKey('Modules', on_delete=models.CASCADE)
 
     class Meta:
+        ordering = ('modules',)
         db_table = 'sets_modules'
         auto_created = True
 

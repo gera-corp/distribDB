@@ -1,73 +1,174 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Средство для просмотра отчетов</title>
-        <style type="text/css">
-            @font-face {
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>Средство для просмотра отчетов</title>
+    <style type="text/css">
+        @font-face {
             font-family: arial;
             src: url("/static/fonts/arial.ttf");
-            }
-            body {
-                font-family: arial;
-                font-weight: 200;
-                font-size: 14px;
-            }
-            .header {
-                font-size: 20px;
-                font-weight: 100;
-                text-align: center;
-                color: #007cae;
-            }
-            .title {
-                font-size: 22px;
-                font-weight: 100;
-               /* text-align: right;*/
-               padding: 10px 20px 0px 20px;
-            }
-            .title span {
-                color: #007cae;
-            }
-            .details {
-                padding: 10px 20px 0px 20px;
-                text-align: left !important;
-                /*margin-left: 40%;*/
-            }
-            .hrItem {
-                border: none;
-                height: 1px;
-                /* Set the hr color */
-                color: #333; /* old IE */
-                background-color: #fff; /* Modern Browsers */
-            }
-        </style>
-    </head>
-    <body>
-        <div class='details'>
+        }
+
+        body {
+            font-family: arial;
+            font-weight: 200;
+            font-size: 14px;
+        }
+
+        .header {
+            font-size: 20px;
+            font-weight: 100;
+            text-align: center;
+            color: #007cae;
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: 100;
+            /* text-align: right;*/
+            padding: 10px 20px 0px 20px;
+        }
+
+        .title span {
+            color: #007cae;
+        }
+
+        .details {
+            padding: 10px 20px 0px 20px;
+            text-align: left !important;
+            /*margin-left: 40%;*/
+        }
+
+        .hrItem {
+            border: none;
+            height: 1px;
+            /* Set the hr color */
+            color: #333; /* old IE */
+            background-color: #fff; /* Modern Browsers */
+        }
+        table, th, td {
+            border-collapse: collapse;
+            padding: 3px;
+        }
+        table {
+            border-spacing: 0px;
+        }
+    </style>
+</head>
+<body>
+
 Состав ПО "СКАТ"
+    <br><br>
+    <table>
+        <tr>
+            <td align="left" width="100%">
+                "УТВЕРЖДАЮ"
+                <br>
+                Главный конструктор<br> по разработке ПО _________________ О.Кузнецов
+            </td>
+            <td align="right">{{ date|date:'d E Y' }}</td>
+        </tr>
+    </table><br>
+<table border="0">
+     <tr>
+         <td width="25%">Заказчик:</td>
+     <td>{{ obj_list.organisationid }}</td>
+     </tr>
+             <tr>
+         <td>По договору №:</td>
+     <td>{% if obj_list.contract %}{{ obj_list.contract }}{% else %}&nbsp;{% endif %}</td>
+     </tr>
+             <tr>
+         <td>Серийный номер:</td>
+     <td>{{ obj_list.serial }}</td>
+     </tr>
+<tr>
+         <td>Логин:</td>
+     <td>{{ obj_list.login }}</td>
+     </tr>
+</table>
+<table>
+    <tr>
+        <td>Язык: {{ obj_list.langid }}</td>
+        <td>Носитель дистрибутива: {{ obj_list.media }}</td>
+        <td>Операционная система: {{ obj_list.osid }}</td>
+    </tr>
+</table>
+Особые условия: {{ obj_list.specialcase }}
+    <br>
+Примечания: {{ obj_list.notes }}
 <br><br>
-"УТВЕРЖДАЮ"
+<h2>Ключи аппаратной защиты</h2>
+{% if obj_list.distribhaspkeys.all %}
+HASP
 <br>
-Главный конструктор &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;{{ date|date:'d E Y' }}
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;по разработке ПО _________________ О.Кузнецов<br>
-<br>Заказчик:
-<br>По договору №:
-<br>Серийный номер дистрибутива:
-<br>Логин:
-<br>Язык:
-
-<br><br>
-{% for item in obj_list %}
-    {{ item.name }}<br>
+<table border="1">
+        <thead>
+        <tr align="center">
+            <th>Номер чипа</th>
+            <th>Ограничение по<br>времени</th>
+            <th>Количество<br>лицензий</th>
+            <th>Примечания</th>
+        </tr>
+        </thead>
+{% for haspkey in obj_list.hasprelationship_set.all %}
+    <tr>
+    <td align="center">{{ haspkey.hasp_keys.chipno }}</td>
+    <td align="center">{% if not haspkey.hasp_keys.timelimit is None %}{{ haspkey.hasp_keys.timelimit }}{% else %}&nbsp;{% endif %}</td>
+    <td align="center">{% if not haspkey.hasp_keys.licenses is None %}{{ haspkey.hasp_keys.licenses }}{% else %}&nbsp;{% endif %}</td>
+    <td width="50%">{{ haspkey.hasp_keys.notes }}</td>
+    </tr>
 {% endfor %}
+</table><br>
+{% endif %}
+{% if obj_list.distribhardlockkeys.all %}
+Hardlock
+<br>
+<table border="1">
+        <thead>
+        <tr align="center">
+            <th>Номер чипа</th>
+            <th>Маркировка</th>
+            <th>Субкод</th>
+            <th>Адрес модуля</th>
+        </tr>
+        </thead>
+{% for hardlock in obj_list.hardlockrelationship_set.all %}
+    <tr>
+    <td align="center">{{ hardlock.hardlock_keys.chipno }}</td>
+    <td align="center">{% if not hardlock.hardlock_keys.mark is None %}{{ hardlock.hardlock_keys.mark }}{% else %}&nbsp;{% endif %}</td>
+    <td align="center">{% if not hardlock.hardlock_keys.subcode is None %}{{ hardlock.hardlock_keys.subcode }}{% else %}&nbsp;{% endif %}</td>
+    <td width="50%">{{ hardlock.hardlock_keys.notes }}</td>
+    </tr>
+{% endfor %}
+</table><br>
+{% endif %}
 
-            <hr class='hrItem' />
-        </div>
-    </div>
-    </body>
+<table border="0">
+    <thead>
+<tr>
+    <th><h2>Дополнительные части ПО</h2></th>
+    <th><h2>Драйверы устройств сброса</h2></th>
+</tr>
+    </thead>
+<tr>
+<td>{% for modules in obj_list.setid.modulesrelationship_set.all %}{{ modules.modules }}<br>{% endfor %}</td>
+<td valign="top">{% for drivers in obj_list.setid.driversrelationship_set.all %}{{ drivers.drivers }}<br>{% endfor %}</td>
+</tr>
+</table>
+
+
+<table border="1">
+    <thead>
+<tr>
+    <th><h2>Устройства Сброса</h2></th>
+    <th><h2>Системы регистрации</h2></th>
+</tr>
+    </thead>
+<tr>
+<td>{% for devices in obj_list.setid.drop_devicerelationship_set.all %}{{ devices.drop_device }}<br>{% endfor %}</td>
+<td valign="top">{% for regsystems in obj_list.setid.regsystemsrelationship_set.all %}{{ regsystems.regsystems.username }}<br>{% endfor %}</td>
+</tr>
+</table>
+</body>
 </html>
