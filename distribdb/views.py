@@ -839,12 +839,12 @@ def typeregsys_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(typeid__icontains=query) |
-            Q(regsysid__icontains=query) |
+            Q(typeid__username__icontains=query) |
+            Q(regsysid__username__icontains=query) |
+            Q(ispath__icontains=query) |
             Q(usernameregsys__icontains=query) |
             Q(sysnameregsys__icontains=query) |
-            Q(description__icontains=query) |
-            Q(ispath__icontains=query)
+            Q(description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -1004,8 +1004,8 @@ def typetasks_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(typeid__icontains=query) |
-            Q(taskid__icontains=query) |
+            Q(typeid__username__icontains=query) |
+            Q(taskid__username__icontains=query) |
             Q(description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
@@ -1169,8 +1169,8 @@ def typemisc_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(typeid__icontains=query) |
-            Q(miscid__icontains=query) |
+            Q(typeid__username__icontains=query) |
+            Q(miscid__username__icontains=query) |
             Q(description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
@@ -1665,7 +1665,9 @@ def distrib_list_view(request):
     if query:
         obj_list = obj_list.filter(
             Q(setid__userfriendlyid__icontains=query) |
-            Q(name__icontains=query)
+            Q(name__icontains=query) |
+            Q(login__icontains=query) |
+            Q(serial__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)

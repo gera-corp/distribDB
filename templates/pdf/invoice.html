@@ -3,48 +3,40 @@
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <title>Средство для просмотра отчетов</title>
-    <style type="text/css">
+    <style>
+        @page {
+            size: a4 portrait;
+            @frame header_frame {           /* Static Frame */
+                -pdf-frame-content: header_content;
+                left: 50pt; width: 512pt; top: 50pt; height: 40pt;
+            }
+            @frame content_frame {          /* Content Frame */
+                left: 50pt; width: 512pt; top: 90pt; height: 650pt;
+            }
+            @frame footer_frame {           /* Another static Frame */
+                -pdf-frame-content: footer_content;
+                left: 50pt; width: 512pt; top: 772pt; height: 20pt;
+            }
+        }
+
+        /* Normal */
         @font-face {
             font-family: arial;
             src: url("/static/fonts/arial.ttf");
         }
-
+        /* Bold */
+        @font-face {
+            font-family: arial;
+            src: url("/static/fonts/arialbd.ttf");
+            font-weight: bold;
+        }
         body {
             font-family: arial;
             font-weight: 200;
             font-size: 14px;
         }
-
-        .header {
-            font-size: 20px;
-            font-weight: 100;
-            text-align: center;
-            color: #007cae;
-        }
-
-        .title {
-            font-size: 22px;
-            font-weight: 100;
-            /* text-align: right;*/
-            padding: 10px 20px 0px 20px;
-        }
-
         .title span {
             color: #007cae;
-        }
-
-        .details {
-            padding: 10px 20px 0px 20px;
-            text-align: left !important;
-            /*margin-left: 40%;*/
-        }
-
-        .hrItem {
-            border: none;
-            height: 1px;
-            /* Set the hr color */
-            color: #333; /* old IE */
-            background-color: #fff; /* Modern Browsers */
         }
         table, th, td {
             border-collapse: collapse;
@@ -53,54 +45,62 @@
         table {
             border-spacing: 0px;
         }
+
     </style>
 </head>
 <body>
 
+    <div id="footer_content">стр. <pdf:pagenumber /> из <pdf:pagecount> </div>
 Состав ПО "СКАТ"
     <br><br>
-    <table>
+    <table border="0">
         <tr>
             <td align="left" width="100%">
-                "УТВЕРЖДАЮ"
+                <b>"УТВЕРЖДАЮ"
                 <br>
-                Главный конструктор<br> по разработке ПО _________________ О.Кузнецов
+                    Главный конструктор<br> по разработке ПО _________________ О.Кузнецов</b>
             </td>
-            <td align="right">{{ date|date:'d E Y' }}</td>
+            <td align="right"><b>{{ date|date:'d E Y' }}</b></td>
         </tr>
     </table><br>
 <table border="0">
      <tr>
-         <td width="25%">Заказчик:</td>
-     <td>{{ obj_list.organisationid }}</td>
+         <td width="25%"><b>Заказчик:</b></td>
+     <td>{{ obj_list.organisationid }} </td>
      </tr>
              <tr>
-         <td>По договору №:</td>
-     <td>{% if obj_list.contract %}{{ obj_list.contract }}{% else %}&nbsp;{% endif %}</td>
+         <td><b>По договору №:</b></td>
+     <td>{{ obj_list.contract }} </td>
      </tr>
              <tr>
-         <td>Серийный номер:</td>
-     <td>{{ obj_list.serial }}</td>
+         <td><b>Серийный номер:</b></td>
+     <td>{{ obj_list.serial }} </td>
      </tr>
 <tr>
-         <td>Логин:</td>
-     <td>{{ obj_list.login }}</td>
+         <td><b>Логин:</b></td>
+     <td>{{ obj_list.login }} </td>
      </tr>
 </table>
 <table>
     <tr>
-        <td>Язык: {{ obj_list.langid }}</td>
-        <td>Носитель дистрибутива: {{ obj_list.media }}</td>
-        <td>Операционная система: {{ obj_list.osid }}</td>
+        <td><b>Язык:</b> {{ obj_list.langid }}</td>
+        <td><b>Носитель дистрибутива:</b> {{ obj_list.media }}</td>
+        <td><b>Операционная система:</b> {{ obj_list.osid }}</td>
     </tr>
 </table>
-Особые условия: {{ obj_list.specialcase }}
-    <br>
-Примечания: {{ obj_list.notes }}
+<table>
+<tr>
+<td  width="25%"><b>Особые условия:</b></td><td>{{ obj_list.specialcase }}</td>
+</tr>
+    <tr>
+        <td><b>Примечания:</b></td><td>{{ obj_list.notes }}</td>
+    </tr>
+</table>
 <br><br>
-<h2>Ключи аппаратной защиты</h2>
+
+{% if obj_list.distribhaspkeys.all or obj_list.distribhardlockkeys.all %}<h2><b>Ключи аппаратной защиты</b></h2>{% endif %}
 {% if obj_list.distribhaspkeys.all %}
-HASP
+<b>HASP</b>
 <br>
 <table border="1">
         <thead>
@@ -122,7 +122,7 @@ HASP
 </table><br>
 {% endif %}
 {% if obj_list.distribhardlockkeys.all %}
-Hardlock
+<b>Hardlock</b>
 <br>
 <table border="1">
         <thead>
@@ -131,6 +131,7 @@ Hardlock
             <th>Маркировка</th>
             <th>Субкод</th>
             <th>Адрес модуля</th>
+            <th>Примечания</th>
         </tr>
         </thead>
 {% for hardlock in obj_list.hardlockrelationship_set.all %}
@@ -138,37 +139,122 @@ Hardlock
     <td align="center">{{ hardlock.hardlock_keys.chipno }}</td>
     <td align="center">{% if not hardlock.hardlock_keys.mark is None %}{{ hardlock.hardlock_keys.mark }}{% else %}&nbsp;{% endif %}</td>
     <td align="center">{% if not hardlock.hardlock_keys.subcode is None %}{{ hardlock.hardlock_keys.subcode }}{% else %}&nbsp;{% endif %}</td>
+    <td align="center">{{ hardlock.hardlock_keys.modaddr }}</td>
     <td width="50%">{{ hardlock.hardlock_keys.notes }}</td>
     </tr>
 {% endfor %}
 </table><br>
 {% endif %}
 
-<table border="0">
+<table border="0" repeat="1">
     <thead>
 <tr>
-    <th><h2>Дополнительные части ПО</h2></th>
-    <th><h2>Драйверы устройств сброса</h2></th>
+    {% if obj_list.setid.modules.all %}<th><h2 align="left">Дополнительные части ПО</h2></th>{% endif %}
+    {% if obj_list.setid.drivers.all %}<th><h2 align="left">Драйверы устройств сброса</h2></th>{% endif %}
 </tr>
     </thead>
 <tr>
-<td>{% for modules in obj_list.setid.modulesrelationship_set.all %}{{ modules.modules }}<br>{% endfor %}</td>
-<td valign="top">{% for drivers in obj_list.setid.driversrelationship_set.all %}{{ drivers.drivers }}<br>{% endfor %}</td>
+<td valign="top">{% for modules in obj_list.setid.modulesrelationship_set.all %}{{ modules.modules.name }}<br>{% endfor %}</td>
+<td valign="top">{% for drivers in obj_list.setid.driversrelationship_set.all %}{{ drivers.drivers.name }}<br>{% endfor %}</td>
 </tr>
 </table>
 
-
-<table border="1">
+<pdf:nextpage />
+<table border="0" repeat="1">
     <thead>
 <tr>
-    <th><h2>Устройства Сброса</h2></th>
-    <th><h2>Системы регистрации</h2></th>
+    {% if obj_list.setid.devices.all %}<th><h2 align="left">Устройства Сброса</h2></th>{% endif %}
+    {% if obj_list.setid.regsystems.all %}<th><h2 align="left">Системы регистрации</h2></th>{% endif %}
 </tr>
     </thead>
 <tr>
-<td>{% for devices in obj_list.setid.drop_devicerelationship_set.all %}{{ devices.drop_device }}<br>{% endfor %}</td>
+<td valign="top">{% for devices in obj_list.setid.drop_devicerelationship_set.all %}{{ devices.drop_device.username }}<br>{% endfor %}</td>
 <td valign="top">{% for regsystems in obj_list.setid.regsystemsrelationship_set.all %}{{ regsystems.regsystems.username }}<br>{% endfor %}</td>
 </tr>
 </table>
+<br>
+{% if obj_list.setid.typemiscrelationship_set.all %}
+<h2 align="center">Дополнительные элементы по типам</h2>
+<table border="0" repeat="1">
+    <thead>
+    <tr>
+    <th align="left">Пользовательское имя ЛА</th>
+    <th align="left">Элемент</th>
+    <th align="left">Системное имя базы импорта (Каталог)</th>
+    <th align="left">Пользовательское имя базы импорта (Attrib)</th>
+    </tr>
+    </thead>
+    {% for typemisc in obj_list.setid.typemiscrelationship_set.all %}
+    <tr>
+    <td>{{ typemisc.typemisc.typeid }} </td>
+    <td>{{ typemisc.typemisc.miscid.name }} </td>
+    <td>{% if not typemisc.typemisc.miscid.sysname is None %}{{ typemisc.typemisc.miscid.sysname }}{% endif %} </td>
+    <td>{% if not typemisc.typemisc.miscid.username is None %}{{ typemisc.typemisc.miscid.username }}{% endif %} </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+<br>
+{% if obj_list.setid.typeregsysrelationship_set.all %}
+    <h2 align="center">Типы ЛА</h2>
+<table border="0" repeat="1">
+    <thead>
+    <tr align="center">
+    <th align="left">Пользовательское имя (Attrib)</th>
+    <th align="left">Системное имя (Каталог)</th>
+    <th align="left">Пользовательское имя первичной базы</th>
+    </tr>
+    </thead>
+    {% for typeregsys in obj_list.setid.typeregsysrelationship_set.all %}
+    <tr>
+    <td>{{ typeregsys.typeregsys.typeid.username }} </td>
+    <td>{{ typeregsys.typeregsys.typeid.sysname }} </td>
+    <td>{{ typeregsys.typeregsys.usernameregsys }} </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+<br>
+{% if obj_list.setid.typetasksrelationship_set.all %}
+    <h2 align="center">Расчётные базы</h2>
+<table border="0" repeat="1">
+    <thead>
+    <tr align="center">
+    <th align="left">Пользовательское имя ЛА (Attrib)</th>
+    <th align="left">Системное имя расчётной базы (Каталог)</th>
+    <th align="left">Пользовательское имя расчётной базы (Attrib)</th>
+    </tr>
+    </thead>
+    {% for typetasks in obj_list.setid.typetasksrelationship_set.all %}
+    <tr>
+    <td>{{ typetasks.typetasks.typeid.username }} </td>
+    <td>{{ typetasks.typetasks.typeid.sysname }} </td>
+    <td>{{ typetasks.typetasks.taskid.username }} </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+<br>
+<table border="0">
+    <tr>
+        <td><b>Зам ГК по ПО</b></td>
+        <td><b>__________________________________А. Ермолов</b></td>
+    </tr>
+    <tr>
+        <td> </td>
+        <td align="right"><b>{{ date|date:'d E Y' }}</b></td>
+    </tr>
+    <tr>
+        <td><b>Начальник ОРАО</b></td>
+        <td><b>______________________________О. Кожемяченко</b></td>
+    </tr>
+        <tr>
+        <td> </td>
+        <td align="right"><b>{{ date|date:'d E Y' }}</b></td>
+    </tr>
+</table>
+<br>
+<center><pdf:barcode value={{ obj_list.id }} type="code128" humanreadable="1" /></center>
+<br>
 </body>
 </html>

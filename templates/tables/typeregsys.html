@@ -17,8 +17,8 @@
         </thead>
         {% for item in object_list %}
             <tr align="center">
-                <td><li class="list-group-item list-group-item-action">{{ item.typeid }}</li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.regsysid }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.typeid.username }}</li></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.regsysid.username }}</li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.usernameregsys }}</li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.sysnameregsys }}</li></td>
                 <td><li class="list-group-item list-group-item-action">{{ item.ispath }}</li></td>

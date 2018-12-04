@@ -258,7 +258,7 @@ class drop_device(models.Model):
 
     class Meta:
         verbose_name = 'Устройство сброса'
-        ordering = ('sysname',)
+        ordering = ('username',)
         db_table = 'devices'
 
 
@@ -340,6 +340,7 @@ class TypeRegSysRelationship(models.Model):
     typeregsys              = models.ForeignKey('TypeRegsys', on_delete=models.CASCADE)
 
     class Meta:
+        ordering = ('typeregsys',)
         db_table = 'sets_typeregsystems'
         auto_created = True
 
@@ -350,6 +351,7 @@ class TypeTasksRelationship(models.Model):
     typetasks               = models.ForeignKey('TypeTasks', on_delete=models.CASCADE)
 
     class Meta:
+        ordering = ('typetasks',)
         db_table = 'sets_typetasks'
         auto_created = True
 
@@ -360,6 +362,7 @@ class TypeMiscRelationship(models.Model):
     typemisc                = models.ForeignKey('TypeMisc', on_delete=models.CASCADE)
 
     class Meta:
+        ordering = ('typemisc',)
         db_table = 'sets_typemisc'
         auto_created = True
 
@@ -381,6 +384,7 @@ class RegSystemsRelationship(models.Model):
     regsystems              = models.ForeignKey('RegSystems', on_delete=models.CASCADE)
 
     class Meta:
+        ordering = ('regsystems',)
         db_table = 'sets_regsystems'
         auto_created = True
 
@@ -391,6 +395,7 @@ class drop_deviceRelationship(models.Model):
     drop_device             = models.ForeignKey('drop_device', on_delete=models.CASCADE)
 
     class Meta:
+        ordering = ('drop_device',)
         db_table = 'sets_devices'
         auto_created = True
 

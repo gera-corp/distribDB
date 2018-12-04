@@ -127,6 +127,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+# PROJECT_ROOT = "/var/www/html/newclone/userapi/"
+# MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
+# MEDIA_URL = '/static/media/'
+# STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static-root')
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/'
