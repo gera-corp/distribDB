@@ -1660,7 +1660,8 @@ def edit_set_edit_post(request, pk):
 def distrib_list_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = Distribution.objects.all()
+    order_by = request.GET.get('order_by', 'setid')
+    obj_list = Distribution.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
