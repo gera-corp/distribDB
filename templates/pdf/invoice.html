@@ -4,18 +4,30 @@
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <title>Средство для просмотра отчетов</title>
     <style>
+        .col{
+            display: table-cell;
+        }
+        .col-1{
+		    width: 60%;
+		    padding-left: 10px;
+	    }
+        .col-2{
+            padding-left: 21px;
+            width: 35%;
+            border-left: 2px solid grey;
+        }
         @page {
             size: a4 portrait;
             @frame header_frame {           /* Static Frame */
                 -pdf-frame-content: header_content;
-                left: 30pt; width: 530pt; top: 30pt; height: 40pt;
+                left: 30pt; width: 540pt; top: 20pt; height: 40pt;
             }
             @frame content_frame {          /* Content Frame */
-                left: 30pt; width: 530pt; top: 30pt; height: 650pt;
+                left: 30pt; width: 540pt; top: 20pt; height: 770pt;
             }
             @frame footer_frame {           /* Another static Frame */
                 -pdf-frame-content: footer_content;
-                left: 30pt; width: 530pt; top: 772pt; height: 20pt;
+                left: 30pt; width: 540pt; top: 800pt; height: 20pt;
             }
         }
 
@@ -40,7 +52,7 @@
         }
         table, th, td {
             border-collapse: collapse;
-            padding: 3px;
+            padding: 3px 2px;
         }
         table {
             border-spacing: 0px;
@@ -49,8 +61,12 @@
     </style>
 </head>
 <body>
-
-    <div id="footer_content">стр. <pdf:pagenumber /> из <pdf:pagecount /> </div>
+    <div id="footer_content">стр. <pdf:pagenumber /> из <pdf:pagecount />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
+Подготовлено к печати: {% now "d.m.Y - H:i:s" %}</div>
 Состав ПО "СКАТ"
     <br><br>
     <table border="0">
@@ -60,7 +76,7 @@
                 <br>
                     Главный конструктор<br> по разработке ПО _________________ О.Кузнецов</b>
             </td>
-            <td align="right"><b>{{ date|date:'d E Y' }}</b></td>
+            <td align="right"><b>{% now "d E Y" %}</b></td>
         </tr>
     </table><br>
 <table border="0">
@@ -154,13 +170,13 @@
 </tr>
     </thead>
 <tr>
-<td valign="top">{% for modules in obj_list.setid.modulesrelationship_set.all %}{{ modules.modules.name }}<br>{% endfor %}</td>
-<td valign="top">{% for drivers in obj_list.setid.driversrelationship_set.all %}{{ drivers.drivers.name }}<br>{% endfor %}</td>
+{% if obj_list.setid.modules.all %}<td valign="top">{% for modules in obj_list.setid.modulesrelationship_set.all %}{{ modules.modules.name }}<br>{% endfor %}</td>{% endif %}
+{% if obj_list.setid.drivers.all %}<td valign="top">{% for drivers in obj_list.setid.driversrelationship_set.all %}{{ drivers.drivers.name }}<br>{% endfor %}</td>{% endif %}
 </tr>
 </table>
 
 <pdf:nextpage />
-<table border="0" repeat="1">
+<table border="0" repeat="0">
     <thead>
 <tr>
     {% if obj_list.setid.devices.all %}<th><h2 align="left">Устройства Сброса</h2></th>{% endif %}
@@ -168,8 +184,8 @@
 </tr>
     </thead>
 <tr>
-<td valign="top">{% for devices in obj_list.setid.drop_devicerelationship_set.all %}{{ devices.drop_device.username }}<br>{% endfor %}</td>
-<td valign="top">{% for regsystems in obj_list.setid.regsystemsrelationship_set.all %}{{ regsystems.regsystems.username }}<br>{% endfor %}</td>
+{% if obj_list.setid.devices.all %}<td valign="top">{% for devices in obj_list.setid.drop_devicerelationship_set.all %}{{ devices.drop_device.username }}<br>{% endfor %}</td>{% endif %}
+{% if obj_list.setid.regsystems.all %}<td valign="top">{% for regsystems in obj_list.setid.regsystemsrelationship_set.all %}{{ regsystems.regsystems.username }}<br>{% endfor %}</td>{% endif %}
 </tr>
 </table>
 <br>
@@ -242,7 +258,7 @@
     </tr>
     <tr>
         <td> </td>
-        <td align="right"><b>{{ date|date:'d E Y' }}</b></td>
+        <td align="right"><b>{% now "d E Y" %}</b></td>
     </tr>
     <tr>
         <td><b>Начальник ОРАО</b></td>
@@ -250,11 +266,10 @@
     </tr>
         <tr>
         <td> </td>
-        <td align="right"><b>{{ date|date:'d E Y' }}</b></td>
+        <td align="right"><b>{% now "d E Y" %}</b></td>
     </tr>
 </table>
 <br>
-<center><pdf:barcode value={{ obj_list.id }} type="code128" humanreadable="1" /></center>
-<br>
+<center><pdf:barcode value="{{ obj_list.id }}" type="QR" humanreadable="1" /></center>
 </body>
 </html>

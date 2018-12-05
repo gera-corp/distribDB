@@ -1667,7 +1667,9 @@ def distrib_list_view(request):
             Q(setid__userfriendlyid__icontains=query) |
             Q(name__icontains=query) |
             Q(login__icontains=query) |
-            Q(serial__icontains=query)
+            Q(serial__icontains=query) |
+            Q(complectno__icontains=query) |
+            Q(distribhaspkeys__chipno__contains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)
@@ -1823,17 +1825,15 @@ from django.template.loader import get_template
 class GeneratePDF(View):
     def get(self, request, pk, *args, **kwargs):
         obj_list = get_object_or_404(Distribution, pk=pk)
-        date = datetime.now()
         template = get_template('pdf/invoice.html')
         context = {
-            "obj_list": obj_list,
-            "date": date,
+            "obj_list": obj_list
         }
         html = template.render(context)
         pdf = render_to_pdf('pdf/invoice.html', context)
         if pdf:
             response = HttpResponse(pdf, content_type='application/pdf')
-            filename = "Invoice_%s.pdf" %("12341231")
+            filename = "distrib_%s.pdf" %(pk)
             content = "inline; filename='%s'" %(filename)
             download = request.GET.get("download")
             if download:
