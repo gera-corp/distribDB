@@ -1681,6 +1681,7 @@ def distrib_list_view(request):
     except EmptyPage:
         queryset = paginator.page(paginator.num_pages)
     context = {
+        'order_by': order_by,
         'object_list': queryset,
     }
     return render(request, 'distribution/distribution.html', context)

@@ -450,7 +450,6 @@ class Distribution(models.Model):
         return '%s --- %s' % (self.date.strftime('%d.%m.%Y'), self.name)
 
     class Meta:
-        ordering = ('-date',)
         db_table = 'distributions'
 
 
