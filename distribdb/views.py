@@ -23,171 +23,11 @@ def programms(request):
     return render(request, 'programms.html')
 
 
-def drop_device_view(request):
-    if not request.user.is_authenticated:
-        return redirect('/accounts/login/')
-    obj_list = drop_device.objects.all()
-    query = request.GET.get('q')
-    if query:
-        obj_list = obj_list.filter(
-            Q(sysname__icontains=query)
-        ).distinct()
-    page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
-    try:
-        queryset = paginator.page(page)
-    except PageNotAnInteger:
-        queryset = paginator.page(1)
-    except EmptyPage:
-        queryset = paginator.page(paginator.num_pages)
-    context = {
-        'object_list': queryset,
-    }
-    return render(request, 'tables/drop_devices.html', context)
-
-
-def drop_device_delete(request, pk):
-    if not request.user.is_authenticated:
-        return redirect('/accounts/login/')
-    obj = get_object_or_404(drop_device, pk=pk)
-    if request.method == 'POST':
-        obj.delete()
-        return redirect('/tables/drop_devices')
-    return render(request, 'tables/drop_devices.html', {'device': obj})
-
-
-def drop_device_new_post(request):
-    if not request.user.is_authenticated:
-        return redirect('/accounts/login/')
-    template = 'tables/drop_device_new_post.html'
-    form = PostDropDeviceForm(request.POST or None)
-
-    try:
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Запись нового устройства добавлена!')
-            form = PostDropDeviceForm()
-    except Exception as e:
-        messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
-
-    context = {
-        'form': form,
-    }
-    return render(request, template, context)
-
-
-def drop_device_edit_post(request, pk):
-    if not request.user.is_authenticated:
-        return redirect('/accounts/login/')
-    template = 'tables/drop_device_new_post.html'
-    post = get_object_or_404(drop_device, pk=pk)
-
-    if request.method == 'POST':
-        form = PostDropDeviceForm(request.POST, instance=post)
-
-        try:
-            if form.is_valid():
-                form.save()
-                messages.success(request, 'Изменения внесены')
-        except Exception as e:
-            messages.warning(request, 'Изменения не внесены! Ошибка: {}'.format(e))
-
-    else:
-        form = PostDropDeviceForm(instance=post)
-
-    context = {
-        'form': form,
-        'post': post,
-    }
-
-    return render(request, template, context)
-
-
-def hasp_keys_view(request):
-    if not request.user.is_authenticated:
-        return redirect('/accounts/login/')
-    obj_list = hasp_keys.objects.all()
-    query = request.GET.get('q')
-    if query:
-        obj_list = obj_list.filter(
-             Q(chipno__icontains=query) |
-             Q(notes__icontains=query)
-         ).distinct()
-    page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20) #Сколько записей на стрицу отображатся
-    try:
-        queryset = paginator.page(page)
-    except PageNotAnInteger:
-        queryset = paginator.page(1)
-    except EmptyPage:
-        queryset = paginator.page(paginator.num_pages)
-    context = {
-        'object_list': queryset,
-    }
-    return render(request, 'tables/hasp_keys.html', context)
-
-
-def hasp_keys_delete(request, pk):
-    if not request.user.is_authenticated:
-        return redirect('/accounts/login/')
-    obj = get_object_or_404(hasp_keys, pk=pk)
-    if request.method == 'POST':
-        obj.delete()
-        return redirect('/tables/hasp_keys')
-    return render(request, 'tables/hasp_keys.html', {'device': obj})
-
-
-def hasp_keys_new_post(request):
-    if not request.user.is_authenticated:
-        return redirect('/accounts/login/')
-    template = 'tables/hasp_keys_new_post.html'
-    form = PostHaspForm(request.POST or None)
-
-    try:
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Запись нового ключа добавлена!')
-            form = PostHaspForm()
-    except Exception as e:
-        messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
-
-    context = {
-        'form': form,
-    }
-    return render(request, template, context)
-
-
-def hasp_keys_edit_post(request, pk):
-    if not request.user.is_authenticated:
-        return redirect('/accounts/login/')
-    template = 'tables/hasp_keys_new_post.html'
-    post = get_object_or_404(hasp_keys, pk=pk)
-
-    if request.method == 'POST':
-        form = PostHaspForm(request.POST, instance=post)
-
-        try:
-            if form.is_valid():
-                form.save()
-                messages.success(request, 'Изменения внесены')
-        except Exception as e:
-            messages.warning(request, 'Изменения не внесены! Ошибка: {}'.format(e))
-
-    else:
-        form = PostHaspForm(instance=post)
-
-    context = {
-        'form': form,
-        'post': post,
-    }
-
-    return render(request, template, context)
-
-
 def hardlock_keys_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = hardlock_keys.objects.all()
+    order_by = request.GET.get('order_by', 'chipno')
+    obj_list = hardlock_keys.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -204,6 +44,7 @@ def hardlock_keys_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
+        'order_by': order_by
     }
     return render(request, 'tables/hardlock_keys.html', context)
 
@@ -265,10 +106,94 @@ def hardlock_keys_edit_post(request, pk):
     return render(request, template, context)
 
 
+def hasp_keys_view(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    order_by = request.GET.get('order_by', 'chipno')
+    obj_list = hasp_keys.objects.all().order_by(order_by)
+    query = request.GET.get('q')
+    if query:
+        obj_list = obj_list.filter(
+             Q(chipno__icontains=query) |
+             Q(notes__icontains=query)
+         ).distinct()
+    page = request.GET.get('page')
+    paginator = Paginator(obj_list, 20) #Сколько записей на стрицу отображатся
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        'object_list': queryset,
+        'order_by': order_by
+    }
+    return render(request, 'tables/hasp_keys.html', context)
+
+
+def hasp_keys_delete(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    obj = get_object_or_404(hasp_keys, pk=pk)
+    if request.method == 'POST':
+        obj.delete()
+        return redirect('/tables/hasp_keys')
+    return render(request, 'tables/hasp_keys.html', {'device': obj})
+
+
+def hasp_keys_new_post(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    template = 'tables/hasp_keys_new_post.html'
+    form = PostHaspForm(request.POST or None)
+
+    try:
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Запись нового ключа добавлена!')
+            form = PostHaspForm()
+    except Exception as e:
+        messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
+
+    context = {
+        'form': form,
+    }
+    return render(request, template, context)
+
+
+def hasp_keys_edit_post(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    template = 'tables/hasp_keys_new_post.html'
+    post = get_object_or_404(hasp_keys, pk=pk)
+
+    if request.method == 'POST':
+        form = PostHaspForm(request.POST, instance=post)
+
+        try:
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Изменения внесены')
+        except Exception as e:
+            messages.warning(request, 'Изменения не внесены! Ошибка: {}'.format(e))
+
+    else:
+        form = PostHaspForm(instance=post)
+
+    context = {
+        'form': form,
+        'post': post,
+    }
+
+    return render(request, template, context)
+
+
 def plane_types_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = Plane_types.objects.all()
+    order_by = request.GET.get('order_by', 'username')
+    obj_list = Plane_types.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -286,6 +211,7 @@ def plane_types_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
+        'order_by': order_by
     }
     return render(request, 'tables/plane_types.html', context)
 
@@ -513,7 +439,8 @@ def os_types_edit_post(request, pk):
 def executables_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = executables.objects.all()
+    order_by = request.GET.get('order_by', 'filename')
+    obj_list = executables.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -529,6 +456,7 @@ def executables_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
+        'order_by': order_by
     }
     return render(request, 'tables/executables.html', context)
 
@@ -593,7 +521,8 @@ def executables_edit_post(request, pk):
 def fas_modules_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = FASModules.objects.all()
+    order_by = request.GET.get('order_by', 'executableid')
+    obj_list = FASModules.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -609,6 +538,7 @@ def fas_modules_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
+        'order_by': order_by
     }
     return render(request, 'tables/fas_modules.html', context)
 
@@ -673,7 +603,8 @@ def fas_modules_edit_post(request, pk):
 def executable_paths_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = ExecutablePaths.objects.all()
+    order_by = request.GET.get('order_by', 'executableid')
+    obj_list = ExecutablePaths.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -689,6 +620,7 @@ def executable_paths_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
+        'order_by': order_by
     }
     return render(request, 'tables/executable_paths.html', context)
 
@@ -753,7 +685,8 @@ def executable_paths_edit_post(request, pk):
 def regsystems_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = RegSystems.objects.all().order_by('sysname')
+    order_by = request.GET.get('order_by', 'sysname')
+    obj_list = RegSystems.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -771,6 +704,7 @@ def regsystems_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
+        'order_by': order_by
     }
     return render(request, 'tables/regsystems.html', context)
 
@@ -835,7 +769,8 @@ def regsystems_edit_post(request, pk):
 def typeregsys_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = TypeRegsys.objects.all()
+    order_by = request.GET.get('order_by', 'typeid')
+    obj_list = TypeRegsys.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -856,6 +791,7 @@ def typeregsys_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
+        'order_by': order_by
     }
     return render(request, 'tables/typeregsys.html', context)
 
@@ -919,7 +855,8 @@ def typeregsys_edit_post(request, pk):
 def tasks_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = Tasks.objects.all()
+    order_by = request.GET.get('order_by', 'sysname')
+    obj_list = Tasks.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -936,6 +873,7 @@ def tasks_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
+        'order_by': order_by
     }
     return render(request, 'tables/tasks.html', context)
 
@@ -1000,7 +938,8 @@ def tasks_edit_post(request, pk):
 def typetasks_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = TypeTasks.objects.all()
+    order_by = request.GET.get('order_by', 'typeid')
+    obj_list = TypeTasks.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1018,6 +957,7 @@ def typetasks_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
+        'order_by': order_by
     }
     return render(request, 'tables/typetasks.html', context)
 
@@ -1082,7 +1022,8 @@ def typetasks_edit_post(request, pk):
 def misc_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = Misc.objects.all()
+    order_by = request.GET.get('order_by', 'name')
+    obj_list = Misc.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1101,6 +1042,7 @@ def misc_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
+        'order_by': order_by
     }
     return render(request, 'tables/misc.html', context)
 
@@ -1165,7 +1107,8 @@ def misc_edit_post(request, pk):
 def typemisc_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = TypeMisc.objects.all()
+    order_by = request.GET.get('order_by', 'typeid')
+    obj_list = TypeMisc.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1183,6 +1126,7 @@ def typemisc_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
+        'order_by': order_by
     }
     return render(request, 'tables/typemisc.html', context)
 
@@ -1247,7 +1191,8 @@ def typemisc_edit_post(request, pk):
 def organisations_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = Organisations.objects.all()
+    order_by = request.GET.get('order_by', 'name')
+    obj_list = Organisations.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1265,6 +1210,7 @@ def organisations_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
+        'order_by': order_by
     }
     return render(request, 'tables/organisations.html', context)
 
@@ -1326,10 +1272,93 @@ def organisations_edit_post(request, pk):
     return render(request, template, context)
 
 
+def drop_device_view(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    order_by = request.GET.get('order_by', 'username')
+    obj_list = drop_device.objects.all().order_by(order_by)
+    query = request.GET.get('q')
+    if query:
+        obj_list = obj_list.filter(
+            Q(sysname__icontains=query)
+        ).distinct()
+    page = request.GET.get('page')
+    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        'object_list': queryset,
+        'order_by': order_by
+    }
+    return render(request, 'tables/drop_devices.html', context)
+
+
+def drop_device_delete(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    obj = get_object_or_404(drop_device, pk=pk)
+    if request.method == 'POST':
+        obj.delete()
+        return redirect('/tables/drop_devices')
+    return render(request, 'tables/drop_devices.html', {'device': obj})
+
+
+def drop_device_new_post(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    template = 'tables/drop_device_new_post.html'
+    form = PostDropDeviceForm(request.POST or None)
+
+    try:
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Запись нового устройства добавлена!')
+            form = PostDropDeviceForm()
+    except Exception as e:
+        messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
+
+    context = {
+        'form': form,
+    }
+    return render(request, template, context)
+
+
+def drop_device_edit_post(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    template = 'tables/drop_device_new_post.html'
+    post = get_object_or_404(drop_device, pk=pk)
+
+    if request.method == 'POST':
+        form = PostDropDeviceForm(request.POST, instance=post)
+
+        try:
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Изменения внесены')
+        except Exception as e:
+            messages.warning(request, 'Изменения не внесены! Ошибка: {}'.format(e))
+
+    else:
+        form = PostDropDeviceForm(instance=post)
+
+    context = {
+        'form': form,
+        'post': post,
+    }
+
+    return render(request, template, context)
+
+
 def regsysdevices_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = RegSysDevices.objects.all()
+    order_by = request.GET.get('order_by', 'regsysid')
+    obj_list = RegSysDevices.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1346,6 +1375,7 @@ def regsysdevices_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
+        'order_by': order_by
     }
     return render(request, 'tables/regsysdevices.html', context)
 
@@ -1410,7 +1440,8 @@ def regsysdevices_edit_post(request, pk):
 def modules_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = Modules.objects.all()
+    order_by = request.GET.get('order_by', 'name')
+    obj_list = Modules.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1428,6 +1459,7 @@ def modules_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
+        'order_by': order_by
     }
     return render(request, 'tables/modules.html', context)
 
@@ -1492,7 +1524,8 @@ def modules_edit_post(request, pk):
 def drivers_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = Drivers.objects.all()
+    order_by = request.GET.get('order_by', 'name')
+    obj_list = Drivers.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1510,6 +1543,7 @@ def drivers_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
+        'order_by': order_by
     }
     return render(request, 'tables/drivers.html', context)
 
@@ -1574,8 +1608,8 @@ def drivers_edit_post(request, pk):
 def edit_set_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    obj_list = Sets.objects.all()
-
+    order_by = request.GET.get('order_by', '-userfriendlyid')
+    obj_list = Sets.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1592,7 +1626,7 @@ def edit_set_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
-
+        'order_by': order_by
     }
     return render(request, 'sets/edit_set.html', context)
 
@@ -1744,7 +1778,8 @@ def distrib_list_delete(request, pk):
 def distrib_update_view(request):
     if not request.user.is_authenticated:
         return redirect('/account/login/')
-    obj_list = UpdateDistr.objects.all().order_by('date')
+    order_by = request.GET.get('order_by', '-date')
+    obj_list = UpdateDistr.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
@@ -1760,6 +1795,7 @@ def distrib_update_view(request):
         queryset = paginator.page(paginator.num_pages)
     context = {
         'object_list': queryset,
+        'order_by': order_by
     }
     return render(request, 'distribution/distrib_update.html', context)
 

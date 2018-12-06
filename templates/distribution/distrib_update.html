@@ -9,24 +9,53 @@
     <table class="table table-sm table-borderless form-control-sm">
         <thead>
         <tr align="center">
-            <th>Дистрибутив</th>
-            <th>Новый дистрибутив</th>
-            <th>Дата обновления</th>
-            <th>Кто затребовал</th>
-            <th>По какой причине</th>
-            <th>Примечания</th>
+            <th>
+                {% if '-distribid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=distribid">Дистрибутив</a>
+                {% elif 'distribid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-distribid">Дистрибутив</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=distribid">Дистрибутив</a>{% endif %}
+            </th>
+            <th>
+                {% if '-newdistribid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=newdistribid">Новый дистрибутив</a>
+                {% elif 'newdistribid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-newdistribid">Новый дистрибутив</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=newdistribid">Новый дистрибутив</a>{% endif %}
+
+            </th>
+            <th>
+                {% if '=-date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=date">Дата обновления</a>
+                {% elif '=date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-date">Дата обновления</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=date">Дата обновления</a>{% endif %}
+            </th>
+            <th>
+                {% if '=-source' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=source">Кто затребовал</a>
+                {% elif '=source' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-source">Кто затребовал</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=source">Кто затребовал</a>{% endif %}
+            </th>
+            <th>
+                {% if '=-cause' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=cause">По какой причине</a>
+                {% elif '=cause' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-cause">По какой причине</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=cause">По какой причине</a>{% endif %}
+            </th>
+            <th>
+                {% if '=-notes' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=notes">Примечания</a>
+                {% elif '=notes' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-notes">Примечания</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=notes">Примечания</a>{% endif %}
+
+            </th>
             <th></th>
         </tr>
         </thead>
         {% for item in object_list %}
             <tr align="center">
-                <td><a href="/distrib_list/edit_post/{{ item.distribid.id }}" class="list-group-item list-group-item-action">{{ item.distribid.name }}</a></td>
-                <td>{% if item.newdistribid %}<a href="/distrib_list/edit_post/{{ item.newdistribid.id }}" class="list-group-item list-group-item-action">{{ item.newdistribid.name }}</a>
-                {% else %}<li class="list-group-item list-group-item-action"></li>{% endif %}</td>
-                <td><li class="list-group-item list-group-item-action">{{ item.date|date:'d.m.Y' }}</li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.source }}</li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.cause }}</li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.notes }}</li></td>
+                <td width="16%"><a href="/distrib_list/edit_post/{{ item.distribid.id }}" class="list-group-item list-group-item-action">{{ item.distribid.name }}</a></td>
+                <td width="16%">
+                {% if item.newdistribid %}<a href="/distrib_list/edit_post/{{ item.newdistribid.id }}" class="list-group-item list-group-item-action">{{ item.newdistribid.name }}</a>
+                {% else %}<li class="list-group-item list-group-item-action">&nbsp;</li>
+                {% endif %}
+                </td>
+                <td width="10%"><li class="list-group-item list-group-item-action">{{ item.date|date:'d.m.Y' }}</li></td>
+                <td width="16%"><li class="list-group-item list-group-item-action">{{ item.source }}<br></li></td>
+                <td width="16%"><li class="list-group-item list-group-item-action">{{ item.cause }}<br></li></td>
+                <td width="26%"><li class="list-group-item list-group-item-action">{{ item.notes }}<br></li></td>
                 <td>
     <div class="btn-group" role="group">
     <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

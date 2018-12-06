@@ -7,17 +7,34 @@
     <table class="table table-sm table-borderless form-control-sm">
         <thead>
         <tr align="center">
-            <th><a style="color: black;; text-decoration: none;" href="?order_by=name">Название</a></th>
-            <th><a style="color: black;; text-decoration: none;" href="?order_by=-setid">Набор ID</a></th>
-            <th>Дата</th>
-            <th>Заказчик</th>
-            <th>Логин</th>
-            <th>Серийный номер</th>
+            <th>
+                {% if '-name' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=name">Название</a>
+                {% elif 'name' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-name">Название</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=name">Название</a>{% endif %}</th>
+            <th>
+                {% if '-setid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=setid">Набор ID</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-setid">Набор ID</a>{% endif %}</th>
+            <th>
+                {% if '-date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=date">Дата</a>
+                {% elif 'date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-date">Дата</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=date">Дата</a>{% endif %}</th>
+            <th>
+                {% if '-organisationid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=organisationid">Заказчик</a>
+                {% elif 'organisationid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-organisationid">Заказчик</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=organisationid">Заказчик</a>{% endif %}</th>
+            <th>
+                {% if '-login' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=login">Логин</a>
+                {% elif 'login' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-login">Логин</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=login">Логин</a>{% endif %}</th>
+            <th>
+                {% if '-serial' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=serial">Серийный номер</a>
+                {% elif 'serial' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-serial">Серийный номер</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=serial">Серийный номер</a>{% endif %}</th>
         </tr>
         </thead>
         {% for item in object_list %}
             <tr align="center">
-                <td><a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.id }}">{{ item.name }}</a></td>
+                <td width="23%"><a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.id }}">{{ item.name }}</a></td>
     <div class="modal fade" id="id{{ item.id }}" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
       <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -220,11 +237,11 @@
     </div>
   </div>
     </div>
-                <td><a href="/edit_set/edit_post/{{ item.setid.id }}/" class="list-group-item list-group-item-action">{{ item.setid.userfriendlyid }}</a></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.date|date:'d.m.Y' }}</li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.organisationid }}</li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.login }}</li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.serial }}</li></td>
+                <td width="7%"><a href="/edit_set/edit_post/{{ item.setid.id }}/" class="list-group-item list-group-item-action">{{ item.setid.userfriendlyid }}</a></td>
+                <td width="10%"><li class="list-group-item list-group-item-action">{{ item.date|date:'d.m.Y' }}</li></td>
+                <td width="20%"><li class="list-group-item list-group-item-action">{{ item.organisationid }}<br></li></td>
+                <td width="20%"><li class="list-group-item list-group-item-action">{{ item.login }}</li></td>
+                <td width="20%"><li class="list-group-item list-group-item-action">{{ item.serial }}</li></td>
                 <td>
     <div class="btn-group" role="group">
     <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

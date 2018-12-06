@@ -6,8 +6,16 @@
     <table class="table table-sm table-borderless form-control-sm">
         <thead>
         <tr align="center">
-            <th>Системное имя</th>
-            <th>Пользовательское имя</th>
+            <th>
+                {% if '-sysname' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=sysname">Системное имя</a>
+                {% elif 'sysname' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-sysname">Системное имя</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-sysname">Системное имя</a>{% endif %}
+            </th>
+            <th>
+                {% if '-username' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=username">Пользовательское имя</a>
+                {% elif 'username' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-username">Пользовательское имя</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=username">Пользовательское имя</a>{% endif %}
+            </th>
             <th></th>
         </tr>
         </thead>

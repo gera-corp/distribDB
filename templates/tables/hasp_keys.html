@@ -6,25 +6,53 @@
     <table class="table table-sm table-borderless form-control-sm">
         <thead>
         <tr align="center">
-            <th>Номер чипа</th>
-            <th>Свободен</th>
-            <th>Порт</th>
-            <th>Тип</th>
-            <th>Ограничение по времени</th>
-            <th>Количество лицензий</th>
-            <th>Примечания</th>
+            <th>
+                {% if '-chipno' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=chipno">Номер чипа</a>
+                {% elif 'chipno' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-chipno">Номер чипа</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-chipno">Номер чипа</a>{% endif %}
+            </th>
+            <th>
+                {% if '-free' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=free">Свободен</a>
+                {% elif 'free' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-free">Свободен</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-free">Свободен</a>{% endif %}
+            </th>
+            <th>
+                {% if '-port' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=port">Порт</a>
+                {% elif 'port' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-port">Порт</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=port">Порт</a>{% endif %}
+            </th>
+            <th>
+                {% if '-type' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=type">Тип</a>
+                {% elif 'type' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-type">Тип</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-type">Тип</a>{% endif %}
+            </th>
+            <th>
+                {% if '-timelimit' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=timelimit">Ограничение по времени</a>
+                {% elif 'timelimit' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-timelimit">Ограничение по времени</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=timelimit">Ограничение по времени</a>{% endif %}
+            </th>
+            <th>
+                {% if '-licenses' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=licenses">Количество лицензий</a>
+                {% elif 'licenses' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-licenses">Количество лицензий</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=licenses">Количество лицензий</a>{% endif %}
+            </th>
+            <th>
+                {% if '-notes' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=notes">Примечания</a>
+                {% elif 'notes' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-notes">Примечания</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-notes">Примечания</a>{% endif %}
+            </th>
             <th></th>
         </tr>
         </thead>
         {% for item in object_list %}
             <tr align="center">
-                <td><li class="list-group-item list-group-item-action">{{ item.chipno }}</li></td>
-                <td align="center"><li class="list-group-item list-group-item-action"><input disabled type="checkbox"{% if item.free == True %}checked="checked"{% endif %}></li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.port }}<br></li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.type }}<br></li></td>
-                <td><li class="list-group-item list-group-item-action">{% if item.timelimit == None %}<br>{% else %}{{ item.timelimit|date:'d.m.Y' }}{% endif %}</li></td>
-                <td align="center"><li class="list-group-item list-group-item-action">{{ item.licenses }}<br></li></td>
-                <td><li class="list-group-item list-group-item-action">{{ item.notes }}<br></li></td>
+                <td width="11%"><li class="list-group-item list-group-item-action">{{ item.chipno }}<br></li></td>
+                <td width="1%" align="center"><li class="list-group-item list-group-item-action">&nbsp;<input disabled type="checkbox" {% if item.free == True %}checked="checked"{% endif %}>&nbsp;</li></td>
+                <td width="11%"><li class="list-group-item list-group-item-action">{% if item.port is not None %}{{ item.port }}{% endif %}<br></li></td>
+                <td width="11%"><li class="list-group-item list-group-item-action">{% if item.type is not None %}{{ item.type }}{% else %}&nbsp;{% endif %}</li></td>
+                <td width="11%"><li class="list-group-item list-group-item-action">{% if item.timelimit == None %}<br>{% else %}{{ item.timelimit|date:'d.m.Y' }}{% endif %}</li></td>
+                <td width="11%" align="center"><li class="list-group-item list-group-item-action">{% if item.licenses is not None %}{{ item.licenses }}{% else %}<br>{% endif %}</li></td>
+                <td width="34%"><li class="list-group-item list-group-item-action">{{ item.notes }}<br></li></td>
                 <td>
     <div class="btn-group" role="group">
     <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -6,7 +6,11 @@
     <table class="table table-sm table-borderless form-control-sm">
         <thead>
         <tr align="center">
-            <th>Имя файла</th>
+            <th>
+                {% if '-filename' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=filename">Имя</a>
+                {% elif 'filename' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-filename">Имя</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-filename">Имя</a>{% endif %}
+            </th>
             <th></th>
         </tr>
         </thead>

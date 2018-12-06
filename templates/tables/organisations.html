@@ -6,17 +6,30 @@
     <table class="table table-sm table-borderless form-control-sm">
         <thead>
         <tr align="center">
-            <th>Название</th>
-            <th>Город</th>
-            <th>Примечания</th>
+            <th>
+                {% if '-name' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=name">Название</a>
+                {% elif 'name' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-name">Название</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-name">Название</a>{% endif %}
+            </th>
+            <th>
+                {% if '-city' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=city">Город</a>
+                {% elif 'city' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-city">Город</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=city">Город</a>{% endif %}
+            </th>
+            <th>
+                {% if '-notes' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=notes">Примечания</a>
+                {% elif 'notes' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-notes">Примечания</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=notes">Примечания</a>{% endif %}
+
+            </th>
             <th></th>
         </tr>
         </thead>
         {% for item in object_list %}
             <tr align="center">
                 <td width="33%"><li class="list-group-item list-group-item-action">{{ item.name }}</li></td>
-                <td width="33%"><li class="list-group-item list-group-item-action">{{ item.city }}</li></td>
-                <td width="33%"><li class="list-group-item list-group-item-action">{{ item.notes }}</li></td>
+                <td width="33%"><li class="list-group-item list-group-item-action">{{ item.city }}&nbsp;</li></td>
+                <td width="33%"><li class="list-group-item list-group-item-action">{{ item.notes }}&nbsp;</li></td>
                 <td>
     <div class="btn-group" role="group">
     <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
