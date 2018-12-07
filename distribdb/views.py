@@ -1605,6 +1605,31 @@ def drivers_edit_post(request, pk):
     return render(request, template, context)
 
 
+def plane_distr(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    order_by = request.GET.get('order_by', 'name')
+    obj_list = Distribution.objects.all().order_by(order_by)
+    query = request.GET.get('q')
+    if query:
+        obj_list = obj_list.filter(
+            Q(setid__typeregsystems__typeid__username__icontains=query)
+        ).distinct()
+    page = request.GET.get('page')
+    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        'object_list': queryset,
+        'order_by': order_by
+    }
+    return render(request, 'tables/plane_distr.html', context)
+
+
 def edit_set_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
@@ -1644,7 +1669,7 @@ def edit_set_delete(request, pk):
 from django.views.decorators.cache import cache_page
 
 
-#@cache_page(60 * 15)
+@cache_page(60 * 15)
 def edit_set_new_post(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
@@ -1663,7 +1688,7 @@ def edit_set_new_post(request):
     return render(request, template, context)
 
 
-#@cache_page(60 * 15)
+@cache_page(60 * 15)
 def edit_set_edit_post(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
@@ -1704,7 +1729,7 @@ def distrib_list_view(request):
             Q(login__icontains=query) |
             Q(serial__icontains=query) |
             Q(complectno__icontains=query) |
-            Q(distribhaspkeys__chipno__contains=query)
+            Q(distribhaspkeys__chipno__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)
@@ -1721,6 +1746,7 @@ def distrib_list_view(request):
     return render(request, 'distribution/distribution.html', context)
 
 
+@cache_page(60 * 15)
 def distrib_list_new_post(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
@@ -1739,6 +1765,7 @@ def distrib_list_new_post(request):
     return render(request, template, context)
 
 
+@cache_page(60 * 15)
 def distrib_list_edit_post(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')

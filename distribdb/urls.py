@@ -104,6 +104,8 @@ urlpatterns = [
     path('tables/drivers/new_post/', views.drivers_new_post),
     path('tables/drivers/edit_post/<uuid:pk>/', views.drivers_edit_post, name='drivers_edit_post'),
 
+    path('plane_distr/', views.plane_distr),
+
     path('edit_set/', views.edit_set_view),
     path('edit_set/<uuid:pk>/delete/', views.edit_set_delete, name='edit_set_delete'),
     path('edit_set/new_post/', views.edit_set_new_post),

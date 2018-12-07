@@ -9,7 +9,7 @@
             <th>
                 {% if '-mark' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=mark">Маркировка</a>
                 {% elif 'mark' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-mark">Маркировка</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=mark">Маркировка</a>{% endif %}
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-mark">Маркировка</a>{% endif %}
             </th>
             <th>
                 {% if '-chipno' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=chipno">Номер чипа</a>
@@ -19,13 +19,13 @@
             <th>
                 {% if '-subcode' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=subcode">Субкод</a>
                 {% elif 'subcode' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-subcode">Субкод</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=subcode">Субкод</a>{% endif %}
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-subcode">Субкод</a>{% endif %}
             </th>
             <th>Адрес модуля</th>
             <th>
                 {% if '-port' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=port">Порт</a>
                 {% elif 'port' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-port">Порт</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=port">Порт</a>{% endif %}
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-port">Порт</a>{% endif %}
             </th>
             <th>
                 {% if '-free' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=free">Свободен</a>

@@ -1,0 +1,246 @@
+<title>Список Типов ЛА входящих в Дистрибутивы</title>
+{% extends 'base.html' %}
+{% block content %}
+<div class="container table-responsive-sm shadow p-3 mb-5 bg-white rounded">
+    <p class="text-monospace small">Данная страница позволяет посмотреть список <code>Типов ЛА</code> включённых в <code>Дистрибутив</code>.<br>
+        Можно осуществлять поиск по <code>Типу ЛА</code> и получить список <code>Дистрибутивов</code> куда входит введённый вами <code>Тип ЛА</code>.</p>
+    <table class="table table-sm table-borderless form-control-sm">
+        <thead>
+        <tr align="center">
+            <th>
+                {% if '-setid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=setid">Тип ЛА</a>
+                {% elif 'setid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-setid">Тип ЛА</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-setid">Тип ЛА</a>{% endif %}
+
+            </th>
+            <th>
+                {% if '-name' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=name">Дистрибутив</a>
+                {% elif 'name' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-name">Дистрибутив</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-name">Дистрибутив</a>{% endif %}
+
+            </th>
+
+        </tr>
+        </thead>
+        {% for item in object_list %}
+            <tr align="center">
+                <td width="50%">
+                    <li class="list-group-item list-group-item-action">
+                    {% for plane_tapes in item.setid.typeregsysrelationship_set.all %}
+                     {% if request.GET.q|lower in plane_tapes.typeregsys.typeid.username|lower %}
+                         {% ifchanged plane_tapes.typeregsys.typeid.username %}{{ plane_tapes.typeregsys.typeid.username }}<br>{% endifchanged %}
+                         {% elif request.GET.q is None %}{% ifchanged plane_tapes.typeregsys.typeid.username %}{{ plane_tapes.typeregsys.typeid.username }}<br>{% endifchanged %}{% endif %}{% endfor %}
+                </li>
+                </td>
+                <td width="50%"><a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.id }}">{{ item.name }}</a></td>
+
+            <div class="modal fade" id="id{{ item.id }}" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLongTitle">Информация о дистрибутиве</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <p class="text-monospace">Данная страница позваляет получить детальную информацию о дистрибутиве.</p>
+<ul class="list-group list-group-flush">
+    <li class="list-group-item">Название:<p class="font-weight-bold small">{{ item.name }}</p></li>
+    <li class="list-group-item">Набор:<p class="font-weight-bold small">{{ item.setid.userfriendlyid }}</p></li>
+    <li class="list-group-item">Дата создания:<p class="font-weight-bold small">{{ item.date|date:'d.m.Y' }}</p></li>
+    <li class="list-group-item">Заказчик:<p class="font-weight-bold small">{{ item.organisationid }}</p></li>
+    <li class="list-group-item">№ комплекта:<p class="font-weight-bold small">{{ item.complectno }}</p></li>
+    <li class="list-group-item">Контракт:<p class="font-weight-bold small">{{ item.contract }}</p></li>
+    <li class="list-group-item">Логин:<p class="font-weight-bold small">{{ item.login }}</p></li>
+    <li class="list-group-item">Серийный номер:<p class="font-weight-bold small">{{ item.serial }}</p></li>
+    <li class="list-group-item">Язык:<p class="font-weight-bold small">{{ item.langid }}</p></li>
+    <li class="list-group-item">Носитель:<p class="font-weight-bold small">{{ item.media }}</p></li>
+    <li class="list-group-item">Операционная система:<p class="font-weight-bold small">{{ item.osid }}</p></li>
+    <li class="list-group-item">Специальные условия:<p class="font-weight-bold small">{{ item.specialcase }}</p></li>
+    <li class="list-group-item">Диск сборки:<p class="font-weight-bold small">{{ item.releasedisk }}</p></li>
+    <li class="list-group-item">Примечания:<p class="font-weight-bold small">{{ item.notes }}</p></li><br>
+    <li class="list-group-item"><p class="text-center">Ключи (HASP):</p>
+<span class="font-weight-normal small">
+        <div class="row">
+    <div class="col-sm" align="center">
+        Дата:
+    </div>
+     <div class="col-sm" align="center">
+      № чипа:
+    </div>
+     <div class="col-sm" align="center">
+      Ограничение:
+    </div>
+     <div class="col-sm" align="center">
+      Лицензий:
+    </div>
+     <div class="col-sm" align="center">
+      Свободен:
+    </div>
+    <div class="col-sm" align="center">
+      Примечания:
+    </div>
+        </div></span>
+
+{% for haspkey in item.hasprelationship_set.all %}
+    <li class="list-group-item">
+    <span class="font-weight-bold small">
+    <div class="row">
+    <div class="col-sm" align="center">
+        {{ haspkey.date|date:'d.m.Y' }}
+    </div>
+    <div class="col-sm" align="center">
+        {{ haspkey.hasp_keys.chipno }}
+    </div>
+    <div class="col-sm" align="center">
+        {{ haspkey.hasp_keys.timelimit|date:'d.m.Y' }}
+        </div>
+    <div class="col-sm" align="center">
+        {% if not haspkey.hasp_keys.licenses is None %}
+        {{ haspkey.hasp_keys.licenses }}
+        {% endif %}
+        </div>
+    <div class="col-sm" align="center">
+        {% if not haspkey.hasp_keys.free is False %}
+        Да
+        {% endif %}
+        </div>
+    <div class="col-sm" align="center">
+        {{ haspkey.hasp_keys.notes }}
+    </div></div>
+    </span>
+{% endfor %}
+    </li><br>
+    <li class="list-group-item"><p class="text-center">Ключи (Hardlock):</p>
+<span class="font-weight-normal small">
+        <div class="row">
+    <div class="col-sm" align="center">
+        Дата:
+    </div>
+    <div class="col-sm" align="center">
+        Маркер:
+    </div>
+     <div class="col-sm" align="center">
+        № чипа:
+     </div>
+    <div class="col-sm" align="center">
+        Субкод:
+    </div>
+    <div class="col-sm" align="center">
+        Адрес модуля:
+    </div>
+    <div class="col-sm" align="center">
+        Свободен:
+    </div>
+     <div class="col-sm" align="center">
+        Примечания:
+     </div>
+</span>
+{% for hardlock in item.hardlockrelationship_set.all %}
+        <li class="list-group-item">
+    <span class="font-weight-bold small">
+    <div class="row">
+    <div class="col-sm" align="center">
+        {{ hardlock.date|date:'d.m.Y' }}
+    </div>
+    <div class="col-sm" align="center">
+        {{ hardlock.hardlock_keys.mark }}
+    </div>
+    <div class="col-sm" align="center">
+        {{ hardlock.hardlock_keys.chipno }}
+    </div>
+    <div class="col-sm" align="center">
+        {{ hardlock.hardlock_keys.subcode }}
+    </div>
+    <div class="col-sm" align="center">
+        {{ hardlock.hardlock_keys.modaddr }}
+    </div>
+    <div class="col-sm" align="center">
+        {% if not hardlock.hardlock_keys.free is False %}
+        Да
+        {% endif %}
+    </div>
+    <div class="col-sm" align="center">
+        {{ hardlock.hardlock_keys.notes }}
+    </div>
+    </div></span>
+{% endfor %}
+     </li><br>
+    <li class="list-group-item"><p class="text-center">Обновления дистрибутива:</p>
+
+<span class="font-weight-normal small">
+<div class="row">
+    <div class="col-sm" align="center">
+        Дистрибутив:
+    </div>
+    <div class="col-sm" align="center">
+        Новый дистрибутив:
+    </div>
+    <div class="col-sm" align="center">
+        Дата обновления:
+    </div>
+    <div class="col-sm" align="center">
+        Кто запросил:
+    </div>
+    <div class="col-sm" align="center">
+        Причина обновления:
+    </div>
+        <div class="col-sm" align="center">
+        Примечания:
+    </div>
+</span>
+
+{% for update in item.updatedistr_set.all %}
+<li class="list-group-item">
+<span class="font-weight-bold small">
+<div class="row">
+<div class="col-sm" align="center">
+
+{{ update.distribid.name }}
+</div>
+<div class="col-sm" align="center">
+{{ update.newdistribid.name }}
+</div>
+<div class="col-sm" align="center">
+{{ update.date|date:'d.m.Y' }}
+</div>
+<div class="col-sm" align="center">
+{% if not update.source is None %}
+{{ update.source }}
+{% endif %}
+</div>
+<div class="col-sm" align="center">
+{% if not update.cause is None %}
+{{ update.cause }}
+{% endif %}
+</div>
+<div class="col-sm" align="center">
+{% if not update.notes is None %}
+{{ update.notes }}
+{% endif %}
+</div>
+</div>
+</span>
+{% endfor %}
+</li>
+
+</ul>
+</div>
+      <div class="modal-footer">
+          <a href="/distrib_update/new_post/"><button type="button" class="btn btn-secondary btn-sm">Добавить обновление</button></a>
+        <a href="{% url 'distrib_list_edit_post' pk=item.pk %}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>
+        <a href="/pdf/{{ item.pk }}"><button type="button" class="btn btn-secondary btn-sm">Служебная записка</button></a>
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+    </div>
+
+
+            </tr>
+        {% endfor %}
+    </table>
+{% include 'paginator.html' %}
+</div>
+{% endblock %}

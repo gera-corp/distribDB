@@ -14,7 +14,7 @@
             <th>
                 {% if '-deviceid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=deviceid">Устройство сброса</a>
                 {% elif 'deviceid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-deviceid">Устройство сброса</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=deviceid">Устройство сброса</a>{% endif %}
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-deviceid">Устройство сброса</a>{% endif %}
             </th>
             <th></th>
         </tr>

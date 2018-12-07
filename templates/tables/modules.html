@@ -14,12 +14,12 @@
             <th>
                 {% if '-ispath' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=ispath">Путь InstallShield</a>
                 {% elif 'ispath' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-ispath">Путь InstallShield</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=ispath">Путь InstallShield</a>{% endif %}
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-ispath">Путь InstallShield</a>{% endif %}
             </th>
             <th>
                 {% if '-description' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=description">Описание</a>
                 {% elif 'description' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-description">Описание</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=description">Описание</a>{% endif %}
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-description">Описание</a>{% endif %}
             </th>
             <th></th>
         </tr>

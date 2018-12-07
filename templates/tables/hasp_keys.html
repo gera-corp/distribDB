@@ -19,7 +19,7 @@
             <th>
                 {% if '-port' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=port">Порт</a>
                 {% elif 'port' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-port">Порт</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=port">Порт</a>{% endif %}
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-port">Порт</a>{% endif %}
             </th>
             <th>
                 {% if '-type' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=type">Тип</a>
@@ -29,12 +29,12 @@
             <th>
                 {% if '-timelimit' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=timelimit">Ограничение по времени</a>
                 {% elif 'timelimit' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-timelimit">Ограничение по времени</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=timelimit">Ограничение по времени</a>{% endif %}
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-timelimit">Ограничение по времени</a>{% endif %}
             </th>
             <th>
                 {% if '-licenses' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=licenses">Количество лицензий</a>
                 {% elif 'licenses' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-licenses">Количество лицензий</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=licenses">Количество лицензий</a>{% endif %}
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-licenses">Количество лицензий</a>{% endif %}
             </th>
             <th>
                 {% if '-notes' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=notes">Примечания</a>
