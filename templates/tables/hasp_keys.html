@@ -7,55 +7,55 @@
         <thead>
         <tr align="center">
             <th>
-                {% if '-chipno' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=chipno">Номер чипа</a>
-                {% elif 'chipno' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-chipno">Номер чипа</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-chipno">Номер чипа</a>{% endif %}
+                {% if '-ChipNo' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=ChipNo">Номер чипа</a>
+                {% elif 'ChipNo' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-ChipNo">Номер чипа</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-ChipNo">Номер чипа</a>{% endif %}
             </th>
             <th>
-                {% if '-free' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=free">Свободен</a>
-                {% elif 'free' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-free">Свободен</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-free">Свободен</a>{% endif %}
+                {% if '-Free' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Free">Свободен</a>
+                {% elif 'Free' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Free">Свободен</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-Free">Свободен</a>{% endif %}
             </th>
             <th>
-                {% if '-port' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=port">Порт</a>
-                {% elif 'port' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-port">Порт</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-port">Порт</a>{% endif %}
+                {% if '-Port' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Port">Порт</a>
+                {% elif 'Port' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Port">Порт</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-Port">Порт</a>{% endif %}
             </th>
             <th>
-                {% if '-type' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=type">Тип</a>
-                {% elif 'type' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-type">Тип</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-type">Тип</a>{% endif %}
+                {% if '-Type' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Type">Тип</a>
+                {% elif 'Type' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Type">Тип</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-Type">Тип</a>{% endif %}
             </th>
             <th>
-                {% if '-timelimit' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=timelimit">Ограничение по времени</a>
-                {% elif 'timelimit' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-timelimit">Ограничение по времени</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-timelimit">Ограничение по времени</a>{% endif %}
+                {% if '-TimeLimit' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=TimeLimit">Ограничение по времени</a>
+                {% elif 'TimeLimit' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-TimeLimit">Ограничение по времени</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-TimeLimit">Ограничение по времени</a>{% endif %}
             </th>
             <th>
-                {% if '-licenses' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=licenses">Количество лицензий</a>
-                {% elif 'licenses' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-licenses">Количество лицензий</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-licenses">Количество лицензий</a>{% endif %}
+                {% if '-Licenses' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Licenses">Количество лицензий</a>
+                {% elif 'Licenses' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Licenses">Количество лицензий</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-Licenses">Количество лицензий</a>{% endif %}
             </th>
             <th>
-                {% if '-notes' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=notes">Примечания</a>
-                {% elif 'notes' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-notes">Примечания</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-notes">Примечания</a>{% endif %}
+                {% if '-Notes' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Notes">Примечания</a>
+                {% elif 'Notes' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Notes">Примечания</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-Notes">Примечания</a>{% endif %}
             </th>
             <th></th>
         </tr>
         </thead>
         {% for item in object_list %}
             <tr align="center">
-                <td width="11%"><li class="list-group-item list-group-item-action">{{ item.chipno }}<br></li></td>
-                <td width="1%" align="center"><li class="list-group-item list-group-item-action">&nbsp;<input disabled type="checkbox" {% if item.free == True %}checked="checked"{% endif %}>&nbsp;</li></td>
-                <td width="11%"><li class="list-group-item list-group-item-action">{% if item.port is not None %}{{ item.port }}{% endif %}<br></li></td>
-                <td width="11%"><li class="list-group-item list-group-item-action">{% if item.type is not None %}{{ item.type }}{% else %}&nbsp;{% endif %}</li></td>
-                <td width="11%"><li class="list-group-item list-group-item-action">{% if item.timelimit == None %}<br>{% else %}{{ item.timelimit|date:'d.m.Y' }}{% endif %}</li></td>
-                <td width="11%" align="center"><li class="list-group-item list-group-item-action">{% if item.licenses is not None %}{{ item.licenses }}{% else %}<br>{% endif %}</li></td>
-                <td width="34%"><li class="list-group-item list-group-item-action">{{ item.notes }}<br></li></td>
+                <td width="11%"><li class="list-group-item list-group-item-action">{{ item.ChipNo }}<br></li></td>
+                <td width="1%" align="center"><li class="list-group-item list-group-item-action">&nbsp;<input disabled Type="checkbox" {% if item.Free == True %}checked="checked"{% endif %}>&nbsp;</li></td>
+                <td width="11%"><li class="list-group-item list-group-item-action">{% if item.Port is not None %}{{ item.Port }}{% endif %}<br></li></td>
+                <td width="11%"><li class="list-group-item list-group-item-action">{% if item.Type is not None %}{{ item.Type }}{% else %}&nbsp;{% endif %}</li></td>
+                <td width="11%"><li class="list-group-item list-group-item-action">{% if item.TimeLimit == None %}<br>{% else %}{{ item.TimeLimit|date:'d.m.Y' }}{% endif %}</li></td>
+                <td width="11%" align="center"><li class="list-group-item list-group-item-action">{% if item.Licenses is not None %}{{ item.Licenses }}{% else %}<br>{% endif %}</li></td>
+                <td width="34%"><li class="list-group-item list-group-item-action">{{ item.Notes }}<br></li></td>
                 <td>
     <div class="btn-group" role="group">
-    <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button id="{{ item.pk }}" Type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <img src="{{ STATIC_URL }} /static/glyphicons/png/more.svg" alt="more">
     </button>
       <div class="dropdown-menu" aria-labelledby="{{ item.pk }}">

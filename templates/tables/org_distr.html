@@ -1,4 +1,4 @@
-<title>Список Типов ЛА входящих в Дистрибутивы</title>
+<title>Заказчик - Дистрибутив</title>
 {% extends 'base.html' %}
 {% block content %}
 <div class="container table-responsive-sm shadow p-3 mb-5 bg-white rounded">
@@ -8,9 +8,9 @@
         <thead>
         <tr align="center">
             <th>
-                {% if '-SetID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=SetID">Тип ЛА</a>
-                {% elif 'SetID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-SetID">Тип ЛА</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-SetID">Тип ЛА</a>{% endif %}
+                {% if '-Organisationid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=Organisationid">Тип ЛА</a>
+                {% elif 'Organisationid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-Organisationid">Тип ЛА</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-Organisationid">Организация - заказчик</a>{% endif %}
 
             </th>
             <th>
@@ -25,10 +25,7 @@
             <tr align="center">
                 <td width="50%">
                     <li class="list-group-item list-group-item-action">
-                    {% for plane_tapes in item.SetID.typeregsysrelationship_set.all %}
-                     {% if request.GET.q|lower in plane_tapes.TypeRegsysID.TypeID.UserName|lower %}
-                         {% ifchanged plane_tapes.TypeRegsysID.TypeID.UserName %}{{ plane_tapes.TypeRegsysID.TypeID.UserName }}<br>{% endifchanged %}
-                         {% elif request.GET.q is None %}{% ifchanged plane_tapes.TypeRegsysID.TypeID.UserName %}{{ plane_tapes.TypeRegsysID.TypeID.UserName }}<br>{% endifchanged %}{% endif %}{% endfor %}
+                    {{ item.OrganisationID }}
                 </li>
                 </td>
                 <td width="50%"><a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.ID }}">{{ item.Name }}</a></td>
@@ -150,7 +147,7 @@
         {{ hardlock.HLKeyID.ChipNo }}
     </div>
     <div class="col-sm" align="center">
-        {{ hardlock.HLKeyID.Subcode }}
+        {{ hardlock.HLKeyID.SubCode }}
     </div>
     <div class="col-sm" align="center">
         {{ hardlock.HLKeyID.ModAddr }}

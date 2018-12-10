@@ -7,22 +7,22 @@
         <thead>
         <tr align="center">
             <th>
-                {% if '-executableid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=executableid">Имя файла</a>
-                {% elif 'executableid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-executableid">Имя файла</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-executableid">Имя файла</a>{% endif %}
+                {% if '-ExecutableID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=ExecutableID">Имя файла</a>
+                {% elif 'ExecutableID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-ExecutableID">Имя файла</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-ExecutableID">Имя файла</a>{% endif %}
             </th>
             <th>
-                {% if '-fasno' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=fasno">FAS-номер</a>
-                {% elif 'fasno' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-fasno">FAS-номер</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-fasno">FAS-номер</a>{% endif %}
+                {% if '-FASNo' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=FASNo">FAS-номер</a>
+                {% elif 'FASNo' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-FASNo">FAS-номер</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-FASNo">FAS-номер</a>{% endif %}
             </th>
             <th></th>
         </tr>
         </thead>
         {% for item in object_list %}
             <tr align="center">
-                <td width="50%"><li class="list-group-item list-group-item-action">{{ item.executableid }}</li></td>
-                <td width="50%"><li class="list-group-item list-group-item-action">{{ item.fasno }}</li></td>
+                <td width="50%"><li class="list-group-item list-group-item-action">{{ item.ExecutableID }}</li></td>
+                <td width="50%"><li class="list-group-item list-group-item-action">{{ item.FASNo }}</li></td>
                 <td>
     <div class="btn-group" role="group">
     <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

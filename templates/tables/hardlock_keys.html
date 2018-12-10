@@ -7,35 +7,35 @@
         <thead>
         <tr align="center">
             <th>
-                {% if '-mark' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=mark">Маркировка</a>
-                {% elif 'mark' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-mark">Маркировка</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-mark">Маркировка</a>{% endif %}
+                {% if '-Mark' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Mark">Маркировка</a>
+                {% elif 'Mark' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Mark">Маркировка</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-Mark">Маркировка</a>{% endif %}
             </th>
             <th>
-                {% if '-chipno' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=chipno">Номер чипа</a>
-                {% elif 'chipno' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-chipno">Номер чипа</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-chipno">Номер чипа</a>{% endif %}
+                {% if '-ChipNo' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=ChipNo">Номер чипа</a>
+                {% elif 'ChipNo' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-ChipNo">Номер чипа</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-ChipNo">Номер чипа</a>{% endif %}
             </th>
             <th>
-                {% if '-subcode' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=subcode">Субкод</a>
-                {% elif 'subcode' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-subcode">Субкод</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-subcode">Субкод</a>{% endif %}
+                {% if '-Subcode' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Subcode">Субкод</a>
+                {% elif 'Subcode' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Subcode">Субкод</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-Subcode">Субкод</a>{% endif %}
             </th>
             <th>Адрес модуля</th>
             <th>
-                {% if '-port' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=port">Порт</a>
-                {% elif 'port' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-port">Порт</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-port">Порт</a>{% endif %}
+                {% if '-Port' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Port">Порт</a>
+                {% elif 'Port' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Port">Порт</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-Port">Порт</a>{% endif %}
             </th>
             <th>
-                {% if '-free' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=free">Свободен</a>
-                {% elif 'free' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-free">Свободен</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-free">Свободен</a>{% endif %}
+                {% if '-Free' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Free">Свободен</a>
+                {% elif 'Free' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Free">Свободен</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-Free">Свободен</a>{% endif %}
             </th>
             <th>
-                {% if '-notes' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=notes">Примечания</a>
-                {% elif 'notes' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-notes">Примечания</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-notes">Примечания</a>{% endif %}
+                {% if '-Notes' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Notes">Примечания</a>
+                {% elif 'Notes' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Notes">Примечания</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-Notes">Примечания</a>{% endif %}
 
             </th>
             <th></th>
@@ -44,13 +44,13 @@
         </thead>
         {% for item in object_list %}
             <tr align="center">
-                <td width="11%"><li class="list-group-item list-group-item-action">{{ item.mark }}<br></li></td>
-                <td width="11%"><li class="list-group-item list-group-item-action">{{ item.chipno }}<br></li></td>
-                <td width="11%"><li class="list-group-item list-group-item-action">{{ item.subcode }}<br></li></td>
-                <td width="11%"><li class="list-group-item list-group-item-action">{{ item.modaddr }}<br></li></td>
-                <td width="11%"><li class="list-group-item list-group-item-action">{% if item.port is not None %}{{ item.port }}{% else %}&nbsp;{% endif %}</li></td>
-                <td width="1%" align="center" width="11%"><li class="list-group-item list-group-item-action">&nbsp;<input disabled type="checkbox" {% if item.free == True %}checked="checked"{% endif %}>&nbsp;</li></td>
-                <td width="34%"><li class="list-group-item list-group-item-action">{{ item.notes }}<br></li></td>
+                <td width="11%"><li class="list-group-item list-group-item-action">{{ item.Mark }}<br></li></td>
+                <td width="11%"><li class="list-group-item list-group-item-action">{{ item.ChipNo }}<br></li></td>
+                <td width="11%"><li class="list-group-item list-group-item-action">{{ item.Subcode }}<br></li></td>
+                <td width="11%"><li class="list-group-item list-group-item-action">{{ item.ModAddr }}<br></li></td>
+                <td width="11%"><li class="list-group-item list-group-item-action">{% if item.Port is not None %}{{ item.Port }}{% else %}&nbsp;{% endif %}</li></td>
+                <td width="1%" align="center" width="11%"><li class="list-group-item list-group-item-action">&nbsp;<input disabled type="checkbox" {% if item.Free == True %}checked="checked"{% endif %}>&nbsp;</li></td>
+                <td width="34%"><li class="list-group-item list-group-item-action">{{ item.Notes }}<br></li></td>
                 <td>
     <div class="btn-group" role="group">
     <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -7,24 +7,24 @@
         <thead>
         <tr align="center">
             <th>
-                {% if '-typeid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=typeid">Тип ЛА</a>
-                {% elif 'typeid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-typeid">Тип ЛА</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-typeid">Тип ЛА</a>{% endif %}
+                {% if '-TypeID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=TypeID">Тип ЛА</a>
+                {% elif 'TypeID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-TypeID">Тип ЛА</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-TypeID">Тип ЛА</a>{% endif %}
             </th>
             <th>
-                {% if '-miscid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=miscid">Элемент</a>
-                {% elif 'miscid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-miscid">Элемент</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-miscid">Элемент</a>{% endif %}
+                {% if '-MiscID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=MiscID">Элемент</a>
+                {% elif 'MiscID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-MiscID">Элемент</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-MiscID">Элемент</a>{% endif %}
             </th>
             <th>
-                {% if '-ispath' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=ispath">Путь InstallShield</a>
-                {% elif 'ispath' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-ispath">Путь InstallShield</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-ispath">Путь InstallShield</a>{% endif %}
+                {% if '-ISPath' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=ISPath">Путь InstallShield</a>
+                {% elif 'ISPath' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-ISPath">Путь InstallShield</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-ISPath">Путь InstallShield</a>{% endif %}
             </th>
             <th>
-                {% if '-description' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=description">Описание</a>
-                {% elif 'description' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-description">Описание</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-description">Описание</a>{% endif %}
+                {% if '-Description' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Description">Описание</a>
+                {% elif 'Description' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Description">Описание</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-Description">Описание</a>{% endif %}
 
             </th>
             <th></th>
@@ -32,10 +32,10 @@
         </thead>
         {% for item in object_list %}
             <tr align="center">
-                <td width="15%"><li class="list-group-item list-group-item-action">{{ item.typeid }}</li></td>
-                <td width="20%"><li class="list-group-item list-group-item-action">{{ item.miscid }}</li></td>
-                <td width="20%"><li class="list-group-item list-group-item-action">{{ item.ispath }}</li></td>
-                <td width="45%"><li class="list-group-item list-group-item-action">{% if item.description is not None %}{{ item.description }}&nbsp;{% else %}&nbsp;{% endif %}</li></td>
+                <td width="15%"><li class="list-group-item list-group-item-action">{{ item.TypeID }}</li></td>
+                <td width="20%"><li class="list-group-item list-group-item-action">{{ item.MiscID }}</li></td>
+                <td width="20%"><li class="list-group-item list-group-item-action">{{ item.ISPath }}</li></td>
+                <td width="45%"><li class="list-group-item list-group-item-action">{% if item.Description is not None %}{{ item.Description }}&nbsp;{% else %}&nbsp;{% endif %}</li></td>
                 <td>
     <div class="btn-group" role="group">
     <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

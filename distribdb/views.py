@@ -26,13 +26,13 @@ def programms(request):
 def hardlock_keys_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    order_by = request.GET.get('order_by', 'chipno')
+    order_by = request.GET.get('order_by', 'ChipNo')
     obj_list = hardlock_keys.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(chipno__icontains=query) |
-            Q(notes__icontains=query)
+            Q(ChipNo__icontains=query) |
+            Q(Notes__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -109,13 +109,13 @@ def hardlock_keys_edit_post(request, pk):
 def hasp_keys_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    order_by = request.GET.get('order_by', 'chipno')
+    order_by = request.GET.get('order_by', 'ChipNo')
     obj_list = hasp_keys.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-             Q(chipno__icontains=query) |
-             Q(notes__icontains=query)
+             Q(ChipNo__icontains=query) |
+             Q(Notes__icontains=query)
          ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20) #Сколько записей на стрицу отображатся
@@ -192,14 +192,14 @@ def hasp_keys_edit_post(request, pk):
 def plane_types_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    order_by = request.GET.get('order_by', 'username')
+    order_by = request.GET.get('order_by', 'UserName')
     obj_list = Plane_types.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(sysname__icontains=query) |
-            Q(username__icontains=query) |
-            Q(description__icontains=query)
+            Q(SysName__icontains=query) |
+            Q(UserName__icontains=query) |
+            Q(Description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -280,9 +280,9 @@ def lang_types_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(lang__icontains=query) |
-            Q(lcode__icontains=query) |
-            Q(isdefine__icontains=query)
+            Q(Lang__icontains=query) |
+            Q(LCode__icontains=query) |
+            Q(ISDefine__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -362,8 +362,8 @@ def os_types_view(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(os__icontains=query) |
-            Q(oscode__icontains=query)
+            Q(OS__icontains=query) |
+            Q(OSCode__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -439,12 +439,12 @@ def os_types_edit_post(request, pk):
 def executables_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    order_by = request.GET.get('order_by', 'filename')
+    order_by = request.GET.get('order_by', 'FileName')
     obj_list = executables.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(filename__icontains=query)
+            Q(FileName__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -521,12 +521,12 @@ def executables_edit_post(request, pk):
 def fas_modules_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    order_by = request.GET.get('order_by', 'executableid')
+    order_by = request.GET.get('order_by', 'ExecutableID')
     obj_list = FASModules.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(executableid__icontains=query)
+            Q(ExecutableID__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -603,7 +603,7 @@ def fas_modules_edit_post(request, pk):
 def executable_paths_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    order_by = request.GET.get('order_by', 'executableid')
+    order_by = request.GET.get('order_by', 'ExecutableID')
     obj_list = ExecutablePaths.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
@@ -685,14 +685,14 @@ def executable_paths_edit_post(request, pk):
 def regsystems_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    order_by = request.GET.get('order_by', 'sysname')
+    order_by = request.GET.get('order_by', 'SysName')
     obj_list = RegSystems.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(sysname__icontains=query) |
-            Q(username__icontains=query) |
-            Q(ispath__icontains=query)
+            Q(SysName__icontains=query) |
+            Q(UserName__icontains=query) |
+            Q(ISPath__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -769,17 +769,17 @@ def regsystems_edit_post(request, pk):
 def typeregsys_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    order_by = request.GET.get('order_by', 'typeid')
+    order_by = request.GET.get('order_by', 'TypeID')
     obj_list = TypeRegsys.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(typeid__username__icontains=query) |
-            Q(regsysid__username__icontains=query) |
-            Q(ispath__icontains=query) |
-            Q(usernameregsys__icontains=query) |
-            Q(sysnameregsys__icontains=query) |
-            Q(description__icontains=query)
+            Q(TypeID__UserName__icontains=query) |
+            Q(RegsysID__UserName__icontains=query) |
+            Q(ISPath__icontains=query) |
+            Q(UserNameRegsys__icontains=query) |
+            Q(SysNameRegsys__icontains=query) |
+            Q(Description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -855,13 +855,13 @@ def typeregsys_edit_post(request, pk):
 def tasks_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    order_by = request.GET.get('order_by', 'sysname')
+    order_by = request.GET.get('order_by', 'SysName')
     obj_list = Tasks.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(username__icontains=query) |
-            Q(sysname__icontains=query)
+            Q(UserName__icontains=query) |
+            Q(SysName__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -938,14 +938,14 @@ def tasks_edit_post(request, pk):
 def typetasks_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    order_by = request.GET.get('order_by', 'typeid')
+    order_by = request.GET.get('order_by', 'TypeID')
     obj_list = TypeTasks.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(typeid__username__icontains=query) |
-            Q(taskid__username__icontains=query) |
-            Q(description__icontains=query)
+            Q(TypeID__UserName__icontains=query) |
+            Q(TaskID__UserName__icontains=query) |
+            Q(Description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -1022,15 +1022,15 @@ def typetasks_edit_post(request, pk):
 def misc_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    order_by = request.GET.get('order_by', 'name')
+    order_by = request.GET.get('order_by', 'Name')
     obj_list = Misc.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(name__icontains=query) |
-            Q(sysname__icontains=query) |
-            Q(username__icontains=query) |
-            Q(description__icontains=query)
+            Q(Name__icontains=query) |
+            Q(SysName__icontains=query) |
+            Q(UserName__icontains=query) |
+            Q(Description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -1107,14 +1107,14 @@ def misc_edit_post(request, pk):
 def typemisc_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    order_by = request.GET.get('order_by', 'typeid')
+    order_by = request.GET.get('order_by', 'TypeID')
     obj_list = TypeMisc.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(typeid__username__icontains=query) |
-            Q(miscid__username__icontains=query) |
-            Q(description__icontains=query)
+            Q(TypeID__UserName__icontains=query) |
+            Q(MiscID__UserName__icontains=query) |
+            Q(Description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -1191,14 +1191,14 @@ def typemisc_edit_post(request, pk):
 def organisations_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    order_by = request.GET.get('order_by', 'name')
+    order_by = request.GET.get('order_by', 'Name')
     obj_list = Organisations.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(name__icontains=query) |
-            Q(city__icontains=query) |
-            Q(notes__icontains=query)
+            Q(Name__icontains=query) |
+            Q(City__icontains=query) |
+            Q(Notes__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -1275,12 +1275,12 @@ def organisations_edit_post(request, pk):
 def drop_device_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    order_by = request.GET.get('order_by', 'username')
+    order_by = request.GET.get('order_by', 'UserName')
     obj_list = drop_device.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(sysname__icontains=query)
+            Q(SysName__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -1357,13 +1357,13 @@ def drop_device_edit_post(request, pk):
 def regsysdevices_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    order_by = request.GET.get('order_by', 'regsysid')
+    order_by = request.GET.get('order_by', 'RegsysID')
     obj_list = RegSysDevices.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(regsysid__icontains=query) |
-            Q(deviceid__icontains=query)
+            Q(RegsysID__icontains=query) |
+            Q(DeviceID__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -1440,14 +1440,14 @@ def regsysdevices_edit_post(request, pk):
 def modules_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    order_by = request.GET.get('order_by', 'name')
+    order_by = request.GET.get('order_by', 'Name')
     obj_list = Modules.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(name__icontains=query) |
-            Q(description__icontains=query) |
-            Q(ispath__icontains=query)
+            Q(Name__icontains=query) |
+            Q(ISPath__icontains=query) |
+            Q(Description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -1524,14 +1524,14 @@ def modules_edit_post(request, pk):
 def drivers_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    order_by = request.GET.get('order_by', 'name')
+    order_by = request.GET.get('order_by', 'Name')
     obj_list = Drivers.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(name__icontains=query) |
-            Q(ispath__icontains=query) |
-            Q(description__icontains=query)
+            Q(Name__icontains=query) |
+            Q(ISPath__icontains=query) |
+            Q(Description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -1608,12 +1608,12 @@ def drivers_edit_post(request, pk):
 def plane_distr(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    order_by = request.GET.get('order_by', 'name')
+    order_by = request.GET.get('order_by', 'Name')
     obj_list = Distribution.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(setid__typeregsystems__typeid__username__icontains=query)
+            Q(SetID__typeregsystems__TypeID__UserName__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -1630,16 +1630,42 @@ def plane_distr(request):
     return render(request, 'tables/plane_distr.html', context)
 
 
+def org_distr(request):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    order_by = request.GET.get('order_by', 'Name')
+    obj_list = Distribution.objects.all().order_by(order_by)
+    query = request.GET.get('q')
+    if query:
+        obj_list = obj_list.filter(
+            Q(OrganisationID__Name__contains=query) |
+            Q(Name__icontains=query)
+        ).distinct()
+    page = request.GET.get('page')
+    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context = {
+        'object_list': queryset,
+        'order_by': order_by
+    }
+    return render(request, 'tables/org_distr.html', context)
+
+
 def edit_set_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    order_by = request.GET.get('order_by', '-userfriendlyid')
+    order_by = request.GET.get('order_by', '-UserFriendlyID')
     obj_list = Sets.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(date__icontains=query) |
-            Q(userfriendlyid__icontains=query)
+            Q(UserFriendlyID__icontains=query) |
+            Q(Date__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
@@ -1669,7 +1695,7 @@ def edit_set_delete(request, pk):
 from django.views.decorators.cache import cache_page
 
 
-@cache_page(60 * 15)
+# @cache_page(60 * 15)
 def edit_set_new_post(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
@@ -1688,7 +1714,7 @@ def edit_set_new_post(request):
     return render(request, template, context)
 
 
-@cache_page(60 * 15)
+# @cache_page(60 * 15)
 def edit_set_edit_post(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
@@ -1719,17 +1745,17 @@ def edit_set_edit_post(request, pk):
 def distrib_list_view(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
-    order_by = request.GET.get('order_by', 'setid')
+    order_by = request.GET.get('order_by', 'SetID')
     obj_list = Distribution.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(setid__userfriendlyid__icontains=query) |
-            Q(name__icontains=query) |
-            Q(login__icontains=query) |
-            Q(serial__icontains=query) |
-            Q(complectno__icontains=query) |
-            Q(distribhaspkeys__chipno__icontains=query)
+            Q(SetID__UserFriendlyID__icontains=query) |
+            Q(Name__icontains=query) |
+            Q(Login__icontains=query) |
+            Q(Serial__icontains=query) |
+            Q(ComplectNo__icontains=query) |
+            Q(distribhaspkeys__ChipNo__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)
@@ -1746,7 +1772,7 @@ def distrib_list_view(request):
     return render(request, 'distribution/distribution.html', context)
 
 
-@cache_page(60 * 15)
+# @cache_page(60 * 15)
 def distrib_list_new_post(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
@@ -1765,7 +1791,7 @@ def distrib_list_new_post(request):
     return render(request, template, context)
 
 
-@cache_page(60 * 15)
+# @cache_page(60 * 15)
 def distrib_list_edit_post(request, pk):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
@@ -1805,12 +1831,12 @@ def distrib_list_delete(request, pk):
 def distrib_update_view(request):
     if not request.user.is_authenticated:
         return redirect('/account/login/')
-    order_by = request.GET.get('order_by', '-date')
+    order_by = request.GET.get('order_by', '-Date')
     obj_list = UpdateDistr.objects.all().order_by(order_by)
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(distribid__name__icontains=query)
+            Q(DistribID__Name__icontains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 20)

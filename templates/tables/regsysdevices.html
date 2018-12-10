@@ -7,22 +7,22 @@
         <thead>
         <tr align="center">
             <th>
-                {% if '-regsysid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=regsysid">Система регистрации</a>
-                {% elif 'regsysid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-regsysid">Система регистрации</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-regsysid">Система регистрации</a>{% endif %}
+                {% if '-RegsysID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=RegsysID">Система регистрации</a>
+                {% elif 'RegsysID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-RegsysID">Система регистрации</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-RegsysID">Система регистрации</a>{% endif %}
             </th>
             <th>
-                {% if '-deviceid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=deviceid">Устройство сброса</a>
-                {% elif 'deviceid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-deviceid">Устройство сброса</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-deviceid">Устройство сброса</a>{% endif %}
+                {% if '-DeviceID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=DeviceID">Устройство сброса</a>
+                {% elif 'DeviceID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-DeviceID">Устройство сброса</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-DeviceID">Устройство сброса</a>{% endif %}
             </th>
             <th></th>
         </tr>
         </thead>
         {% for item in object_list %}
             <tr align="center">
-                <td width="50%"><li class="list-group-item list-group-item-action">{{ item.regsysid.username }}</li></td>
-                <td width="50%"><li class="list-group-item list-group-item-action">{{ item.deviceid }}</li></td>
+                <td width="50%"><li class="list-group-item list-group-item-action">{{ item.RegsysID.UserName }}</li></td>
+                <td width="50%"><li class="list-group-item list-group-item-action">{{ item.DeviceID.UserName }}</li></td>
                 <td>
     <div class="btn-group" role="group">
     <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

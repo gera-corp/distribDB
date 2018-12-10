@@ -8,22 +8,22 @@ class hardlock_keys(models.Model):
         ('USB', 'USB'),
         ('LPT', 'LPT')
     )
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    mark                    = models.CharField(max_length=50, blank=True)
-    chipno                  = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Номером чипа')
-    subcode                 = models.IntegerField(blank=True)
-    modaddr                 = models.IntegerField()
-    port                    = models.CharField(max_length=50, blank=False, default=None, choices=port_name)
-    free                    = models.BooleanField(default=False)
-    notes                   = models.TextField(max_length=8000, blank=True)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    Mark                    = models.CharField(max_length=50, blank=True)
+    ChipNo                  = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Номером чипа')
+    Subcode                 = models.IntegerField(blank=True)
+    ModAddr                 = models.IntegerField()
+    Port                    = models.CharField(max_length=50, blank=False, default=None, choices=port_name)
+    Free                    = models.BooleanField(default=False)
+    Notes                   = models.TextField(max_length=8000, blank=True)
 
     class Meta:
         verbose_name = 'Ключ аппаратной защиты (Hardlock)'
-        ordering = ('chipno',)
-        db_table = 'hl_keys'
+        ordering = ('ChipNo',)
+        db_table = 'HL_Keys'
 
     def __str__(self):
-        return self.chipno
+        return self.ChipNo
 
 
 class hasp_keys(models.Model):
@@ -36,274 +36,273 @@ class hasp_keys(models.Model):
         ('TimeHASP', 'TimeHASP'),
         ('NetHASP', 'NetHasp')
     )
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    chipno                  = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Номером чипа')
-    free                    = models.BooleanField(default=False)
-    port                    = models.CharField(max_length=50, blank=False, default=None, choices=port_name)
-    type                    = models.CharField(max_length=50, blank=False, default=None, choices=type_key)
-    timelimit               = models.DateField(null=True, blank=True)
-    licenses                = models.CharField(max_length=255, blank=True, null=True)
-    notes                   = models.TextField(max_length=8000, blank=True)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    ChipNo                  = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Номером чипа')
+    Free                    = models.BooleanField(default=False)
+    Port                    = models.CharField(max_length=50, blank=False, default=None, choices=port_name)
+    Type                    = models.CharField(max_length=50, blank=False, default=None, choices=type_key)
+    TimeLimit               = models.DateField(null=True, blank=True)
+    Licenses                = models.CharField(max_length=255, blank=True, null=True)
+    Notes                   = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return self.chipno
+        return self.ChipNo
 
     class Meta:
         verbose_name = 'Ключ аппаратной защиты (HASP)'
-        ordering = ('chipno',)
-        db_table = 'hasp_keys'
+        ordering = ('ChipNo',)
+        db_table = 'HASP_Keys'
 
 
 class Plane_types(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    sysname                 = models.CharField(max_length=50, blank=False)
-    username                = models.CharField(max_length=50, blank=False)
-    ispath                  = models.CharField(max_length=250, blank=False)
-    description             = models.TextField(max_length=8000, blank=True)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    SysName                 = models.CharField(max_length=50, blank=False)
+    UserName                = models.CharField(max_length=50, blank=False)
+    ISPath                  = models.CharField(max_length=250, blank=False)
+    Description             = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return self.username
+        return self.UserName
 
     class Meta:
-        ordering = ('username',)
+        ordering = ('UserName',)
         verbose_name = 'Типы ЛА'
-        db_table = 'planetypes'
-
+        db_table = 'PlaneTypes'
 
 
 class Lang_types(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    lang                    = models.CharField(max_length=50, blank=False)
-    lcode                   = models.IntegerField()
-    isdefine                = models.CharField(max_length=50, blank=False)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    Lang                    = models.CharField(max_length=50, blank=False)
+    LCode                   = models.IntegerField()
+    ISDefine                = models.CharField(max_length=50, blank=False)
 
     def __str__(self):
-        return self.lang
+        return self.Lang
 
     class Meta:
-        db_table = 'lang'
+        db_table = 'Lang'
 
 
 class OS_type(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    os                      = models.CharField(max_length=50, blank=False)
-    oscode                  = models.IntegerField(blank=False)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    OS                      = models.CharField(max_length=50, blank=False)
+    OSCode                  = models.IntegerField(blank=False)
 
     def __str__(self):
-        return self.os
+        return self.OS
 
     class Meta:
-        db_table = 'os'
+        db_table = 'OS'
 
 
 class executables(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    filename                = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Именем файла')
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    FileName                = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Именем файла')
 
     def __str__(self):
-        return self.filename
+        return self.FileName
 
     class Meta:
         verbose_name = 'Исполняемый модуль'
-        ordering = ('filename',)
-        db_table = 'executables'
+        ordering = ('FileName',)
+        db_table = 'Executables'
 
 
 class FASModules(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    executableid            = models.ForeignKey('executables', on_delete=models.CASCADE, blank=False)
-    fasno                   = models.IntegerField(blank=False, unique=True, verbose_name='FAS номером')
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    ExecutableID            = models.ForeignKey('executables', on_delete=models.CASCADE, blank=False, db_column='ExecutableID')
+    FASNo                   = models.IntegerField(blank=False, unique=True, verbose_name='FAS номером')
 
     class Meta:
         verbose_name = 'FAS модуль'
-        ordering = ('executableid',)
-        db_table = 'fasmodules'
+        ordering = ('ExecutableID',)
+        db_table = 'FASModules'
 
 
 class ExecutablePaths(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    executableid            = models.ForeignKey('executables', on_delete=models.CASCADE, blank=False)
-    ispath                  = models.CharField(max_length=250, blank=False)
-    source                  = models.CharField(max_length=800, blank=True)
-    dest                    = models.CharField(max_length=800, blank=True)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    ExecutableID            = models.ForeignKey('executables', on_delete=models.CASCADE, blank=False, db_column='ExecutableID')
+    ISPath                  = models.CharField(max_length=250, blank=False)
+    Source                  = models.CharField(max_length=800, blank=True)
+    Dest                    = models.CharField(max_length=800, blank=True)
 
     class Meta:
-        ordering = ('executableid',)
-        db_table = 'executablepaths'
+        ordering = ('ExecutableID',)
+        db_table = 'ExecutablePaths'
 
 
 class RegSystems(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    sysname                 = models.CharField(max_length=50, blank=False)
-    username                = models.CharField(max_length=50, blank=False)
-    ispath                  = models.CharField(max_length=50, blank=False)
-    hide                    = models.BooleanField(default=False)
-    description             = models.TextField(max_length=8000, blank=True)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    SysName                 = models.CharField(max_length=50, blank=False)
+    UserName                = models.CharField(max_length=50, blank=False)
+    ISPath                  = models.CharField(max_length=50, blank=False)
+    Hide                    = models.BooleanField(default=False)
+    Description             = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return '%s %s' % (self.username, self.hide)
+        return '%s %s' % (self.UserName, self.Hide)
 
     class Meta:
-        ordering = ('username',)
-        db_table = 'regsystems'
+        ordering = ('UserName',)
+        db_table = 'RegSystems'
 
 
 class TypeRegsys(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    typeid                  = models.ForeignKey('Plane_types', on_delete=models.CASCADE, blank=False, verbose_name='Тип ЛА')
-    regsysid                = models.ForeignKey('RegSystems', on_delete=models.CASCADE, blank=False, verbose_name='Система регистрации')
-    ispath                  = models.CharField(max_length=255, blank=False)
-    usernameregsys          = models.CharField(max_length=36, blank=False)
-    sysnameregsys           = models.CharField(max_length=16, blank=False)
-    description             = models.TextField(max_length=8000, blank=True)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    TypeID                  = models.ForeignKey('Plane_types', on_delete=models.CASCADE, blank=False, verbose_name='Тип ЛА', db_column='TypeID')
+    RegsysID                = models.ForeignKey('RegSystems', on_delete=models.CASCADE, blank=False, verbose_name='Система регистрации', db_column='RegsysID')
+    ISPath                  = models.CharField(max_length=255, blank=False)
+    UserNameRegsys          = models.CharField(max_length=36, blank=False)
+    SysNameRegsys           = models.CharField(max_length=16, blank=False)
+    Description             = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return self.regsysid.username
+        return self.RegsysID.UserName
 
     class Meta:
-        ordering = ('typeid',)
-        unique_together = ('typeid', 'regsysid')
+        ordering = ('TypeID',)
+        unique_together = ('TypeID', 'RegsysID')
         verbose_name = 'Система регистрации по типам ЛА'
-        db_table = 'typeregsys'
+        db_table = 'TypeRegsys'
 
 
 class Tasks(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    sysname                 = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Системным именем')
-    username                = models.CharField(max_length=50, blank=True)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    SysName                 = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Системным именем')
+    UserName                = models.CharField(max_length=50, blank=True)
 
     def __str__(self):
-        return self.sysname
+        return self.SysName
 
     class Meta:
         verbose_name = 'База экспрессов'
-        ordering = ('sysname',)
-        db_table = 'tasks'
+        ordering = ('SysName',)
+        db_table = 'Tasks'
 
 
 class TypeTasks(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    typeid                  = models.ForeignKey('Plane_types', on_delete=models.CASCADE, blank=False, verbose_name='Тип ЛА')
-    taskid                  = models.ForeignKey('Tasks', on_delete=models.CASCADE, blank=False, verbose_name='База экспресса')
-    ispath                  = models.CharField(max_length=255, blank=False)
-    description             = models.TextField(max_length=8000, blank=True)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    TypeID                  = models.ForeignKey('Plane_types', on_delete=models.CASCADE, blank=False, verbose_name='Тип ЛА', db_column='TypeID')
+    TaskID                  = models.ForeignKey('Tasks', on_delete=models.CASCADE, blank=False, verbose_name='База экспресса', db_column='TaskID')
+    ISPath                  = models.CharField(max_length=255, blank=False)
+    Description             = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return self.taskid.sysname
+        return self.TaskID.SysName
 
     class Meta:
-        ordering = ('typeid',)
+        ordering = ('TypeID',)
         verbose_name = 'Экспресс для типов ЛА'
-        unique_together = ('typeid', 'taskid')
-        db_table = 'typetasks'
+        unique_together = ('TypeID', 'TaskID')
+        db_table = 'TypeTasks'
 
 
 class Misc(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name                    = models.CharField(max_length=255, blank=False, unique=True, verbose_name='Названием')
-    sysname                 = models.CharField(max_length=50, blank=True)
-    username                = models.CharField(max_length=50, blank=True)
-    description             = models.TextField(max_length=8000, blank=True)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    Name                    = models.CharField(max_length=255, blank=False, unique=True, verbose_name='Названием')
+    SysName                 = models.CharField(max_length=50, blank=True)
+    UserName                = models.CharField(max_length=50, blank=True)
+    Description             = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.Name
 
     class Meta:
         verbose_name = 'Допольнительный элемент ЛА'
-        ordering = ('name',)
-        db_table = 'misc'
+        ordering = ('Name',)
+        db_table = 'Misc'
 
 
 class TypeMisc(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    typeid                  = models.ForeignKey('Plane_types', on_delete=models.CASCADE, blank=False, verbose_name='Тип ЛА')
-    miscid                  = models.ForeignKey('Misc', on_delete=models.CASCADE, blank=False, verbose_name='Элемент')
-    ispath                  = models.CharField(max_length=255, blank=False)
-    description             = models.TextField(max_length=8000, blank=True)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    TypeID                  = models.ForeignKey('Plane_types', on_delete=models.CASCADE, blank=False, verbose_name='Тип ЛА', db_column='TypeID')
+    MiscID                  = models.ForeignKey('Misc', on_delete=models.CASCADE, blank=False, verbose_name='Элемент', db_column='MiscID')
+    ISPath                  = models.CharField(max_length=255, blank=False)
+    Description             = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return self.miscid.name
+        return self.MiscID.Name
 
     class Meta:
         verbose_name = 'Дополнительный элемент ЛА'
-        unique_together = ('typeid', 'miscid')
-        ordering = ('typeid',)
-        db_table = 'typemisc'
+        unique_together = ('TypeID', 'MiscID')
+        ordering = ('TypeID',)
+        db_table = 'TypeMisc'
 
 
 class Organisations(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name                    = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Названием')
-    city                    = models.CharField(max_length=50, blank=True)
-    notes                   = models.CharField(max_length=255, blank=True)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    Name                    = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Названием')
+    City                    = models.CharField(max_length=50, blank=True)
+    Notes                   = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.Name
 
     class Meta:
         verbose_name = 'Организация'
-        ordering = ('name',)
-        db_table = 'organisations'
+        ordering = ('Name',)
+        db_table = 'Organisations'
 
 
 class drop_device(models.Model):
-    id                       = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    sysname                  = models.CharField(max_length=50, blank=False)
-    username                 = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Пользовательским именем')
-    ispath                   = models.CharField(max_length=250, blank=False)
-    description              = models.TextField(max_length=8000, blank=True)
+    ID                       = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    SysName                  = models.CharField(max_length=50, blank=False)
+    UserName                 = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Пользовательским именем')
+    ISPath                   = models.CharField(max_length=250, blank=False)
+    Description              = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return self.username
+        return self.UserName
 
     class Meta:
         verbose_name = 'Устройство сброса'
-        ordering = ('username',)
-        db_table = 'devices'
+        ordering = ('UserName',)
+        db_table = 'Devices'
 
 
 class RegSysDevices(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    regsysid                = models.ForeignKey('RegSystems', on_delete=models.CASCADE, blank=False)
-    deviceid                = models.ForeignKey('drop_device', on_delete=models.CASCADE, blank=False)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    RegsysID                = models.ForeignKey('RegSystems', on_delete=models.CASCADE, blank=False, db_column='RegsysID')
+    DeviceID                = models.ForeignKey('drop_device', on_delete=models.CASCADE, blank=False, db_column='DeviceID')
 
     def __str__(self):
-        return '%s %s' % (self.regsysid.username, self.deviceid.username)
+        return '%s %s' % (self.RegsysID.UserName, self.DeviceID.UserName)
 
     class Meta:
-        ordering = ('regsysid',)
-        db_table = 'regsysdevices'
+        ordering = ('RegsysID',)
+        db_table = 'RegSysDevices'
 
 
 class Modules(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name                    = models.CharField(max_length=255, blank=False, unique=True, verbose_name='Названием')
-    ispath                  = models.CharField(max_length=255, blank=False)
-    description             = models.TextField(max_length=8000, blank=True)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    Name                    = models.CharField(max_length=255, blank=False, unique=True, verbose_name='Названием')
+    ISPath                  = models.CharField(max_length=255, blank=False)
+    Description             = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.Name
 
     class Meta:
         verbose_name = 'Дополнительный модуль ПО'
-        ordering = ('name',)
-        db_table = 'modules'
+        ordering = ('Name',)
+        db_table = 'Modules'
 
 
 class Drivers(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name                    = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Названием')
-    xno                     = models.IntegerField(blank=False)
-    ispath                  = models.CharField(max_length=255, blank=False)
-    description             = models.TextField(max_length=8000, blank=True)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    Name                    = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Названием')
+    Xno                     = models.IntegerField(blank=False)
+    ISPath                  = models.CharField(max_length=255, blank=False)
+    Description             = models.TextField(max_length=8000, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.Name
 
     class Meta:
         verbose_name = 'Драйвер'
-        ordering = ('name',)
-        db_table = 'drivers'
+        ordering = ('Name',)
+        db_table = 'Drivers'
 
 
 def ids():
@@ -315,98 +314,98 @@ def ids():
 
 
 class Sets(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    userfriendlyid          = models.BigIntegerField(default=ids, unique=True, editable=False)
-    date                    = models.DateField(null=False, blank=False, default=datetime.now)
-    typeregsystems          = models.ManyToManyField('TypeRegsys', through='TypeRegSysRelationship', through_fields=('sets', 'typeregsys'))
-    typetasks               = models.ManyToManyField('TypeTasks', through='TypeTasksRelationship', through_fields=('sets', 'typetasks'))
-    typemisc                = models.ManyToManyField('TypeMisc', through='TypeMiscRelationship', through_fields=('sets', 'typemisc'))
-    modules                 = models.ManyToManyField('Modules', through='ModulesRelationship', through_fields=('sets', 'modules'), blank=True)
-    regsystems              = models.ManyToManyField('RegSystems', through='RegSystemsRelationship', through_fields=('sets', 'regsystems'), blank=True)
-    devices                 = models.ManyToManyField('drop_device', through='drop_deviceRelationship', through_fields=('sets', 'drop_device'), blank=True)
-    drivers                 = models.ManyToManyField('Drivers', through='DriversRelationship', through_fields=('sets','drivers'), blank=True)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    UserFriendlyID          = models.BigIntegerField(default=ids, unique=True, editable=False)
+    Date                    = models.DateField(null=False, blank=False, default=datetime.now)
+    typeregsystems          = models.ManyToManyField('TypeRegsys', through='TypeRegSysRelationship', through_fields=('SetID', 'TypeRegsysID'))
+    typetasks               = models.ManyToManyField('TypeTasks', through='TypeTasksRelationship', through_fields=('SetID', 'TypeTaskID'))
+    typemisc                = models.ManyToManyField('TypeMisc', through='TypeMiscRelationship', through_fields=('SetID', 'TypeMiscID'))
+    modules                 = models.ManyToManyField('Modules', through='ModulesRelationship', through_fields=('SetID', 'ModuleID'), blank=True)
+    regsystems              = models.ManyToManyField('RegSystems', through='RegSystemsRelationship', through_fields=('SetID', 'RegsysID'), blank=True)
+    devices                 = models.ManyToManyField('drop_device', through='drop_deviceRelationship', through_fields=('SetID', 'DeviceID'), blank=True)
+    drivers                 = models.ManyToManyField('Drivers', through='DriversRelationship', through_fields=('SetID', 'DriverID'), blank=True)
 
     def __str__(self):
-        return '%s --- %s' % (self.date.strftime('%d.%m.%Y'), self.userfriendlyid)
+        return '%s --- %s' % (self.Date.strftime('%d.%m.%Y'), self.UserFriendlyID)
 
     class Meta:
-        ordering = ('-userfriendlyid',)
-        db_table = 'sets'
+        ordering = ('-UserFriendlyID',)
+        db_table = 'Sets'
 
 
 class TypeRegSysRelationship(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    sets                    = models.ForeignKey('Sets', on_delete=models.CASCADE)
-    typeregsys              = models.ForeignKey('TypeRegsys', on_delete=models.CASCADE)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    SetID                    = models.ForeignKey('Sets', on_delete=models.CASCADE, db_column='SetID')
+    TypeRegsysID              = models.ForeignKey('TypeRegsys', on_delete=models.CASCADE, db_column='TypeRegsysID')
 
     class Meta:
-        ordering = ('typeregsys',)
-        db_table = 'sets_typeregsystems'
+        ordering = ('TypeRegsysID',)
+        db_table = 'SetTypeRegsystems'
         auto_created = True
 
 
 class TypeTasksRelationship(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    sets                    = models.ForeignKey('Sets', on_delete=models.CASCADE)
-    typetasks               = models.ForeignKey('TypeTasks', on_delete=models.CASCADE)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    SetID                    = models.ForeignKey('Sets', on_delete=models.CASCADE, db_column='SetID')
+    TypeTaskID               = models.ForeignKey('TypeTasks', on_delete=models.CASCADE, db_column='TypeTaskID')
 
     class Meta:
-        ordering = ('typetasks',)
-        db_table = 'sets_typetasks'
+        ordering = ('TypeTaskID',)
+        db_table = 'SetTypeTasks'
         auto_created = True
 
 
 class TypeMiscRelationship(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    sets                    = models.ForeignKey('Sets', on_delete=models.CASCADE)
-    typemisc                = models.ForeignKey('TypeMisc', on_delete=models.CASCADE)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    SetID                    = models.ForeignKey('Sets', on_delete=models.CASCADE, db_column='SetID')
+    TypeMiscID                = models.ForeignKey('TypeMisc', on_delete=models.CASCADE, db_column='TypeMiscID')
 
     class Meta:
-        ordering = ('typemisc',)
-        db_table = 'sets_typemisc'
+        ordering = ('TypeMiscID',)
+        db_table = 'SetTypeMisc'
         auto_created = True
 
 
 class ModulesRelationship(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    sets                    = models.ForeignKey('Sets', on_delete=models.CASCADE)
-    modules                 = models.ForeignKey('Modules', on_delete=models.CASCADE)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    SetID                    = models.ForeignKey('Sets', on_delete=models.CASCADE, db_column='SetID')
+    ModuleID                 = models.ForeignKey('Modules', on_delete=models.CASCADE, db_column='ModuleID')
 
     class Meta:
-        ordering = ('modules',)
-        db_table = 'sets_modules'
+        ordering = ('ModuleID',)
+        db_table = 'SetModules'
         auto_created = True
 
 
 class RegSystemsRelationship(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    sets                    = models.ForeignKey('Sets', on_delete=models.CASCADE)
-    regsystems              = models.ForeignKey('RegSystems', on_delete=models.CASCADE)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    SetID                    = models.ForeignKey('Sets', on_delete=models.CASCADE, db_column='SetID')
+    RegsysID              = models.ForeignKey('RegSystems', on_delete=models.CASCADE, db_column='RegsysID')
 
     class Meta:
-        ordering = ('regsystems',)
-        db_table = 'sets_regsystems'
+        ordering = ('RegsysID',)
+        db_table = 'SetRegsystems'
         auto_created = True
 
 
 class drop_deviceRelationship(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    sets                    = models.ForeignKey('Sets', on_delete=models.CASCADE)
-    drop_device             = models.ForeignKey('drop_device', on_delete=models.CASCADE)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    SetID                    = models.ForeignKey('Sets', on_delete=models.CASCADE, db_column='SetID')
+    DeviceID             = models.ForeignKey('drop_device', on_delete=models.CASCADE, db_column='DeviceID')
 
     class Meta:
-        ordering = ('drop_device',)
-        db_table = 'sets_devices'
+        ordering = ('DeviceID',)
+        db_table = 'SetDevices'
         auto_created = True
 
 
 class DriversRelationship(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    sets                    = models.ForeignKey('Sets', on_delete=models.CASCADE)
-    drivers                 = models.ForeignKey('Drivers', on_delete=models.CASCADE)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    SetID                    = models.ForeignKey('Sets', on_delete=models.CASCADE, db_column='SetID')
+    DriverID                 = models.ForeignKey('Drivers', on_delete=models.CASCADE, db_column='DriverID')
 
     class Meta:
-        db_table = 'sets_drivers'
+        db_table = 'SetDrivers'
         auto_created = True
 
 
@@ -425,68 +424,68 @@ class Distribution(models.Model):
         ('ФА', 'ФА'),
         ('Бюллетень', 'Бюллетень')
     )
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    setid                   = models.ForeignKey('Sets', on_delete=models.CASCADE, blank=False)
-    organisationid          = models.ForeignKey('Organisations', on_delete=models.CASCADE, blank=False)
-    complectno              = models.CharField(max_length=50, blank=True)
-    name                    = models.CharField(max_length=50, blank=False)
-    date                    = models.DateField(null=False, blank=False, default=datetime.now)
-    contract                = models.CharField(max_length=50, blank=True)
-    login                   = models.CharField(max_length=50, blank=False)
-    serial                  = models.CharField(max_length=50, blank=False)
-    language                = models.CharField(max_length=50, blank=False)
-    media                   = models.CharField(max_length=50, blank=True, choices=med)
-    os                      = models.CharField(max_length=50, blank=True)
-    specialcase             = models.CharField(max_length=50, blank=False, choices=spec)
-    notes                   = models.CharField(max_length=255, blank=True)
-    langid                  = models.ForeignKey('Lang_types', on_delete=models.CASCADE, blank=False)
-    osid                    = models.ForeignKey('OS_type', on_delete=models.CASCADE, blank=False)
-    releasedisk             = models.CharField(max_length=50, blank=True, choices=disk)
-    distribhaspkeys         = models.ManyToManyField('hasp_keys', blank=True, through='HaspRelationship', through_fields=('distribid', 'hasp_keys'))
-    distribhardlockkeys     = models.ManyToManyField('hardlock_keys', blank=True, through='HardLockRelationship', through_fields=('distribid', 'hardlock_keys'))
-    distribupdate           = models.ManyToManyField('self', blank=True, through='UpdateDistr', through_fields=('distribid', 'distribid'), symmetrical=False)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    SetID                   = models.ForeignKey('Sets', on_delete=models.CASCADE, blank=False, db_column='SetID')
+    OrganisationID          = models.ForeignKey('Organisations', on_delete=models.CASCADE, blank=False, db_column='OrganisationID')
+    ComplectNo              = models.CharField(max_length=50, blank=True)
+    Name                    = models.CharField(max_length=50, blank=False)
+    Date                    = models.DateField(null=False, blank=False, default=datetime.now)
+    Contract                = models.CharField(max_length=50, blank=True)
+    Login                   = models.CharField(max_length=50, blank=False)
+    Serial                  = models.CharField(max_length=50, blank=False)
+    Language                = models.CharField(max_length=50, blank=False)
+    Media                   = models.CharField(max_length=50, blank=True, choices=med)
+    OS                      = models.CharField(max_length=50, blank=True)
+    SpecialCase             = models.CharField(max_length=50, blank=False, choices=spec)
+    Notes                   = models.CharField(max_length=255, blank=True)
+    LangID                  = models.ForeignKey('Lang_types', on_delete=models.CASCADE, blank=False, db_column='LangID')
+    osID                    = models.ForeignKey('OS_type', on_delete=models.CASCADE, blank=False, db_column='osID')
+    ReleaseDisk             = models.CharField(max_length=50, blank=True, choices=disk)
+    distribhaspkeys         = models.ManyToManyField('hasp_keys', blank=True, through='HaspRelationship', through_fields=('DistribID', 'HASPKeyID'))
+    distribhardlockkeys     = models.ManyToManyField('hardlock_keys', blank=True, through='HardLockRelationship', through_fields=('DistribID', 'HLKeyID'))
+    distribupdate           = models.ManyToManyField('self', blank=True, through='UpdateDistr', through_fields=('DistribID', 'DistribID'), symmetrical=False)
 
     def __str__(self):
-        return '%s --- %s' % (self.date.strftime('%d.%m.%Y'), self.name)
+        return '%s --- %s' % (self.Date.strftime('%d.%m.%Y'), self.Name)
 
     class Meta:
-        db_table = 'distributions'
+        db_table = 'Distributions'
 
 
 class HaspRelationship(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    distribid               = models.ForeignKey('Distribution', on_delete=models.CASCADE, blank=False)
-    hasp_keys               = models.ForeignKey('hasp_keys', on_delete=models.CASCADE, blank=False)
-    date                    = models.DateField(null=False, blank=False, default=datetime.now)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    DistribID               = models.ForeignKey('Distribution', on_delete=models.CASCADE, blank=False, db_column='DistribID')
+    HASPKeyID               = models.ForeignKey('hasp_keys', on_delete=models.CASCADE, blank=False, db_column='HASPKeyID')
+    Date                    = models.DateField(null=False, blank=False, default=datetime.now)
 
     class Meta:
-        db_table = 'distribhaspkeys'
+        db_table = 'DistribHASPKeys'
         auto_created = True
 
     def __str__(self):
-        return '%s %s' % (self.date.strftime('%d.%m.%Y'), self.hasp_keys)
+        return '%s %s' % (self.Date.strftime('%d.%m.%Y'), self.HASPKeyID)
 
 
 class HardLockRelationship(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    distribid               = models.ForeignKey('Distribution', on_delete=models.CASCADE, blank=False)
-    hardlock_keys           = models.ForeignKey('hardlock_keys', on_delete=models.CASCADE, blank=False)
-    date                    = models.DateField(null=False, blank=False, default=datetime.now)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    DistribID               = models.ForeignKey('Distribution', on_delete=models.CASCADE, blank=False, db_column='DistribID')
+    HLKeyID                 = models.ForeignKey('hardlock_keys', on_delete=models.CASCADE, blank=False, db_column='HLKeyID')
+    Date                    = models.DateField(null=False, blank=False, default=datetime.now)
 
     class Meta:
-        db_table = 'distribhlkeys'
+        db_table = 'DistribHLKeys'
         auto_created = True
 
 
 class UpdateDistr(models.Model):
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    distribid               = models.ForeignKey('Distribution', on_delete=models.CASCADE, blank=False)
-    newdistribid            = models.ForeignKey('Distribution', on_delete=models.CASCADE, blank=True, related_name='newdistribid_test')
-    date                    = models.DateField(null=False, blank=False, default=datetime.now)
-    source                  = models.CharField(max_length=80, null=True, blank=True)
-    cause                   = models.CharField(max_length=80, null=True, blank=True)
-    notes                   = models.CharField(max_length=5192, null=True, blank=True)
+    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    DistribID               = models.ForeignKey('Distribution', on_delete=models.CASCADE, blank=False, db_column='DistribID')
+    NewDistribID            = models.ForeignKey('Distribution', on_delete=models.CASCADE, blank=True, db_column='NewDistribID', related_name='newdistribid_test')
+    Date                    = models.DateField(null=False, blank=False, default=datetime.now)
+    Source                  = models.CharField(max_length=80, null=True, blank=True)
+    Cause                   = models.CharField(max_length=80, null=True, blank=True)
+    Notes                   = models.CharField(max_length=5192, null=True, blank=True)
 
     class Meta:
-        db_table = 'distribupdates'
-        ordering = ('date',)
+        db_table = 'DistribUpdates'
+        ordering = ('Date',)

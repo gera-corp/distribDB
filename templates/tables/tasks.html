@@ -7,22 +7,22 @@
         <thead>
         <tr align="center">
             <th>
-                {% if '-sysname' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=sysname">Системное имя</a>
-                {% elif 'sysname' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-sysname">Системное имя</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-sysname">Системное имя</a>{% endif %}
+                {% if '-SysName' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=SysName">Системное имя</a>
+                {% elif 'SysName' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-SysName">Системное имя</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-SysName">Системное имя</a>{% endif %}
             </th>
             <th>
-                {% if '-username' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=username">Пользовательское имя</a>
-                {% elif 'username' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-username">Пользовательское имя</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-username">Пользовательское имя</a>{% endif %}
+                {% if '-UserName' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=UserName">Пользовательское имя</a>
+                {% elif 'UserName' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-UserName">Пользовательское имя</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-UserName">Пользовательское имя</a>{% endif %}
             </th>
             <th></th>
         </tr>
         </thead>
         {% for item in object_list %}
             <tr align="center">
-                <td width="50%"><li class="list-group-item list-group-item-action">{{ item.sysname }}</li></td>
-                <td width="50%"><li class="list-group-item list-group-item-action">{{ item.username }}</li></td>
+                <td width="50%"><li class="list-group-item list-group-item-action">{{ item.SysName }}</li></td>
+                <td width="50%"><li class="list-group-item list-group-item-action">{{ item.UserName }}</li></td>
                 <td>
     <div class="btn-group" role="group">
     <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

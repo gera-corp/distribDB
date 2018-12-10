@@ -8,34 +8,34 @@
         <thead>
         <tr align="center">
             <th>
-                {% if '-name' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=name">Название</a>
-                {% elif 'name' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-name">Название</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=name">Название</a>{% endif %}</th>
+                {% if '-Name' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Name">Название</a>
+                {% elif 'Name' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Name">Название</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=Name">Название</a>{% endif %}</th>
             <th>
-                {% if '-setid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=setid">Набор ID</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-setid">Набор ID</a>{% endif %}</th>
+                {% if '-SetID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=SetID">Набор ID</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-SetID">Набор ID</a>{% endif %}</th>
             <th>
-                {% if '-date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=date">Дата</a>
-                {% elif 'date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-date">Дата</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=date">Дата</a>{% endif %}</th>
+                {% if '-Date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Date">Дата</a>
+                {% elif 'Date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Date">Дата</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=Date">Дата</a>{% endif %}</th>
             <th>
-                {% if '-organisationid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=organisationid">Заказчик</a>
-                {% elif 'organisationid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-organisationid">Заказчик</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=organisationid">Заказчик</a>{% endif %}</th>
+                {% if '-OrganisationID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=OrganisationID">Заказчик</a>
+                {% elif 'OrganisationID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-OrganisationID">Заказчик</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=OrganisationID">Заказчик</a>{% endif %}</th>
             <th>
-                {% if '-login' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=login">Логин</a>
-                {% elif 'login' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-login">Логин</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=login">Логин</a>{% endif %}</th>
+                {% if '-Login' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Login">Логин</a>
+                {% elif 'Login' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Login">Логин</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=Login">Логин</a>{% endif %}</th>
             <th>
-                {% if '-serial' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=serial">Серийный номер</a>
-                {% elif 'serial' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-serial">Серийный номер</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=serial">Серийный номер</a>{% endif %}</th>
+                {% if '-Serial' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Serial">Серийный номер</a>
+                {% elif 'Serial' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Serial">Серийный номер</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=Serial">Серийный номер</a>{% endif %}</th>
         </tr>
         </thead>
         {% for item in object_list %}
             <tr align="center">
-                <td width="23%"><a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.id }}">{{ item.name }}</a></td>
-    <div class="modal fade" id="id{{ item.id }}" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
+                <td width="23%"><a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.ID }}">{{ item.Name }}</a></td>
+    <div class="modal fade" id="id{{ item.ID }}" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
       <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -47,20 +47,20 @@
       <div class="modal-body">
           <p class="text-monospace">Данная страница позваляет получить детальную информацию о дистрибутиве.</p>
 <ul class="list-group list-group-flush">
-    <li class="list-group-item">Название:<p class="font-weight-bold small">{{ item.name }}</p></li>
-    <li class="list-group-item">Набор:<p class="font-weight-bold small">{{ item.setid.userfriendlyid }}</p></li>
-    <li class="list-group-item">Дата создания:<p class="font-weight-bold small">{{ item.date|date:'d.m.Y' }}</p></li>
-    <li class="list-group-item">Заказчик:<p class="font-weight-bold small">{{ item.organisationid }}</p></li>
-    <li class="list-group-item">№ комплекта:<p class="font-weight-bold small">{{ item.complectno }}</p></li>
-    <li class="list-group-item">Контракт:<p class="font-weight-bold small">{{ item.contract }}</p></li>
-    <li class="list-group-item">Логин:<p class="font-weight-bold small">{{ item.login }}</p></li>
-    <li class="list-group-item">Серийный номер:<p class="font-weight-bold small">{{ item.serial }}</p></li>
-    <li class="list-group-item">Язык:<p class="font-weight-bold small">{{ item.langid }}</p></li>
-    <li class="list-group-item">Носитель:<p class="font-weight-bold small">{{ item.media }}</p></li>
-    <li class="list-group-item">Операционная система:<p class="font-weight-bold small">{{ item.osid }}</p></li>
-    <li class="list-group-item">Специальные условия:<p class="font-weight-bold small">{{ item.specialcase }}</p></li>
-    <li class="list-group-item">Диск сборки:<p class="font-weight-bold small">{{ item.releasedisk }}</p></li>
-    <li class="list-group-item">Примечания:<p class="font-weight-bold small">{{ item.notes }}</p></li><br>
+    <li class="list-group-item">Название:<p class="font-weight-bold small">{{ item.Name }}</p></li>
+    <li class="list-group-item">Набор:<p class="font-weight-bold small">{{ item.SetID.UserFriendlyID }}</p></li>
+    <li class="list-group-item">Дата создания:<p class="font-weight-bold small">{{ item.Date|date:'d.m.Y' }}</p></li>
+    <li class="list-group-item">Заказчик:<p class="font-weight-bold small">{{ item.OrganisationID }}</p></li>
+    <li class="list-group-item">№ комплекта:<p class="font-weight-bold small">{{ item.ComplectNo }}</p></li>
+    <li class="list-group-item">Контракт:<p class="font-weight-bold small">{{ item.Contract }}</p></li>
+    <li class="list-group-item">Логин:<p class="font-weight-bold small">{{ item.Login }}</p></li>
+    <li class="list-group-item">Серийный номер:<p class="font-weight-bold small">{{ item.Serial }}</p></li>
+    <li class="list-group-item">Язык:<p class="font-weight-bold small">{{ item.LangID }}</p></li>
+    <li class="list-group-item">Носитель:<p class="font-weight-bold small">{{ item.Media }}</p></li>
+    <li class="list-group-item">Операционная система:<p class="font-weight-bold small">{{ item.osID }}</p></li>
+    <li class="list-group-item">Специальные условия:<p class="font-weight-bold small">{{ item.SpecialCase }}</p></li>
+    <li class="list-group-item">Диск сборки:<p class="font-weight-bold small">{{ item.ReleaseDisk }}</p></li>
+    <li class="list-group-item">Примечания:<p class="font-weight-bold small">{{ item.Notes }}</p></li><br>
     <li class="list-group-item"><p class="text-center">Ключи (HASP):</p>
 <span class="font-weight-normal small">
         <div class="row">
@@ -89,26 +89,26 @@
     <span class="font-weight-bold small">
     <div class="row">
     <div class="col-sm" align="center">
-        {{ haspkey.date|date:'d.m.Y' }}
+        {{ haspkey.Date|date:'d.m.Y' }}
     </div>
     <div class="col-sm" align="center">
-        {{ haspkey.hasp_keys.chipno }}
+        {{ haspkey.HASPKeyID.ChipNo }}
     </div>
     <div class="col-sm" align="center">
-        {{ haspkey.hasp_keys.timelimit|date:'d.m.Y' }}
+        {{ haspkey.HASPKeyID.TimeLimit|date:'d.m.Y' }}
         </div>
     <div class="col-sm" align="center">
-        {% if not haspkey.hasp_keys.licenses is None %}
-        {{ haspkey.hasp_keys.licenses }}
+        {% if not haspkey.HASPKeyID.Licenses is None %}
+        {{ haspkey.HASPKeyID.Licenses }}
         {% endif %}
         </div>
     <div class="col-sm" align="center">
-        {% if not haspkey.hasp_keys.free is False %}
+        {% if not haspkey.HASPKeyID.Free is False %}
         Да
         {% endif %}
         </div>
     <div class="col-sm" align="center">
-        {{ haspkey.hasp_keys.notes }}
+        {{ haspkey.HASPKeyID.Notes }}
     </div></div>
     </span>
 {% endfor %}
@@ -143,27 +143,27 @@
     <span class="font-weight-bold small">
     <div class="row">
     <div class="col-sm" align="center">
-        {{ hardlock.date|date:'d.m.Y' }}
+        {{ hardlock.Date|date:'d.m.Y' }}
     </div>
     <div class="col-sm" align="center">
-        {{ hardlock.hardlock_keys.mark }}
+        {{ hardlock.HLKeyID.Mark }}
     </div>
     <div class="col-sm" align="center">
-        {{ hardlock.hardlock_keys.chipno }}
+        {{ hardlock.HLKeyID.ChipNo }}
     </div>
     <div class="col-sm" align="center">
-        {{ hardlock.hardlock_keys.subcode }}
+        {{ hardlock.HLKeyID.Subcode }}
     </div>
     <div class="col-sm" align="center">
-        {{ hardlock.hardlock_keys.modaddr }}
+        {{ hardlock.HLKeyID.ModAddr }}
     </div>
     <div class="col-sm" align="center">
-        {% if not hardlock.hardlock_keys.free is False %}
+        {% if not hardlock.HLKeyID.Free is False %}
         Да
         {% endif %}
     </div>
     <div class="col-sm" align="center">
-        {{ hardlock.hardlock_keys.notes }}
+        {{ hardlock.HLKeyID.Notes }}
     </div>
     </div></span>
 {% endfor %}
@@ -198,27 +198,27 @@
 <div class="row">
 <div class="col-sm" align="center">
 
-{{ update.distribid.name }}
+{{ update.DistribID.Name }}
 </div>
 <div class="col-sm" align="center">
-{{ update.newdistribid.name }}
+{{ update.NewDistribID.Name }}
 </div>
 <div class="col-sm" align="center">
-{{ update.date|date:'d.m.Y' }}
+{{ update.Date|date:'d.m.Y' }}
 </div>
 <div class="col-sm" align="center">
-{% if not update.source is None %}
-{{ update.source }}
+{% if not update.Source is None %}
+{{ update.Source }}
 {% endif %}
 </div>
 <div class="col-sm" align="center">
-{% if not update.cause is None %}
-{{ update.cause }}
+{% if not update.Cause is None %}
+{{ update.Cause }}
 {% endif %}
 </div>
 <div class="col-sm" align="center">
-{% if not update.notes is None %}
-{{ update.notes }}
+{% if not update.Notes is None %}
+{{ update.Notes }}
 {% endif %}
 </div>
 </div>
@@ -237,11 +237,11 @@
     </div>
   </div>
     </div>
-                <td width="7%"><a href="/edit_set/edit_post/{{ item.setid.id }}/" class="list-group-item list-group-item-action">{{ item.setid.userfriendlyid }}</a></td>
-                <td width="10%"><li class="list-group-item list-group-item-action">{{ item.date|date:'d.m.Y' }}</li></td>
-                <td width="20%"><li class="list-group-item list-group-item-action">{{ item.organisationid }}<br></li></td>
-                <td width="20%"><li class="list-group-item list-group-item-action">{{ item.login }}</li></td>
-                <td width="20%"><li class="list-group-item list-group-item-action">{{ item.serial }}</li></td>
+                <td width="7%"><a href="/edit_set/edit_post/{{ item.SetID.ID }}/" class="list-group-item list-group-item-action">{{ item.SetID.UserFriendlyID }}</a></td>
+                <td width="10%"><li class="list-group-item list-group-item-action">{{ item.Date|date:'d.m.Y' }}</li></td>
+                <td width="20%"><li class="list-group-item list-group-item-action">{{ item.OrganisationID }}<br></li></td>
+                <td width="20%"><li class="list-group-item list-group-item-action">{{ item.Login }}</li></td>
+                <td width="20%"><li class="list-group-item list-group-item-action">{{ item.Serial }}</li></td>
                 <td>
     <div class="btn-group" role="group">
     <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -8,14 +8,14 @@
             <thead>
             <tr align="center">
                 <th>
-                    {% if '-userfriendlyid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=userfriendlyid">ID</a>
-                    {% elif 'userfriendlyid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-userfriendlyid">ID</a>
-                    {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=userfriendlyid">ID</a>{% endif %}
+                    {% if '-UserFriendlyID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=UserFriendlyID">ID</a>
+                    {% elif 'UserFriendlyID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-UserFriendlyID">ID</a>
+                    {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=UserFriendlyID">ID</a>{% endif %}
                 </th>
                 <th>
-                    {% if '-date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=date">Дата создания</a>
-                    {% elif 'date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-date">Дата создания</a>
-                    {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=date">Дата создания</a>{% endif %}
+                    {% if '-Date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Date">Дата создания</a>
+                    {% elif 'Date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Date">Дата создания</a>
+                    {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=Date">Дата создания</a>{% endif %}
                 </th>
                 <th></th>
             </tr>
@@ -25,10 +25,10 @@
                 <tr align="center">
                     <ul class="list-group">
                         <td width="50%">
-                            <li class="list-group-item list-group-item-action">{{ item.userfriendlyid }}</li>
+                            <li class="list-group-item list-group-item-action">{{ item.UserFriendlyID }}</li>
                         </td>
                         <td width="50%">
-                            <li class="list-group-item list-group-item-action">{{ item.date|date:'d.m.Y' }}</li>
+                            <li class="list-group-item list-group-item-action">{{ item.Date|date:'d.m.Y' }}</li>
                         </td>
                         <td>
     <div class="btn-group" role="group">
@@ -37,7 +37,7 @@
     </button>
       <div class="dropdown-menu" aria-labelledby="{{ item.pk }}">
       <a class="dropdown-item" href="{% url 'edit_set_edit_post' pk=item.pk %}">Редактировать</a>
-      <a class="dropdown-item" href="#" data-toggle="modal" data-target=#modal-{{ item.id }}>Удалить</a>
+      <a class="dropdown-item" href="#" data-toggle="modal" data-target=#modal-{{ item.pk }}>Удалить</a>
     </div>
         <form action="{% url 'edit_set_delete' item.pk %}" method="POST">{% csrf_token %}{% include 'modal.html' %}</form>
     </div>
