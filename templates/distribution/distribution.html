@@ -237,7 +237,112 @@
     </div>
   </div>
     </div>
-                <td width="7%"><a href="/edit_set/edit_post/{{ item.SetID.ID }}/" class="list-group-item list-group-item-action">{{ item.SetID.UserFriendlyID }}</a></td>
+                <td width="7%"><a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.SetID.ID }}">{{ item.SetID.UserFriendlyID }}</a></td>
+
+
+
+             <div class="modal fade" id="id{{ item.SetID.ID }}" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLongTitle">Информация о наборе</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <p class="text-monospace">Данная страница позваляет получить детальную информацию о наборе.</p>
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">ID: <p class="font-weight-bold small">{{ item.SetID.UserFriendlyID }}</p></li>
+    <li class="list-group-item">Дата: <p class="font-weight-bold small">{{ item.SetID.Date|date:'d E Y'  }}</p></li><br>
+    <li class="list-group-item"><p class="text-center">Список дистрибутивов:</p>
+        <p class="text-monospace small" align="center">По этому набору были созданы следующие дистрибутивы:</p>
+        <span class="font-weight-normal small">
+        <div class="row">
+    <div class="col-sm" align="center">
+        Название:
+    </div>
+    <div class="col-sm" align="center">
+        Дата создания:
+    </div>
+     <div class="col-sm" align="center">
+      Заказчик:
+    </div>
+     <div class="col-sm" align="center">
+      Логин:
+    </div>
+     <div class="col-sm" align="center">
+      Серийный номер:
+    </div>
+        </div></span>
+
+        {% for distr in object_list %}
+        {% if item.SetID.UserFriendlyID == distr.SetID.UserFriendlyID %}
+     <li class="list-group-item">
+    <span class="font-weight-bold small">
+    <div class="row">
+    <div class="col-sm" align="center">
+        {{ distr.Name }}<br>
+    </div>
+<div class="col-sm" align="center">
+{{ distr.Date|date:'d.m.Y' }}
+</div>
+<div class="col-sm" align="center">
+{{ distr.OrganisationID }}
+</div>
+<div class="col-sm" align="center">
+{{ distr.Login }}
+</div>
+<div class="col-sm" align="center">
+{{ distr.Serial }}
+</div></div></span></li>
+{% endif %}
+{% endfor %}
+    <br>
+<li class="list-group-item"><p class="text-center">Состав набора:</p>
+    <b>Типы ЛА</b>
+<span class="font-weight-normal small">
+        <div class="row">
+     <div class="col-sm" align="center">
+      Первичные базы:
+    </div>
+     <div class="col-sm" align="center">
+      Расчётные базы:
+    </div>
+     <div class="col-sm" align="center">
+      Дополнительные элементы:
+    </div>
+        </div></span>
+
+<li class="list-group-item">
+
+    <div class="row">
+<div class="col-sm" align="center">
+{% for test in item.SetID.typeregsysrelationship_set.all %}
+    {% ifchanged test.TypeRegsysID.TypeID.UserName %}<span class="font-weight-bold small">{{ test.TypeRegsysID.TypeID.UserName }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.TypeRegsysID.RegsysID.UserName }}</span><br>
+{% endfor %}</div>
+
+<div class="col-sm" align="center">
+{% for test in item.SetID.typetasksrelationship_set.all %}
+{% ifchanged test.TypeTaskID.TypeID.UserName %}<span class="font-weight-bold small">{{ test.TypeTaskID.TypeID.UserName }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.TypeTaskID.TaskID.SysName }}</span><br>
+{% endfor %}</div>
+
+<div class="col-sm" align="center">
+{% for test in item.SetID.typemiscrelationship_set.all %}
+{% ifchanged test.TypeMiscID.TypeID.UserName %}<span class="font-weight-bold small">{{ test.TypeMiscID.TypeID.UserName }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.TypeMiscID.MiscID.Name }}</span><br>
+{% endfor %}</div>
+
+</div></span><br>
+
+
+          <div class="modal-footer">
+        <a href="/edit_set/edit_post/{{ item.SetID.ID }}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
+      </div>
+    </ul></div></div></div></div>
+
+
+
                 <td width="10%"><li class="list-group-item list-group-item-action">{{ item.Date|date:'d.m.Y' }}</li></td>
                 <td width="20%"><li class="list-group-item list-group-item-action">{{ item.OrganisationID }}<br></li></td>
                 <td width="20%"><li class="list-group-item list-group-item-action">{{ item.Login }}</li></td>

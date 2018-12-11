@@ -27,7 +27,7 @@
             }
             @frame footer_frame {           /* Another static Frame */
                 -pdf-frame-content: footer_content;
-                left: 30pt; width: 540pt; top: 800pt; height: 20pt;
+                left: 30pt; width: 540pt; top: 820pt; height: 20pt;
             }
         }
 
@@ -56,6 +56,7 @@
         }
         table {
             border-spacing: 0px;
+            {#-pdf-keep-in-frame-mode: shrink;#}
         }
 
     </style>
@@ -162,6 +163,7 @@
 </table><br>
 {% endif %}
 
+    {% if obj_list.SetID.modules.all or obj_list.SetID.drivers.all %}
 <table border="0" repeat="1">
     <thead>
 <tr>
@@ -170,12 +172,14 @@
 </tr>
     </thead>
 <tr>
-{% if obj_list.SetID.modules.all %}<td valign="top">{% for modules in obj_list.SetID.modulesrelationship_set.all %}{{ modules.ModuleID.Name }}<br>{% endfor %}</td>{% endif %}
-{% if obj_list.SetID.drivers.all %}<td valign="top">{% for drivers in obj_list.SetID.driversrelationship_set.all %}{{ drivers.DriverID.Name }}<br>{% endfor %}</td>{% endif %}
+<td valign="top">{% for modules in obj_list.SetID.modulesrelationship_set.all %}{{ modules.ModuleID.Name }}<br>{% endfor %}</td>
+<td valign="top">{% for drivers in obj_list.SetID.driversrelationship_set.all %}{{ drivers.DriverID.Name }}<br>{% endfor %}</td>
 </tr>
 </table>
+    {% endif %}
 
 <pdf:nextpage />
+    {% if obj_list.SetID.devices.all or obj_list.SetID.regsystems.all %}
 <table border="0" repeat="0">
     <thead>
 <tr>
@@ -188,6 +192,7 @@
 {% if obj_list.SetID.regsystems.all %}<td valign="top">{% for regsystems in obj_list.SetID.regsystemsrelationship_set.all %}{{ regsystems.RegsysID.UserName }}<br>{% endfor %}</td>{% endif %}
 </tr>
 </table>
+    {% endif %}
 <br>
 {% if obj_list.SetID.typemiscrelationship_set.all %}
 <h2 align="center">Дополнительные элементы по типам</h2>

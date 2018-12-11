@@ -18,21 +18,32 @@
                 {% elif 'Name' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-Name">Дистрибутив</a>
                 {% else %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-Name">Дистрибутив</a>{% endif %}
             </th>
+            <th>
+                {% if '-SetID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=SetID">Набор</a>
+                {% elif 'SetID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-SetID">Набор</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-SetID">Набор</a>{% endif %}
 
+            </th>
+            <th>
+                {% if '-Date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=Date">Дата</a>
+                {% elif 'Date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-Date">Дата</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-Date">Дата</a>{% endif %}
+            </th>
         </tr>
         </thead>
         {% for item in object_list %}
             <tr align="center">
-                <td width="50%">
+                <td width="40%">
                     <li class="list-group-item list-group-item-action">
-                    {% for plane_tapes in item.SetID.typeregsysrelationship_set.all %}
-                     {% if request.GET.q|lower in plane_tapes.TypeRegsysID.TypeID.UserName|lower %}
-                         {% ifchanged plane_tapes.TypeRegsysID.TypeID.UserName %}{{ plane_tapes.TypeRegsysID.TypeID.UserName }}<br>{% endifchanged %}
-                         {% elif request.GET.q is None %}{% ifchanged plane_tapes.TypeRegsysID.TypeID.UserName %}{{ plane_tapes.TypeRegsysID.TypeID.UserName }}<br>{% endifchanged %}{% endif %}{% endfor %}
+                    {% for plane_types in item.SetID.typeregsysrelationship_set.all %}
+                     {% if request.GET.q|lower in plane_types.TypeRegsysID.TypeID.UserName|lower %}
+                         {% ifchanged plane_types.TypeRegsysID.TypeID.UserName %}{{ plane_types.TypeRegsysID.TypeID.UserName }}<br>{% endifchanged %}
+                         {% elif request.GET.q is None %}{% ifchanged plane_types.TypeRegsysID.TypeID.UserName %}{{ plane_types.TypeRegsysID.TypeID.UserName }}<br>{% endifchanged %}{% endif %}{% endfor %}
                 </li>
                 </td>
-                <td width="50%"><a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.ID }}">{{ item.Name }}</a></td>
-
+                <td width="40%"><a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.ID }}">{{ item.Name }}</a></td>
+                <td><li class="list-group-item list-group-item-action">{{ item.SetID.UserFriendlyID }}</td>
+                <td><li class="list-group-item list-group-item-action">{{ item.Date|date:'d.m.Y' }}</td>
             <div class="modal fade" id="id{{ item.ID }}" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
       <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -225,6 +236,7 @@
 </li>
 
 </ul>
+
 </div>
       <div class="modal-footer">
           <a href="/distrib_update/new_post/"><button type="button" class="btn btn-secondary btn-sm">Добавить обновление</button></a>
@@ -235,8 +247,6 @@
     </div>
   </div>
     </div>
-
-
             </tr>
         {% endfor %}
     </table>
