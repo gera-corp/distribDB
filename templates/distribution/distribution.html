@@ -1,6 +1,7 @@
 <title>Список дистрибутивов</title>
 {% extends 'base.html' %}
 {% block content %}
+
 <div class="container table-responsive-sm shadow p-3 mb-5 bg-white rounded">
 <p class="text-monospace small">Данная страница позволяет посмотреть список дистрибутивов.<br> Удаление дистрибутива возможно только в том случае, если у Вас имеется соответствующая привилегия.</p>
     <a class="btn btn-secondary" href="new_post/" role="button">Добавить</a><br><br>
@@ -48,7 +49,7 @@
           <p class="text-monospace">Данная страница позваляет получить детальную информацию о дистрибутиве.</p>
 <ul class="list-group list-group-flush">
     <li class="list-group-item">Название:<p class="font-weight-bold small">{{ item.Name }}</p></li>
-    <li class="list-group-item">Набор:<p class="font-weight-bold small">{{ item.SetID.UserFriendlyID }}</p></li>
+    <li class="list-group-item">Набор:<a href="" style="color: black;; text-decoration: none;" data-dismiss="modal" data-toggle="modal" data-target="#id{{ item.SetID.ID }}"><p class="font-weight-bold small">{{ item.SetID.UserFriendlyID }}</p></a></li>
     <li class="list-group-item">Дата создания:<p class="font-weight-bold small">{{ item.Date|date:'d.m.Y' }}</p></li>
     <li class="list-group-item">Заказчик:<p class="font-weight-bold small">{{ item.OrganisationID }}</p></li>
     <li class="list-group-item">№ комплекта:<p class="font-weight-bold small">{{ item.ComplectNo }}</p></li>
@@ -238,9 +239,6 @@
   </div>
     </div>
                 <td width="7%"><a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.SetID.ID }}">{{ item.SetID.UserFriendlyID }}</a></td>
-
-
-
              <div class="modal fade" id="id{{ item.SetID.ID }}" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
       <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -282,7 +280,8 @@
     <span class="font-weight-bold small">
     <div class="row">
     <div class="col-sm" align="center">
-        {{ distr.Name }}<br>
+
+        <a href="" data-dismiss="modal" style="color: black;; text-decoration: none;" data-toggle="modal" data-target="#id{{ distr.ID }}">{{ distr.Name }}</a><br>
     </div>
 <div class="col-sm" align="center">
 {{ distr.Date|date:'d.m.Y' }}
@@ -300,9 +299,8 @@
 {% endfor %}
     <br>
 <li class="list-group-item"><p class="text-center">Состав набора:</p>
-    <b>Типы ЛА</b>
 <span class="font-weight-normal small">
-        <div class="row">
+<div class="row">
      <div class="col-sm" align="center">
       Первичные базы:
     </div>
@@ -312,11 +310,11 @@
      <div class="col-sm" align="center">
       Дополнительные элементы:
     </div>
-        </div></span>
+</div></span></li>
 
 <li class="list-group-item">
 
-    <div class="row">
+<div class="row">
 <div class="col-sm" align="center">
 {% for test in item.SetID.typeregsysrelationship_set.all %}
     {% ifchanged test.TypeRegsysID.TypeID.UserName %}<span class="font-weight-bold small">{{ test.TypeRegsysID.TypeID.UserName }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.TypeRegsysID.RegsysID.UserName }}</span><br>
@@ -332,7 +330,58 @@
 {% ifchanged test.TypeMiscID.TypeID.UserName %}<span class="font-weight-bold small">{{ test.TypeMiscID.TypeID.UserName }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.TypeMiscID.MiscID.Name }}</span><br>
 {% endfor %}</div>
 
-</div></span><br>
+</div></li><br>
+
+<li class="list-group-item">
+<span class="font-weight-bold small">
+<div class="row">
+<div class="col-sm" align="center">
+Дополнительные модули ПО:
+</div>
+
+<div class="col-sm" align="center">
+Системы регистрации:
+</div>
+
+<div class="col-sm" align="center">
+Устройства сброса:
+</div>
+
+<div class="col-sm" align="center">
+Драйверы устройств:
+</div>
+
+</div></span></li>
+
+<li class="list-group-item">
+<span class="font-weight-normal small">
+<div class="row">
+<div class="col-sm" align="center">
+{% for modules in item.SetID.modulesrelationship_set.all %}
+{{ modules.ModuleID.Name }}<br>
+{% endfor %}
+</div>
+
+<div class="col-sm" align="center">
+{% for regsys in item.SetID.regsystemsrelationship_set.all %}
+{{ regsys.RegsysID.UserName }}<br>
+{% endfor %}
+</div>
+
+<div class="col-sm" align="center">
+{% for dropdev in item.SetID.drop_devicerelationship_set.all %}
+{{ dropdev.DeviceID.UserName }}<br>
+{% endfor %}
+</div>
+
+<div class="col-sm" align="center">
+{% for drivers in item.SetID.driversrelationship_set.all %}
+{{ drivers.DriverID.Name }}
+{% endfor %}
+</div>
+
+
+</div></span></li>
 
 
           <div class="modal-footer">

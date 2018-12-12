@@ -26,3 +26,8 @@
     background-color: #5a5a5a !Important;
     border: solid 1px #5a5a5a;
 }
+
+.modal
+{
+    overflow-y: auto !important;
+}

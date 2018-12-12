@@ -25,7 +25,7 @@
                 <tr align="center">
                     <ul class="list-group">
                         <td width="50%">
-                            <li class="list-group-item list-group-item-action">{{ item.UserFriendlyID }}</li>
+                            <a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.ID }}">{{ item.UserFriendlyID }}</a>
                         </td>
                         <td width="50%">
                             <li class="list-group-item list-group-item-action">{{ item.Date|date:'d.m.Y' }}</li>
@@ -44,6 +44,119 @@
                         </td>
                     </ul>
                 </tr>
+
+
+<div class="modal fade" id="id{{ item.ID }}" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLongTitle">Информация о наборе</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <p class="text-monospace">Данная страница позваляет получить детальную информацию о наборе.</p>
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">ID: <p class="font-weight-bold small">{{ item.UserFriendlyID }}</p></li>
+    <li class="list-group-item">Дата: <p class="font-weight-bold small">{{ item.Date|date:'d E Y' }}</p></li><br>
+    <br>
+<li class="list-group-item"><p class="text-center">Состав набора:</p>
+<span class="font-weight-normal small">
+<div class="row">
+     <div class="col-sm" align="center">
+      Первичные базы:
+    </div>
+     <div class="col-sm" align="center">
+      Расчётные базы:
+    </div>
+     <div class="col-sm" align="center">
+      Дополнительные элементы:
+    </div>
+</div></span></li>
+
+<li class="list-group-item">
+
+<div class="row">
+<div class="col-sm" align="center">
+{% for test in item.typeregsysrelationship_set.all %}
+    {% ifchanged test.TypeRegsysID.TypeID.UserName %}<span class="font-weight-bold small">{{ test.TypeRegsysID.TypeID.UserName }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.TypeRegsysID.RegsysID.UserName }}</span><br>
+{% endfor %}</div>
+
+<div class="col-sm" align="center">
+{% for test in item.typetasksrelationship_set.all %}
+{% ifchanged test.TypeTaskID.TypeID.UserName %}<span class="font-weight-bold small">{{ test.TypeTaskID.TypeID.UserName }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.TypeTaskID.TaskID.SysName }}</span><br>
+{% endfor %}</div>
+
+<div class="col-sm" align="center">
+{% for test in item.typemiscrelationship_set.all %}
+{% ifchanged test.TypeMiscID.TypeID.UserName %}<span class="font-weight-bold small">{{ test.TypeMiscID.TypeID.UserName }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.TypeMiscID.MiscID.Name }}</span><br>
+{% endfor %}</div>
+
+</div></li><br>
+
+<li class="list-group-item">
+<span class="font-weight-bold small">
+<div class="row">
+<div class="col-sm" align="center">
+Дополнительные модули ПО:
+</div>
+
+<div class="col-sm" align="center">
+Системы регистрации:
+</div>
+
+<div class="col-sm" align="center">
+Устройства сброса:
+</div>
+
+<div class="col-sm" align="center">
+Драйверы устройств:
+</div>
+
+</div></span></li>
+
+<li class="list-group-item">
+<span class="font-weight-normal small">
+<div class="row">
+<div class="col-sm" align="center">
+{% for modules in item.modulesrelationship_set.all %}
+{{ modules.ModuleID.Name }}<br>
+{% endfor %}
+</div>
+
+<div class="col-sm" align="center">
+{% for regsys in item.regsystemsrelationship_set.all %}
+{{ regsys.RegsysID.UserName }}<br>
+{% endfor %}
+</div>
+
+<div class="col-sm" align="center">
+{% for dropdev in item.drop_devicerelationship_set.all %}
+{{ dropdev.DeviceID.UserName }}<br>
+{% endfor %}
+</div>
+
+<div class="col-sm" align="center">
+{% for drivers in item.driversrelationship_set.all %}
+{{ drivers.DriverID.Name }}
+{% endfor %}
+</div>
+
+
+</div></span></li>
+
+
+          <div class="modal-footer">
+        <a href="/edit_set/edit_post/{{ item.SetID.ID }}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
+      </div>
+    </ul></div></div></div></div>
+
+
+
+
+
             {% endfor %}
         </table>
         {% include 'paginator.html' %}

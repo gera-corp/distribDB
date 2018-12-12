@@ -158,6 +158,7 @@
 
     <br><br><button type="submit" class="btn btn-danger btn-sm">Сохранить</button>
     <a class="btn btn-dark btn-sm" href="/edit_set" role="button">Отмена</a>
+    {% if post.UserFriendlyID is not None %}<button class="btn btn-danger btn-sm">Копировать набор</button>{% endif %}
 </form>
 
 </div>

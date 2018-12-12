@@ -8,9 +8,9 @@
         <thead>
         <tr align="center">
             <th>
-                {% if '-Organisationid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=Organisationid">Тип ЛА</a>
-                {% elif 'Organisationid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-Organisationid">Тип ЛА</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-Organisationid">Организация - заказчик</a>{% endif %}
+                {% if '-OrganisationID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=OrganisationID">Организация - заказчик</a>
+                {% elif 'OrganisationID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-OrganisationID">Организация - заказчик</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-OrganisationID">Организация - заказчик</a>{% endif %}
 
             </th>
             <th>

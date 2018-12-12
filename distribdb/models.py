@@ -307,7 +307,7 @@ class Drivers(models.Model):
 
 def ids():
     try:
-        no = Sets.objects.first().userfriendlyid
+        no = Sets.objects.first().UserFriendlyID
         return no + 1
     except:
         return 1
@@ -367,7 +367,7 @@ class TypeMiscRelationship(models.Model):
 
 
 class ModulesRelationship(models.Model):
-    ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    ID                       = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     SetID                    = models.ForeignKey('Sets', on_delete=models.CASCADE, db_column='SetID')
     ModuleID                 = models.ForeignKey('Modules', on_delete=models.CASCADE, db_column='ModuleID')
 
@@ -379,8 +379,8 @@ class ModulesRelationship(models.Model):
 
 class RegSystemsRelationship(models.Model):
     ID                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    SetID                    = models.ForeignKey('Sets', on_delete=models.CASCADE, db_column='SetID')
-    RegsysID              = models.ForeignKey('RegSystems', on_delete=models.CASCADE, db_column='RegsysID')
+    SetID                   = models.ForeignKey('Sets', on_delete=models.CASCADE, db_column='SetID')
+    RegsysID                = models.ForeignKey('RegSystems', on_delete=models.CASCADE, db_column='RegsysID')
 
     class Meta:
         ordering = ('RegsysID',)

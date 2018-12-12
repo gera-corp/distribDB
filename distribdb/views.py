@@ -35,7 +35,7 @@ def hardlock_keys_view(request):
             Q(Notes__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -118,7 +118,7 @@ def hasp_keys_view(request):
              Q(Notes__icontains=query)
          ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20) #Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15) #Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -202,7 +202,7 @@ def plane_types_view(request):
             Q(Description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -285,7 +285,7 @@ def lang_types_view(request):
             Q(ISDefine__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -366,7 +366,7 @@ def os_types_view(request):
             Q(OSCode__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -447,7 +447,7 @@ def executables_view(request):
             Q(FileName__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -529,7 +529,7 @@ def fas_modules_view(request):
             Q(ExecutableID__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -611,7 +611,7 @@ def executable_paths_view(request):
             Q(ExecutableID__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -695,7 +695,7 @@ def regsystems_view(request):
             Q(ISPath__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -782,7 +782,7 @@ def typeregsys_view(request):
             Q(Description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -864,7 +864,7 @@ def tasks_view(request):
             Q(SysName__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -948,7 +948,7 @@ def typetasks_view(request):
             Q(Description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -1033,7 +1033,7 @@ def misc_view(request):
             Q(Description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -1117,7 +1117,7 @@ def typemisc_view(request):
             Q(Description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -1201,7 +1201,7 @@ def organisations_view(request):
             Q(Notes__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -1283,7 +1283,7 @@ def drop_device_view(request):
             Q(SysName__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -1366,7 +1366,7 @@ def regsysdevices_view(request):
             Q(DeviceID__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -1450,7 +1450,7 @@ def modules_view(request):
             Q(Description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -1534,7 +1534,7 @@ def drivers_view(request):
             Q(Description__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -1616,7 +1616,7 @@ def plane_distr(request):
             Q(SetID__typeregsystems__TypeID__UserName__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -1642,7 +1642,7 @@ def org_distr(request):
             Q(Name__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -1668,7 +1668,7 @@ def edit_set_view(request):
             Q(Date__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)  # Сколько записей на стрицу отображатся
+    paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -1758,7 +1758,7 @@ def distrib_list_view(request):
             Q(distribhaspkeys__ChipNo__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)
+    paginator = Paginator(obj_list, 15)
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -1839,7 +1839,7 @@ def distrib_update_view(request):
             Q(DistribID__Name__icontains=query)
         ).distinct()
     page = request.GET.get('page')
-    paginator = Paginator(obj_list, 20)
+    paginator = Paginator(obj_list, 15)
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
