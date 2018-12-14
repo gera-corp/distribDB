@@ -7,29 +7,29 @@
         <thead>
         <tr align="center">
             <th>
-                {% if '-SysName' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=SysName">Системное имя</a>
-                {% elif 'SysName' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-SysName">Системное имя</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-SysName">Системное имя</a>{% endif %}
+                {% if '-sysname' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=sysname">Системное имя</a>
+                {% elif 'sysname' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-sysname">Системное имя</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-sysname">Системное имя</a>{% endif %}
             </th>
             <th>
-                {% if '-UserName' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=UserName">Пользовательское имя</a>
-                {% elif 'UserName' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-UserName">Пользовательское имя</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-UserName">Пользовательское имя</a>{% endif %}
+                {% if '-username' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=username">Пользовательское имя</a>
+                {% elif 'username' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-username">Пользовательское имя</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-username">Пользовательское имя</a>{% endif %}
             </th>
             <th>
-                {% if '-ISPath' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=ISPath">Путь InstallShield</a>
-                {% elif 'ISPath' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-ISPath">Путь InstallShield</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-ISPath">Путь InstallShield</a>{% endif %}
+                {% if '-ispath' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=ispath">Путь InstallShield</a>
+                {% elif 'ispath' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-ispath">Путь InstallShield</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-ispath">Путь InstallShield</a>{% endif %}
             </th>
             <th>
-                {% if '-Hide' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Hide">Спрятан?</a>
-                {% elif 'Hide' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Hide">Спрятан?</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-Hide">Спрятан?</a>{% endif %}
+                {% if '-hide' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=hide">Спрятан?</a>
+                {% elif 'hide' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-hide">Спрятан?</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-hide">Спрятан?</a>{% endif %}
             </th>
             <th>
-                {% if '-Description' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Description">Описание</a>
-                {% elif 'Description' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Description">Описание</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-Description">Описание</a>{% endif %}
+                {% if '-description' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=description">Описание</a>
+                {% elif 'description' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-description">Описание</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-description">Описание</a>{% endif %}
 
             </th>
             <th></th>
@@ -37,11 +37,11 @@
         </thead>
         {% for item in object_list %}
             <tr align="center">
-                <td width="16%"><li class="list-group-item list-group-item-action">{{ item.SysName }}</li></td>
-                <td width="16%"><li class="list-group-item list-group-item-action">{{ item.UserName }}</li></td>
-                <td width="16%"><li class="list-group-item list-group-item-action">{{ item.ISPath }}</li></td>
-                <td width="8%" align="center"><li class="list-group-item list-group-item-action"><input disabled type="checkbox" {% if item.Hide == True %}checked="checked"{% endif %}>&nbsp;</li></td>
-                <td width="44%"><li class="list-group-item list-group-item-action">{% if item.Description is not None %}{{ item.Description }}&nbsp;{% else %}&nbsp;{% endif %}</li></td>
+                <td width="16%"><li class="list-group-item list-group-item-action">{{ item.sysname }}</li></td>
+                <td width="16%"><li class="list-group-item list-group-item-action">{{ item.username }}</li></td>
+                <td width="16%"><li class="list-group-item list-group-item-action">{{ item.ispath }}</li></td>
+                <td width="8%" align="center"><li class="list-group-item list-group-item-action"><input disabled type="checkbox" {% if item.hide == True %}checked="checked"{% endif %}>&nbsp;</li></td>
+                <td width="44%"><li class="list-group-item list-group-item-action">{% if item.description is not None %}{{ item.description }}&nbsp;{% else %}&nbsp;{% endif %}</li></td>
                 <td>
     <div class="btn-group" role="group">
     <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

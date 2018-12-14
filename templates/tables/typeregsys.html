@@ -7,46 +7,46 @@
         <thead>
         <tr align="center">
             <th>
-                {% if '-TypeID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=TypeID">Тип ЛА</a>
-                {% elif 'TypeID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-TypeID">Тип ЛА</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-TypeID">Тип ЛА</a>{% endif %}
+                {% if '-typeid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=typeid">Тип ЛА</a>
+                {% elif 'typeid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-typeid">Тип ЛА</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-typeid">Тип ЛА</a>{% endif %}
             </th>
             <th>
-                {% if '-RegsysID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=RegsysID">Система регистрации</a>
-                {% elif 'RegsysID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-RegsysID">Система регистрации</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-RegsysID">Система регистрации</a>{% endif %}
+                {% if '-regsysid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=regsysid">Система регистрации</a>
+                {% elif 'regsysid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-regsysid">Система регистрации</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-regsysid">Система регистрации</a>{% endif %}
             </th>
             <th>
-                {% if '-UserNameRegsys' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=UserNameRegsys">Польз.имя ПБ</a>
-                {% elif 'UserNameRegsys' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-UserNameRegsys">Польз.имя ПБ</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-UserNameRegsys">Польз.имя ПБ</a>{% endif %}
+                {% if '-usernameregsys' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=usernameregsys">Польз.имя ПБ</a>
+                {% elif 'usernameregsys' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-usernameregsys">Польз.имя ПБ</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-usernameregsys">Польз.имя ПБ</a>{% endif %}
             </th>
             <th>
-                {% if '-SysNameRegsys' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=SysNameRegsys">Системное имя ПБ</a>
-                {% elif 'SysNameRegsys' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-SysNameRegsys">Системное имя ПБ</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-SysNameRegsys">Системное имя ПБ</a>{% endif %}
+                {% if '-sysnameregsys' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=sysnameregsys">Системное имя ПБ</a>
+                {% elif 'sysnameregsys' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-sysnameregsys">Системное имя ПБ</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-sysnameregsys">Системное имя ПБ</a>{% endif %}
             </th>
             <th>
-                {% if '-ISPath' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=ISPath">Путь InstallShield</a>
-                {% elif 'ISPath' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-ISPath">Путь InstallShield</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-ISPath">Путь InstallShield</a>{% endif %}
+                {% if '-ispath' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=ispath">Путь InstallShield</a>
+                {% elif 'ispath' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-ispath">Путь InstallShield</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-ispath">Путь InstallShield</a>{% endif %}
             </th>
             <th>
-                {% if '-Description' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Description">Описание</a>
-                {% elif 'Description' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Description">Описание</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-Description">Описание</a>{% endif %}
+                {% if '-description' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=description">Описание</a>
+                {% elif 'description' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-description">Описание</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-description">Описание</a>{% endif %}
             </th>
             <th></th>
         </tr>
         </thead>
         {% for item in object_list %}
             <tr align="center">
-                <td width="15%"><li class="list-group-item list-group-item-action">{{ item.TypeID.UserName }}</li></td>
-                <td width="15%"><li class="list-group-item list-group-item-action">{{ item.RegsysID.UserName }}</li></td>
-                <td width="15%"><li class="list-group-item list-group-item-action">{{ item.UserNameRegsys }}</li></td>
-                <td width="15%"><li class="list-group-item list-group-item-action">{{ item.SysNameRegsys }}</li></td>
-                <td width="15%"><li class="list-group-item list-group-item-action">{{ item.ISPath }}</li></td>
-                <td width="25%"><li class="list-group-item list-group-item-action">{{ item.Description }}&nbsp;</li></td>
+                <td width="15%"><li class="list-group-item list-group-item-action">{{ item.typeid.username }}</li></td>
+                <td width="15%"><li class="list-group-item list-group-item-action">{{ item.regsysid.username }}</li></td>
+                <td width="15%"><li class="list-group-item list-group-item-action">{{ item.usernameregsys }}</li></td>
+                <td width="15%"><li class="list-group-item list-group-item-action">{{ item.sysnameregsys }}</li></td>
+                <td width="15%"><li class="list-group-item list-group-item-action">{{ item.ispath }}</li></td>
+                <td width="25%"><li class="list-group-item list-group-item-action">{{ item.description }}&nbsp;</li></td>
                 <td>
     <div class="btn-group" role="group">
     <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -83,34 +83,34 @@
 <table border="0">
      <tr>
          <td width="25%"><b>Заказчик:</b></td>
-     <td>{{ obj_list.OrganisationID }} </td>
+     <td>{{ obj_list.organisationid }} </td>
      </tr>
              <tr>
          <td><b>По договору №:</b></td>
-     <td>{{ obj_list.Contract }} </td>
+     <td>{{ obj_list.contract }} </td>
      </tr>
              <tr>
          <td><b>Серийный номер:</b></td>
-     <td>{{ obj_list.Serial }} </td>
+     <td>{{ obj_list.serial }} </td>
      </tr>
 <tr>
          <td><b>Логин:</b></td>
-     <td>{{ obj_list.Login }} </td>
+     <td>{{ obj_list.login }} </td>
      </tr>
 </table>
 <table>
     <tr>
-        <td><b>Язык:</b> {{ obj_list.LangID }}</td>
-        <td><b>Носитель дистрибутива:</b> {{ obj_list.Media }}</td>
-        <td><b>Операционная система:</b> {{ obj_list.osID }}</td>
+        <td><b>Язык:</b> {{ obj_list.langid }}</td>
+        <td><b>Носитель дистрибутива:</b> {{ obj_list.media }}</td>
+        <td><b>Операционная система:</b> {{ obj_list.osid }}</td>
     </tr>
 </table>
 <table>
 <tr>
-<td  width="25%"><b>Особые условия:</b></td><td>{{ obj_list.SpecialCase }}</td>
+<td  width="25%"><b>Особые условия:</b></td><td>{{ obj_list.specialcase }}</td>
 </tr>
     <tr>
-        <td><b>Примечания:</b></td><td>{{ obj_list.Notes }}</td>
+        <td><b>Примечания:</b></td><td>{{ obj_list.notes }}</td>
     </tr>
 </table>
 <br><br>
@@ -130,10 +130,10 @@
         </thead>
 {% for haspkey in obj_list.hasprelationship_set.all %}
     <tr>
-    <td align="center">{{ haspkey.HASPKeyID.ChipNo }}</td>
-    <td align="center">{% if not haspkey.HASPKeyID.TimeLimit is None %}{{ haspkey.HASPKeyID.TimeLimit }}{% else %}&nbsp;{% endif %}</td>
-    <td align="center">{% if not haspkey.HASPKeyID.Licenses is None %}{{ haspkey.HASPKeyID.Licenses }}{% else %}&nbsp;{% endif %}</td>
-    <td width="50%">{{ haspkey.HASPKeyID.Notes }}</td>
+    <td align="center">{{ haspkey.haspkeyid.chipno }}</td>
+    <td align="center">{% if not haspkey.haspkeyid.timelimit is None %}{{ haspkey.haspkeyid.timelimit }}{% else %}&nbsp;{% endif %}</td>
+    <td align="center">{% if not haspkey.haspkeyid.licenses is None %}{{ haspkey.haspkeyid.licenses }}{% else %}&nbsp;{% endif %}</td>
+    <td width="50%">{{ haspkey.haspkeyid.notes }}</td>
     </tr>
 {% endfor %}
 </table><br>
@@ -153,48 +153,48 @@
         </thead>
 {% for hardlock in obj_list.hardlockrelationship_set.all %}
     <tr>
-    <td align="center">{{ hardlock.HLKeyID.ChipNo }}</td>
-    <td align="center">{% if not hardlock.HLKeyID.Mark is None %}{{ hardlock.HLKeyID.Mark }}{% else %}&nbsp;{% endif %}</td>
-    <td align="center">{% if not hardlock.HLKeyID.Subcode is None %}{{ hardlock.HLKeyID.Subcode }}{% else %}&nbsp;{% endif %}</td>
-    <td align="center">{{ hardlock.HLKeyID.ModAddr }}</td>
-    <td width="50%">{{ hardlock.HLKeyID.Notes }}</td>
+    <td align="center">{{ hardlock.hlkeyid.chipno }}</td>
+    <td align="center">{% if not hardlock.hlkeyid.mark is None %}{{ hardlock.hlkeyid.mark }}{% else %}&nbsp;{% endif %}</td>
+    <td align="center">{% if not hardlock.hlkeyid.subcode is None %}{{ hardlock.hlkeyid.subcode }}{% else %}&nbsp;{% endif %}</td>
+    <td align="center">{{ hardlock.hlkeyid.modaddr }}</td>
+    <td width="50%">{{ hardlock.hlkeyid.notes }}</td>
     </tr>
 {% endfor %}
 </table><br>
 {% endif %}
 
-    {% if obj_list.SetID.modules.all or obj_list.SetID.drivers.all %}
+    {% if obj_list.setid.modules.all or obj_list.setid.drivers.all %}
 <table border="0" repeat="1">
     <thead>
 <tr>
-    {% if obj_list.SetID.modules.all %}<th><h2 align="left">Дополнительные части ПО</h2></th>{% endif %}
-    {% if obj_list.SetID.drivers.all %}<th><h2 align="left">Драйверы устройств сброса</h2></th>{% endif %}
+    {% if obj_list.setid.modules.all %}<th><h2 align="left">Дополнительные части ПО</h2></th>{% endif %}
+    {% if obj_list.setid.drivers.all %}<th><h2 align="left">Драйверы устройств сброса</h2></th>{% endif %}
 </tr>
     </thead>
 <tr>
-<td valign="top">{% for modules in obj_list.SetID.modulesrelationship_set.all %}{{ modules.ModuleID.Name }}<br>{% endfor %}</td>
-<td valign="top">{% for drivers in obj_list.SetID.driversrelationship_set.all %}{{ drivers.DriverID.Name }}<br>{% endfor %}</td>
+<td valign="top">{% for modules in obj_list.setid.modulesrelationship_set.all %}{{ modules.moduleid.name }}<br>{% endfor %}</td>
+<td valign="top">{% for drivers in obj_list.setid.driversrelationship_set.all %}{{ drivers.driverid.name }}<br>{% endfor %}</td>
 </tr>
 </table>
     {% endif %}
 
 <pdf:nextpage />
-    {% if obj_list.SetID.devices.all or obj_list.SetID.regsystems.all %}
+    {% if obj_list.setid.devices.all or obj_list.setid.regsystems.all %}
 <table border="0" repeat="0">
     <thead>
 <tr>
-    {% if obj_list.SetID.devices.all %}<th><h2 align="left">Устройства Сброса</h2></th>{% endif %}
-    {% if obj_list.SetID.regsystems.all %}<th><h2 align="left">Системы регистрации</h2></th>{% endif %}
+    {% if obj_list.setid.devices.all %}<th><h2 align="left">Устройства Сброса</h2></th>{% endif %}
+    {% if obj_list.setid.regsystems.all %}<th><h2 align="left">Системы регистрации</h2></th>{% endif %}
 </tr>
     </thead>
 <tr>
-{% if obj_list.SetID.devices.all %}<td valign="top">{% for devices in obj_list.SetID.drop_devicerelationship_set.all %}{{ devices.DeviceID.UserName }}<br>{% endfor %}</td>{% endif %}
-{% if obj_list.SetID.regsystems.all %}<td valign="top">{% for regsystems in obj_list.SetID.regsystemsrelationship_set.all %}{{ regsystems.RegsysID.UserName }}<br>{% endfor %}</td>{% endif %}
+{% if obj_list.setid.devices.all %}<td valign="top">{% for devices in obj_list.setid.drop_devicerelationship_set.all %}{{ devices.deviceid.username }}<br>{% endfor %}</td>{% endif %}
+{% if obj_list.setid.regsystems.all %}<td valign="top">{% for regsystems in obj_list.setid.regsystemsrelationship_set.all %}{{ regsystems.regsysid.username }}<br>{% endfor %}</td>{% endif %}
 </tr>
 </table>
     {% endif %}
 <br>
-{% if obj_list.SetID.typemiscrelationship_set.all %}
+{% if obj_list.setid.typemiscrelationship_set.all %}
 <h2 align="center">Дополнительные элементы по типам</h2>
 <table border="0" repeat="1">
     <thead>
@@ -205,18 +205,18 @@
     <th align="left">Пользовательское имя базы импорта (Attrib)</th>
     </tr>
     </thead>
-    {% for type_misc in obj_list.SetID.typemiscrelationship_set.all %}
+    {% for type_misc in obj_list.setid.typemiscrelationship_set.all %}
     <tr>
-    <td>{{ type_misc.TypeMiscID.TypeID }} </td>
-    <td>{{ type_misc.TypeMiscID.MiscID.Name }} </td>
-    <td>{% if not type_misc.TypeMiscID.MiscID.SysName is None %}{{ type_misc.TypeMiscID.MiscID.SysName }}{% endif %} </td>
-    <td>{% if not type_misc.TypeMiscID.MiscID.UserName is None %}{{ type_misc.TypeMiscID.MiscID.UserName }}{% endif %} </td>
+    <td>{{ type_misc.typemiscid.typeid }} </td>
+    <td>{{ type_misc.typemiscid.miscid.name }} </td>
+    <td>{% if not type_misc.typemiscid.miscid.sysname is None %}{{ type_misc.typemiscid.miscid.sysname }}{% endif %} </td>
+    <td>{% if not type_misc.typemiscid.miscid.username is None %}{{ type_misc.typemiscid.miscid.username }}{% endif %} </td>
     </tr>
     {% endfor %}
 </table>
 {% endif %}
 <br>
-{% if obj_list.SetID.typeregsysrelationship_set.all %}
+{% if obj_list.setid.typeregsysrelationship_set.all %}
     <h2 align="center">Типы ЛА</h2>
 <table border="0" repeat="1">
     <thead>
@@ -226,17 +226,17 @@
     <th align="left">Пользовательское имя первичной базы</th>
     </tr>
     </thead>
-    {% for typeregsys in obj_list.SetID.typeregsysrelationship_set.all %}
+    {% for typeregsys in obj_list.setid.typeregsysrelationship_set.all %}
     <tr>
-    <td>{{ typeregsys.TypeRegsysID.TypeID.UserName }} </td>
-    <td>{{ typeregsys.TypeRegsysID.TypeID.SysName }} </td>
-    <td>{{ typeregsys.TypeRegsysID.UserNameRegsys }} </td>
+    <td>{{ typeregsys.typeregsysid.typeid.username }} </td>
+    <td>{{ typeregsys.typeregsysid.typeid.sysname }} </td>
+    <td>{{ typeregsys.typeregsysid.usernameRegsys }} </td>
     </tr>
     {% endfor %}
 </table>
 {% endif %}
 <br>
-{% if obj_list.SetID.typetasksrelationship_set.all %}
+{% if obj_list.setid.typetasksrelationship_set.all %}
     <h2 align="center">Расчётные базы</h2>
 <table border="0" repeat="1">
     <thead>
@@ -246,11 +246,11 @@
     <th align="left">Пользовательское имя расчётной базы (Attrib)</th>
     </tr>
     </thead>
-    {% for typetasks in obj_list.SetID.typetasksrelationship_set.all %}
+    {% for typetasks in obj_list.setid.typetasksrelationship_set.all %}
     <tr>
-    <td>{{ typetasks.TypeTaskID.TypeID.UserName }} </td>
-    <td>{{ typetasks.TypeTaskID.TypeID.SysName }} </td>
-    <td>{{ typetasks.TypeTaskID.TaskID.UserName }} </td>
+    <td>{{ typetasks.typetaskid.typeid.username }} </td>
+    <td>{{ typetasks.typetaskid.typeid.sysname }} </td>
+    <td>{{ typetasks.typetaskid.taskid.username }} </td>
     </tr>
     {% endfor %}
 </table>

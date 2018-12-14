@@ -7,34 +7,34 @@
         <thead>
         <tr align="center">
             <th>
-                {% if '-ExecutableID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=ExecutableID">Имя файла</a>
-                {% elif 'ExecutableID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-ExecutableID">Имя файла</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-ExecutableID">Имя файла</a>{% endif %}
+                {% if '-executableid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=executableid">Имя файла</a>
+                {% elif 'executableid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-executableid">Имя файла</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-executableid">Имя файла</a>{% endif %}
             </th>
             <th>
-                {% if '-ISPath' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=ISPath">Путь InstallShield</a>
-                {% elif 'ISPath' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-ISPath">Путь InstallShield</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-ISPath">Путь InstallShield</a>{% endif %}
+                {% if '-ispath' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=ispath">Путь InstallShield</a>
+                {% elif 'ispath' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-ispath">Путь InstallShield</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-ispath">Путь InstallShield</a>{% endif %}
             </th>
             <th>
-                {% if '-Source' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Source">Источник файлов для шифрования</a>
-                {% elif 'Source' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Source">Источник файлов для шифрования</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-Source">Источник файлов для шифрования</a>{% endif %}
+                {% if '-source' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=source">Источник файлов для шифрования</a>
+                {% elif 'source' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-source">Источник файлов для шифрования</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-source">Источник файлов для шифрования</a>{% endif %}
             </th>
             <th>
-                {% if '-Dest' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Dest">Путь для шифрованых файлов</a>
-                {% elif 'Dest' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Dest">Путь для шифрованых файлов</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-Dest">Путь для шифрованых файлов</a>{% endif %}
+                {% if '-dest' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=dest">Путь для шифрованых файлов</a>
+                {% elif 'dest' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-dest">Путь для шифрованых файлов</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-dest">Путь для шифрованых файлов</a>{% endif %}
             </th>
             <th></th>
         </tr>
         </thead>
         {% for item in object_list %}
             <tr align="center">
-                <td width="25%"><li class="list-group-item list-group-item-action">{{ item.ExecutableID }}</li></td>
-                <td width="25%"><li class="list-group-item list-group-item-action">{{ item.ISPath }}</li></td>
-                <td width="25%"><li class="list-group-item list-group-item-action">{% if item.Source is not None %}{{ item.Source }}&nbsp;{% else %}&nbsp;{% endif %}</li></td>
-                <td width="25%"><li class="list-group-item list-group-item-action">{% if item.Dest is not None %}{{ item.Dest }}&nbsp;{% else %}&nbsp;{% endif %}</li></td>
+                <td width="25%"><li class="list-group-item list-group-item-action">{{ item.executableid }}</li></td>
+                <td width="25%"><li class="list-group-item list-group-item-action">{{ item.ispath }}</li></td>
+                <td width="25%"><li class="list-group-item list-group-item-action">{% if item.source is not None %}{{ item.source }}&nbsp;{% else %}&nbsp;{% endif %}</li></td>
+                <td width="25%"><li class="list-group-item list-group-item-action">{% if item.dest is not None %}{{ item.dest }}&nbsp;{% else %}&nbsp;{% endif %}</li></td>
                 <td>
     <div class="btn-group" role="group">
     <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

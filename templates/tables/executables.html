@@ -7,16 +7,16 @@
         <thead>
         <tr align="center">
             <th>
-                {% if '-FileName' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=FileName">Имя</a>
-                {% elif 'FileName' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-FileName">Имя</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-FileName">Имя</a>{% endif %}
+                {% if '-filename' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=filename">Имя</a>
+                {% elif 'filename' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-filename">Имя</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-filename">Имя</a>{% endif %}
             </th>
             <th></th>
         </tr>
         </thead>
         {% for item in object_list %}
             <tr align="center">
-                <td width="100%"><li class="list-group-item list-group-item-action">{{ item.FileName }}</li></td>
+                <td width="100%"><li class="list-group-item list-group-item-action">{{ item.filename }}</li></td>
                 <td>
     <div class="btn-group" role="group">
     <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

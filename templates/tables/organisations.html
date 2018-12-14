@@ -7,19 +7,19 @@
         <thead>
         <tr align="center">
             <th>
-                {% if '-Name' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Name">Название</a>
-                {% elif 'Name' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Name">Название</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-Name">Название</a>{% endif %}
+                {% if '-name' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=name">Название</a>
+                {% elif 'name' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-name">Название</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-name">Название</a>{% endif %}
             </th>
             <th>
-                {% if '-City' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=City">Город</a>
-                {% elif 'city' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-City">Город</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-City">Город</a>{% endif %}
+                {% if '-city' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=city">Город</a>
+                {% elif 'city' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-city">Город</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-city">Город</a>{% endif %}
             </th>
             <th>
-                {% if '-Notes' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Notes">Примечания</a>
-                {% elif 'Notes' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Notes">Примечания</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-Notes">Примечания</a>{% endif %}
+                {% if '-notes' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=notes">Примечания</a>
+                {% elif 'notes' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-notes">Примечания</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-notes">Примечания</a>{% endif %}
 
             </th>
             <th></th>
@@ -27,9 +27,9 @@
         </thead>
         {% for item in object_list %}
             <tr align="center">
-                <td width="33%"><li class="list-group-item list-group-item-action">{{ item.Name }}</li></td>
-                <td width="33%"><li class="list-group-item list-group-item-action">{{ item.City }}&nbsp;</li></td>
-                <td width="33%"><li class="list-group-item list-group-item-action">{{ item.Notes }}&nbsp;</li></td>
+                <td width="33%"><li class="list-group-item list-group-item-action">{{ item.name }}</li></td>
+                <td width="33%"><li class="list-group-item list-group-item-action">{{ item.city }}&nbsp;</li></td>
+                <td width="33%"><li class="list-group-item list-group-item-action">{{ item.notes }}&nbsp;</li></td>
                 <td>
     <div class="btn-group" role="group">
     <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

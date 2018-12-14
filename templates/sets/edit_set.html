@@ -2,20 +2,28 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container table-responsive-sm shadow-lg p-3 mb-5 bg-white rounded">
+    {% if messages %}
+        {% for message in messages %}
+            <div align="center" {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
+            <strong>{{ message }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
         <p class="text-monospace small">Данная страница позволяет просмотреть список наборов.</p>
         <a class="btn btn-secondary" href="new_post/" role="button">Добавить</a><br><br>
         <table class="table table-sm table-borderless form-control-sm">
             <thead>
             <tr align="center">
                 <th>
-                    {% if '-UserFriendlyID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=UserFriendlyID">ID</a>
-                    {% elif 'UserFriendlyID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-UserFriendlyID">ID</a>
-                    {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=UserFriendlyID">ID</a>{% endif %}
+                    {% if '-userfriendlyid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=userfriendlyid">ID</a>
+                    {% elif 'userfriendlyid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-userfriendlyid">ID</a>
+                    {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=userfriendlyid">ID</a>{% endif %}
                 </th>
                 <th>
-                    {% if '-Date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Date">Дата создания</a>
-                    {% elif 'Date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Date">Дата создания</a>
-                    {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=Date">Дата создания</a>{% endif %}
+                    {% if '-date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=date">Дата создания</a>
+                    {% elif 'date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-date">Дата создания</a>
+                    {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=date">Дата создания</a>{% endif %}
                 </th>
                 <th></th>
             </tr>
@@ -25,10 +33,10 @@
                 <tr align="center">
                     <ul class="list-group">
                         <td width="50%">
-                            <a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.ID }}">{{ item.UserFriendlyID }}</a>
+                            <a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.id }}">{{ item.userfriendlyid }}</a>
                         </td>
                         <td width="50%">
-                            <li class="list-group-item list-group-item-action">{{ item.Date|date:'d.m.Y' }}</li>
+                            <li class="list-group-item list-group-item-action">{{ item.date|date:'d.m.Y' }}</li>
                         </td>
                         <td>
     <div class="btn-group" role="group">
@@ -46,7 +54,7 @@
                 </tr>
 
 
-<div class="modal fade" id="id{{ item.ID }}" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
+<div class="modal fade" id="id{{ item.id }}" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
       <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -58,8 +66,8 @@
       <div class="modal-body">
           <p class="text-monospace">Данная страница позваляет получить детальную информацию о наборе.</p>
     <ul class="list-group list-group-flush">
-    <li class="list-group-item">ID: <p class="font-weight-bold small">{{ item.UserFriendlyID }}</p></li>
-    <li class="list-group-item">Дата: <p class="font-weight-bold small">{{ item.Date|date:'d E Y' }}</p></li><br>
+    <li class="list-group-item">ID: <p class="font-weight-bold small">{{ item.userfriendlyid }}</p></li>
+    <li class="list-group-item">Дата: <p class="font-weight-bold small">{{ item.date|date:'d E Y' }}</p></li><br>
     <br>
 <li class="list-group-item"><p class="text-center">Состав набора:</p>
 <span class="font-weight-normal small">
@@ -80,17 +88,17 @@
 <div class="row">
 <div class="col-sm" align="center">
 {% for test in item.typeregsysrelationship_set.all %}
-    {% ifchanged test.TypeRegsysID.TypeID.UserName %}<span class="font-weight-bold small">{{ test.TypeRegsysID.TypeID.UserName }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.TypeRegsysID.RegsysID.UserName }}</span><br>
+    {% ifchanged test.typeregsysid.typeid.username %}<span class="font-weight-bold small">{{ test.typeregsysid.typeid.username }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.typeregsysid.regsysid.username }}</span><br>
 {% endfor %}</div>
 
 <div class="col-sm" align="center">
 {% for test in item.typetasksrelationship_set.all %}
-{% ifchanged test.TypeTaskID.TypeID.UserName %}<span class="font-weight-bold small">{{ test.TypeTaskID.TypeID.UserName }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.TypeTaskID.TaskID.SysName }}</span><br>
+{% ifchanged test.typetaskid.typeid.username %}<span class="font-weight-bold small">{{ test.typetaskid.typeid.username }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.typetaskid.taskid.sysname }}</span><br>
 {% endfor %}</div>
 
 <div class="col-sm" align="center">
 {% for test in item.typemiscrelationship_set.all %}
-{% ifchanged test.TypeMiscID.TypeID.UserName %}<span class="font-weight-bold small">{{ test.TypeMiscID.TypeID.UserName }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.TypeMiscID.MiscID.Name }}</span><br>
+{% ifchanged test.typemiscid.typeid.username %}<span class="font-weight-bold small">{{ test.typemiscid.typeid.username }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.typemiscid.miscid.name }}</span><br>
 {% endfor %}</div>
 
 </div></li><br>
@@ -121,25 +129,25 @@
 <div class="row">
 <div class="col-sm" align="center">
 {% for modules in item.modulesrelationship_set.all %}
-{{ modules.ModuleID.Name }}<br>
+{{ modules.moduleid.name }}<br>
 {% endfor %}
 </div>
 
 <div class="col-sm" align="center">
 {% for regsys in item.regsystemsrelationship_set.all %}
-{{ regsys.RegsysID.UserName }}<br>
+{{ regsys.regsysid.username }}<br>
 {% endfor %}
 </div>
 
 <div class="col-sm" align="center">
 {% for dropdev in item.drop_devicerelationship_set.all %}
-{{ dropdev.DeviceID.UserName }}<br>
+{{ dropdev.deviceid.username }}<br>
 {% endfor %}
 </div>
 
 <div class="col-sm" align="center">
 {% for drivers in item.driversrelationship_set.all %}
-{{ drivers.DriverID.Name }}
+{{ drivers.driverid.name }}
 {% endfor %}
 </div>
 
@@ -148,7 +156,7 @@
 
 
           <div class="modal-footer">
-        <a href="/edit_set/edit_post/{{ item.SetID.ID }}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>
+        <a href="/edit_set/edit_post/{{ item.setid.id }}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
       </div>
     </ul></div></div></div></div>

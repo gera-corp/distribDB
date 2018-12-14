@@ -14,33 +14,33 @@
 <form method="post">{% csrf_token %}
     <div class="form-group">
 Название
-{{ form.Name }}
+{{ form.name }}
 <br>Набор
-{{ form.SetID }}
+{{ form.setid }}
 <br>Дата создания
-{{ form.Date }}
+{{ form.date }}
 <br>Заказчик
-{{ form.OrganisationID }}
+{{ form.organisationid }}
 <br>№ комплекта
-{{ form.ComplectNo }}
+{{ form.complectno }}
 <br>Контракт
-{{ form.Contract }}
+{{ form.contract }}
 <br>Логин
-{{ form.Login }}
+{{ form.login }}
 <br>Серийный номер
-{{ form.Serial }}
+{{ form.serial }}
 <br>Язык
-{{ form.LangID }}
+{{ form.langid }}
 <br>Носитель
-{{ form.Media }}
+{{ form.media }}
 <br>Операционная система
-{{ form.osID }}
+{{ form.osid }}
 <br>Особые условия
-{{ form.SpecialCase }}
+{{ form.specialcase }}
 <br>Диск сборки
-{{ form.ReleaseDisk }}
+{{ form.releasedisk }}
 <br>Примечания
-{{ form.Notes }}
+{{ form.notes }}
 <br>
 <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#hasp">Ключи дистрибутива HASP
     <script>var numchkbox=0;{% for checkbox in form.distribhaspkeys %}{% if checkbox.data.selected == True %}numchkbox++;{% endif %}

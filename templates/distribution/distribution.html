@@ -9,34 +9,34 @@
         <thead>
         <tr align="center">
             <th>
-                {% if '-Name' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Name">Название</a>
-                {% elif 'Name' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Name">Название</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=Name">Название</a>{% endif %}</th>
+                {% if '-name' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=name">Название</a>
+                {% elif 'name' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-name">Название</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=name">Название</a>{% endif %}</th>
             <th>
-                {% if '-SetID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=SetID">Набор ID</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-SetID">Набор ID</a>{% endif %}</th>
+                {% if '-setid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=setid">Набор ID</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=-setid">Набор ID</a>{% endif %}</th>
             <th>
-                {% if '-Date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Date">Дата</a>
-                {% elif 'Date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Date">Дата</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=Date">Дата</a>{% endif %}</th>
+                {% if '-date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=date">Дата</a>
+                {% elif 'date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-date">Дата</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=date">Дата</a>{% endif %}</th>
             <th>
-                {% if '-OrganisationID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=OrganisationID">Заказчик</a>
-                {% elif 'OrganisationID' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-OrganisationID">Заказчик</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=OrganisationID">Заказчик</a>{% endif %}</th>
+                {% if '-organisationid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=organisationid">Заказчик</a>
+                {% elif 'organisationid' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-organisationid">Заказчик</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=organisationid">Заказчик</a>{% endif %}</th>
             <th>
-                {% if '-Login' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Login">Логин</a>
-                {% elif 'Login' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Login">Логин</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=Login">Логин</a>{% endif %}</th>
+                {% if '-login' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=login">Логин</a>
+                {% elif 'login' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-login">Логин</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=login">Логин</a>{% endif %}</th>
             <th>
-                {% if '-Serial' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=Serial">Серийный номер</a>
-                {% elif 'Serial' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-Serial">Серийный номер</a>
-                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=Serial">Серийный номер</a>{% endif %}</th>
+                {% if '-serial' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=serial">Серийный номер</a>
+                {% elif 'serial' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?order_by=-serial">Серийный номер</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?order_by=serial">Серийный номер</a>{% endif %}</th>
         </tr>
         </thead>
         {% for item in object_list %}
             <tr align="center">
-                <td width="23%"><a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.ID }}">{{ item.Name }}</a></td>
-    <div class="modal fade" id="id{{ item.ID }}" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
+                <td width="23%"><a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.id }}">{{ item.name }}</a></td>
+    <div class="modal fade" id="id{{ item.id }}" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
       <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -48,20 +48,20 @@
       <div class="modal-body">
           <p class="text-monospace">Данная страница позваляет получить детальную информацию о дистрибутиве.</p>
 <ul class="list-group list-group-flush">
-    <li class="list-group-item">Название:<p class="font-weight-bold small">{{ item.Name }}</p></li>
-    <li class="list-group-item">Набор:<a href="" style="color: black;; text-decoration: none;" data-dismiss="modal" data-toggle="modal" data-target="#id{{ item.SetID.ID }}"><p class="font-weight-bold small">{{ item.SetID.UserFriendlyID }}</p></a></li>
-    <li class="list-group-item">Дата создания:<p class="font-weight-bold small">{{ item.Date|date:'d.m.Y' }}</p></li>
-    <li class="list-group-item">Заказчик:<p class="font-weight-bold small">{{ item.OrganisationID }}</p></li>
-    <li class="list-group-item">№ комплекта:<p class="font-weight-bold small">{{ item.ComplectNo }}</p></li>
-    <li class="list-group-item">Контракт:<p class="font-weight-bold small">{{ item.Contract }}</p></li>
-    <li class="list-group-item">Логин:<p class="font-weight-bold small">{{ item.Login }}</p></li>
-    <li class="list-group-item">Серийный номер:<p class="font-weight-bold small">{{ item.Serial }}</p></li>
-    <li class="list-group-item">Язык:<p class="font-weight-bold small">{{ item.LangID }}</p></li>
-    <li class="list-group-item">Носитель:<p class="font-weight-bold small">{{ item.Media }}</p></li>
-    <li class="list-group-item">Операционная система:<p class="font-weight-bold small">{{ item.osID }}</p></li>
-    <li class="list-group-item">Специальные условия:<p class="font-weight-bold small">{{ item.SpecialCase }}</p></li>
-    <li class="list-group-item">Диск сборки:<p class="font-weight-bold small">{{ item.ReleaseDisk }}</p></li>
-    <li class="list-group-item">Примечания:<p class="font-weight-bold small">{{ item.Notes }}</p></li><br>
+    <li class="list-group-item">Название:<p class="font-weight-bold small">{{ item.name }}</p></li>
+    <li class="list-group-item">Набор:<a href="" style="color: black;; text-decoration: none;" data-dismiss="modal" data-toggle="modal" data-target="#id{{ item.setid.id }}"><p class="font-weight-bold small">{{ item.setid.userfriendlyid }}</p></a></li>
+    <li class="list-group-item">Дата создания:<p class="font-weight-bold small">{{ item.date|date:'d.m.Y' }}</p></li>
+    <li class="list-group-item">Заказчик:<p class="font-weight-bold small">{{ item.organisationid }}</p></li>
+    <li class="list-group-item">№ комплекта:<p class="font-weight-bold small">{{ item.complectno }}</p></li>
+    <li class="list-group-item">Контракт:<p class="font-weight-bold small">{{ item.contract }}</p></li>
+    <li class="list-group-item">Логин:<p class="font-weight-bold small">{{ item.login }}</p></li>
+    <li class="list-group-item">Серийный номер:<p class="font-weight-bold small">{{ item.serial }}</p></li>
+    <li class="list-group-item">Язык:<p class="font-weight-bold small">{{ item.langid }}</p></li>
+    <li class="list-group-item">Носитель:<p class="font-weight-bold small">{{ item.media }}</p></li>
+    <li class="list-group-item">Операционная система:<p class="font-weight-bold small">{{ item.osid }}</p></li>
+    <li class="list-group-item">Специальные условия:<p class="font-weight-bold small">{{ item.specialcase }}</p></li>
+    <li class="list-group-item">Диск сборки:<p class="font-weight-bold small">{{ item.releasedisk }}</p></li>
+    <li class="list-group-item">Примечания:<p class="font-weight-bold small">{{ item.notes }}</p></li><br>
     <li class="list-group-item"><p class="text-center">Ключи (HASP):</p>
 <span class="font-weight-normal small">
         <div class="row">
@@ -90,26 +90,26 @@
     <span class="font-weight-bold small">
     <div class="row">
     <div class="col-sm" align="center">
-        {{ haspkey.Date|date:'d.m.Y' }}
+        {{ haspkey.date|date:'d.m.Y' }}
     </div>
     <div class="col-sm" align="center">
-        {{ haspkey.HASPKeyID.ChipNo }}
+        {{ haspkey.haspkeyid.chipno }}
     </div>
     <div class="col-sm" align="center">
-        {{ haspkey.HASPKeyID.TimeLimit|date:'d.m.Y' }}
+        {{ haspkey.haspkeyid.timelimit|date:'d.m.Y' }}
         </div>
     <div class="col-sm" align="center">
-        {% if not haspkey.HASPKeyID.Licenses is None %}
-        {{ haspkey.HASPKeyID.Licenses }}
+        {% if not haspkey.haspkeyid.licenses is None %}
+        {{ haspkey.haspkeyid.licenses }}
         {% endif %}
         </div>
     <div class="col-sm" align="center">
-        {% if not haspkey.HASPKeyID.Free is False %}
+        {% if not haspkey.haspkeyid.free is False %}
         Да
         {% endif %}
         </div>
     <div class="col-sm" align="center">
-        {{ haspkey.HASPKeyID.Notes }}
+        {{ haspkey.haspkeyid.notes }}
     </div></div>
     </span>
 {% endfor %}
@@ -144,27 +144,27 @@
     <span class="font-weight-bold small">
     <div class="row">
     <div class="col-sm" align="center">
-        {{ hardlock.Date|date:'d.m.Y' }}
+        {{ hardlock.date|date:'d.m.Y' }}
     </div>
     <div class="col-sm" align="center">
-        {{ hardlock.HLKeyID.Mark }}
+        {{ hardlock.hlkeyid.mark }}
     </div>
     <div class="col-sm" align="center">
-        {{ hardlock.HLKeyID.ChipNo }}
+        {{ hardlock.hlkeyid.chipno }}
     </div>
     <div class="col-sm" align="center">
-        {{ hardlock.HLKeyID.Subcode }}
+        {{ hardlock.hlkeyid.subcode }}
     </div>
     <div class="col-sm" align="center">
-        {{ hardlock.HLKeyID.ModAddr }}
+        {{ hardlock.hlkeyid.modaddr }}
     </div>
     <div class="col-sm" align="center">
-        {% if not hardlock.HLKeyID.Free is False %}
+        {% if not hardlock.hlkeyid.free is False %}
         Да
         {% endif %}
     </div>
     <div class="col-sm" align="center">
-        {{ hardlock.HLKeyID.Notes }}
+        {{ hardlock.hlkeyid.notes }}
     </div>
     </div></span>
 {% endfor %}
@@ -199,27 +199,27 @@
 <div class="row">
 <div class="col-sm" align="center">
 
-{{ update.DistribID.Name }}
+{{ update.distribid.name }}
 </div>
 <div class="col-sm" align="center">
-{{ update.NewDistribID.Name }}
+{{ update.newdistribid.name }}
 </div>
 <div class="col-sm" align="center">
-{{ update.Date|date:'d.m.Y' }}
+{{ update.date|date:'d.m.Y' }}
 </div>
 <div class="col-sm" align="center">
-{% if not update.Source is None %}
-{{ update.Source }}
+{% if not update.source is None %}
+{{ update.source }}
 {% endif %}
 </div>
 <div class="col-sm" align="center">
-{% if not update.Cause is None %}
-{{ update.Cause }}
+{% if not update.cause is None %}
+{{ update.cause }}
 {% endif %}
 </div>
 <div class="col-sm" align="center">
-{% if not update.Notes is None %}
-{{ update.Notes }}
+{% if not update.notes is None %}
+{{ update.notes }}
 {% endif %}
 </div>
 </div>
@@ -238,8 +238,8 @@
     </div>
   </div>
     </div>
-                <td width="7%"><a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.SetID.ID }}">{{ item.SetID.UserFriendlyID }}</a></td>
-             <div class="modal fade" id="id{{ item.SetID.ID }}" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
+                <td width="7%"><a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.setid.id }}">{{ item.setid.userfriendlyid }}</a></td>
+             <div class="modal fade" id="id{{ item.setid.id }}" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
       <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -251,8 +251,8 @@
       <div class="modal-body">
           <p class="text-monospace">Данная страница позваляет получить детальную информацию о наборе.</p>
     <ul class="list-group list-group-flush">
-    <li class="list-group-item">ID: <p class="font-weight-bold small">{{ item.SetID.UserFriendlyID }}</p></li>
-    <li class="list-group-item">Дата: <p class="font-weight-bold small">{{ item.SetID.Date|date:'d E Y'  }}</p></li><br>
+    <li class="list-group-item">ID: <p class="font-weight-bold small">{{ item.setid.userfriendlyid }}</p></li>
+    <li class="list-group-item">Дата: <p class="font-weight-bold small">{{ item.setid.date|date:'d E Y'  }}</p></li><br>
     <li class="list-group-item"><p class="text-center">Список дистрибутивов:</p>
         <p class="text-monospace small" align="center">По этому набору были созданы следующие дистрибутивы:</p>
         <span class="font-weight-normal small">
@@ -275,25 +275,25 @@
         </div></span>
 
         {% for distr in object_list %}
-        {% if item.SetID.UserFriendlyID == distr.SetID.UserFriendlyID %}
+        {% if item.setid.userfriendlyid == distr.setid.userfriendlyid %}
      <li class="list-group-item">
     <span class="font-weight-bold small">
     <div class="row">
     <div class="col-sm" align="center">
 
-        <a href="" data-dismiss="modal" style="color: black;; text-decoration: none;" data-toggle="modal" data-target="#id{{ distr.ID }}">{{ distr.Name }}</a><br>
+        <a href="" data-dismiss="modal" style="color: black;; text-decoration: none;" data-toggle="modal" data-target="#id{{ distr.id }}">{{ distr.name }}</a><br>
     </div>
 <div class="col-sm" align="center">
-{{ distr.Date|date:'d.m.Y' }}
+{{ distr.date|date:'d.m.Y' }}
 </div>
 <div class="col-sm" align="center">
-{{ distr.OrganisationID }}
+{{ distr.organisationid }}
 </div>
 <div class="col-sm" align="center">
-{{ distr.Login }}
+{{ distr.login }}
 </div>
 <div class="col-sm" align="center">
-{{ distr.Serial }}
+{{ distr.serial }}
 </div></div></span></li>
 {% endif %}
 {% endfor %}
@@ -316,18 +316,18 @@
 
 <div class="row">
 <div class="col-sm" align="center">
-{% for test in item.SetID.typeregsysrelationship_set.all %}
-    {% ifchanged test.TypeRegsysID.TypeID.UserName %}<span class="font-weight-bold small">{{ test.TypeRegsysID.TypeID.UserName }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.TypeRegsysID.RegsysID.UserName }}</span><br>
+{% for test in item.setid.typeregsysrelationship_set.all %}
+    {% ifchanged test.typeregsysid.typeid.username %}<span class="font-weight-bold small">{{ test.typeregsysid.typeid.username }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.typeregsysid.regsysid.username }}</span><br>
 {% endfor %}</div>
 
 <div class="col-sm" align="center">
-{% for test in item.SetID.typetasksrelationship_set.all %}
-{% ifchanged test.TypeTaskID.TypeID.UserName %}<span class="font-weight-bold small">{{ test.TypeTaskID.TypeID.UserName }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.TypeTaskID.TaskID.SysName }}</span><br>
+{% for test in item.setid.typetasksrelationship_set.all %}
+{% ifchanged test.typetaskid.typeid.username %}<span class="font-weight-bold small">{{ test.typetaskid.typeid.username }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.typetaskid.taskid.sysname }}</span><br>
 {% endfor %}</div>
 
 <div class="col-sm" align="center">
-{% for test in item.SetID.typemiscrelationship_set.all %}
-{% ifchanged test.TypeMiscID.TypeID.UserName %}<span class="font-weight-bold small">{{ test.TypeMiscID.TypeID.UserName }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.TypeMiscID.MiscID.Name }}</span><br>
+{% for test in item.setid.typemiscrelationship_set.all %}
+{% ifchanged test.typemiscid.typeid.username %}<span class="font-weight-bold small">{{ test.typemiscid.typeid.username }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.typemiscid.miscid.name }}</span><br>
 {% endfor %}</div>
 
 </div></li><br>
@@ -357,26 +357,26 @@
 <span class="font-weight-normal small">
 <div class="row">
 <div class="col-sm" align="center">
-{% for modules in item.SetID.modulesrelationship_set.all %}
-{{ modules.ModuleID.Name }}<br>
+{% for modules in item.setid.modulesrelationship_set.all %}
+{{ modules.moduleid.name }}<br>
 {% endfor %}
 </div>
 
 <div class="col-sm" align="center">
-{% for regsys in item.SetID.regsystemsrelationship_set.all %}
-{{ regsys.RegsysID.UserName }}<br>
+{% for regsys in item.setid.regsystemsrelationship_set.all %}
+{{ regsys.regsysid.username }}<br>
 {% endfor %}
 </div>
 
 <div class="col-sm" align="center">
-{% for dropdev in item.SetID.drop_devicerelationship_set.all %}
-{{ dropdev.DeviceID.UserName }}<br>
+{% for dropdev in item.setid.drop_devicerelationship_set.all %}
+{{ dropdev.deviceid.username }}<br>
 {% endfor %}
 </div>
 
 <div class="col-sm" align="center">
-{% for drivers in item.SetID.driversrelationship_set.all %}
-{{ drivers.DriverID.Name }}
+{% for drivers in item.setid.driversrelationship_set.all %}
+{{ drivers.driverid.name }}
 {% endfor %}
 </div>
 
@@ -385,17 +385,17 @@
 
 
           <div class="modal-footer">
-        <a href="/edit_set/edit_post/{{ item.SetID.ID }}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>
+        <a href="/edit_set/edit_post/{{ item.setid.ID }}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
       </div>
     </ul></div></div></div></div>
 
 
 
-                <td width="10%"><li class="list-group-item list-group-item-action">{{ item.Date|date:'d.m.Y' }}</li></td>
-                <td width="20%"><li class="list-group-item list-group-item-action">{{ item.OrganisationID }}<br></li></td>
-                <td width="20%"><li class="list-group-item list-group-item-action">{{ item.Login }}</li></td>
-                <td width="20%"><li class="list-group-item list-group-item-action">{{ item.Serial }}</li></td>
+                <td width="10%"><li class="list-group-item list-group-item-action">{{ item.date|date:'d.m.Y' }}</li></td>
+                <td width="20%"><li class="list-group-item list-group-item-action">{{ item.organisationid }}<br></li></td>
+                <td width="20%"><li class="list-group-item list-group-item-action">{{ item.login }}</li></td>
+                <td width="20%"><li class="list-group-item list-group-item-action">{{ item.serial }}</li></td>
                 <td>
     <div class="btn-group" role="group">
     <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

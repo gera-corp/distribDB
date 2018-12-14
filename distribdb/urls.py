@@ -106,6 +106,7 @@ urlpatterns = [
 
     path('plane_distr/', views.plane_distr),
     path('org_distr/', views.org_distr),
+    path('clone_set/<uuid:pk>/', views.clone_set, name='clone_set'),
 
     path('edit_set/', views.edit_set_view),
     path('edit_set/<uuid:pk>/delete/', views.edit_set_delete, name='edit_set_delete'),
