@@ -1715,14 +1715,6 @@ def edit_set_new_post(request):
     return render(request, template, context)
 
 
-def ids():
-    try:
-        no = Sets.objects.first().userfriendlyid
-        return no + 1
-    except:
-        return 1
-
-
 # @cache_page(60 * 15)
 def edit_set_edit_post(request, pk):
     if not request.user.is_authenticated:
@@ -1749,6 +1741,14 @@ def edit_set_edit_post(request, pk):
     }
 
     return render(request, template, context)
+
+
+def ids():
+    try:
+        no = Sets.objects.first().userfriendlyid
+        return no + 1
+    except:
+        return 1
 
 
 def clone_set(request, pk):
