@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container table-responsive-sm shadow p-3 mb-5 bg-white rounded">
     <p class="text-monospace small">Данная страница позволяет посмотреть список <code>Заказчиков</code> включённых в <code>Дистрибутив</code>.<br>
-        Можно осуществлять поиск по <code>Типу ЛА</code> и получить список <code>Дистрибутивов</code> куда входит введённый вами <code>Тип ЛА</code>.</p>
+        Можно осуществлять поиск по <code>Заказчику</code> и получить список <code>Дистрибутивов</code> куда входит введённый вами <code>Заказчик</code>.</p>
     <table class="table table-sm table-borderless form-control-sm">
         <thead>
         <tr align="center">
@@ -18,17 +18,26 @@
                 {% elif 'name' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-name">Дистрибутив</a>
                 {% else %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-name">Дистрибутив</a>{% endif %}
             </th>
-
+            <th>
+                {% if '-date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=date">Дата</a>
+                {% elif 'date' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-date">Дата</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-date">Дата</a>{% endif %}
+            </th>
+            <th>
+                {% if '-serial' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=serial">Серийный номер</a>
+                {% elif 'serial' in request.get_full_path %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-serial">Серийный номер</a>
+                {% else %}<a style="color: black;; text-decoration: none;" href="?q={{ request.GET.q }}&order_by=-serial">Серийный номер</a>{% endif %}
+            </th>
         </tr>
         </thead>
         {% for item in object_list %}
             <tr align="center">
-                <td width="50%">
+                <td width="28%">
                     <li class="list-group-item list-group-item-action">
                     {{ item.organisationid }}
                 </li>
                 </td>
-                <td width="50%"><a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.id }}">{{ item.name }}</a></td>
+                <td width="35%"><a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#id{{ item.id }}">{{ item.name }}</a></td>
 
             <div class="modal fade" id="id{{ item.id }}" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
       <div class="modal-dialog modal-lg">
@@ -232,8 +241,8 @@
     </div>
   </div>
     </div>
-
-
+                <td width="10%"><li class="list-group-item list-group-item-action">{{ item.date|date:'d.m.Y' }}</li></td>
+<td width="30%"><li class="list-group-item list-group-item-action">{{ item.serial }}</li></td>
             </tr>
         {% endfor %}
     </table>

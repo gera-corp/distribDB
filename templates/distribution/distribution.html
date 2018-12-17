@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="container table-responsive-sm shadow p-3 mb-5 bg-white rounded">
-<p class="text-monospace small">Данная страница позволяет посмотреть список дистрибутивов.<br> Удаление дистрибутива возможно только в том случае, если у Вас имеется соответствующая привилегия.</p>
+<p class="text-monospace small">Существующие <code>Дистрибутивы</code>.</p>
     <a class="btn btn-secondary" href="new_post/" role="button">Добавить</a><br><br>
     <table class="table table-sm table-borderless form-control-sm">
         <thead>
@@ -111,9 +111,9 @@
     <div class="col-sm" align="center">
         {{ haspkey.haspkeyid.notes }}
     </div></div>
-    </span>
+    </span></li>
 {% endfor %}
-    </li><br>
+    <br>
     <li class="list-group-item"><p class="text-center">Ключи (Hardlock):</p>
 <span class="font-weight-normal small">
         <div class="row">
@@ -166,9 +166,9 @@
     <div class="col-sm" align="center">
         {{ hardlock.hlkeyid.notes }}
     </div>
-    </div></span>
+    </div></span></li>
 {% endfor %}
-     </li><br>
+     <br>
     <li class="list-group-item"><p class="text-center">Обновления дистрибутива:</p>
 
 <span class="font-weight-normal small">
@@ -224,8 +224,8 @@
 </div>
 </div>
 </span>
-{% endfor %}
 </li>
+{% endfor %}
 
 </ul>
 </div>

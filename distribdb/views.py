@@ -1638,8 +1638,7 @@ def org_distr(request):
     query = request.GET.get('q')
     if query:
         obj_list = obj_list.filter(
-            Q(organisationid__name__contains=query) |
-            Q(name__icontains=query)
+            Q(organisationid__name__contains=query)
         ).distinct()
     page = request.GET.get('page')
     paginator = Paginator(obj_list, 15)  # Сколько записей на стрицу отображатся
