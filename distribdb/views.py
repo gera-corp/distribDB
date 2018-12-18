@@ -1751,6 +1751,8 @@ def ids():
 
 
 def clone_set(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
     post = Sets.objects.get(pk=pk)
     source_typeregsystems = post.typeregsystems.all()
     source_typetasks = post.typetasks.all()
@@ -1947,6 +1949,8 @@ from django.template.loader import get_template
 
 class GeneratePDF(View):
     def get(self, request, pk, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('/accounts/login/')
         obj_list = get_object_or_404(Distribution, pk=pk)
         template = get_template('pdf/invoice.html')
         context = {
