@@ -41,7 +41,7 @@
                 <td width="16%"><li class="list-group-item list-group-item-action">{{ item.sysname }}</li></td>
                 <td width="16%"><li class="list-group-item list-group-item-action">{{ item.username }}</li></td>
                 <td width="16%"><li class="list-group-item list-group-item-action">{{ item.ispath }}</li></td>
-                <td width="8%" align="center"><li class="list-group-item list-group-item-action"><input disabled type="checkbox" {% if item.hide == True %}checked="checked"{% endif %}>&nbsp;</li></td>
+                <td width="8%" align="center"><li class="list-group-item list-group-item-action"><div class="custom-control custom-switch"><input disabled type="checkbox" class="custom-control-input" {% if item.hide == True %}checked="checked"{% endif %}><label class="custom-control-label"></label></div></li></td>
                 <td width="44%"><li class="list-group-item list-group-item-action">{% if item.description is not None %}{{ item.description }}&nbsp;{% else %}&nbsp;{% endif %}</li></td>
                 <td>
     <div class="btn-group" role="group">
