@@ -443,7 +443,7 @@ class Distribution(models.Model):
     language                = models.CharField(max_length=50, blank=False)
     media                   = models.CharField(max_length=50, blank=True, choices=med)
     os                      = models.CharField(max_length=50, blank=True)
-    specialcase             = models.CharField(max_length=50, blank=False, choices=spec)
+    specialcase             = models.CharField(max_length=50, blank=False, default=None, choices=spec)
     notes                   = models.CharField(max_length=255, blank=True)
     langid                  = models.ForeignKey('Lang_types', on_delete=models.CASCADE, blank=False, db_column='langid')
     osid                    = models.ForeignKey('OS_type', on_delete=models.CASCADE, blank=False, db_column='osid')
