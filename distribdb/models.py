@@ -409,6 +409,13 @@ class DriversRelationship(models.Model):
         auto_created = True
 
 
+from django.utils.crypto import get_random_string
+
+
+def serial():
+    return get_random_string(4).upper() + '-' + get_random_string(4).upper() + '-' + get_random_string(4).upper() + '-' + get_random_string(4).upper()
+
+
 class Distribution(models.Model):
     med = (
         ('нет', 'нет'),
@@ -432,7 +439,7 @@ class Distribution(models.Model):
     date                    = models.DateField(null=False, blank=False, default=datetime.now)
     contract                = models.CharField(max_length=50, blank=True)
     login                   = models.CharField(max_length=50, blank=False)
-    serial                  = models.CharField(max_length=50, blank=False)
+    serial                  = models.CharField(max_length=50, blank=False, default=serial, unique=True)
     language                = models.CharField(max_length=50, blank=False)
     media                   = models.CharField(max_length=50, blank=True, choices=med)
     os                      = models.CharField(max_length=50, blank=True)
