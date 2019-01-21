@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container table-responsive-sm shadow p-3 mb-5 bg-white rounded">
     <p class="text-monospace small">Существующие <code>Операционные системы</code> совместимые с ПО СКАТ.</p>
-    <a class="btn btn-secondary" href="new_post/" role="button">Добавить</a><br><br>
+    {% ifnotequal user.groups.all.0.name None %}<a class="btn btn-secondary" href="new_post/" role="button">Добавить</a><br><br>{% endifnotequal %}
     <table class="table table-sm table-borderless form-control-sm">
         <thead>
         <tr align="center">
@@ -16,7 +16,7 @@
             <tr align="center">
                 <td width="50%"><li class="list-group-item list-group-item-action">{{ item.os }}</li></td>
                 <td width="50%"><li class="list-group-item list-group-item-action">{{ item.oscode }}<br></li></td>
-                <td>
+                {% ifnotequal user.groups.all.0.name None %}<td>
     <div class="btn-group" role="group">
     <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <img src="{{ STATIC_URL }} /static/glyphicons/png/more.svg" alt="more">
@@ -27,7 +27,7 @@
     </div>
         <form action="{% url 'os_types_delete' item.pk %}" method="POST">{% csrf_token %}{% include 'modal.html' %}</form>
     </div>
-                </td>
+                </td>{% endifnotequal %}
             </tr>
         {% endfor %}
     </table>

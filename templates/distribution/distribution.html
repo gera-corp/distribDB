@@ -4,7 +4,7 @@
 
 <div class="container table-responsive-sm shadow p-3 mb-5 bg-white rounded">
 <p class="text-monospace small">Существующие <code>Дистрибутивы</code>.</p>
-    <a class="btn btn-secondary" href="new_post/" role="button">Добавить</a><br><br>
+    {% ifnotequal user.groups.all.0.name None %}<a class="btn btn-secondary" href="new_post/" role="button">Добавить</a><br><br>{% endifnotequal %}
     <table class="table table-sm table-borderless form-control-sm">
         <thead>
         <tr align="center">
@@ -230,8 +230,8 @@
 </ul>
 </div>
       <div class="modal-footer">
-          <a href="/distrib_update/new_post/"><button type="button" class="btn btn-secondary btn-sm">Добавить обновление</button></a>
-        <a href="{% url 'distrib_list_edit_post' pk=item.pk %}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>
+          {% ifnotequal user.groups.all.0.name None %}<a href="/distrib_update/new_post/"><button type="button" class="btn btn-secondary btn-sm">Добавить обновление</button></a>
+        <a href="{% url 'distrib_list_edit_post' pk=item.pk %}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>{% endifnotequal %}
         <a href="/pdf/{{ item.pk }}"><button type="button" class="btn btn-secondary btn-sm">Служебная записка</button></a>
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
       </div>
@@ -385,7 +385,7 @@
 
 
           <div class="modal-footer">
-        <a href="/edit_set/edit_post/{{ item.setid.id }}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>
+        {% ifnotequal user.groups.all.0.name None %}<a href="/edit_set/edit_post/{{ item.setid.id }}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>{% endifnotequal %}
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
       </div>
     </ul></div></div></div></div>
@@ -396,7 +396,7 @@
                 <td width="20%"><li class="list-group-item list-group-item-action">{{ item.organisationid }}<br></li></td>
                 <td width="20%"><li class="list-group-item list-group-item-action">{{ item.login }}</li></td>
                 <td width="20%"><li class="list-group-item list-group-item-action">{{ item.serial }}</li></td>
-                <td>
+                {% ifnotequal user.groups.all.0.name None %}<td>
     <div class="btn-group" role="group">
     <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <img src="{{ STATIC_URL }} /static/glyphicons/png/more.svg" alt="more">
@@ -407,7 +407,7 @@
     </div>
         <form action="{% url 'distrib_list_delete' item.pk %}" method="POST">{% csrf_token %}{% include 'modal.html' %}</form>
     </div>
-                </td>
+                </td>{% endifnotequal %}
             </tr>
         {% endfor %}
     </table>

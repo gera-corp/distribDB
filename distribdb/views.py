@@ -1815,7 +1815,7 @@ def distrib_list_new_post(request):
     try:
         if form.is_valid():
             form.save()
-            messages.success(request, 'Запись нового набора, добавлена!')
+            messages.success(request, 'Запись нового дистрибутива, добавлена!')
             form = Distrib()
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
@@ -1895,7 +1895,7 @@ def distrib_update_new_post(request):
     try:
         if form.is_valid():
             form.save()
-            messages.success(request, 'Запись нового набора, добавлена!')
+            messages.success(request, 'Запись нового обновления дистрибутива, добавлена!')
             form = DistribUpdate()
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))

@@ -233,8 +233,8 @@
 </ul>
 </div>
       <div class="modal-footer">
-          <a href="/distrib_update/new_post/"><button type="button" class="btn btn-secondary btn-sm">Добавить обновление</button></a>
-        <a href="{% url 'distrib_list_edit_post' pk=item.pk %}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>
+          {% ifnotequal user.groups.all.0.name None %}<a href="/distrib_update/new_post/"><button type="button" class="btn btn-secondary btn-sm">Добавить обновление</button></a>
+        <a href="{% url 'distrib_list_edit_post' pk=item.pk %}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>{% endifnotequal %}
         <a href="/pdf/{{ item.pk }}"><button type="button" class="btn btn-secondary btn-sm">Служебная записка</button></a>
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
       </div>

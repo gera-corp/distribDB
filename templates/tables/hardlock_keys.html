@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container table-responsive-sm shadow p-3 mb-5 bg-white rounded">
     <p class="text-monospace small">Существующие <code>Ключи аппаратной защиты (Hardlock)</code>.</p>
-    <a class="btn btn-secondary" href="new_post/" role="button">Добавить</a><br><br>
+    {% ifnotequal user.groups.all.0.name None %}<a class="btn btn-secondary" href="new_post/" role="button">Добавить</a><br><br>{% endifnotequal %}
     <table class="table table-sm table-borderless form-control-sm">
         <thead>
         <tr align="center">
@@ -52,7 +52,7 @@
                 <td width="11%"><li class="list-group-item list-group-item-action">{% if item.port is not None %}{{ item.port }}{% else %}&nbsp;{% endif %}</li></td>
                 <td width="1%" align="center" width="11%"><li class="list-group-item list-group-item-action"><div class="custom-control custom-switch"><input disabled type="checkbox" class="custom-control-input" {% if item.free == True %}checked="checked"{% endif %}><label class="custom-control-label"></label></div></li></td>
                 <td width="34%"><li class="list-group-item list-group-item-action">{{ item.notes }}<br></li></td>
-                <td>
+                {% ifnotequal user.groups.all.0.name None %}<td>
     <div class="btn-group" role="group">
     <button id="{{ item.pk }}" type="button" class="btn btn-link btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <img src="{{ STATIC_URL }} /static/glyphicons/png/more.svg">
@@ -63,7 +63,7 @@
     </div>
         <form action="{% url 'hardlock_keys_delete' item.pk %}" method="POST">{% csrf_token %}{% include 'modal.html' %}</form>
     </div>
-                </td>
+                </td>{% endifnotequal %}
 
             </tr>
         {% endfor %}
