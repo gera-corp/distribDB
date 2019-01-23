@@ -36,6 +36,7 @@
             {{ user.username }}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% ifequal user.groups.all.0.name 'Администраторы' %}<a class="dropdown-item" href="/admin">Администрирование</a>{% endifequal %}
                 <a class="dropdown-item" href="/logout">Выйти</a>
             </div>
             </li>

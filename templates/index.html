@@ -5,8 +5,12 @@
         <p class="text-monospace">Домашняя страница
             <br>Версия Beta 8.14.12.18
             <br>Учётная запись: {{ user.username }}
-            <br>Уровень доступа: {% ifequal user.groups.all.0.name None %}Гость{% endifequal %}{{ request.user.groups.all.0 }}
-            <br><br>Для работы с базой данных выберите пункт
+            <br>Уровень доступа: {% ifequal user.groups.all.0.name None %}Гость <br>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">Вам доступен только просмотр
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+</button></div>{% endifequal %}{{ request.user.groups.all.0 }}
+            <br>Для работы с базой данных выберите пункт:
         </p>
         <div class="alert alert-info" role="alert" align="center">
             {% load static %}<img src="{% static '/img/icon-recycle-blue1.png' %}"/>
