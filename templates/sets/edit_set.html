@@ -156,7 +156,8 @@
 
 
           <div class="modal-footer">
-        {% ifnotequal user.groups.all.0.name None %}<a href="/edit_set/edit_post/{{ item.id }}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>{% endifnotequal %}
+        {% ifnotequal user.groups.all.0.name None %}<a href={% url 'distrib_list_new_post' id=item.id %}><button type="button" class="btn btn-secondary btn-sm">Добавить дистрибутив</button></a>
+            <a href="/edit_set/edit_post/{{ item.id }}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>{% endifnotequal %}
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
       </div>
     </ul></div></div></div></div>

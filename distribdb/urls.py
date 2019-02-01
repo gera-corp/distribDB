@@ -115,7 +115,8 @@ urlpatterns = [
 
     path('distrib_list/', views.distrib_list_view),
     path('distrib_list/<uuid:pk>/delete/', views.distrib_list_delete, name='distrib_list_delete'),
-    path('distrib_list/new_post/', views.distrib_list_new_post),
+    path('distrib_list/new_post/<uuid:id>/', views.distrib_list_new_post, name='distrib_list_new_post'),
+    path('distrib_list/new_post/', views.distrib_list_new_post_clear),
     path('distrib_list/edit_post/<uuid:pk>/', views.distrib_list_edit_post, name='distrib_list_edit_post'),
 
     path('distrib_update/', views.distrib_update_view),

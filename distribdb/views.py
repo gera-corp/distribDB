@@ -1807,7 +1807,30 @@ def distrib_list_view(request):
 
 
 # @cache_page(60 * 15)
-def distrib_list_new_post(request):
+def distrib_list_new_post(request, id):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    template = 'distribution/distribution_new_post.html'
+    initial_data = {
+        'setid': id
+    }
+    form = Distrib(request.POST or None, initial=initial_data)
+    try:
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Запись нового дистрибутива, добавлена!')
+            form = Distrib()
+            return redirect('/distrib_list/')
+    except Exception as e:
+        messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
+    context = {
+        'form': form,
+    }
+    return render(request, template, context)
+
+
+# @cache_page(60 * 15)
+def distrib_list_new_post_clear(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
     template = 'distribution/distribution_new_post.html'
