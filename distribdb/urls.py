@@ -120,7 +120,8 @@ urlpatterns = [
 
     path('distrib_update/', views.distrib_update_view),
     path('distrib_update/<uuid:pk>/delete/', views.distrib_update_delete, name='distrib_update_delete'),
-    path('distrib_update/new_post/', views.distrib_update_new_post),
+    path('distrib_update/new_post/<uuid:id>/', views.distrib_update_new_post, name='distrib_update_new_post'),
+    path('distrib_update/new_post/', views.distrib_update_new_post_clear),
     path('distrib_update/edit_post/<uuid:pk>/', views.distrib_update_edit_post, name='distrib_update_edit_post'),
 
     path('pdf/<uuid:pk>/', views.GeneratePDF.as_view()),

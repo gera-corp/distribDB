@@ -2,6 +2,14 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container table-responsive-sm shadow p-3 mb-5 bg-white rounded">
+    {% if messages %}
+        {% for message in messages %}
+            <div align="center" {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
+            <strong>{{ message }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
     <p class="text-monospace small">Данная страница содержит список о <code>Обновлениях дистрибутивов</code>.<br>
     Обновление формируется каждый раз, когда пересобирается существующий дистрибутив, либо на базе существующего дистрибутива создается новый.
 </p>
@@ -242,7 +250,7 @@
 </ul>
 </div>
       <div class="modal-footer">
-          {% ifnotequal user.groups.all.0.name None %}<a href="/distrib_update/new_post/"><button type="button" class="btn btn-secondary btn-sm">Добавить обновление</button></a>
+          {% ifnotequal user.groups.all.0.name None %}<a href={% url 'distrib_update_new_post' id=item.distribid.id %}><button type="button" class="btn btn-secondary btn-sm">Добавить обновление</button></a>
         <a href="{% url 'distrib_list_edit_post' pk=item.distribid.pk %}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>{% endifnotequal %}
         <a href="/pdf/{{ item.distribid.pk }}"><button type="button" class="btn btn-secondary btn-sm">Служебная записка</button></a>
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
@@ -450,7 +458,7 @@
 </ul>
 </div>
       <div class="modal-footer">
-          {% ifnotequal user.groups.all.0.name None %}<a href="/distrib_update/new_post/"><button type="button" class="btn btn-secondary btn-sm">Добавить обновление</button></a>
+          {% ifnotequal user.groups.all.0.name None %}<a href={% url 'distrib_update_new_post' id=item.newdistribid.id %}><button type="button" class="btn btn-secondary btn-sm">Добавить обновление</button></a>
         <a href="{% url 'distrib_list_edit_post' pk=item.newdistribid.pk %}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>{% endifnotequal %}
         <a href="/pdf/{{ item.newdistribid.pk }}"><button type="button" class="btn btn-secondary btn-sm">Служебная записка</button></a>
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>

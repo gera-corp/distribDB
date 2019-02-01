@@ -1687,7 +1687,7 @@ def edit_set_delete(request, pk):
     obj = get_object_or_404(Sets, pk=pk)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/edit_set')
+        return redirect('/edit_set/')
     return render(request, 'sets/edit_set.html', {'device': obj})
 
 
@@ -1817,6 +1817,7 @@ def distrib_list_new_post(request):
             form.save()
             messages.success(request, 'Запись нового дистрибутива, добавлена!')
             form = Distrib()
+            return redirect('/distrib_list/')
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
     context = {
@@ -1887,7 +1888,29 @@ def distrib_update_view(request):
     return render(request, 'distribution/distrib_update.html', context)
 
 
-def distrib_update_new_post(request):
+def distrib_update_new_post(request, id):
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/')
+    template = 'distribution/distrib_update_new_post.html'
+    initial_data = {
+        'distribid': id
+    }
+    form = DistribUpdate(request.POST or None, initial=initial_data)
+    try:
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Запись нового обновления дистрибутива, добавлена!')
+            form = DistribUpdate()
+            return redirect('/distrib_update/')
+    except Exception as e:
+        messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
+    context = {
+        'form': form,
+    }
+    return render(request, template, context)
+
+
+def distrib_update_new_post_clear(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/')
     template = 'distribution/distrib_update_new_post.html'
@@ -1897,6 +1920,7 @@ def distrib_update_new_post(request):
             form.save()
             messages.success(request, 'Запись нового обновления дистрибутива, добавлена!')
             form = DistribUpdate()
+            return redirect('/distrib_update/')
     except Exception as e:
         messages.warning(request, 'Запись не была добавлена! Ошибка: {}'.format(e))
     context = {

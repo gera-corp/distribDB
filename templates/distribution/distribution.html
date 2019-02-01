@@ -1,8 +1,15 @@
 <title>Список дистрибутивов</title>
 {% extends 'base.html' %}
 {% block content %}
-
 <div class="container table-responsive-sm shadow p-3 mb-5 bg-white rounded">
+    {% if messages %}
+        {% for message in messages %}
+            <div align="center" {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
+            <strong>{{ message }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
 <p class="text-monospace small">Существующие <code>Дистрибутивы</code>.</p>
     {% ifnotequal user.groups.all.0.name None %}<a class="btn btn-secondary" href="new_post/" role="button">Добавить</a><br><br>{% endifnotequal %}
     <table class="table table-sm table-borderless form-control-sm">
@@ -230,7 +237,7 @@
 </ul>
 </div>
       <div class="modal-footer">
-          {% ifnotequal user.groups.all.0.name None %}<a href="/distrib_update/new_post/"><button type="button" class="btn btn-secondary btn-sm">Добавить обновление</button></a>
+          {% ifnotequal user.groups.all.0.name None %}<a href={% url 'distrib_update_new_post' id=item.id %}><button type="button" class="btn btn-secondary btn-sm">Добавить обновление</button></a>
         <a href="{% url 'distrib_list_edit_post' pk=item.pk %}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>{% endifnotequal %}
         <a href="/pdf/{{ item.pk }}"><button type="button" class="btn btn-secondary btn-sm">Служебная записка</button></a>
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
