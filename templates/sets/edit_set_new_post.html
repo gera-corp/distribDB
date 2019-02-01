@@ -28,7 +28,7 @@
         <td width="33%">
 {% regroup form.typeregsystems by data.group as feature_list %}
 {% for group in feature_list %}
-    <label type="radio" {% for choice in group.list %}{% ifequal choice.data.selected True %}class="btn btn-danger btn-sm"{% endifequal %}{% endfor %} class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
+    <label type="radio" {% for choice in group.list %}{% ifequal choice.data.selected True %}class="btn btn-dark btn-sm"{% endifequal %}{% endfor %} class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
         <script>var numchkbox=0;{% for choice in group.list %}{% if choice.data.selected %}numchkbox++;{% endif %}{% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-light /">',numchkbox)}</script></label>
 <div class="collapse" id="collapse{{ group.grouper.id }}">{% for choice in group.list %}
    <label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label>
@@ -39,7 +39,7 @@
 <td width="33%">
 {% regroup form.typetasks by data.group as feature_list %}
 {% for group in feature_list %}
-    <label type="radio" {% for choice in group.list %}{% ifequal choice.data.selected True %}class="btn btn-danger btn-sm"{% endifequal %}{% endfor %} class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
+    <label type="radio" {% for choice in group.list %}{% ifequal choice.data.selected True %}class="btn btn-dark btn-sm"{% endifequal %}{% endfor %} class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
         <script>var numchkbox=0;{% for choice in group.list %}{% if choice.data.selected %}numchkbox++;{% endif %}{% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-light /">',numchkbox)}</script></label>
 <div class="collapse" id="collapse{{ group.grouper.id }}">{% for choice in group.list %}
    <label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label>
@@ -50,7 +50,7 @@
 <td width="33%">
 {% regroup form.typemisc by data.group as feature_list %}
 {% for group in feature_list %}
-    <label type="radio" {% for choice in group.list %}{% ifequal choice.data.selected True %}class="btn btn-danger btn-sm"{% endifequal %}{% endfor %} class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
+    <label type="radio" {% for choice in group.list %}{% ifequal choice.data.selected True %}class="btn btn-dark btn-sm"{% endifequal %}{% endfor %} class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapse{{ group.grouper.id }}">{{ group.grouper|default:"Other Features" }}
         <script>var numchkbox=0;{% for choice in group.list %}{% if choice.data.selected %}numchkbox++;{% endif %}{% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-light /">',numchkbox)}</script></label>
 <div class="collapse" id="collapse{{ group.grouper.id }}">{% for choice in group.list %}
     <label class="btn btn-outline-secondary btn-sm">{{ choice.tag }} {{ choice.choice_label }}</label>
