@@ -62,7 +62,7 @@
 
 <table>
 <td>
-<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#dopmodpo">Долнительные модули ПО
+<button type="button" {% for choice in form.modules %}{% ifequal choice.data.selected True %}class="btn btn-dark btn-sm"{% endifequal %}{% endfor %} class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#dopmodpo">Долнительные модули ПО
     <script>var numchkbox=0;{% for checkbox in form.modules %}{% if checkbox.data.selected == True %}numchkbox++;{% endif %}
     {% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-light /">',numchkbox)}
     </script>
@@ -89,7 +89,7 @@
   </div>
 </div>
 
-<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#resys">Системы регистриции
+<button type="button" {% for choice in form.regsystems %}{% ifequal choice.data.selected True %}class="btn btn-dark btn-sm"{% endifequal %}{% endfor %} class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#resys">Системы регистриции
     <script>var numchkbox=0;{% for checkbox in form.regsystems %}{% if checkbox.data.selected == True %}numchkbox++;{% endif %}
     {% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-light /">',numchkbox)}
     </script>
@@ -114,7 +114,7 @@
   </div>
 </div>
 
-<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#dropdev">Устройства сброса
+<button type="button" {% for choice in form.devices %}{% ifequal choice.data.selected True %}class="btn btn-dark btn-sm"{% endifequal %}{% endfor %} class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#dropdev">Устройства сброса
     <script>var numchkbox=0;{% for checkbox in form.devices %}{% if checkbox.data.selected == True %}numchkbox++;{% endif %}
     {% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-light /">',numchkbox)}
     </script>
@@ -141,7 +141,7 @@
   </div>
 </div>
 
-<button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#driver">Драйверы устройств
+<button type="button" {% for choice in form.drivers %}{% ifequal choice.data.selected True %}class="btn btn-dark btn-sm"{% endifequal %}{% endfor %} class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#driver">Драйверы устройств
     <script>var numchkbox=0;{% for checkbox in form.drivers %}{% if checkbox.data.selected == True %}numchkbox++;{% endif %}
     {% endfor %}if(numchkbox!=0){document.write('<span class="badge badge-light /">',numchkbox)}
     </script>
