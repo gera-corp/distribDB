@@ -45,6 +45,7 @@
     </button>
       <div class="dropdown-menu" aria-labelledby="{{ item.pk }}">
       <a class="dropdown-item" href="{% url 'edit_set_edit_post' pk=item.pk %}">Редактировать</a>
+        <a class="dropdown-item" href="/clone_set/{{ item.id }}">Копировать набор</a>
       <a class="dropdown-item" href="#" data-toggle="modal" data-target=#modal-{{ item.pk }}>Удалить</a>
     </div>
         <form action="{% url 'edit_set_delete' item.pk %}" method="POST">{% csrf_token %}{% include 'modal.html' %}</form>
@@ -86,19 +87,16 @@
 <li class="list-group-item">
 
 <div class="row">
-<div class="col-sm" align="center">
-{% for test in item.typeregsysrelationship_set.all %}
-    {% ifchanged test.typeregsysid.typeid.username %}<span class="font-weight-bold small">{{ test.typeregsysid.typeid.username }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.typeregsysid.regsysid.username }}</span><br>
+<div class="col-sm" align="center">{% for test in item.typeregsysrelationship_set.all %}
+{% ifchanged test.typeregsysid.typeid.username %}<span class="font-weight-bold small">{{ test.typeregsysid.typeid.username }}</span><br>{% endifchanged %}<span class="font-weight-normal small">{{ test.typeregsysid.regsysid.username }}</span><br>
 {% endfor %}</div>
 
-<div class="col-sm" align="center">
-{% for test in item.typetasksrelationship_set.all %}
-{% ifchanged test.typetaskid.typeid.username %}<span class="font-weight-bold small">{{ test.typetaskid.typeid.username }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.typetaskid.taskid.sysname }}</span><br>
+<div class="col-sm" align="center">{% for test in item.typetasksrelationship_set.all %}
+{% ifchanged test.typetaskid.typeid.username %}<span class="font-weight-bold small">{{ test.typetaskid.typeid.username }}</span><br>{% endifchanged %}<span class="font-weight-normal small">{{ test.typetaskid.taskid.sysname }}</span><br>
 {% endfor %}</div>
 
-<div class="col-sm" align="center">
-{% for test in item.typemiscrelationship_set.all %}
-{% ifchanged test.typemiscid.typeid.username %}<span class="font-weight-bold small">{{ test.typemiscid.typeid.username }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.typemiscid.miscid.name }}</span><br>
+<div class="col-sm" align="center">{% for test in item.typemiscrelationship_set.all %}
+{% ifchanged test.typemiscid.typeid.username %}<span class="font-weight-bold small">{{ test.typemiscid.typeid.username }}</span><br>{% endifchanged %}<span class="font-weight-normal small">{{ test.typemiscid.miscid.name }}</span><br>
 {% endfor %}</div>
 
 </div></li><br>
@@ -158,6 +156,7 @@
           <div class="modal-footer">
         {% ifnotequal user.groups.all.0.name None %}<a href={% url 'distrib_list_new_post' id=item.id %}><button type="button" class="btn btn-secondary btn-sm">Добавить дистрибутив</button></a>
             <a href="/edit_set/edit_post/{{ item.id }}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>{% endifnotequal %}
+            <a href="/clone_set/{{ item.id }}" role="button" class="btn btn-secondary btn-sm">Копировать набор</a>
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
       </div>
     </ul></div></div></div></div>

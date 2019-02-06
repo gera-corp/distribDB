@@ -322,19 +322,16 @@
 <li class="list-group-item">
 
 <div class="row">
-<div class="col-sm" align="center">
-{% for test in item.setid.typeregsysrelationship_set.all %}
-    {% ifchanged test.typeregsysid.typeid.username %}<span class="font-weight-bold small">{{ test.typeregsysid.typeid.username }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.typeregsysid.regsysid.username }}</span><br>
+<div class="col-sm" align="center">{% for test in item.setid.typeregsysrelationship_set.all %}
+{% ifchanged test.typeregsysid.typeid.username %}<span class="font-weight-bold small">{{ test.typeregsysid.typeid.username }}</span><br>{% endifchanged %}<span class="font-weight-normal small">{{ test.typeregsysid.regsysid.username }}</span><br>
 {% endfor %}</div>
 
-<div class="col-sm" align="center">
-{% for test in item.setid.typetasksrelationship_set.all %}
-{% ifchanged test.typetaskid.typeid.username %}<span class="font-weight-bold small">{{ test.typetaskid.typeid.username }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.typetaskid.taskid.sysname }}</span><br>
+<div class="col-sm" align="center">{% for test in item.setid.typetasksrelationship_set.all %}
+{% ifchanged test.typetaskid.typeid.username %}<span class="font-weight-bold small">{{ test.typetaskid.typeid.username }}</span><br>{% endifchanged %}<span class="font-weight-normal small">{{ test.typetaskid.taskid.sysname }}</span><br>
 {% endfor %}</div>
 
-<div class="col-sm" align="center">
-{% for test in item.setid.typemiscrelationship_set.all %}
-{% ifchanged test.typemiscid.typeid.username %}<span class="font-weight-bold small">{{ test.typemiscid.typeid.username }}</span><br>{% else %}{% endifchanged %}<span class="font-weight-normal small">{{ test.typemiscid.miscid.name }}</span><br>
+<div class="col-sm" align="center">{% for test in item.setid.typemiscrelationship_set.all %}
+{% ifchanged test.typemiscid.typeid.username %}<span class="font-weight-bold small">{{ test.typemiscid.typeid.username }}</span><br>{% endifchanged %}<span class="font-weight-normal small">{{ test.typemiscid.miscid.name }}</span><br>
 {% endfor %}</div>
 
 </div></li><br>
@@ -392,7 +389,8 @@
 
 
           <div class="modal-footer">
-        {% ifnotequal user.groups.all.0.name None %}<a href="/edit_set/edit_post/{{ item.setid.id }}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>{% endifnotequal %}
+        {% ifnotequal user.groups.all.0.name None %}<a href={% url 'distrib_list_new_post' id=item.setid.id %}><button type="button" class="btn btn-secondary btn-sm">Добавить дистрибутив</button></a>
+        <a href="/edit_set/edit_post/{{ item.setid.id }}"><button type="button" class="btn btn-secondary btn-sm">Редактировать</button></a>{% endifnotequal %}
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
       </div>
     </ul></div></div></div></div>
