@@ -87,18 +87,26 @@
 <li class="list-group-item">
 
 <div class="row">
-<div class="col-sm" align="center">{% for test in item.typeregsysrelationship_set.all %}
-{% ifchanged test.typeregsysid.typeid.username %}<span class="font-weight-bold small">{{ test.typeregsysid.typeid.username }}</span><br>{% endifchanged %}<span class="font-weight-normal small">{{ test.typeregsysid.regsysid.username }}</span><br>
-{% endfor %}</div>
+<div class="col-sm" align="center">
+{% regroup item.typeregsysrelationship_set.all by typeregsysid.typeid.username as fstbase %}
+    {% for typeid in fstbase %}<br><span class="font-weight-bold small">{{ typeid.grouper }}</span><br>
+        {% for item in typeid.list %}<span class="font-weight-normal small">{{ item.typeregsysid }}</span><br>{% endfor %}
+    {% endfor %}
+</div>
 
-<div class="col-sm" align="center">{% for test in item.typetasksrelationship_set.all %}
-{% ifchanged test.typetaskid.typeid.username %}<span class="font-weight-bold small">{{ test.typetaskid.typeid.username }}</span><br>{% endifchanged %}<span class="font-weight-normal small">{{ test.typetaskid.taskid.sysname }}</span><br>
-{% endfor %}</div>
+<div class="col-sm" align="center">
+{% regroup item.typetasksrelationship_set.all by typetaskid.typeid.username as rasbase %}
+    {% for typeid in rasbase %}<br><span class="font-weight-bold small">{{ typeid.grouper }}</span><br>
+        {% for item in typeid.list %}<span class="font-weight-normal small">{{ item.typetaskid }}</span><br>{% endfor %}
+    {% endfor %}
+</div>
 
-<div class="col-sm" align="center">{% for test in item.typemiscrelationship_set.all %}
-{% ifchanged test.typemiscid.typeid.username %}<span class="font-weight-bold small">{{ test.typemiscid.typeid.username }}</span><br>{% endifchanged %}<span class="font-weight-normal small">{{ test.typemiscid.miscid.name }}</span><br>
-{% endfor %}</div>
-
+<div class="col-sm" align="center">
+{% regroup item.typemiscrelationship_set.all by typemiscid.typeid.username as dopelement %}
+    {% for typeid in dopelement %}<br><span class="font-weight-bold small">{{ typeid.grouper }}</span><br>
+        {% for item in typeid.list %}<span class="font-weight-normal small">{{ item.typemiscid }}</span><br>{% endfor %}
+    {% endfor %}
+</div>
 </div></li><br>
 
 <li class="list-group-item">
