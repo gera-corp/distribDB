@@ -281,7 +281,7 @@
     </div>
         </div></span>
 
-        {% for distr in object_list %}
+        {% for distr in object_list|dictsortreversed:'date' %}
         {% if item.setid.userfriendlyid == distr.setid.userfriendlyid %}
      <li class="list-group-item">
     <span class="font-weight-bold small">
