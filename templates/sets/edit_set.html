@@ -88,43 +88,23 @@
 
 <div class="row">
 <div class="col-sm" align="center">
-{#    {% for test in item.typeregsysrelationship_set.all %}#}
-{#        {% ifchanged test.typeregsysid.typeid.username %}#}
-{#            <label class="btn btn-dark btn-sm" data-toggle="collapse" data-target="#collapse{{ test.typeregsysid.typeid.id }}">#}
-{#            {{ test.typeregsysid.typeid.username }}</label><br>#}
-{#        {% endifchanged %}#}
-{#        <div class="collapse" id="collapse{{ test.typeregsysid.typeid.id }}"><label class="btn btn-outline-secondary btn-sm">{{ test.typeregsysid.regsysid.username }}</label></div>#}
-{#    {% endfor %}#}
+
 {% regroup item.typeregsysrelationship_set.all by typeregsysid.typeid.username as fstbase %}
-    {% for typeid in fstbase %}<br><span class="font-weight-bold small">{{ typeid.grouper }}</span><br>
+    {% for typeid in fstbase %}<span class="font-weight-bold small">{{ typeid.grouper }}</span><br>
         {% for item in typeid.list %}<span class="font-weight-normal small">{{ item.typeregsysid }}</span><br>{% endfor %}
     {% endfor %}
 </div>
 
 <div class="col-sm" align="center">
-{#    {% for test in item.typetasksrelationship_set.all %}#}
-{#        {% ifchanged test.typetaskid.typeid.username %}#}
-{#            <label class="btn btn-dark btn-sm" data-toggle="collapse" data-target="#collapse{{ test.typetaskid.typeid.id }}">#}
-{#            {{ test.typetaskid.typeid.username }}</label><br>#}
-{#        {% endifchanged %}#}
-{#        <div class="collapse" id="collapse{{ test.typetaskid.typeid.id }}"><label class="btn btn-outline-secondary btn-sm">{{ test.typetaskid.taskid.sysname }}</label></div>#}
-{#    {% endfor %}#}
 {% regroup item.typetasksrelationship_set.all by typetaskid.typeid.username as rasbase %}
-    {% for typeid in rasbase %}<br><span class="font-weight-bold small">{{ typeid.grouper }}</span><br>
+    {% for typeid in rasbase %}<span class="font-weight-bold small">{{ typeid.grouper }}</span><br>
         {% for item in typeid.list %}<span class="font-weight-normal small">{{ item.typetaskid }}</span><br>{% endfor %}
     {% endfor %}
 </div>
 
 <div class="col-sm" align="center">
-{#    {% for test in item.typemiscrelationship_set.all %}#}
-{#        {% ifchanged test.typemiscid.typeid.username %}#}
-{#            <label class="btn btn-dark btn-sm" data-toggle="collapse" data-target="#collapse{{ test.typemiscid.typeid.id }}">#}
-{#            {{ test.typemiscid.typeid.username }}</label><br>#}
-{#        {% endifchanged %}#}
-{#        <div class="collapse" id="collapse{{ test.typemiscid.typeid.id }}"><label class="btn btn-outline-secondary btn-sm">{{ test.typemiscid.miscid.name }}</label></div>#}
-{#    {% endfor %}#}
 {% regroup item.typemiscrelationship_set.all by typemiscid.typeid.username as dopelement %}
-    {% for typeid in dopelement %}<br><span class="font-weight-bold small">{{ typeid.grouper }}</span><br>
+    {% for typeid in dopelement %}<span class="font-weight-bold small">{{ typeid.grouper }}</span><br>
         {% for item in typeid.list %}<span class="font-weight-normal small">{{ item.typemiscid }}</span><br>{% endfor %}
     {% endfor %}
 </div>
