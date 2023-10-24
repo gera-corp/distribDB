@@ -8,14 +8,14 @@ class hardlock_keys(models.Model):
         ('USB', 'USB'),
         ('LPT', 'LPT')
     )
-    id                      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    mark                    = models.CharField(max_length=50, blank=True)
-    chipno                  = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Номером чипа')
-    subcode                 = models.IntegerField(blank=True)
-    modaddr                 = models.IntegerField()
-    port                    = models.CharField(max_length=50, blank=False, default=None, choices=port_name)
-    free                    = models.BooleanField(default=False)
-    notes                   = models.TextField(max_length=8000, blank=True)
+    id      = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    mark    = models.CharField(max_length=50, blank=True)
+    chipno  = models.CharField(max_length=50, blank=False, unique=True, verbose_name='Номером чипа')
+    subcode = models.IntegerField(blank=True)
+    modaddr = models.IntegerField()
+    port    = models.CharField(max_length=50, blank=False, default=None, choices=port_name)
+    free    = models.BooleanField(default=False)
+    notes   = models.TextField(max_length=8000, blank=True)
 
     class Meta:
         verbose_name = 'Ключ аппаратной защиты (hardlock)'
